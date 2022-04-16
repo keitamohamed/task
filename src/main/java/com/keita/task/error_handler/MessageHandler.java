@@ -30,12 +30,12 @@ public class MessageHandler {
         Map<String, String> errorMap = new HashMap<>();
 
         message.put("status", status.name());
+        message.put("code", String.valueOf(status.value()));
         for (FieldError error : bindingResult.getFieldErrors()) {
             errorMap.put(error.getField(), error.getDefaultMessage());
         }
         message.put("error", errorMap);
         response.setStatus(status.value());
-        errorMap.put("code", String.valueOf(status.value()));
         response.setContentType(APPLICATION_JSON_VALUE);
         return message;
     }

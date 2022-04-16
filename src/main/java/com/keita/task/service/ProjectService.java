@@ -29,7 +29,7 @@ public class ProjectService {
 
     public void save(Project project, BindingResult result, HttpServletResponse response) {
         if (result.hasErrors()) {
-            throw new InvalidInput(result, response, "Invalid fields");
+            throw new InvalidInput(result, response, "Invalid input fields. Make sure all required fields are valid");
         }
         findByIdentifier(project.getIdentifier(), response);
 
