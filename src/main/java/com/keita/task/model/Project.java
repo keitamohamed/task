@@ -46,4 +46,8 @@ public class Project {
     @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "task")
     private List<ProjectTask> task;
+
+    public void addNewTask(ProjectTask newTask) {
+        task.add(newTask);
+    }
 }

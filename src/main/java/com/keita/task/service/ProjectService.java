@@ -3,6 +3,7 @@ package com.keita.task.service;
 import com.keita.task.error_handler.InvalidInput;
 import com.keita.task.error_handler.ProjectExceptionHandler;
 import com.keita.task.model.Project;
+import com.keita.task.model.ProjectTask;
 import com.keita.task.repository.ProjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,19 +22,33 @@ import java.util.stream.StreamSupport;
 public class ProjectService {
 
     private final ProjectRepo projectRepo;
+    private final TaskService taskService;
 
     @Autowired
-    public ProjectService(ProjectRepo projectRepo) {
+    public ProjectService(ProjectRepo projectRepo, TaskService taskService) {
         this.projectRepo = projectRepo;
+        this.taskService = taskService;
     }
 
     public void save(Project project, BindingResult result, HttpServletResponse response) {
         if (result.hasErrors()) {
             throw new InvalidInput(result, response, "Invalid input fields. Make sure all required fields are valid");
         }
-        findByIdentifier(project.getIdentifier(), response);
+        findProjectByIdentifier(project.getIdentifier(), response);
 
         project.setIdentifier(project.getIdentifier().toUpperCase());
+        projectRepo.save(project);
+    }
+
+    public void saveTask(String identifier, ProjectTask task, BindingResult result, HttpServletResponse response) {
+        Optional<Project> findProject = findProjectByIdentifier(
+                HttpStatus.BAD_REQUEST,
+                identifier,
+                response, "");
+        Project project = findProject.get();
+        task.setTask(project);
+        taskService.save(task, result, response);
+        project.addNewTask(task);
         projectRepo.save(project);
     }
 
@@ -91,10 +106,11 @@ public class ProjectService {
                 ));
     }
 
-    private void findByIdentifier(String projectIdentifier, HttpServletResponse response) {
+    private void findProjectByIdentifier(String projectIdentifier, HttpServletResponse response) {
         String message = "Project with identifier " + projectIdentifier.toUpperCase() + " already exist";
         if (projectRepo.findProjectByIdentifier(projectIdentifier).isPresent()){
             throw new ProjectExceptionHandler(HttpStatus.FOUND, response, message);
         }
     }
+
 }

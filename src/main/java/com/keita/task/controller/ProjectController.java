@@ -2,6 +2,7 @@ package com.keita.task.controller;
 
 
 import com.keita.task.model.Project;
+import com.keita.task.model.ProjectTask;
 import com.keita.task.service.ProjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,6 +35,18 @@ public class ProjectController {
             BindingResult result,
             HttpServletResponse response) {
         service.save(project, result, response);
+    }
+
+    @PostMapping(
+            value = {"{identifier}/add-task"},
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addTask(
+            @PathVariable String identifier,
+            @Valid
+            @RequestBody ProjectTask task,
+            BindingResult result,
+            HttpServletResponse response) {
+        service.saveTask(identifier, task, result, response);
     }
 
     @GetMapping(value = {"/find-by-identifier/{identifier}"})
