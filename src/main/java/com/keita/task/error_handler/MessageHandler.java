@@ -59,7 +59,6 @@ public class MessageHandler {
 
         try {
             Map<String, String> errorMap = new HashMap<>();
-
             errorMap.put("status", status.name());
             errorMap.put("code", String.valueOf(status.value()));
             errorMap.put("message", message);

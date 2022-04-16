@@ -55,7 +55,7 @@ public class ProjectService {
 
     public void deleteProjectByIdentifier(String identifier, HttpServletResponse response) {
         String message = String.format("Project with identifier %s does not exists", identifier);
-        Optional<Project> findProject = findProjectByIdentifier(HttpStatus.NO_CONTENT, identifier, response, message);
+        Optional<Project> findProject = findProjectByIdentifier(HttpStatus.BAD_REQUEST, identifier, response, message);
         findProject.ifPresent(projectRepo::delete);
         throw new ProjectExceptionHandler(HttpStatus.OK, response, String.format("Project with identifier %s was deleted", identifier));
 
@@ -63,8 +63,7 @@ public class ProjectService {
 
     public void updateProject(Project project, HttpServletResponse response) {
         String message = String.format("Project with identifier %s does not exists", project.getIdentifier());
-        Optional<Project> findProject = findProjectByIdentifier(HttpStatus.NO_CONTENT, project.getIdentifier(), response, message);
-
+        Optional<Project> findProject = findProjectByIdentifier(HttpStatus.BAD_REQUEST, project.getIdentifier(), response, message);
         findProject.ifPresent(result -> {
             result.setDescription(project.getDescription());
             result.setName(project.getName());

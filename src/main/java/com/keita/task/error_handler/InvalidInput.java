@@ -6,9 +6,6 @@ import org.springframework.validation.BindingResult;
 import javax.servlet.http.HttpServletResponse;
 
 public class InvalidInput extends RuntimeException{
-    public InvalidInput() {
-        super();
-    }
 
     public InvalidInput(BindingResult result, HttpServletResponse response, String message) {
         super(message);

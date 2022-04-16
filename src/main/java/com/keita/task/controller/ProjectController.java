@@ -39,7 +39,7 @@ public class ProjectController {
     @GetMapping(value = {"/find-by-identifier/{identifier}"})
     public Optional<Project> getProjectByIdentifier(
             @PathVariable("identifier") String projectIdentifier, HttpServletResponse response) {
-        return service.findProjectByIdentifier(HttpStatus.OK, projectIdentifier, response, "");
+        return service.findProjectByIdentifier(HttpStatus.BAD_REQUEST, projectIdentifier, response, "");
     }
 
     @GetMapping("/find-all-project")
@@ -53,10 +53,12 @@ public class ProjectController {
     }
 
     @PutMapping(
-            value = {"/update-project/{identifier}"},
+            value = {"/update-project"},
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public void updateProjectByIdentifier(@RequestBody Project project, HttpServletResponse response) {
+    public void updateProjectByIdentifier(
+            @RequestBody Project project,
+            HttpServletResponse response) {
         service.updateProject(project, response);
     }
 
