@@ -58,14 +58,30 @@ public class ProjectController {
         return service.findProjectByIdentifier(HttpStatus.BAD_REQUEST, projectIdentifier, response, "");
     }
 
+    @GetMapping(value = {"/find-task-by-id/{id}"})
+    public Optional<ProjectTask> getProjectByIdentifier(
+            @PathVariable("id") Long id, HttpServletResponse response) {
+        return taskService.findTaskByID(id, response);
+    }
+
     @GetMapping("/find-all-project")
     public List<Project> getAllProject(HttpServletResponse response) {
         return service.findAllProject(response);
     }
 
-    @DeleteMapping(value = "/delete-project/{identifier}")
+    @GetMapping("/find-all-project-task")
+    public List<ProjectTask> getAllTask(HttpServletResponse response) {
+        return taskService.projectTaskList(response);
+    }
+
+    @DeleteMapping(value = "/delete/{identifier}")
     public void deleteProject(@PathVariable String identifier, HttpServletResponse response) {
         service.deleteProjectByIdentifier(identifier, response);
+    }
+
+    @DeleteMapping(value = "/delete-task/{id}")
+    public void deleteProjectTask(@PathVariable Long id, HttpServletResponse response) {
+        taskService.deleteTask(id, response);
     }
 
     @PutMapping(
@@ -81,7 +97,7 @@ public class ProjectController {
             value = {"/update-task/{id}"},
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public void updateProjectById(@RequestBody ProjectTask task, @PathVariable Long id,
+    public void updateProjectTaskById(@RequestBody ProjectTask task, @PathVariable Long id,
                                   HttpServletResponse response) {
         taskService.updateTask(task, id, response);
     }

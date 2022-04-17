@@ -15,9 +15,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class TaskService {
@@ -33,12 +33,13 @@ public class TaskService {
         if (result.hasErrors()) {
             throw new InvalidInput(result, response, "Invalid input fields. Make sure all required fields are valid");
         }
+        task.setCreateAt(getDate());
         taskRepo.save(task);
         new SuccessfulHandler(response, String.format("Task with an id %s have been added", task.getTaskID()));
     }
 
     public void updateTask(ProjectTask task, Long id, HttpServletResponse response) {
-        Optional<ProjectTask> findTask = findByID(id, response);
+        Optional<ProjectTask> findTask = findTaskByID(id, response);
         findTask.ifPresent(result -> {
             result.setStatus(task.getStatus());
             result.setPriority(task.getPriority());
@@ -51,18 +52,31 @@ public class TaskService {
     }
 
     public void deleteTask(Long taskID, HttpServletResponse response) {
-        Optional<ProjectTask> findTask = findByID(taskID, response);
+        Optional<ProjectTask> findTask = findTaskByID(taskID, response);
         if (findTask.isEmpty()) {
-            System.out.println("");
+            String message = "Request not process. There is no task with an id " + taskID + ".";
+            throw new ProjectExceptionHandler(HttpStatus.BAD_REQUEST, response, message);
         }
         taskRepo.deleteByTaskID(taskID);
+        new SuccessfulHandler(response, String.format("Successfully deleted task with an id %s", taskID));
     }
 
-    public Optional<ProjectTask> findByID(Long taskID, HttpServletResponse response) {
+    public Optional<ProjectTask> findTaskByID(Long taskID, HttpServletResponse response) {
         String message = String.format("No task match with an id %s.", taskID);
         return taskRepo.findById(taskID)
                 .map(Optional::of).orElseThrow(() ->
                         new ProjectExceptionHandler(HttpStatus.BAD_REQUEST, response, message));
+    }
+
+    public List<ProjectTask> projectTaskList(HttpServletResponse response) {
+        List<ProjectTask> tasks = taskRepo.projectTaskList();
+        if (tasks.isEmpty()) {
+            throw new ProjectExceptionHandler(
+                    HttpStatus.OK,
+                    response,
+                    "No tasks to load.");
+        }
+        return tasks;
     }
 
     private Date getDate() {

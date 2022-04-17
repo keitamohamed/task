@@ -60,7 +60,7 @@ public class ProjectService {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), result -> {
                     if (result.isEmpty()) {
                         throw new ProjectExceptionHandler(
-                                HttpStatus.NO_CONTENT,
+                                HttpStatus.OK,
                                 response,
                                 "No content to load."
                         );}
