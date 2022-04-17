@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
-public class ErrorMessageMapper extends ObjectMapper {
-    public ErrorMessageMapper(OutputStream outputStream, Object o) throws IOException {
+public class MessageMapper extends ObjectMapper {
+    public MessageMapper(OutputStream outputStream, Object o) throws IOException {
         super.writeValue(outputStream, o);
     }
 }

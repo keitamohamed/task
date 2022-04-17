@@ -4,6 +4,7 @@ package com.keita.task.controller;
 import com.keita.task.model.Project;
 import com.keita.task.model.ProjectTask;
 import com.keita.task.service.ProjectService;
+import com.keita.task.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
@@ -20,9 +21,11 @@ import java.util.Optional;
 public class ProjectController {
 
     private final ProjectService service;
+    private final TaskService taskService;
 
-    public ProjectController(ProjectService service) {
+    public ProjectController(ProjectService service, TaskService taskService) {
         this.service = service;
+        this.taskService = taskService;
     }
 
     @PostMapping(
@@ -66,13 +69,21 @@ public class ProjectController {
     }
 
     @PutMapping(
-            value = {"/update-project"},
+            value = {"/update"},
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public void updateProjectByIdentifier(
             @RequestBody Project project,
             HttpServletResponse response) {
         service.updateProject(project, response);
+    }
+    @PutMapping(
+            value = {"/update-task/{id}"},
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void updateProjectById(@RequestBody ProjectTask task, @PathVariable Long id,
+                                  HttpServletResponse response) {
+        taskService.updateTask(task, id, response);
     }
 
 }

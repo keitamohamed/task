@@ -15,11 +15,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Service
 public class MessageHandler {
 
-    static void bindingResult(BindingResult bindingResult, HttpServletResponse response, HttpStatus status) {
+    static void successful(BindingResult bindingResult, HttpServletResponse response, HttpStatus status) {
 
         try {
             Map<String, Object> message = setErrorMessage(bindingResult, response, status);
-            new ErrorMessageMapper(response.getOutputStream(), message);
+            new MessageMapper(response.getOutputStream(), message);
         }catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
@@ -40,15 +40,17 @@ public class MessageHandler {
         return message;
     }
 
-    static void bindingResult(HttpServletResponse response, String message) {
+    static void successful(HttpServletResponse response, String message) {
         try {
-            Map<String, String> errorMap = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
 
-            errorMap.put("projectIdentifier", message);
-            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
-            errorMap.put("status", String.valueOf(HttpServletResponse.SC_NOT_ACCEPTABLE));
+            map.put("status", String.valueOf(HttpServletResponse.SC_OK));
+            map.put("code", String.valueOf(HttpStatus.OK.value()));
+            map.put("message", message);
+            response.setStatus(HttpServletResponse.SC_OK);
             response.setContentType(APPLICATION_JSON_VALUE);
-            new ErrorMessageMapper(response.getOutputStream(), errorMap);
+
+            new MessageMapper(response.getOutputStream(), map);
         }catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
@@ -64,7 +66,7 @@ public class MessageHandler {
             errorMap.put("message", message);
             response.setStatus(status.value());
             response.setContentType(APPLICATION_JSON_VALUE);
-            new ErrorMessageMapper(response.getOutputStream(), errorMap);
+            new MessageMapper(response.getOutputStream(), errorMap);
         }catch (IOException exception) {
             System.out.println(exception.getMessage());
         }

@@ -1,9 +1,12 @@
 package com.keita.task.service;
 
 import com.keita.task.error_handler.InvalidInput;
+import com.keita.task.error_handler.ProjectExceptionHandler;
+import com.keita.task.error_handler.SuccessfulHandler;
 import com.keita.task.model.ProjectTask;
 import com.keita.task.repository.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
@@ -31,10 +34,11 @@ public class TaskService {
             throw new InvalidInput(result, response, "Invalid input fields. Make sure all required fields are valid");
         }
         taskRepo.save(task);
+        new SuccessfulHandler(response, String.format("Task with an id %s have been added", task.getTaskID()));
     }
 
-    public void updateTask(ProjectTask task, Long id) {
-        Optional<ProjectTask> findTask = findByID(id);
+    public void updateTask(ProjectTask task, Long id, HttpServletResponse response) {
+        Optional<ProjectTask> findTask = findByID(id, response);
         findTask.ifPresent(result -> {
             result.setStatus(task.getStatus());
             result.setPriority(task.getPriority());
@@ -42,19 +46,23 @@ public class TaskService {
             result.setDueDate(task.getDueDate());
             result.setUpdatedAt(getDate());
         });
+        taskRepo.save(findTask.get());
+        new SuccessfulHandler(response, String.format("Successfully updated task with an id %s", id));
     }
 
-    public void deleteTask(Long taskID) {
-        Optional<ProjectTask> findTask = findByID(taskID);
+    public void deleteTask(Long taskID, HttpServletResponse response) {
+        Optional<ProjectTask> findTask = findByID(taskID, response);
         if (findTask.isEmpty()) {
             System.out.println("");
         }
         taskRepo.deleteByTaskID(taskID);
     }
 
-    public Optional<ProjectTask> findByID(Long taskID) {
+    public Optional<ProjectTask> findByID(Long taskID, HttpServletResponse response) {
+        String message = String.format("No task match with an id %s.", taskID);
         return taskRepo.findById(taskID)
-                .map(Optional::of).orElseThrow(() -> new IllegalArgumentException("Invalid task id"));
+                .map(Optional::of).orElseThrow(() ->
+                        new ProjectExceptionHandler(HttpStatus.BAD_REQUEST, response, message));
     }
 
     private Date getDate() {
