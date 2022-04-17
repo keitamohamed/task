@@ -40,4 +40,5 @@ public class ProjectTask {
     @JoinColumn(name = "id")
     @JsonBackReference(value = "task")
     private Project task;
+
 }

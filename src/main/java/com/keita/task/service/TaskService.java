@@ -61,7 +61,17 @@ public class TaskService {
         new SuccessfulHandler(response, String.format("Successfully deleted task with an id %s", taskID));
     }
 
+    public List<ProjectTask> taskDueSoon(HttpServletResponse response) {
+        List<ProjectTask> tasks = projectTaskList(response);
+        return tasks
+                .stream()
+                .sorted(Comparator.comparing(ProjectTask::getDueDate))
+                .limit(5)
+                .collect(Collectors.toList());
+    }
+
     public Optional<ProjectTask> findTaskByID(Long taskID, HttpServletResponse response) {
+        taskDueSoon(response);
         String message = String.format("No task match with an id %s.", taskID);
         return taskRepo.findById(taskID)
                 .map(Optional::of).orElseThrow(() ->

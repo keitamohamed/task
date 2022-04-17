@@ -74,6 +74,11 @@ public class ProjectController {
         return taskService.projectTaskList(response);
     }
 
+    @GetMapping(value = "/task-due-soon")
+    public List<ProjectTask> tasksDueSoon(HttpServletResponse response) {
+        return taskService.taskDueSoon(response);
+    }
+
     @DeleteMapping(value = "/delete/{identifier}")
     public void deleteProject(@PathVariable String identifier, HttpServletResponse response) {
         service.deleteProjectByIdentifier(identifier, response);
