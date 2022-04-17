@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/task/project")
-@CrossOrigin
 public class ProjectController {
 
     private final ProjectService service;
@@ -90,7 +90,7 @@ public class ProjectController {
     }
 
     @PutMapping(
-            value = {"/update"},
+            value = {"/update/{id}"},
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public void updateProjectByIdentifier(

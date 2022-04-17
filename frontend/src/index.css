@@ -2,11 +2,48 @@
   box-sizing: border-box;
   text-align: center;
   scroll-behavior: smooth;
+  border: none;
   box-shadow: none;
   outline: none;
   transition: all 0.2s ease-in-out;
   padding: 0;
   margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+button, input[type=button], input[type=reset], input[type=submit] {
+  background: none;
+}
+
+input[type=button], input[type=reset], input[type=text], input[type=submit] {
+  border: 0;
+  outline: 0;
+}
+
+input, input:focus {
+  border: 0;
+  outline: 0;
+}
+
+.addRedBorder {
+  border: 1px solid #D82148 !important;
+}
+
+.inputError {
+  color: #FF1818;
+  text-align: left;
+  padding: 0 0 1.2em 0;
+  font-size: 17px;
+}
+
+input[type=submit] {
+  text-align: center !important;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas: "sidebar sidebar mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent";
 }
 
 /*# sourceMappingURL=index.css.map */
