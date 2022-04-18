@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
 * {
   box-sizing: border-box;
   text-align: center;
@@ -38,6 +39,13 @@ input, input:focus {
 
 input[type=submit] {
   text-align: center !important;
+}
+
+select {
+  text-align: left !important;
+}
+select option {
+  text-align: left;
 }
 
 .dashboard {

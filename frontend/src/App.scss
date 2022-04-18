@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@400;500;700&family=Lato:wght@400;700&display=swap');
+@import "./style/@_Variable";
 
 .notification {
   border: 1px solid #cbcbcb;
@@ -36,6 +36,62 @@
     .conform {
       background: #019267;
       color: white;
+    }
+  }
+}
+
+.model {
+  width: 95%;
+  min-height: 90vh;
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.9);
+
+  svg {
+    color: #FFF;
+    fill: #FFF;
+    right: 0;
+    position: absolute;
+    margin-right: 1em;
+    font-size: 2em;
+    cursor: pointer;
+
+    &:hover {
+      color: #E83A14;
+      fill: #E83A14;
+    }
+  }
+
+  .formContainer {
+    padding: 20px 15px;
+    min-width: 90%;
+    min-height: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background: white;
+    justify-content: center;
+    text-align: center;
+
+    .titleContainer {
+      text-align: left;
+      width: 80%;
+      margin: 0 auto;
+
+      h2 {
+        text-align: left;
+        width: 75%;
+        margin: 0 auto;
+        border-bottom: 1px dotted #8D8DAA;
+        padding-bottom: 10px;
+      }
     }
   }
 }
@@ -121,11 +177,13 @@
           border-bottom: 1px solid red;
         }
       }
+
       .contentInfo {
         margin-bottom: 3em;
 
         .titleContainer {
           padding-bottom: 1.3em;
+
           .title {
             width: 95%;
             font-family: 'Lato', 'Anek Tamil', sans-serif;
@@ -157,11 +215,13 @@
           &:first-child {
             color: #39AEA9;
           }
+
           &:last-child {
             color: rgba(102, 211, 243, 1);
           }
         }
       }
+
       h2 {
         font-weight: bold;
         line-height: 1em;
@@ -170,7 +230,7 @@
   }
 }
 
-.projectForm {
+.form {
   width: 100%;
   padding: 15px;
 
@@ -186,7 +246,7 @@
       width: 60%;
       margin: 0 auto;
 
-      input, textarea {
+      input, textarea, select {
         border: 1px solid #a7a7a7;
         width: 100%;
         padding: 10px 15px;
@@ -263,6 +323,7 @@
         .contentTop {
 
         }
+
         .contentBottom {
 
         }
@@ -388,7 +449,7 @@
       border-radius: 5px;
       margin-bottom: .5em;
       grid-gap: .5em;
-      background:  #fdfdfd;
+      background: #fdfdfd;
 
       .contentLeft {
         p {
@@ -397,6 +458,7 @@
           text-align: left;
         }
       }
+
       .contentMiddle {
         text-align: left;
         position: relative;
@@ -418,6 +480,7 @@
           position: absolute
         }
       }
+
       .contentRight {
         background: white;
 
@@ -527,6 +590,7 @@
           &:first-child {
             background: #8D8DAA;
           }
+
           &:nth-child(2) {
             background: #30AADD;
           }
@@ -537,7 +601,7 @@
         }
       }
 
-      .positionMiddle{
+      .positionMiddle {
         border-left: 1px solid #aeaeae;
         border-right: 1px solid #aeaeae;
       }

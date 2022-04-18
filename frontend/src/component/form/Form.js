@@ -26,7 +26,7 @@ const Form = ({isNewProject, title, submitBtnText, submit, change, projectDate})
     }
 
     return (
-        <form className="projectForm"
+        <form className="form"
               onSubmit={onSubmit}
         >
             <div className="titleContainer">

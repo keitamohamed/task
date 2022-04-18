@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@400;500;700&family=Lato:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
 .notification {
   border: 1px solid #cbcbcb;
   padding: 15px 5px 15px;
@@ -33,6 +33,57 @@
 .notification .buttonContainer .conform {
   background: #019267;
   color: white;
+}
+
+.model {
+  width: 95%;
+  min-height: 90vh;
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.model svg {
+  color: #FFF;
+  fill: #FFF;
+  right: 0;
+  position: absolute;
+  margin-right: 1em;
+  font-size: 2em;
+  cursor: pointer;
+}
+.model svg:hover {
+  color: #E83A14;
+  fill: #E83A14;
+}
+.model .formContainer {
+  padding: 20px 15px;
+  min-width: 90%;
+  min-height: 70%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background: white;
+  justify-content: center;
+  text-align: center;
+}
+.model .formContainer .titleContainer {
+  text-align: left;
+  width: 80%;
+  margin: 0 auto;
+}
+.model .formContainer .titleContainer h2 {
+  text-align: left;
+  width: 75%;
+  margin: 0 auto;
+  border-bottom: 1px dotted #8D8DAA;
+  padding-bottom: 10px;
 }
 
 .showNotification {
@@ -150,22 +201,22 @@
   line-height: 1em;
 }
 
-.projectForm {
+.form {
   width: 100%;
   padding: 15px;
 }
-.projectForm .titleContainer {
+.form .titleContainer {
   padding: 15px 15px 20px;
 }
-.projectForm .formContainer {
+.form .formContainer {
   width: 70%;
   margin: 0 auto;
 }
-.projectForm .formContainer .formGroup {
+.form .formContainer .formGroup {
   width: 60%;
   margin: 0 auto;
 }
-.projectForm .formContainer .formGroup input, .projectForm .formContainer .formGroup textarea {
+.form .formContainer .formGroup input, .form .formContainer .formGroup textarea, .form .formContainer .formGroup select {
   border: 1px solid #a7a7a7;
   width: 100%;
   padding: 10px 15px;
@@ -174,13 +225,13 @@
   font-size: 1.1em;
   text-align: left;
 }
-.projectForm .formContainer .formGroup textarea {
+.form .formContainer .formGroup textarea {
   min-height: 100px;
 }
-.projectForm .formContainer .formGroup .btnContainer {
+.form .formContainer .formGroup .btnContainer {
   margin-top: 1em;
 }
-.projectForm .formContainer .formGroup .btnContainer .submitButton {
+.form .formContainer .formGroup .btnContainer .submitButton {
   background: #00C897;
   color: #FFF;
   border-radius: 10px;

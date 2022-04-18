@@ -1,13 +1,22 @@
+import {useState, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+
+import TaskModel from "../model/TaskModel";
+
 import {RiAddFill} from "react-icons/ri";
 
 import Header from "./Header";
 
 const ProjectBoard = () => {
+    const [task, setTask] = useState({})
 
+    useEffect(() => {
 
+    }, [])
     return (
         <div className="projectBoard">
             <Header/>
+            <TaskModel/>
             <div className="mainContainer">
                 <div className="btnContainer">
                     <li><RiAddFill /> <span>Create Task</span></li>
@@ -31,7 +40,6 @@ const ProjectBoard = () => {
 
                         </div>
                         <div className="positionRight">
-
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,5 @@
+@import "./style/@_Variable";
+
 * {
   box-sizing: border-box;
   text-align: center;
@@ -8,7 +10,7 @@
   transition: all 0.2s ease-in-out;
   padding: 0;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: $font_family_roboto;
 }
 
 button, input[type="button"], input[type="reset"], input[type="submit"]{
@@ -38,6 +40,14 @@ input, input:focus {
 
 input[type="submit"] {
   text-align: center !important;
+}
+
+select {
+  text-align: left !important;
+
+  option {
+    text-align: left;
+  }
 }
 
 
