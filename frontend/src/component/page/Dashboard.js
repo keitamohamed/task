@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useNavigate, Link} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {BsPlus} from 'react-icons/bs'
 
 import {GET_REQUEST} from "../../action/request";
@@ -8,8 +8,10 @@ import {GET_REQUEST} from "../../action/request";
 const Dashboard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {taskDue} = useSelector((state) => state.task)
 
     useEffect(() => {
+        dispatch((GET_REQUEST('/project/task-due-soon', null, null)))
         dispatch(GET_REQUEST('project/find-all-project', null, null))
     }, [dispatch])
     return (

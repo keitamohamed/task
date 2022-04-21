@@ -12,19 +12,24 @@ const TaskModel = () => {
         })
     }
 
+    const toggleModel = () => {
+        const getElement = document.querySelector('.model');
+        getElement.classList.toggle('open_model')
+    }
+
     return (
         <div className="model">
             <div className="content">
                 <form action="" className="form">
-                    <div className="btnContainer">
-                        <FaTimes/>
-                    </div>
                     <div className="formContainer">
+                        <div className="btnCloseContainer">
+                            <FaTimes onClick={toggleModel} />
+                        </div>
                         <div className="titleContainer">
-                            <h2>New Project Task Form</h2>
+                            <h2>New Project Task</h2>
                         </div>
                         <div className="formGroup">
-                            <input type="text"
+                            <textarea
                                    name={"name"}
                                    className={'addRedBorder summary'}
                                    onChange={''}
@@ -32,14 +37,14 @@ const TaskModel = () => {
                             />
                         </div>
                         <div className="formGroup">
-                            <select id = "priority">
+                            <select id = "priority" className={'addRedBorder priority'}>
                                 <option value="default">Select task priority</option>
                                 <option value="Low">Low</option>
                                 <option value="Height">Height</option>
                             </select>
                         </div>
                         <div className="formGroup">
-                            <select id = "status">
+                            <select id = "status" className={'addRedBorder status'}>
                                 <option value="default">Select task status</option>
                                 <option value="To Do">To Do</option>
                                 <option value="In Progress">In Progress</option>

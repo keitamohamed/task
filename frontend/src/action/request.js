@@ -58,12 +58,14 @@ export const GET_REQUEST = (url, id, token) => {
         }
 
         try {
-            const project = await fetchDate()
-            if (id !== null) {
-                dispatch(projectAction.selectedProject(project))
-            }
-            else {
-                dispatch(projectAction.loadProject(project))
+            const response = await fetchDate()
+            if (!url.includes("task")) {
+                if (id !== null) {
+                    dispatch(projectAction.selectedProject(response))
+                }
+                else {
+                    dispatch(projectAction.loadProject(response))
+                }
             }
         }catch (error) {
             dispatch(projectAction.setError(error.response.data))

@@ -1,14 +1,21 @@
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {RiAddFill} from "react-icons/ri";
+import {BsPlusSquareDotted} from "react-icons/bs";
 
 import TaskModel from "../model/TaskModel";
-
-import {RiAddFill} from "react-icons/ri";
-
 import Header from "./Header";
+
+
 
 const ProjectBoard = () => {
     const [task, setTask] = useState({})
+    
+    
+    const toggleModel = () => {
+        const getElement = document.querySelector('.model');
+        getElement.classList.toggle('open_model')
+    }
 
     useEffect(() => {
 
@@ -19,7 +26,11 @@ const ProjectBoard = () => {
             <TaskModel/>
             <div className="mainContainer">
                 <div className="btnContainer">
-                    <li><RiAddFill /> <span>Create Task</span></li>
+                    <li onClick={toggleModel}>
+                        <BsPlusSquareDotted />
+                        <br/>
+                        <span>Create Task</span>
+                    </li>
                 </div>
                 <div className="taskContainer">
                     <nav>

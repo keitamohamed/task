@@ -38,6 +38,7 @@
 .model {
   width: 95%;
   min-height: 90vh;
+  display: none;
   z-index: 10;
   position: absolute;
   left: 50%;
@@ -46,32 +47,35 @@
   overflow: auto;
   padding: 15px;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.9);
 }
-.model svg {
-  color: #FFF;
-  fill: #FFF;
+.model .content {
+  position: relative;
+  -webkit-animation-name: model;
+  -webkit-animation-duration: 0.4s;
+  animation-name: model;
+  animation-duration: 0.4s;
+  margin-top: 3em;
+}
+.model .btnCloseContainer {
+  width: 100%;
+  text-align: right;
+}
+.model .btnCloseContainer svg {
   right: 0;
-  position: absolute;
-  margin-right: 1em;
   font-size: 2em;
   cursor: pointer;
-}
-.model svg:hover {
-  color: #E83A14;
   fill: #E83A14;
 }
 .model .formContainer {
-  padding: 20px 15px;
+  padding: 5px 10px 20px;
   min-width: 90%;
-  min-height: 70%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  background: white;
+  min-height: 90%;
+  background: #F1F6F9;
   justify-content: center;
   text-align: center;
+}
+.model .formContainer * {
+  background: #F1F6F9;
 }
 .model .formContainer .titleContainer {
   text-align: left;
@@ -80,10 +84,36 @@
 }
 .model .formContainer .titleContainer h2 {
   text-align: left;
+  font-size: 1.2em;
   width: 75%;
   margin: 0 auto;
   border-bottom: 1px dotted #8D8DAA;
   padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+@-webkit-keyframes model {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes model {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+.open_model {
+  display: block;
 }
 
 .showNotification {
@@ -284,7 +314,7 @@
   justify-content: center;
   padding: 15px;
   width: 100%;
-  background: url("./../public/image/dashboard-bg.png") no-repeat center center fixed;
+  background: url("./../public/image/dashboard_bg_w.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -450,25 +480,18 @@
 }
 .projectBoard .mainContainer .btnContainer li {
   width: fit-content;
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  justify-content: center;
-  background: #30AADD;
-  padding: 5px 2em;
-  border-radius: 10px;
   cursor: pointer;
 }
 .projectBoard .mainContainer .btnContainer li * {
-  color: #FFF;
+  color: #069A8E;
 }
 .projectBoard .mainContainer .btnContainer li span {
   margin-top: 0.5em;
-  font-size: 1.2em;
-  color: #FFF;
+  font-size: 1em;
 }
 .projectBoard .mainContainer .btnContainer li svg {
-  font-size: 2.5em;
+  font-size: 3.5em;
+  margin-bottom: 0.1em;
 }
 .projectBoard .mainContainer .taskContainer {
   display: grid;
