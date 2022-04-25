@@ -62,12 +62,6 @@ public class TaskService {
 
     public List<ProjectTask> taskDueSoon(HttpServletResponse response) {
         List<ProjectTask> tasks = projectTaskList(response);
-        List<ProjectTask> due = tasks
-                .stream()
-                .sorted(Comparator.comparing(ProjectTask::getDueDate))
-                .limit(5)
-                .collect(Collectors.toList());
-        due.forEach(t -> System.out.println(t.getSummary() + " due " + t.getDueDate()));
         return (tasks
                 .stream()
                 .sorted(Comparator.comparing(ProjectTask::getDueDate))
