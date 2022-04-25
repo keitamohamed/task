@@ -30,7 +30,7 @@ const routePath = [
     },
     {
         name: "Project Board",
-        path: "/project/board",
+        path: "/project/board/:id",
         protected: true,
         showLink: false,
         component: ProjectBoard
