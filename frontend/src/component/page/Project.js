@@ -41,11 +41,12 @@ const Project = () => {
         dispatch(projectAction.setError(error.response.data))
     }
 
-    const getProjectTask = (identifier) => {
+    const setProjectAndTasks = (identifier) => {
+        dispatch(GET_REQUEST("project/find-by-identifier/", identifier, null, setProduct, setError))
         dispatch(GET_REQUEST('project/project-task/', identifier, null, setProductTask, setErrorMessage))
     }
 
-    const getProjects = (id, identifier) => {
+    const getProjects = (identifier) => {
         dispatch(GET_REQUEST('project/find-by-identifier/', identifier, null, setProduct, setError))
     }
 
@@ -95,13 +96,13 @@ const Project = () => {
                                         </div>
                                     </div>
                                     <div className="contentRight">
-                                        <Link to={`/project/board/${project.id}`} onClick={() => getProjectTask(project.identifier)}>
+                                        <Link to={`/project/board/${project.identifier}`} onClick={() => setProjectAndTasks(project.identifier)}>
                                             <MdDashboard style={{color: '#0093AB'}} />
                                             <span>Project Board</span>
                                         </Link>
                                         <Link
                                             to={`/project/update/${project.id}`}
-                                            onClick={() => getProjects(project.id, project.identifier)}
+                                            onClick={() => getProjects(project.identifier)}
                                         >
                                             <FiCheckSquare style={{color: '#019267'}} />
                                             <span>Update Project</span>
