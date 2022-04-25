@@ -84,7 +84,8 @@ const Project = () => {
                                         </div>
                                     </div>
                                     <div className="contentRight">
-                                        <Link to={`/project/board`}>
+                                        <Link to={`/project/board/${project.id}`}
+                                              onClick={() => getProjects(project.id, project.identifier)}>
                                             <MdDashboard style={{color: '#0093AB'}} />
                                             <span>Project Board</span>
                                         </Link>
