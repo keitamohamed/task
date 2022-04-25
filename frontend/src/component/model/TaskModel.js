@@ -39,8 +39,9 @@ const TaskModel = () => {
                         <div className="formGroup">
                             <select id = "priority" className={'addRedBorder priority'}>
                                 <option value="default">Select task priority</option>
+                                <option value="High">Height</option>
+                                <option value="Medium">Medium</option>
                                 <option value="Low">Low</option>
-                                <option value="Height">Height</option>
                             </select>
                         </div>
                         <div className="formGroup">

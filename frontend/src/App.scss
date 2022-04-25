@@ -586,10 +586,16 @@
 }
 
 .projectBoard {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
 
   .mainContainer {
     width: 95%;
     top: 30%;
+    position: static;
+    left: 0;
+    transform: translate(0, 0);
+    margin: 0 auto;
 
     .btnContainer {
       padding: 20px;
@@ -649,9 +655,63 @@
         }
       }
 
-      .positionMiddle {
-        border-left: 1px solid #aeaeae;
-        border-right: 1px solid #aeaeae;
+      .task {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        grid-gap: 1em;
+        padding: 15px 0;
+
+        .positionLeft {
+          overflow: scroll;
+        }
+
+        .card {
+          width: 100%;
+          border: 1px solid #F2F2F2;
+
+          .header {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            padding: 8px 0;
+            color: #FFF;
+          }
+
+          .body {
+            padding: 10px 0;
+
+            .actionBtn {
+              margin-top: 1em;
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              justify-content: center;
+              place-items: center;
+
+              li {
+                width: fit-content;
+                background: #42C2FF;
+                padding: 5px 10px;
+                color: #FFF;
+                cursor: pointer;
+                border-radius: 5px;
+
+                &:last-child {
+                  background: #E83A14;
+                }
+              }
+            }
+          }
+
+          .bgGreen {
+            background: #069A8E;
+          }
+          .bgRed {
+            background: #E83A14;
+          }
+          .bgWarm {
+            background: #E8630A;
+          }
+        }
       }
     }
 
