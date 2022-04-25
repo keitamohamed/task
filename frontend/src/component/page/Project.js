@@ -21,8 +21,14 @@ const Project = () => {
     const {projects} = useSelector((state) => state.project)
     const notification = useContext(NotificationContext)
 
+    const setProductTask = (url, id, response) => {
+        dispatch(taskAction.loadTask(response))
+    }
+    const setErrorMessage = (error) => {
+        dispatch(taskAction.setError(error.response.data))
+    }
 
-    const setProduct = (id, response) => {
+    const setProduct = (url, id, response) => {
         if (id !== null) {
             dispatch(projectAction.selectedProject(response))
         }
@@ -31,26 +37,16 @@ const Project = () => {
         }
     }
 
-    const setProductTask = (response) => {
-        console.log(response)
-        dispatch(taskAction.loadTask(response))
-    }
-
-    const setErrorMessage = (error) => {
-        dispatch(taskAction.setError(error.response.data))
-    }
-
     const setError = (error) => {
         dispatch(projectAction.setError(error.response.data))
     }
 
-    const getProjects = (id, identifier) => {
-        dispatch(GET_REQUEST('project/find-by-identifier/', identifier, null, setProduct, setError))
+    const getProjectTask = (identifier) => {
+        dispatch(GET_REQUEST('project/project-task/', identifier, null, setProductTask, setErrorMessage))
     }
 
-    const getProjectTask = (identifier) => {
-        console.log('identifier', identifier)
-        dispatch(GET_REQUEST('project/project-task/', identifier, null, setProductTask, setErrorMessage))
+    const getProjects = (id, identifier) => {
+        dispatch(GET_REQUEST('project/find-by-identifier/', identifier, null, setProduct, setError))
     }
 
     const deleteProject = (identifier) => {
@@ -99,8 +95,7 @@ const Project = () => {
                                         </div>
                                     </div>
                                     <div className="contentRight">
-                                        <Link to={`/project/board/${project.id}`}
-                                              onClick={() => getProjectTask(project.identifier)}>
+                                        <Link to={`/project/board/${project.id}`} onClick={() => getProjectTask(project.identifier)}>
                                             <MdDashboard style={{color: '#0093AB'}} />
                                             <span>Project Board</span>
                                         </Link>

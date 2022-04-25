@@ -89,6 +89,15 @@ public class TaskService {
         );
     }
 
+    public List<ProjectTask> sortProjectTaskByDueDateAndPriority(Project project) {
+        return (project.getTask()
+                .stream()
+                .sorted(Comparator.comparing(ProjectTask::getDueDate))
+                .sorted(Comparator.comparing(ProjectTask::getPriority))
+                .collect(Collectors.toList())
+        );
+    }
+
     public Optional<ProjectTask> findTaskByID(Long taskID, HttpServletResponse response) {
         taskDueSoon(response);
         String message = String.format("No task match with an id %s.", taskID);
