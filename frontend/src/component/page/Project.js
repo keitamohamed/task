@@ -12,6 +12,7 @@ import Notification from "../../notification/Notification";
 import {GET_REQUEST, DELETE_REQUEST} from "../../action/request";
 import {NotificationContext} from "../context/Context";
 import {projectAction} from "../../store/project_slice";
+import {taskAction} from "../../store/task_slice";
 
 let isLoaded = false;
 const Project = () => {
@@ -21,7 +22,7 @@ const Project = () => {
     const notification = useContext(NotificationContext)
 
 
-    const setProduct = (url, id, response) => {
+    const setProduct = (id, response) => {
         if (id !== null) {
             dispatch(projectAction.selectedProject(response))
         }
@@ -30,12 +31,26 @@ const Project = () => {
         }
     }
 
+    const setProductTask = (response) => {
+        console.log(response)
+        dispatch(taskAction.loadTask(response))
+    }
+
+    const setErrorMessage = (error) => {
+        dispatch(taskAction.setError(error.response.data))
+    }
+
     const setError = (error) => {
         dispatch(projectAction.setError(error.response.data))
     }
 
     const getProjects = (id, identifier) => {
         dispatch(GET_REQUEST('project/find-by-identifier/', identifier, null, setProduct, setError))
+    }
+
+    const getProjectTask = (identifier) => {
+        console.log('identifier', identifier)
+        dispatch(GET_REQUEST('project/project-task/', identifier, null, setProductTask, setErrorMessage))
     }
 
     const deleteProject = (identifier) => {
@@ -85,7 +100,7 @@ const Project = () => {
                                     </div>
                                     <div className="contentRight">
                                         <Link to={`/project/board/${project.id}`}
-                                              onClick={() => getProjects(project.id, project.identifier)}>
+                                              onClick={() => getProjectTask(project.identifier)}>
                                             <MdDashboard style={{color: '#0093AB'}} />
                                             <span>Project Board</span>
                                         </Link>
