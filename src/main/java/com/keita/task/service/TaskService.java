@@ -3,6 +3,7 @@ package com.keita.task.service;
 import com.keita.task.error_handler.InvalidInput;
 import com.keita.task.error_handler.ProjectExceptionHandler;
 import com.keita.task.error_handler.SuccessfulHandler;
+import com.keita.task.model.Project;
 import com.keita.task.model.ProjectTask;
 import com.keita.task.repository.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,15 @@ public class TaskService {
                 .sorted(Comparator.comparing(ProjectTask::getDueDate))
                 .limit(5)
                 .collect(Collectors.toList()));
+    }
+
+    public List<ProjectTask> projectTask (Project project) {
+        return (project.getTask()
+                .stream()
+                .sorted(Comparator.comparing(ProjectTask::getDueDate))
+                .sorted(Comparator.comparing(ProjectTask::getPriority))
+                .collect(Collectors.toList())
+        );
     }
 
     public List<ProjectTask> sortTaskByPriority(HttpServletResponse response) {

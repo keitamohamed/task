@@ -113,4 +113,10 @@ public class ProjectService {
         }
     }
 
+    public List<ProjectTask> findProjectTaskSortByDueDateAndPriority(String projectIdentifier, HttpServletResponse response) {
+        Optional<Project> project = findProjectByIdentifier(HttpStatus.BAD_REQUEST, projectIdentifier, response, "");
+        return taskService.projectTask(project.get());
+    }
+
+
 }
