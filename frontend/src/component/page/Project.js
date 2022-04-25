@@ -11,6 +11,7 @@ import Header from "./Header";
 import Notification from "../../notification/Notification";
 import {GET_REQUEST, DELETE_REQUEST} from "../../action/request";
 import {NotificationContext} from "../context/Context";
+import {projectAction} from "../../store/project_slice";
 
 let isLoaded = false;
 const Project = () => {
@@ -19,8 +20,22 @@ const Project = () => {
     const {projects} = useSelector((state) => state.project)
     const notification = useContext(NotificationContext)
 
+
+    const setProduct = (url, id, response) => {
+        if (id !== null) {
+            dispatch(projectAction.selectedProject(response))
+        }
+        else {
+            dispatch(projectAction.loadProject(response))
+        }
+    }
+
+    const setError = (error) => {
+        dispatch(projectAction.setError(error.response.data))
+    }
+
     const getProjects = (id, identifier) => {
-        dispatch(GET_REQUEST('project/find-by-identifier/', identifier, null))
+        dispatch(GET_REQUEST('project/find-by-identifier/', identifier, null, setProduct, setError))
     }
 
     const deleteProject = (identifier) => {
@@ -39,7 +54,7 @@ const Project = () => {
 
     useEffect(() => {
         if (!isLoaded) {
-            dispatch(GET_REQUEST('project/find-all-project', null, null))
+            dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
             isLoaded = true
         }
     }, [projects])

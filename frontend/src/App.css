@@ -326,9 +326,11 @@
   margin: 0 auto;
   width: 80%;
   border-bottom: 1px solid #bebebe;
+  text-align: left;
 }
 .dashboard .mainContent .contentButtonContainer li {
   list-style: none;
+  width: fit-content;
 }
 .dashboard .mainContent .contentButtonContainer li svg {
   border: 3px dotted;
@@ -381,15 +383,31 @@
   list-style-type: circle;
   text-align: left;
   font-size: 18px;
-  padding-bottom: 5px;
+  padding: 15px 15px 5px;
   border-bottom: 1px solid #909090;
   text-transform: capitalize;
 }
 .dashboard .mainContent .taskDueContainer .taskContainer li:last-child {
   border: none;
+  text-align: right;
+  top: 0.2em;
+  position: relative;
 }
 .dashboard .mainContent .taskDueContainer .taskContainer li::marker {
   font-size: 2em;
+}
+.dashboard .mainContent .taskDueContainer .taskContainer .taskDue {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.dashboard .mainContent .taskDueContainer .taskContainer .taskDue span {
+  display: list-item;
+  border-bottom: none;
+  text-align: left;
+}
+.dashboard .mainContent .taskDueContainer .taskContainer .taskDue span:last-child {
+  list-style-type: none;
+  text-align: right;
 }
 
 .project {

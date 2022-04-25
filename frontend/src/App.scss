@@ -385,9 +385,11 @@
       margin: 0 auto;
       width: 80%;
       border-bottom: 1px solid #bebebe;
+      text-align: left;
 
       li {
         list-style: none;
+        width: fit-content;
 
         svg {
           border: 3px dotted;
@@ -450,17 +452,36 @@
           list-style-type: circle;
           text-align: left;
           font-size: 18px;
-          padding-bottom: 5px;
+          padding: 15px 15px 5px;
           border-bottom: 1px solid #909090;
           text-transform: capitalize;
 
           &:last-child {
             border: none;
+            text-align: right;
+            top: .2em;
+            position: relative;
           }
         }
 
         li::marker {
           font-size: 2em;
+        }
+
+        .taskDue {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+
+          span {
+            display: list-item;
+            border-bottom: none;
+            text-align: left;
+
+            &:last-child {
+              list-style-type: none;
+              text-align: right;
+            }
+          }
         }
       }
 

@@ -45,7 +45,7 @@ export const UPDATE_REQUEST = (url, data) => {
     }
 }
 
-export const GET_REQUEST = (url, id, token) => {
+export const GET_REQUEST = (url, id, token, action, setError) => {
     return async (dispatch) => {
         const fetchDate = async () => {
             const response = await axios({
@@ -59,16 +59,10 @@ export const GET_REQUEST = (url, id, token) => {
 
         try {
             const response = await fetchDate()
-            if (!url.includes("task")) {
-                if (id !== null) {
-                    dispatch(projectAction.selectedProject(response))
-                }
-                else {
-                    dispatch(projectAction.loadProject(response))
-                }
-            }
+            action(url, id, response)
         }catch (error) {
-            dispatch(projectAction.setError(error.response.data))
+            setError(error)
+            // dispatch(projectAction.setError(error.response.data))
         }
     }
 }

@@ -2,17 +2,47 @@ import {useEffect} from "react";
 import {useNavigate, Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {BsPlus} from 'react-icons/bs'
+import moment from "moment";
 
 import {GET_REQUEST} from "../../action/request";
+import {projectAction} from "../../store/project_slice";
+import {taskAction} from "../../store/task_slice";
 
 const Dashboard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {taskDue} = useSelector((state) => state.task)
 
+    const setDueTask = (url, id, response) => {
+        if (url.includes('task-due-soon')) {
+            dispatch(taskAction.setTaskDue(response))
+        }
+        else {
+            dispatch(taskAction.loadTask(response))
+        }
+    }
+
+    const setProduct = (url, id, response) => {
+        if (id !== null) {
+            dispatch(projectAction.selectedProject(response))
+        }
+        else {
+            dispatch(projectAction.loadProject(response))
+        }
+    }
+
+    const setTaskErrorMessage = (error) => {
+        dispatch(taskAction.setError(error.response.data))
+    }
+
+    const setError = (error) => {
+        dispatch(projectAction.setError(error.response.data))
+    }
+
+
     useEffect(() => {
-        dispatch((GET_REQUEST('/project/task-due-soon', null, null)))
-        dispatch(GET_REQUEST('project/find-all-project', null, null))
+        dispatch((GET_REQUEST('/project/task-due-soon', null, null, setDueTask, setTaskErrorMessage)))
+        dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
     }, [dispatch])
     return (
         <div className={`dashboard`}>
@@ -44,16 +74,23 @@ const Dashboard = () => {
             <div className="mainContent">
                 <div className="taskDueContainer">
                     <div className="titleContainer">
-                        <h5>Tasks Due Soon
-                        </h5>
-                        <i>See all my tasks</i>
+                        <h5>Tasks Due Soon</h5>
+                        <i>All tasks</i>
                     </div>
                     <div className="taskContainer">
                         <div className="content">
                             <ul>
-                                <li>Meet with Client</li>
-                                <li>Create Project</li>
-                                <li>Creat app</li>
+                                {
+                                    taskDue.map((task, index) => {
+                                        return <li
+                                            key={index}
+                                            className={'taskDue'}
+                                        >
+                                            <span>{task.summary}</span>
+                                            <span>{moment(task.dueDate).format('MMM DD YYYY')}</span>
+                                        </li>
+                                    })
+                                }
                             </ul>
                         </div>
                     </div>
