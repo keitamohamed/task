@@ -662,12 +662,16 @@
         grid-gap: 1em;
         padding: 15px 0;
 
-        .positionLeft {
+        .positionLeft, .positionMiddle, .positionRight {
           overflow: scroll;
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+          grid-gap: .5em;
         }
 
         .card {
           width: 100%;
+          height: fit-content;
           border: 1px solid #F2F2F2;
 
           .header {
@@ -675,6 +679,9 @@
             grid-template-columns: repeat(2, 1fr);
             padding: 8px 0;
             color: #FFF;
+            * {
+              font-size: 1.2em;
+            }
           }
 
           .body {

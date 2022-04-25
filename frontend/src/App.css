@@ -553,11 +553,15 @@
   grid-gap: 1em;
   padding: 15px 0;
 }
-.projectBoard .mainContainer .taskContainer .task .positionLeft {
+.projectBoard .mainContainer .taskContainer .task .positionLeft, .projectBoard .mainContainer .taskContainer .task .positionMiddle, .projectBoard .mainContainer .taskContainer .task .positionRight {
   overflow: scroll;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 0.5em;
 }
 .projectBoard .mainContainer .taskContainer .task .card {
   width: 100%;
+  height: fit-content;
   border: 1px solid #F2F2F2;
 }
 .projectBoard .mainContainer .taskContainer .task .card .header {
@@ -565,6 +569,9 @@
   grid-template-columns: repeat(2, 1fr);
   padding: 8px 0;
   color: #FFF;
+}
+.projectBoard .mainContainer .taskContainer .task .card .header * {
+  font-size: 1.2em;
 }
 .projectBoard .mainContainer .taskContainer .task .card .body {
   padding: 10px 0;
