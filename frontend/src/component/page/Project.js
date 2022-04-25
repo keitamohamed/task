@@ -12,6 +12,7 @@ import Notification from "../../notification/Notification";
 import {GET_REQUEST, DELETE_REQUEST} from "../../action/request";
 import {NotificationContext} from "../context/Context";
 import {projectAction} from "../../store/project_slice";
+import {taskAction} from "../../store/task_slice";
 
 let isLoaded = false;
 const Project = () => {
@@ -20,6 +21,13 @@ const Project = () => {
     const {projects} = useSelector((state) => state.project)
     const notification = useContext(NotificationContext)
 
+
+    const setProductTask = (url, id, response) => {
+        dispatch(taskAction.loadTask(response))
+    }
+    const setErrorMessage = (error) => {
+        dispatch(taskAction.setError(error.response.data))
+    }
 
     const setProduct = (url, id, response) => {
         if (id !== null) {
@@ -32,6 +40,10 @@ const Project = () => {
 
     const setError = (error) => {
         dispatch(projectAction.setError(error.response.data))
+    }
+
+    const getProjectTask = (identifier) => {
+        dispatch(GET_REQUEST('project/project-task/', identifier, null, setProductTask, setErrorMessage))
     }
 
     const getProjects = (id, identifier) => {
@@ -84,7 +96,7 @@ const Project = () => {
                                         </div>
                                     </div>
                                     <div className="contentRight">
-                                        <Link to={`/project/board`}>
+                                        <Link to={`/project/board/${project.id}`} onClick={() => getProjectTask(project.identifier)}>
                                             <MdDashboard style={{color: '#0093AB'}} />
                                             <span>Project Board</span>
                                         </Link>

@@ -30,8 +30,7 @@ const ProjectBoard = () => {
     }
 
     useEffect(() => {
-        dispatch(GET_REQUEST("/project/task-by-priority", null, null, loadTask, setError))
-    }, [dispatch])
+    }, [tasks])
     return (
         <div className="projectBoard">
             <Header/>
