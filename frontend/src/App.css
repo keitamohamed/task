@@ -485,9 +485,17 @@
   color: #E83A14;
 }
 
+.projectBoard {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
 .projectBoard .mainContainer {
   width: 95%;
   top: 30%;
+  position: static;
+  left: 0;
+  transform: translate(0, 0);
+  margin: 0 auto;
 }
 .projectBoard .mainContainer .btnContainer {
   padding: 20px;
@@ -538,9 +546,55 @@
 .projectBoard .mainContainer .taskContainer nav li:last-child {
   background: #43919B;
 }
-.projectBoard .mainContainer .taskContainer .positionMiddle {
-  border-left: 1px solid #aeaeae;
-  border-right: 1px solid #aeaeae;
+.projectBoard .mainContainer .taskContainer .task {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  grid-gap: 1em;
+  padding: 15px 0;
+}
+.projectBoard .mainContainer .taskContainer .task .positionLeft {
+  overflow: scroll;
+}
+.projectBoard .mainContainer .taskContainer .task .card {
+  width: 100%;
+  border: 1px solid #F2F2F2;
+}
+.projectBoard .mainContainer .taskContainer .task .card .header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 8px 0;
+  color: #FFF;
+}
+.projectBoard .mainContainer .taskContainer .task .card .body {
+  padding: 10px 0;
+}
+.projectBoard .mainContainer .taskContainer .task .card .body .actionBtn {
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  place-items: center;
+}
+.projectBoard .mainContainer .taskContainer .task .card .body .actionBtn li {
+  width: fit-content;
+  background: #42C2FF;
+  padding: 5px 10px;
+  color: #FFF;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.projectBoard .mainContainer .taskContainer .task .card .body .actionBtn li:last-child {
+  background: #E83A14;
+}
+.projectBoard .mainContainer .taskContainer .task .card .bgGreen {
+  background: #069A8E;
+}
+.projectBoard .mainContainer .taskContainer .task .card .bgRed {
+  background: #E83A14;
+}
+.projectBoard .mainContainer .taskContainer .task .card .bgWarm {
+  background: #E8630A;
 }
 .projectBoard .mainContainer li {
   list-style: none;
