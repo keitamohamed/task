@@ -74,6 +74,11 @@ public class ProjectController {
         return taskService.projectTaskList(response);
     }
 
+    @GetMapping("/project-task/{projectIdentifier}")
+    public List<ProjectTask> projectTaskSort(@PathVariable("projectIdentifier") String identifier, HttpServletResponse response) {
+        return service.findProjectTaskSortByDueDateAndPriority(identifier, response);
+    }
+
     @GetMapping("/task-by-priority")
     public List<ProjectTask> tasksByPriority(HttpServletResponse response) {
         return taskService.sortTaskByPriority(response);
