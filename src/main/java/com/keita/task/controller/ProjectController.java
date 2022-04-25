@@ -74,6 +74,11 @@ public class ProjectController {
         return taskService.projectTaskList(response);
     }
 
+    @GetMapping("/task-by-priority")
+    public List<ProjectTask> tasksByPriority(HttpServletResponse response) {
+        return taskService.sortTaskByPriority(response);
+    }
+
     @GetMapping(value = "/task-due-soon")
     public List<ProjectTask> tasksDueSoon(HttpServletResponse response) {
         return taskService.taskDueSoon(response);
