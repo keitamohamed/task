@@ -1,9 +1,22 @@
-import DatePicker from "react-datepicker";
 import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import DatePicker from "react-datepicker";
 import {FaTimes} from "react-icons/fa";
+import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
+import {taskAction} from "../../store/task_slice";
 
 const TaskModel = () => {
+    const dispatch = useDispatch()
+    const {project} = useSelector((state) => state.project)
+    const {error} = useSelector((state) => state.task)
     const [task, setTask] = useState({})
+
+    const onChange = event => {
+      setTask({
+          ...task,
+          [event.target.name]: event.target.value
+      })
+    }
 
     const setDate = (name, value) => {
         setTask({
@@ -13,14 +26,31 @@ const TaskModel = () => {
     }
 
     const toggleModel = () => {
+        dispatch(GET_REQUEST('project/project-task/', project.identifier, null, setProductTask, setErrorMessage))
         const getElement = document.querySelector('.model');
         getElement.classList.toggle('open_model')
+    }
+
+    const setProductTask = (url, id, response) => {
+        dispatch(taskAction.loadTask(response))
+    }
+    const setErrorMessage = (error) => {
+        dispatch(taskAction.setError(error.response.data))
+    }
+    
+    const addNewTask = event => {
+        event.preventDefault()
+        dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, null))
     }
 
     return (
         <div className="model">
             <div className="content">
-                <form action="" className="form">
+                <form
+                    action=""
+                    className="form"
+                    onSubmit={addNewTask}
+                >
                     <div className="formContainer">
                         <div className="btnCloseContainer">
                             <FaTimes onClick={toggleModel} />
@@ -30,14 +60,19 @@ const TaskModel = () => {
                         </div>
                         <div className="formGroup">
                             <textarea
-                                   name={"name"}
-                                   className={'addRedBorder summary'}
-                                   onChange={''}
+                                   name='summary'
+                                   className={error && error.summary ? 'addRedBorder' : 'summary'}
+                                   onChange={onChange}
                                    placeholder={'Enter task summary'}
                             />
                         </div>
                         <div className="formGroup">
-                            <select id = "priority" className={'addRedBorder priority'}>
+                            <select
+                                id = "priority"
+                                name='priority'
+                                className={error && error.priority ? 'addRedBorder' : 'priority'}
+                                onChange={onChange}
+                            >
                                 <option value="default">Select task priority</option>
                                 <option value="High">High</option>
                                 <option value="Medium">Medium</option>
@@ -45,7 +80,12 @@ const TaskModel = () => {
                             </select>
                         </div>
                         <div className="formGroup">
-                            <select id = "status" className={'addRedBorder status'}>
+                            <select
+                                id = "status"
+                                name='status'
+                                className={error && error.status ? 'addRedBorder' : 'status'}
+                                onChange={onChange}
+                            >
                                 <option value="default">Select task status</option>
                                 <option value="To Do">To Do</option>
                                 <option value="In Progress">In Progress</option>
@@ -56,7 +96,7 @@ const TaskModel = () => {
                         <div className="formGroup">
                             <DatePicker
                                 name={"dueDate"}
-                                className={'addRedBorder dueDate'}
+                                className={error && error.dueDate ? 'addRedBorder' :'dueDate'}
                                 selected={task.dueDate}
                                 minDate={new Date()}
                                 dateFormat={"yyyy-MM-dd"}

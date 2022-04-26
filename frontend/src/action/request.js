@@ -62,7 +62,6 @@ export const GET_REQUEST = (url, id, token, action, setError) => {
             action(url, id, response)
         }catch (error) {
             setError(error)
-            // dispatch(projectAction.setError(error.response.data))
         }
     }
 }

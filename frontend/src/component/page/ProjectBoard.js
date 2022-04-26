@@ -12,6 +12,7 @@ import {GET_REQUEST} from "../../action/request";
 
 const ProjectBoard = () => {
     const dispatch = useDispatch()
+    const projectTask = useSelector((state) => state.task)
     const {tasks} = useSelector((state) => state.task)
     const [task, setTask] = useState({})
     
@@ -31,7 +32,7 @@ const ProjectBoard = () => {
 
     useEffect(() => {
 
-    }, [tasks])
+    }, [dispatch, tasks, projectTask])
 
     return (
         <div className="projectBoard">
@@ -61,7 +62,7 @@ const ProjectBoard = () => {
                         <div className="positionLeft">
                             {
                                 tasks.map((task, index) => {
-                                    return task.status === 'To DO' ? (
+                                    return task.status === 'To DO' || task.status === 'To Do' ? (
                                         <div className="card" key={index}>
                                             <div className=
                                                      {`header 
