@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 
 import {useEffect, useState} from "react";
 import {projectAction} from "../../store/project_slice";
-import {SEND_REQUEST} from "../../action/request";
+import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import Form from "./Form";
 
 let isLoaded = false;
@@ -31,9 +31,27 @@ const NewProject = () => {
     const onChange = event => {
         dispatch(projectAction.addNewProject(event.target))
     }
+
+    const setProduct = (url, id, response) => {
+        if (id !== null) {
+            dispatch(projectAction.selectedProject(response))
+        }
+        else {
+            dispatch(projectAction.loadProject(response))
+        }
+    }
+
+    const setError = (error) => {
+        dispatch(projectAction.setError(error.response.data))
+    }
+
+    const fetchProject = () => {
+        dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
+    }
+
     const onSubmit = event => {
         event.preventDefault();
-        dispatch(SEND_REQUEST('POST', 'project/add', project.project, null))
+        dispatch(SEND_REQUEST('POST', 'project/add', project.project, fetchProject, setError))
         navigate('/project')
     }
 

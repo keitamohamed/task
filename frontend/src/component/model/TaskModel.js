@@ -9,7 +9,12 @@ const TaskModel = () => {
     const dispatch = useDispatch()
     const {project} = useSelector((state) => state.project)
     const {error} = useSelector((state) => state.task)
-    const [task, setTask] = useState({})
+    const [task, setTask] = useState({
+        summary: '',
+        status: '',
+        priority: '',
+        dueDate: null
+    })
 
     const onChange = event => {
       setTask({
@@ -25,8 +30,11 @@ const TaskModel = () => {
         })
     }
 
+    const getProjectTask = () => {
+        dispatch(GET_REQUEST('project/project-task/', project.identifier, null, setProductTask, setError))
+    }
+
     const toggleModel = () => {
-        dispatch(GET_REQUEST('project/project-task/', project.identifier, null, setProductTask, setErrorMessage))
         const getElement = document.querySelector('.model');
         getElement.classList.toggle('open_model')
     }
@@ -34,13 +42,15 @@ const TaskModel = () => {
     const setProductTask = (url, id, response) => {
         dispatch(taskAction.loadTask(response))
     }
-    const setErrorMessage = (error) => {
+
+    const setError = (error) => {
+        console.log(error)
         dispatch(taskAction.setError(error.response.data))
     }
     
     const addNewTask = event => {
         event.preventDefault()
-        dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, null))
+        dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, getProjectTask, setError))
     }
 
     return (
@@ -65,6 +75,7 @@ const TaskModel = () => {
                                    onChange={onChange}
                                    placeholder={'Enter task summary'}
                             />
+                            {error && error.summary && (<p className='inputError'>{error.summary}</p>)}
                         </div>
                         <div className="formGroup">
                             <select
@@ -78,6 +89,7 @@ const TaskModel = () => {
                                 <option value="Medium">Medium</option>
                                 <option value="Low">Low</option>
                             </select>
+                            {error && error.priority && (<p className='inputError'>{error.priority}</p>)}
                         </div>
                         <div className="formGroup">
                             <select
@@ -91,7 +103,7 @@ const TaskModel = () => {
                                 <option value="In Progress">In Progress</option>
                                 <option value="Complete">Complete</option>
                             </select>
-
+                            {error && error.status && (<p className='inputError'>{error.status}</p>)}
                         </div>
                         <div className="formGroup">
                             <DatePicker
@@ -103,6 +115,7 @@ const TaskModel = () => {
                                 onChange={(date) => setDate("dueDate", date)}
                                 placeholderText="Select task due date"
                             />
+                            {error && error.dueDate && (<p className='inputError'>{error.dueDate}</p>)}
                         </div>
                         <div className="formGroup">
                             <div className="btnContainer">

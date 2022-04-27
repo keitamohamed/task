@@ -3,24 +3,23 @@ import {projectAction} from "../store/project_slice";
 
 axios.defaults.baseURL = "http://localhost:8080/task/"
 
-export const SEND_REQUEST = (action, url, data, id) => {
+export const SEND_REQUEST = (requestAction, url, data, action, setError) => {
     return async (dispatch) => {
         const send = async () => {
             await axios({
-                method: action,
-                url: `${url}${id ? id : ''}`,
+                method: requestAction,
+                url: url,
                 data: data,
             })
         }
 
         try {
             await send()
-            if (url.includes('project/add')) {
-                dispatch(GET_REQUEST('project/find-all-project', null, null))
-            }
+            action()
 
         }catch (error) {
-            return(dispatch(projectAction.setError(error.response.data)));
+            console.log(error)
+            setError(error)
         }
     }
 }

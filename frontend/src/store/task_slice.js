@@ -18,6 +18,9 @@ const taskSlice = createSlice({
         setTaskDue(state, action) {
             state.taskDue = action.payload
         },
+        setMessage(state, action){
+            state.message = action.payload.message
+        },
         setError(state, action) {
             state.error = action.payload.error
         }
