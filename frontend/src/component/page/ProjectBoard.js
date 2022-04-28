@@ -14,7 +14,12 @@ const ProjectBoard = () => {
     const dispatch = useDispatch()
     const projectTask = useSelector((state) => state.task)
     const {tasks} = useSelector((state) => state.task)
-    const [task, setTask] = useState({})
+    const [task, setTask] = useState({
+        summary: '',
+        status: '',
+        priority: '',
+        dueDate: null
+    })
     
     
     const toggleModel = () => {
@@ -30,6 +35,27 @@ const ProjectBoard = () => {
         dispatch(taskAction.setError(error.response.data))
     }
 
+    const toggleTaskUpdate = (id) => {
+        const findTask = tasks.find(task => task.taskID === id)
+        setTask(findTask)
+        const getElement = document.querySelector('.model');
+        getElement.classList.toggle('open_model')
+    }
+
+    const onChange = event => {
+        setTask({
+            ...task,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const setDate = (name, value) => {
+        setTask({
+            ...task,
+            [name]: value
+        })
+    }
+
     useEffect(() => {
 
     }, [dispatch, tasks, projectTask])
@@ -37,7 +63,7 @@ const ProjectBoard = () => {
     return (
         <div className="projectBoard">
             <Header/>
-            <TaskModel/>
+            <TaskModel task={task} change={onChange} taskDate={setDate} />
             <div className="mainContainer">
                 <div className="btnContainer">
                     <li onClick={toggleModel}>
@@ -76,7 +102,7 @@ const ProjectBoard = () => {
                                             <div className="body">
                                                 <h3>{task.summary}</h3>
                                                 <div className="actionBtn">
-                                                    <li>View / Update</li>
+                                                    <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
                                                     <li>Delete</li>
                                                 </div>
                                             </div>
@@ -102,7 +128,7 @@ const ProjectBoard = () => {
                                             <div className="body">
                                                 <h3>{task.summary}</h3>
                                                 <div className="actionBtn">
-                                                    <li>View / Update</li>
+                                                    <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
                                                     <li>Delete</li>
                                                 </div>
                                             </div>
@@ -128,7 +154,7 @@ const ProjectBoard = () => {
                                             <div className="body">
                                                 <h3>{task.summary}</h3>
                                                 <div className="actionBtn">
-                                                    <li>View / Update</li>
+                                                    <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
                                                     <li>Delete</li>
                                                 </div>
                                             </div>

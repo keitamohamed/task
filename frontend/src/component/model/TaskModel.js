@@ -1,33 +1,30 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import DatePicker from "react-datepicker";
 import {FaTimes} from "react-icons/fa";
 import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import {taskAction} from "../../store/task_slice";
 
-const TaskModel = () => {
+const TaskModel = ({task, change, taskDate}) => {
     const dispatch = useDispatch()
     const {project} = useSelector((state) => state.project)
     const {error} = useSelector((state) => state.task)
-    const [task, setTask] = useState({
-        summary: '',
-        status: '',
-        priority: '',
-        dueDate: null
+
+    const [selectedDate, setSelectedDate] = useState({
+        dueDate: ''
     })
 
     const onChange = event => {
-      setTask({
-          ...task,
-          [event.target.name]: event.target.value
-      })
+        change(event)
     }
 
     const setDate = (name, value) => {
-        setTask({
-            ...task,
+        setSelectedDate({
+            ...selectedDate,
             [name]: value
         })
+        taskDate(name, value)
+        // task.taskDate(name, value)
     }
 
     const getProjectTask = () => {
@@ -37,6 +34,7 @@ const TaskModel = () => {
     const toggleModel = () => {
         const getElement = document.querySelector('.model');
         getElement.classList.toggle('open_model')
+        dispatch(taskAction.reSetError())
     }
 
     const setProductTask = (url, id, response) => {
@@ -44,7 +42,6 @@ const TaskModel = () => {
     }
 
     const setError = (error) => {
-        console.log(error)
         dispatch(taskAction.setError(error.response.data))
     }
     
@@ -52,6 +49,9 @@ const TaskModel = () => {
         event.preventDefault()
         dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, getProjectTask, setError))
     }
+
+    useEffect(() => {
+    }, [task])
 
     return (
         <div className="model">
@@ -73,7 +73,8 @@ const TaskModel = () => {
                                    name='summary'
                                    className={error && error.summary ? 'addRedBorder' : 'summary'}
                                    onChange={onChange}
-                                   placeholder={'Enter task summary'}
+                                   value={task.summary}
+                                   placeholder={task.summary ? task.summary : 'Enter task summary'}
                             />
                             {error && error.summary && (<p className='inputError'>{error.summary}</p>)}
                         </div>
@@ -82,9 +83,12 @@ const TaskModel = () => {
                                 id = "priority"
                                 name='priority'
                                 className={error && error.priority ? 'addRedBorder' : 'priority'}
+                                value={task.priority ? task.priority : ''}
                                 onChange={onChange}
                             >
-                                <option value="default">Select task priority</option>
+                                <option value="default">
+                                    Select task priority
+                                </option>
                                 <option value="High">High</option>
                                 <option value="Medium">Medium</option>
                                 <option value="Low">Low</option>
@@ -95,6 +99,7 @@ const TaskModel = () => {
                             <select
                                 id = "status"
                                 name='status'
+                                value={task.status ? task.status : ''}
                                 className={error && error.status ? 'addRedBorder' : 'status'}
                                 onChange={onChange}
                             >
@@ -109,11 +114,11 @@ const TaskModel = () => {
                             <DatePicker
                                 name={"dueDate"}
                                 className={error && error.dueDate ? 'addRedBorder' :'dueDate'}
-                                selected={task.dueDate}
+                                selected={selectedDate.dueDate}
                                 minDate={new Date()}
                                 dateFormat={"yyyy-MM-dd"}
                                 onChange={(date) => setDate("dueDate", date)}
-                                placeholderText="Select task due date"
+                                placeholderText={task.dueDate ? task.dueDate : 'Select task due date'}
                             />
                             {error && error.dueDate && (<p className='inputError'>{error.dueDate}</p>)}
                         </div>

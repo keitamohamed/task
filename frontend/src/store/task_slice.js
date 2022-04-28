@@ -23,6 +23,9 @@ const taskSlice = createSlice({
         },
         setError(state, action) {
             state.error = action.payload.error
+        },
+        reSetError(state){
+            state.error = null
         }
     }
 })
