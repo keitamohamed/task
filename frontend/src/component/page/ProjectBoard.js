@@ -20,11 +20,27 @@ const ProjectBoard = () => {
         priority: '',
         dueDate: null
     })
-    
-    
+    const [modelProperty, setModelProperty] = useState({
+        isNewTask: Boolean,
+    })
+
     const toggleModel = () => {
         const getElement = document.querySelector('.model');
         getElement.classList.toggle('open_model')
+    }
+
+    const newProject = () => {
+        setTask({
+            summary: '',
+            status: '',
+            priority: '',
+            dueDate: null
+        })
+        setModelProperty({
+            ...modelProperty,
+            isNewTask: true
+        })
+        toggleModel();
     }
 
     const loadTask = (url, id, response) => {
@@ -38,8 +54,11 @@ const ProjectBoard = () => {
     const toggleTaskUpdate = (id) => {
         const findTask = tasks.find(task => task.taskID === id)
         setTask(findTask)
-        const getElement = document.querySelector('.model');
-        getElement.classList.toggle('open_model')
+        setModelProperty({
+            ...modelProperty,
+            isNewTask: false,
+        })
+        toggleModel()
     }
 
     const onChange = event => {
@@ -63,10 +82,15 @@ const ProjectBoard = () => {
     return (
         <div className="projectBoard">
             <Header/>
-            <TaskModel task={task} change={onChange} taskDate={setDate} />
+            <TaskModel
+                isNewTask={modelProperty.isNewTask}
+                task={task}
+                change={onChange}
+                taskDate={setDate}
+            />
             <div className="mainContainer">
                 <div className="btnContainer">
-                    <li onClick={toggleModel}>
+                    <li onClick={newProject}>
                         <BsPlusSquareDotted />
                         <br/>
                         <span>Create Task</span>
@@ -140,7 +164,7 @@ const ProjectBoard = () => {
                         <div className="positionRight">
                             {
                                 tasks.map((task, index) => {
-                                    return task.status === 'Completed' ? (
+                                    return task.status === 'Complete' ? (
                                         <div className="card" key={index}>
                                             <div className={
                                                 `header 

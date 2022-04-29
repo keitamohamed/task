@@ -31,11 +31,21 @@ input, input:focus {
   border: 1px solid #D82148 !important;
 }
 
-.inputError {
+.messageContainer{
+  margin-top: 1em !important;
+}
+
+
+.inputError, .message {
   color: #FF1818;
   text-align: left;
   padding: 0 0 1.2em 0;
   font-size: 17px;
+}
+
+.message {
+  color: #4E944F;
+  padding-bottom: .5em;
 }
 
 input[type="submit"] {

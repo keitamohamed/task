@@ -5,14 +5,15 @@ import {FaTimes} from "react-icons/fa";
 import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import {taskAction} from "../../store/task_slice";
 
-const TaskModel = ({task, change, taskDate}) => {
+const TaskModel = ({isNewTask, task, change, taskDate}) => {
     const dispatch = useDispatch()
+    const {message} = useSelector((state) => state.task)
     const {project} = useSelector((state) => state.project)
     const {error} = useSelector((state) => state.task)
-
     const [selectedDate, setSelectedDate] = useState({
         dueDate: ''
     })
+
 
     const onChange = event => {
         change(event)
@@ -24,17 +25,6 @@ const TaskModel = ({task, change, taskDate}) => {
             [name]: value
         })
         taskDate(name, value)
-        // task.taskDate(name, value)
-    }
-
-    const getProjectTask = () => {
-        dispatch(GET_REQUEST('project/project-task/', project.identifier, null, setProductTask, setError))
-    }
-
-    const toggleModel = () => {
-        const getElement = document.querySelector('.model');
-        getElement.classList.toggle('open_model')
-        dispatch(taskAction.reSetError())
     }
 
     const setProductTask = (url, id, response) => {
@@ -44,10 +34,30 @@ const TaskModel = ({task, change, taskDate}) => {
     const setError = (error) => {
         dispatch(taskAction.setError(error.response.data))
     }
+
+    const toggleModel = () => {
+        const getElement = document.querySelector('.model');
+        getElement.classList.toggle('open_model')
+        dispatch(taskAction.reSetMessage({}))
+        dispatch(taskAction.reSetError({}))
+    }
     
-    const addNewTask = event => {
+    const updateAction = (data) => {
+        dispatch(taskAction.setMessage(data))
+        getProjectTask()
+    }
+
+    const getProjectTask = () => {
+        dispatch(GET_REQUEST('project/project-task/', project.identifier, null, setProductTask, setError))
+    }
+    
+    const onSubmit = event => {
         event.preventDefault()
-        dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, getProjectTask, setError))
+        if (isNewTask) {
+            dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, getProjectTask, setError))
+            return
+        }
+        dispatch(SEND_REQUEST('PUT', `project/update-task/${task.taskID}`, task, updateAction, setError))
     }
 
     useEffect(() => {
@@ -59,14 +69,14 @@ const TaskModel = ({task, change, taskDate}) => {
                 <form
                     action=""
                     className="form"
-                    onSubmit={addNewTask}
+                    onSubmit={onSubmit}
                 >
                     <div className="formContainer">
                         <div className="btnCloseContainer">
                             <FaTimes onClick={toggleModel} />
                         </div>
                         <div className="titleContainer">
-                            <h2>New Project Task</h2>
+                            <h2>{isNewTask ? 'New Project Task' : 'Update Project Task'}</h2>
                         </div>
                         <div className="formGroup">
                             <textarea
@@ -122,9 +132,12 @@ const TaskModel = ({task, change, taskDate}) => {
                             />
                             {error && error.dueDate && (<p className='inputError'>{error.dueDate}</p>)}
                         </div>
+                        <div className="formGroup messageContainer">
+                            {message && message.message && (<p className='message'>{message.message}</p>)}
+                        </div>
                         <div className="formGroup">
                             <div className="btnContainer">
-                                <input type="submit" className="submitButton" value={"Submit"}/>
+                                <input type="submit" className="submitButton" value={isNewTask ? 'Submit' : 'Update'}/>
                             </div>
                         </div>
                     </div>

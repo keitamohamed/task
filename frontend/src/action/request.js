@@ -6,19 +6,17 @@ axios.defaults.baseURL = "http://localhost:8080/task/"
 export const SEND_REQUEST = (requestAction, url, data, action, setError) => {
     return async (dispatch) => {
         const send = async () => {
-            await axios({
+            return axios({
                 method: requestAction,
                 url: url,
                 data: data,
-            })
+            });
         }
 
         try {
-            await send()
-            action()
-
+            const response = await send()
+            action(response.data)
         }catch (error) {
-            console.log(error)
             setError(error)
         }
     }
