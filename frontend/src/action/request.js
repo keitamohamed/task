@@ -1,14 +1,14 @@
 import axios from "axios";
 import {projectAction} from "../store/project_slice";
 
-axios.defaults.baseURL = "http://localhost:8080/task/"
+// axios.defaults.baseURL = "http://localhost:8080/task/"
 
 export const SEND_REQUEST = (requestAction, url, data, action, setError) => {
     return async (dispatch) => {
         const send = async () => {
             return axios({
                 method: requestAction,
-                url: url,
+                url: `/task/${url}`,
                 data: data,
             });
         }
@@ -27,7 +27,7 @@ export const UPDATE_REQUEST = (url, data) => {
         const send = async () => {
             return axios({
                 method: 'PUT',
-                url: `${url}`,
+                url: `/task/${url}`,
                 data: data,
             });
         }
@@ -43,50 +43,41 @@ export const UPDATE_REQUEST = (url, data) => {
 }
 
 export const GET_REQUEST = (url, id, token, action, setError) => {
-    return async (dispatch) => {
+    return async () => {
         const fetchDate = async () => {
-            const response = await axios({
+            return  axios({
                 method: 'GET',
-                url: `${url}${id ? id : ''}`,
+                url: `/task/${url}${id ? id : ''}`,
             })
-            if (response.status !== 200) {
-            }
-            return await response.data;
         }
 
         try {
             const response = await fetchDate()
-            action(url, id, response)
+            action(url, id, response.data)
         }catch (error) {
             setError(error)
         }
     }
 }
 
-export const DELETE_REQUEST = (url, id, token) => {
-    return async (dispatch) => {
+export const DELETE_REQUEST = (url, id, token, deleteAction, setError) => {
+    return async () => {
         const fetchDate = async () => {
-            const response = await axios({
+            return axios({
                 method: 'DELETE',
-                url: `${url}${id ? id : ''}`,
+                url: `/task/${url}${id ? id : ''}`,
+                headers: {
+                    'Accept': "*/*"
+                }
             })
-            if (response.status !== 200) {
-
-            }
-            return await response.data;
         }
 
         try {
             const project = await fetchDate()
-            dispatch(GET_REQUEST('project/find-all-project', null, token))
-            if (id !== null) {
-                dispatch(projectAction.selectedProject(project))
-            }
-            else {
-                dispatch(projectAction.loadProject(project))
-            }
+            deleteAction(project.data)
         }catch (error) {
-            dispatch(projectAction.setError(error.response.data))
+            setError(error.response.data)
+
         }
     }
 }

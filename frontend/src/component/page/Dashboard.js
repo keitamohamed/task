@@ -39,9 +39,8 @@ const Dashboard = () => {
         dispatch(projectAction.setError(error.response.data))
     }
 
-
     useEffect(() => {
-        dispatch((GET_REQUEST('/project/task-due-soon', null, null, setDueTask, setTaskErrorMessage)))
+        dispatch((GET_REQUEST('project/task-due-soon', null, null, setDueTask, setTaskErrorMessage)))
         dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
     }, [dispatch])
     return (
@@ -72,6 +71,16 @@ const Dashboard = () => {
                 </nav>
             </div>
             <div className="mainContent">
+                <div className="contentButtonContainer">
+                    <li>
+                        <BsPlus
+                            style={{color: '#557B83'}}
+                            onClick={() => navigate("/new-project")}
+                        />
+                        <br/>
+                        <span>New Project</span>
+                    </li>
+                </div>
                 <div className="taskDueContainer">
                     <div className="titleContainer">
                         <h5>Tasks Due Soon</h5>
@@ -94,16 +103,6 @@ const Dashboard = () => {
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div className="contentButtonContainer">
-                    <li>
-                        <BsPlus
-                            style={{color: '#557B83'}}
-                            onClick={() => navigate("/new-project")}
-                        />
-                        <br/>
-                        <span>New Project</span>
-                    </li>
                 </div>
             </div>
         </div>

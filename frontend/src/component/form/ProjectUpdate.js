@@ -1,18 +1,20 @@
-import Form from "./Form";
 import {useContext, useEffect, useState} from "react";
+import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
-
 import {projectAction} from "../../store/project_slice";
-import {UPDATE_REQUEST} from "../../action/request";
 
+import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import Header from "../page/Header";
+
 import Notification from "../../notification/Notification";
 import {NotificationContext} from "../context/Context";
+import Form from "./Form";
 
 let isLoaded = false
 let showNotification = false;
 
 const ProjectUpdate = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const {project: selectedProject, message} = useSelector((state) => state.project);
     const [updateProject, setUpdateProject] = useState({})
@@ -34,9 +36,22 @@ const ProjectUpdate = () => {
         dispatch(projectAction.updateProject({name: event.target.name, value: event.target.value}))
     }
 
+    const setProjects = (url, id, data) => {
+      dispatch(projectAction.loadProject(data))
+    }
+
+    const setError = (error) => {
+      dispatch(projectAction.setError(error))
+    }
+    
+    const projectUpdateAction = (data) => {
+        dispatch(projectAction.setMessage(data))
+        dispatch(GET_REQUEST('project/find-all-project', null, null, setProjects, setError))
+    }
+
     const onSubmit = event => {
         event.preventDefault();
-        dispatch(UPDATE_REQUEST(`project/update/${selectedProject.id}`, selectedProject))
+        dispatch(SEND_REQUEST('PUT', `project/update/${selectedProject.id}`, selectedProject, projectUpdateAction, setError))
         showNotification = true;
     }
 
@@ -49,6 +64,10 @@ const ProjectUpdate = () => {
         showNotification = false
     }
 
+    const projectPage = () => {
+        navigate("/project")
+    }
+
     useEffect(() => {
         if (!isLoaded) {
             setUpdateProject(selectedProject)
@@ -57,7 +76,7 @@ const ProjectUpdate = () => {
         if (message !== null && showNotification) {
             setMessage()
             setTimeout(setNotification, 5000)
-
+            setTimeout(projectPage, 5000)
         }
     }, [selectedProject, message, updateProject, notification])
 

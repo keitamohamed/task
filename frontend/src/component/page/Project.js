@@ -9,7 +9,7 @@ import {ImDatabase} from 'react-icons/im'
 
 import Header from "./Header";
 import Notification from "../../notification/Notification";
-import {GET_REQUEST, DELETE_REQUEST} from "../../action/request";
+import {GET_REQUEST} from "../../action/request";
 import {NotificationContext} from "../context/Context";
 import {projectAction} from "../../store/project_slice";
 import {taskAction} from "../../store/task_slice";

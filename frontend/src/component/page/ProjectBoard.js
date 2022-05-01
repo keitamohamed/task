@@ -6,12 +6,13 @@ import {BsPlusSquareDotted} from "react-icons/bs";
 import TaskModel from "../model/TaskModel";
 import Header from "./Header";
 import {taskAction} from "../../store/task_slice";
-import {GET_REQUEST} from "../../action/request";
+import {DELETE_REQUEST, GET_REQUEST} from "../../action/request";
 
 
 
 const ProjectBoard = () => {
     const dispatch = useDispatch()
+    const {project} = useSelector((state) => state.project)
     const projectTask = useSelector((state) => state.task)
     const {tasks} = useSelector((state) => state.task)
     const [task, setTask] = useState({
@@ -43,7 +44,7 @@ const ProjectBoard = () => {
         toggleModel();
     }
 
-    const loadTask = (url, id, response) => {
+    const setProductTask = (url, id, response) => {
         dispatch(taskAction.loadTask(response))
     }
 
@@ -59,6 +60,14 @@ const ProjectBoard = () => {
             isNewTask: false,
         })
         toggleModel()
+    }
+
+    const deleteAction = () => {
+        dispatch(GET_REQUEST('project/project-task/', project.identifier, null, setProductTask, setError))
+    }
+
+    const deleteTask = (taskID) => {
+        dispatch(DELETE_REQUEST('product/delete-task/', taskID, null, deleteAction))
     }
 
     const onChange = event => {
@@ -127,7 +136,7 @@ const ProjectBoard = () => {
                                                 <h3>{task.summary}</h3>
                                                 <div className="actionBtn">
                                                     <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
-                                                    <li>Delete</li>
+                                                    <li onClick={() => deleteTask(task.taskID)}>Delete</li>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,7 +162,7 @@ const ProjectBoard = () => {
                                                 <h3>{task.summary}</h3>
                                                 <div className="actionBtn">
                                                     <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
-                                                    <li>Delete</li>
+                                                    <li onClick={() => deleteTask(task.taskID)}>Delete</li>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,7 +188,7 @@ const ProjectBoard = () => {
                                                 <h3>{task.summary}</h3>
                                                 <div className="actionBtn">
                                                     <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
-                                                    <li>Delete</li>
+                                                    <li onClick={() => deleteTask(task.taskID)}>Delete</li>
                                                 </div>
                                             </div>
                                         </div>

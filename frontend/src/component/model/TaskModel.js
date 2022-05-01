@@ -27,8 +27,8 @@ const TaskModel = ({isNewTask, task, change, taskDate}) => {
         taskDate(name, value)
     }
 
-    const setProductTask = (url, id, response) => {
-        dispatch(taskAction.loadTask(response))
+    const setProductTask = (ur, id, data) => {
+        dispatch(taskAction.loadTask(data))
     }
 
     const setError = (error) => {

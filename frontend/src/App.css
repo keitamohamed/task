@@ -163,7 +163,7 @@
 }
 .home .mainContainer {
   display: grid;
-  grid-template-columns: 4fr 7fr;
+  grid-template-columns: 4.5fr 7fr;
   width: 90%;
   height: auto;
   top: 50%;
@@ -172,26 +172,34 @@
   transform: translate(-50%, -50%);
   position: absolute;
 }
+.home .mainContainer .positionLeft {
+  padding: 15px;
+  min-height: 60vh;
+  background: rgba(247, 247, 247, 0.1);
+}
 .home .mainContainer .positionLeft nav {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 2fr 1fr 1fr;
   justify-content: center;
+  place-items: center;
   padding-bottom: 2em;
+  grid-gap: 0.5em;
 }
 .home .mainContainer .positionLeft nav li {
   font-size: 1.2em;
   list-style: none;
   display: inline-block;
+  width: fit-content;
   font-weight: bold;
   font-family: "Lato", "Anek Tamil", sans-serif;
   cursor: pointer;
-  padding-bottom: 5px;
+  padding: 0 5px 5px;
 }
 .home .mainContainer .positionLeft nav .active {
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid red !important;
 }
 .home .mainContainer .positionLeft .contentInfo {
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 .home .mainContainer .positionLeft .contentInfo .titleContainer {
   padding-bottom: 1.3em;
@@ -208,27 +216,42 @@
   font-size: 1.2em;
   line-height: 1.5em;
 }
-.home .mainContainer .positionLeft .iconContainer {
-  width: 70%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.home .mainContainer .positionLeft .positionBottom {
+  position: fixed;
+  bottom: 0;
   margin: 0 auto;
+  text-align: center;
+  place-items: center;
+  justify-content: center;
+}
+.home .mainContainer .positionLeft .positionBottom .iconContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   padding-bottom: 20px;
   justify-content: center;
   align-items: center;
+  grid-gap: 1em;
 }
-.home .mainContainer .positionLeft .iconContainer svg {
+.home .mainContainer .positionLeft .positionBottom .iconContainer svg {
   font-size: 3em;
 }
-.home .mainContainer .positionLeft .iconContainer svg:first-child {
+.home .mainContainer .positionLeft .positionBottom .iconContainer svg:first-child {
   color: #39AEA9;
 }
-.home .mainContainer .positionLeft .iconContainer svg:last-child {
-  color: #66d3f3;
+.home .mainContainer .positionLeft .positionBottom .iconContainer svg:nth-child(2) {
+  color: #F8CB2E;
+  background: #000;
 }
-.home .mainContainer .positionLeft h2 {
-  font-weight: bold;
-  line-height: 1em;
+.home .mainContainer .positionLeft .positionBottom .iconContainer svg:nth-child(3) {
+  color: #069A8E;
+}
+.home .mainContainer .positionLeft .positionBottom .iconContainer svg:nth-child(4) {
+  color: #42C2FF;
+}
+.home .mainContainer .positionLeft .positionBottom .iconContainer svg:last-child {
+  color: #0AA1DD;
+  font-size: 3.5em;
 }
 
 .form {
@@ -309,24 +332,28 @@
   padding-bottom: 10px;
 }
 .dashboard .mainContent {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-areas: "btnContainer btnContainer btnContainer" "task task task";
   grid-area: mainContent;
   text-align: center;
   justify-content: center;
   padding: 15px;
   width: 100%;
+  height: auto;
   background: url("./../public/image/dashboard_bg_w.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  position: relative;
 }
 .dashboard .mainContent .contentButtonContainer {
-  padding: 3em 15px 15px;
-  margin: 0 auto;
+  grid-area: btnContainer;
+  padding: 3em 15px 10px;
   width: 80%;
   border-bottom: 1px solid #bebebe;
   text-align: left;
+  margin: 0 auto auto;
 }
 .dashboard .mainContent .contentButtonContainer li {
   list-style: none;
@@ -335,7 +362,7 @@
 .dashboard .mainContent .contentButtonContainer li svg {
   border: 3px dotted;
   border-radius: 10px;
-  font-size: 80px;
+  font-size: 60px;
   cursor: pointer;
   margin-bottom: 0.1em;
 }
@@ -343,18 +370,18 @@
   padding-top: 10px;
 }
 .dashboard .mainContent .taskDueContainer {
+  grid-area: task;
   width: 80%;
+  min-height: 73vh;
   margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .dashboard .mainContent .taskDueContainer .titleContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   border-bottom: 1px solid #bebebe;
   margin-bottom: 1em;
+  padding: 5px 5px 0;
+  margin-top: 0.5em;
 }
 .dashboard .mainContent .taskDueContainer .titleContainer h5 {
   font-size: 1.5em;
@@ -408,6 +435,63 @@
 .dashboard .mainContent .taskDueContainer .taskContainer .taskDue span:last-child {
   list-style-type: none;
   text-align: right;
+}
+
+.login {
+  min-height: 100vh;
+}
+.login .main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  place-items: center;
+  min-height: 100vh;
+}
+.login .main .positionLeft {
+  height: 100%;
+  width: 100%;
+  background: url("../public/image/login.png") no-repeat center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.login .main .positionRight {
+  width: 100%;
+}
+.login .main .positionRight .titleContainer {
+  width: 80%;
+  text-align: left;
+  margin: 0 auto 3em;
+}
+.login .main .positionRight .titleContainer h2 {
+  width: fit-content;
+}
+.login .main .positionRight .formContainer {
+  width: 100%;
+  place-items: center;
+}
+.login .main .positionRight .formContainer .form {
+  margin: 0 auto;
+  width: 80%;
+}
+.login .main .positionRight .formContainer .form .formGroup p {
+  float: left;
+  padding: 10px 0 5px;
+}
+.login .main .positionRight .formContainer .form > div {
+  margin-bottom: 0.5em;
+}
+.login .main .positionRight .formContainer .form input {
+  width: 100%;
+  border: 1px solid #EEEEEE;
+  padding: 10px 15px;
+  font-size: 1.1em;
+  text-align: left;
+}
+.login .main .positionRight .formContainer .form input[type=submit] {
+  background: #205375;
+  color: #FFF;
 }
 
 .project {

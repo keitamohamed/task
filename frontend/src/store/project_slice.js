@@ -56,5 +56,4 @@ const projectSlice = createSlice( {
 })
 
 export const projectAction = projectSlice.actions
-
 export default projectSlice;
