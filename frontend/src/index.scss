@@ -13,6 +13,11 @@
   font-family: $font_family_roboto;
 }
 
+.logoContainer {
+  width: fit-content;
+  width: -moz-fit-content;
+}
+
 button, input[type="button"], input[type="reset"], input[type="submit"]{
   background: none;
 }

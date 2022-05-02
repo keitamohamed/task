@@ -90,7 +90,7 @@ const ProjectBoard = () => {
 
     return (
         <div className="projectBoard">
-            <Header/>
+            <Header width={'55%'}/>
             <TaskModel
                 isNewTask={modelProperty.isNewTask}
                 task={task}

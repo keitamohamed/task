@@ -152,10 +152,6 @@
     display: grid;
     grid-template-columns: 2fr 8fr;
 
-    .logoContainer {
-      width: 100%;
-    }
-
     .linkContainer {
       text-align: right;
       width: 100%;
@@ -232,7 +228,7 @@
             font-family: 'Lato', 'Anek Tamil', sans-serif;
             font-weight: 700;
             margin: 0 auto;
-            font-size: 3em;
+            font-size: 2.5em;
             text-align: left;
           }
         }
@@ -528,22 +524,101 @@
     min-height: 100vh;
 
     .positionLeft{
-      height: 100%;
       width: 100%;
-      background: url('../public/image/login.png') no-repeat center;
+      height: 100%;
+      background: url('../public/image/Login-two.png') no-repeat center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
+
+      .logoContainer {
+        padding: 1.5rem 0 0 2em;
+        text-align: left;
+      }
+
+      .content {
+        width: 70%;
+        margin: 6em auto 0;
+
+        h2 {
+          padding: 15px 15px 15px 0;
+          letter-spacing: 2px;
+        }
+
+        p {
+          line-height: 1.5em;
+          font-size: 1em;
+        }
+
+        svg {
+          float: left;
+          margin-top: 1em;
+          font-size: 1.5em;
+        }
+        * {
+          text-align: left;
+          color: #FFF;
+        }
+      }
     }
 
     .positionRight {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-content: center;
       width: 100%;
+      height: 100vh;
+
+      .content {
+        width: 100%;
+        place-self: center;
+      }
+
+      .signupContent {
+        display: none;
+        opacity: 0;
+      }
+
+      .loginContent {
+        display: none;
+        opacity: 0;
+      }
+
+      .loginContent[open] {
+        display: block;
+        animation: form_open 1s ease 0.5s forwards;
+      }
+
+      .signupContent[open] {
+        display: block;
+        animation: form_open 1s ease 0.5s forwards;
+      }
+
+      .loginContent[closing] {
+        display: block;
+        opacity: 1;
+        animation: form_closing .2s forwards;
+      }
+
+      .signupContent[closing] {
+        display: block;
+        opacity: 1;
+        animation: form_closing .2s forwards;
+      }
+
+      .loginContent[closed] {
+        display: none;
+      }
+
+      .signupContent[closed] {
+        display: none;
+      }
 
       .titleContainer {
         width: 80%;
         text-align: left;
-        margin: 0 auto 3em;
+        margin: 0 auto 1em;
 
         h2 {
           width: fit-content;
@@ -563,6 +638,17 @@
               float: left;
               padding: 10px 0 5px;
             }
+
+            li {
+              list-style-type: none;
+              text-align: left;
+              padding: 10px 0;
+
+              span {
+                color: #2155CD;
+                cursor: pointer;
+              }
+            }
           }
 
           & > div {
@@ -580,6 +666,7 @@
           input[type=submit] {
             background: #205375;
             color: #FFF;
+            cursor: pointer;
           }
         }
       }
@@ -839,6 +926,26 @@
 
 .projectForm {
   width: 100%;
+}
+
+@keyframes form_open {
+  0% {
+    opacity: 0;
+    transform: scale(0)
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes form_closing {
+  0% {
+    transform: scale(.5) translateY(0);
+  }
+  100% {
+    transform: scale(0) translateY(150%);
+  }
 }
 
 

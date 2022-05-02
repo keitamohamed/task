@@ -54,7 +54,7 @@ const Home = () => {
 
     return (
         <div className={'home'}>
-            <Header/>
+            <Header width={'60%'}/>
             <div className="mainContainer">
                 <div className="positionLeft">
                     <nav>

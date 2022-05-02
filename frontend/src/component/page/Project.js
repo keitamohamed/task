@@ -73,7 +73,7 @@ const Project = () => {
 
     return (
         <div className='project'>
-            <Header/>
+            <Header width={'60%'}/>
             <Notification/>
             <div className="mainContainer">
                 <div className="projectsContainer">

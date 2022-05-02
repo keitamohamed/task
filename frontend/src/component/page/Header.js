@@ -1,13 +1,18 @@
 import {Link} from "react-router-dom";
 import routePath from "../../route/RoutePath";
+import Logo from "../app_logo/Logo";
 
-const Header = () => {
+const Header = ({width, color}) => {
 
     return (
         <header className={'appHeader'}>
             <nav>
                 <div className="logoContainer">
-                    <h2>Header Logo</h2>
+                    <strong>
+                        <Link to={'/'}>
+                            <Logo fontWidth={width} />
+                        </Link>
+                    </strong>
                 </div>
                 <div className="linkContainer">
                     {
