@@ -2,14 +2,17 @@ package com.keita.task.service;
 
 import com.keita.task.error_handler.InvalidInput;
 import com.keita.task.error_handler.PasswordValidation;
+import com.keita.task.error_handler.ProjectExceptionHandler;
 import com.keita.task.error_handler.SuccessfulHandler;
 import com.keita.task.model.Authenticate;
 import com.keita.task.model.User;
 import com.keita.task.repository.UserRepo;
 import com.keita.task.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import javax.servlet.http.HttpServletResponse;
@@ -49,8 +52,9 @@ public class UserService {
         new SuccessfulHandler(response, message);
     }
 
+    @Transactional
     public List<User> all () {
-        return userRepo.findAll();
+        return userRepo.findAllUser();
     }
 
     private void setAuthenticate(User user) {
@@ -62,6 +66,14 @@ public class UserService {
         authenticate.setAccountNotLocked(true);
         authenticate.setCredentialsNonExpired(true);
         authenticate.setEnabled(true);
+    }
+
+    public User findUserByUserID(Long userID, HttpServletResponse response) {
+        Optional<User> findUser = findUserByID(userID);
+        return findUser.orElseThrow(() -> new ProjectExceptionHandler(
+                HttpStatus.BAD_REQUEST,
+                response,
+                String.format("User with identifier %s does not exist", userID)));
     }
 
     private Optional<User> findUserByID(Long userID) {

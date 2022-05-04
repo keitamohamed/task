@@ -4,6 +4,7 @@ import com.keita.task.error_handler.InvalidInput;
 import com.keita.task.error_handler.ProjectExceptionHandler;
 import com.keita.task.model.Project;
 import com.keita.task.model.ProjectTask;
+import com.keita.task.model.User;
 import com.keita.task.repository.ProjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,13 +31,14 @@ public class ProjectService {
         this.taskService = taskService;
     }
 
-    public void save(Project project, BindingResult result, HttpServletResponse response) {
+    public void save(User user, Project project, BindingResult result, HttpServletResponse response) {
         if (result.hasErrors()) {
             throw new InvalidInput(result, response, "Invalid input fields. Make sure all required fields are valid");
         }
         findProjectByIdentifier(project.getIdentifier(), response);
 
         project.setIdentifier(project.getIdentifier().toUpperCase());
+        project.setUser(user);
         projectRepo.save(project);
     }
 

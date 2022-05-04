@@ -33,7 +33,9 @@ public class UserController {
         userService.save(user, bindingResult, response);
     }
 
-    @GetMapping(value = {"/all"})
+    @GetMapping(
+            value = {"/all"}
+    )
     public List<User> all() {
         return userService.all();
     }

@@ -47,7 +47,7 @@ public class Project {
     @JoinColumn(name = "userID")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JsonBackReference(value = "project")
-    private User project;
+    private User user;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "task")

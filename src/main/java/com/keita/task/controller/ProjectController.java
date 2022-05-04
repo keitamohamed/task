@@ -3,8 +3,10 @@ package com.keita.task.controller;
 
 import com.keita.task.model.Project;
 import com.keita.task.model.ProjectTask;
+import com.keita.task.model.User;
 import com.keita.task.service.ProjectService;
 import com.keita.task.service.TaskService;
+import com.keita.task.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
@@ -22,22 +24,26 @@ public class ProjectController {
 
     private final ProjectService service;
     private final TaskService taskService;
+    private final UserService userService;
 
-    public ProjectController(ProjectService service, TaskService taskService) {
+    public ProjectController(ProjectService service, TaskService taskService, UserService userService) {
         this.service = service;
         this.taskService = taskService;
+        this.userService = userService;
     }
 
     @PostMapping(
-            value = {"/add"},
+            value = {"/{userID}/add"},
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public void saveProject(
+            @PathVariable("userID") Long userID,
             @Valid
             @RequestBody Project project,
             BindingResult result,
             HttpServletResponse response) {
-        service.save(project, result, response);
+        User user = userService.findUserByUserID(userID, response);
+        service.save(user, project, result, response);
     }
 
     @PostMapping(
