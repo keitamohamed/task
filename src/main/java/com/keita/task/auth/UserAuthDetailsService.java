@@ -9,12 +9,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
 import static com.keita.task.permission.UserRole.*;
 
+@Service
 public class UserAuthDetailsService implements UserDetailsService {
 
     private final AuthRepo authRepo;
@@ -30,7 +32,7 @@ public class UserAuthDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Authenticate authenticate = authRepo.findByEmail(username);
         if (authenticate == null) {
-            throw new ProjectExceptionHandler(HttpStatus.BAD_REQUEST, response, "Invalid username and password");
+            throw new ProjectExceptionHandler(HttpStatus.BAD_REQUEST, response, "You have entered an invalid username or password");
         }
         return new UserAuthDetail(authenticate, grantedAuthorities(authenticate));
     }

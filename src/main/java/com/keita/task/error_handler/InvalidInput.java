@@ -9,6 +9,6 @@ public class InvalidInput extends RuntimeException{
 
     public InvalidInput(BindingResult result, HttpServletResponse response, String message) {
         super(message);
-        MessageHandler.successful(result, response, HttpStatus.NOT_ACCEPTABLE);
+        MessageHandler.message(result, response, HttpStatus.NOT_ACCEPTABLE);
     }
 }

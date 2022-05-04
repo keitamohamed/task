@@ -1,12 +1,14 @@
 package com.keita.task.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -15,6 +17,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value = "authID", allowGetters = true)
 public class Authenticate {
 
     @Id
@@ -22,8 +25,8 @@ public class Authenticate {
     @NotBlank(message = "Email is required")
     @Column(updatable = false, unique = true)
     private String email;
+    @Column(columnDefinition = "LONGBLOB")
     @NotBlank(message = "Password is required")
-    @Size(min = 6, max = 8, message = "Password must be between 6 to 8 character in length")
     private String password;
     private String role;
     private boolean isAccountNonExpired;
@@ -35,4 +38,5 @@ public class Authenticate {
     @JoinColumn(name = "userID")
     @JsonBackReference(value = "auth")
     private User auth;
+
 }

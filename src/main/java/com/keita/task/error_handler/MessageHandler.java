@@ -15,7 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Service
 public class MessageHandler {
 
-    static void successful(BindingResult bindingResult, HttpServletResponse response, HttpStatus status) {
+    static void message(BindingResult bindingResult, HttpServletResponse response, HttpStatus status) {
 
         try {
             Map<String, Object> message = setErrorMessage(bindingResult, response, status);
@@ -40,7 +40,7 @@ public class MessageHandler {
         return message;
     }
 
-    static void successful(HttpServletResponse response, String message) {
+    static void message(HttpServletResponse response, String message) {
         try {
             Map<String, String> map = new HashMap<>();
 

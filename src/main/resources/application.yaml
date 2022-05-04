@@ -16,3 +16,7 @@ spring:
     username: developer
     password: 'developer'
     driver-class-name: com.mysql.cj.jdbc.Driver
+jwt:
+  securityKey: 'securesecuresecurehbsfljjkdwnlDWscjkcfbkt8322yroyo823ye29ogdiqeo2y282u7g2d28u2fwiut821yw'
+  tokenPrefix: 'Bearer'
+  expirationAfterDays: 14
