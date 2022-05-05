@@ -1,11 +1,40 @@
-import {BiDotsHorizontal} from "react-icons/bi";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {BiDotsHorizontal} from "react-icons/bi";
 import Logo from "../app_logo/Logo";
+import {SEND_REQUEST} from "../../action/request";
 
 const Login = () => {
-    let loginForm = null
-    let signupForm = null
+    let loginForm = null;
+    let signupForm = null;
+    const dispatch = useDispatch();
+    const [login, setLogin] = useState({
+        email: '',
+        password: ''
+    })
+    const [register, setRegister] = useState({})
+    
+    const setLoginCredential = data => {
+        console.log(data)
+    }
+
+    const setError = error => {
+    }
+    
+    const onChangeLogin = event => {
+        setLogin({
+            ...login,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const onChangeRegister = event => {
+        setRegister({
+            ...register,
+            [event.target.name]: event.target.value
+        })
+    }
 
     const getElement = (name) => {
         const element = document.querySelector(`.${name}`)
@@ -20,6 +49,11 @@ const Login = () => {
         }, {once: true})
         openElement.removeAttribute('closed')
         openElement.setAttribute('open', '')
+    }
+
+    const onSubmitLogin = event => {
+        event.preventDefault()
+        dispatch(SEND_REQUEST("POST", "login", login, setLoginCredential, setError))
     }
 
     useEffect(() => {
@@ -54,16 +88,22 @@ const Login = () => {
                                 <h2>Login</h2>
                             </div>
                             <div className="formContainer">
-                                <form action="" className="form">
+                                <form action=""
+                                      onSubmit={onSubmitLogin}
+                                      className="form">
                                     <div className="formGroup">
                                         <p>Email</p>
                                         <input type="email"
+                                               name="email"
+                                               onChange={onChangeLogin}
                                                placeholder='Email'
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Password</p>
                                         <input type="password"
+                                               name="password"
+                                               onChange={onChangeLogin}
                                                placeholder='Password'
                                         />
                                     </div>
@@ -86,31 +126,40 @@ const Login = () => {
                                     <div className="formGroup">
                                         <p>First name</p>
                                         <input type="text"
+                                               name="firstName"
+                                               onChange={onChangeRegister}
                                                placeholder='First name'
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Last name</p>
                                         <input type="text"
+                                               name="lastName"
+                                               onChange={onChangeRegister}
                                                placeholder='Last name'
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Email</p>
                                         <input type="email"
+                                               name="email"
+                                               onChange={onChangeRegister}
                                                placeholder='Email'
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Password</p>
                                         <input type="password"
+                                               name="password"
+                                               onChange={onChangeRegister}
                                                placeholder='Password'
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Conform password</p>
                                         <input type="password"
-                                               placeholder='Password'
+                                               name='pConform'
+                                               placeholder='Conform Password'
                                         />
                                     </div>
                                     <div className="formGroup">
