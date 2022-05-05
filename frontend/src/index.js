@@ -5,11 +5,14 @@ import './index.css';
 import App from './App';
 import 'react-datepicker/dist/react-datepicker.css'
 import store from "./store/store";
+import AuthProvider from "./component/context/AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-        <App />
+        <AuthProvider>
+            <App/>
+        </AuthProvider>
     </Provider>
 );
 
