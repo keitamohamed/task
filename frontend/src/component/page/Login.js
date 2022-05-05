@@ -1,7 +1,9 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {BiDotsHorizontal} from "react-icons/bi";
+
+import {AuthContext} from "../context/Context";
 import Logo from "../app_logo/Logo";
 import {SEND_REQUEST} from "../../action/request";
 
@@ -9,14 +11,15 @@ const Login = () => {
     let loginForm = null;
     let signupForm = null;
     const dispatch = useDispatch();
+    const authCtx = useContext(AuthContext)
     const [login, setLogin] = useState({
         email: '',
         password: ''
     })
     const [register, setRegister] = useState({})
     
-    const setLoginCredential = data => {
-        console.log(data)
+    const setLoginCredential = userCredential => {
+        authCtx.setUserCredential(userCredential)
     }
 
     const setError = error => {
