@@ -1,4 +1,5 @@
 import {useContext, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {BiDotsHorizontal} from "react-icons/bi";
@@ -10,6 +11,7 @@ import {SEND_REQUEST} from "../../action/request";
 const Login = () => {
     let loginForm = null;
     let signupForm = null;
+    const  navigate = useNavigate();
     const dispatch = useDispatch();
     const authCtx = useContext(AuthContext)
     const [login, setLogin] = useState({
@@ -20,6 +22,7 @@ const Login = () => {
     
     const setLoginCredential = userCredential => {
         authCtx.setUserCredential(userCredential)
+        navigate('/')
     }
 
     const setError = error => {
