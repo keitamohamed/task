@@ -137,16 +137,24 @@
   grid-template-columns: 2fr 8fr;
 }
 .appHeader nav .linkContainer {
+  display: inline-block;
   text-align: right;
   width: 100%;
   padding: 0 1.5em 0 15px;
 }
-.appHeader a {
+.appHeader a, .appHeader li {
+  display: inline-block;
   text-decoration: none;
   text-underline: none;
   color: inherit;
   margin-left: 0.5em;
   font-size: 1.3em;
+  cursor: pointer;
+}
+.appHeader a:hover, .appHeader li:hover {
+  border-bottom: 1px solid #EE5007;
+  border-radius: 2px;
+  padding: 0 3px 5px;
 }
 
 .home {

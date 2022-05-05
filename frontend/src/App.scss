@@ -153,18 +153,27 @@
     grid-template-columns: 2fr 8fr;
 
     .linkContainer {
+      display: inline-block;
       text-align: right;
       width: 100%;
       padding: 0 1.5em 0 15px;
     }
   }
 
-  a {
+  a, li {
+    display: inline-block;
     text-decoration: none;
     text-underline: none;
     color: inherit;
     margin-left: .5em;
     font-size: 1.3em;
+    cursor: pointer;
+
+    &:hover {
+      border-bottom: 1px solid #EE5007;
+      border-radius: 2px;
+      padding: 0 3px 5px;
+    }
   }
 }
 

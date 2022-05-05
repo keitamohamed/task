@@ -8,13 +8,12 @@ const AuthProvider = ({children}) => {
     const [cookie, setCookie, removeCookie] = useCookies(
         ['accessToken', 'name', 'userID', 'email', 'read', 'write', 'role'])
     
-    const setUserCredential = ({accessToken, email, read, write, role}) => {
-        console.log(email, role, accessToken)
+    const setUserCredential = ({accessToken, email, READ, WRITE, ROLE_USER}) => {
         setCookie('accessToken', accessToken)
         setCookie('email', email)
-        setCookie('read', read)
-        setCookie('write', write)
-        setCookie('role', role)
+        setCookie('read', READ)
+        setCookie('write', WRITE)
+        setCookie('role', ROLE_USER)
     }
 
     const seUserIDAndName = ({userId, name}) => {
