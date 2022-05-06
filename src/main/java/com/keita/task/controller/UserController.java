@@ -1,5 +1,6 @@
 package com.keita.task.controller;
 
+import com.keita.task.model.Project;
 import com.keita.task.model.User;
 import com.keita.task.service.UserService;
 import org.springframework.http.MediaType;
@@ -40,6 +41,13 @@ public class UserController {
         System.out.println("Email " + email);
         userService.customData(email, response);
     }
+
+    @GetMapping(value = {"{userID}/project"},
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public List<Project> project(@PathVariable Long userID, HttpServletResponse response) {
+        return userService.projects(userID, response);
+    };
 
     @GetMapping(
             value = {"/all"}

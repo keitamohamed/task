@@ -2,6 +2,7 @@ package com.keita.task.service;
 
 import com.keita.task.error_handler.*;
 import com.keita.task.model.Authenticate;
+import com.keita.task.model.Project;
 import com.keita.task.model.User;
 import com.keita.task.repository.AuthRepo;
 import com.keita.task.repository.UserRepo;
@@ -54,10 +55,14 @@ public class UserService {
         new SuccessfulHandler(response, message);
     }
 
+    public List<Project> projects(Long userID, HttpServletResponse response) {
+        User findUser = findUserByUserID(userID, response);
+
+        return null;
+    }
+
     public void customData(String email, HttpServletResponse response) {
         Authenticate findUser = authRepo.findByEmail(email);
-        System.out.println("\nUser ID ");
-        System.out.println("ID " + findUser.getAuth().getUserID());
         Map<String, String> data = new HashMap<>();
 
         User user = findUser.getAuth();
