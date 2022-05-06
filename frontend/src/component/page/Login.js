@@ -6,7 +6,7 @@ import {BiDotsHorizontal} from "react-icons/bi";
 
 import {AuthContext} from "../context/Context";
 import Logo from "../app_logo/Logo";
-import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
+import {SEND_REQUEST} from "../../action/request";
 
 const Login = () => {
     let loginForm = null;
@@ -22,18 +22,7 @@ const Login = () => {
     
     const setLoginCredential = userCredential => {
         authCtx.setUserCredential(userCredential)
-        dispatch(GET_REQUEST(
-            `/user/${userCredential.email}/custom-data`,
-            null,
-            userCredential.accessToken,
-            customData,
-            setError))
-        navigate('/')
-    }
-
-    const customData = (ur, id, data) => {
-        console.log(data)
-        authCtx.seUserIDAndName(data)
+        navigate('/dashboard')
     }
 
     const setError = error => {

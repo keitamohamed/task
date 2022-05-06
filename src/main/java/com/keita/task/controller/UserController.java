@@ -35,7 +35,6 @@ public class UserController {
 
     @GetMapping(value = {"/{email}/custom-data"})
     public void getUserIDAndName(@PathVariable String email, HttpServletResponse response) {
-        System.out.println("Coming here");
         userService.customData(email, response);
     }
 

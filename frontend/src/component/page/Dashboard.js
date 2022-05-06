@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 import {useNavigate, Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {BsPlus} from 'react-icons/bs'
@@ -7,10 +7,12 @@ import moment from "moment";
 import {GET_REQUEST} from "../../action/request";
 import {projectAction} from "../../store/project_slice";
 import {taskAction} from "../../store/task_slice";
+import {AuthContext} from "../context/Context";
 
 const Dashboard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const authCtx = useContext(AuthContext)
     const {taskDue} = useSelector((state) => state.task)
 
     const setDueTask = (url, id, response) => {
@@ -39,7 +41,16 @@ const Dashboard = () => {
         dispatch(projectAction.setError(error.response.data))
     }
 
+    const customData = (ur, id, data) => {
+        authCtx.seUserIDAndName(data)
+    }
+
+    const setCustomError = error => {
+    }
+
     useEffect(() => {
+        dispatch(GET_REQUEST(`/user/${authCtx.cookie.email}/custom-data`, null,
+            authCtx.cookie.accessToken, customData, setCustomError))
         dispatch((GET_REQUEST('project/task-due-soon', null, null, setDueTask, setTaskErrorMessage)))
         dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
     }, [dispatch])
