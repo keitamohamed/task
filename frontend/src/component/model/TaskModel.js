@@ -1,12 +1,14 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import DatePicker from "react-datepicker";
 import {FaTimes} from "react-icons/fa";
 import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import {taskAction} from "../../store/task_slice";
+import {AuthContext} from "../context/Context";
 
 const TaskModel = ({isNewTask, task, change, taskDate}) => {
     const dispatch = useDispatch()
+    const authCtx = useContext(AuthContext)
     const {message} = useSelector((state) => state.task)
     const {project} = useSelector((state) => state.project)
     const {error} = useSelector((state) => state.task)
@@ -48,16 +50,18 @@ const TaskModel = ({isNewTask, task, change, taskDate}) => {
     }
 
     const getProjectTask = () => {
-        dispatch(GET_REQUEST('project/project-task/', project.identifier, null, setProductTask, setError))
+        const {accessToken} = authCtx.cookie
+        dispatch(GET_REQUEST(`project/project-task/${project.identifier}`, project.identifier, accessToken, setProductTask, setError))
     }
     
     const onSubmit = event => {
         event.preventDefault()
+        const {accessToken} = authCtx.cookie
         if (isNewTask) {
-            dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, getProjectTask, setError))
+            dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, getProjectTask, setError, accessToken))
             return
         }
-        dispatch(SEND_REQUEST('PUT', `project/update-task/${task.taskID}`, task, updateAction, setError))
+        dispatch(SEND_REQUEST('PUT', `project/update-task/${task.taskID}`, task, updateAction, setError, accessToken))
     }
 
     useEffect(() => {

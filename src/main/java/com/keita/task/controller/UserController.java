@@ -41,9 +41,7 @@ public class UserController {
         userService.customData(email, response);
     }
 
-    @GetMapping(value = {"{userID}/project"},
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
+    @GetMapping(value = {"{userID}/project"})
     public List<Project> project(@PathVariable Long userID, HttpServletResponse response) {
         return userService.projects(userID, response);
     };

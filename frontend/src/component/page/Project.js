@@ -10,7 +10,7 @@ import {ImDatabase} from 'react-icons/im'
 import Header from "./Header";
 import Notification from "../../notification/Notification";
 import {GET_REQUEST} from "../../action/request";
-import {NotificationContext} from "../context/Context";
+import {AuthContext, NotificationContext} from "../context/Context";
 import {projectAction} from "../../store/project_slice";
 import {taskAction} from "../../store/task_slice";
 
@@ -18,6 +18,7 @@ let isLoaded = false;
 const Project = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const authCtx = useContext(AuthContext)
     const {projects} = useSelector((state) => state.project)
     const notification = useContext(NotificationContext)
 
@@ -28,13 +29,12 @@ const Project = () => {
         dispatch(taskAction.setError(error.response.data))
     }
 
-    const setProduct = (url, id, response) => {
-        if (id !== null) {
-            dispatch(projectAction.selectedProject(response))
-        }
-        else {
-            dispatch(projectAction.loadProject(response))
-        }
+    const setProjects = (url, id, response) => {
+        dispatch(projectAction.loadProject(response))
+    }
+
+    const setProject = (url, id, response) => {
+        dispatch(projectAction.selectedProject(response))
     }
 
     const setError = (error) => {
@@ -42,12 +42,14 @@ const Project = () => {
     }
 
     const setProjectAndTasks = (identifier) => {
-        dispatch(GET_REQUEST("project/find-by-identifier/", identifier, null, setProduct, setError))
-        dispatch(GET_REQUEST('project/project-task/', identifier, null, setProductTask, setErrorMessage))
+        const {accessToken} = authCtx.cookie
+        dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, identifier, accessToken, setProject, setError))
+        dispatch(GET_REQUEST(`project/project-task/${identifier}`, identifier, accessToken, setProductTask, setErrorMessage))
     }
 
     const getProjects = (identifier) => {
-        dispatch(GET_REQUEST('project/find-by-identifier/', identifier, null, setProduct, setError))
+        const {accessToken} = authCtx.cookie
+        dispatch(GET_REQUEST('project/find-by-identifier/', identifier, accessToken, setProject, setError))
     }
 
     const deleteProject = (identifier) => {
@@ -65,8 +67,9 @@ const Project = () => {
     }
 
     useEffect(() => {
+        const {userID, accessToken} = authCtx.cookie
         if (!isLoaded) {
-            dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
+            dispatch(GET_REQUEST(`user/${userID}/project`, userID, accessToken, setProjects, setError))
             isLoaded = true
         }
     }, [projects])

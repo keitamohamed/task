@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RiAddFill} from "react-icons/ri";
 import {BsPlusSquareDotted} from "react-icons/bs";
@@ -7,11 +7,13 @@ import TaskModel from "../model/TaskModel";
 import Header from "./Header";
 import {taskAction} from "../../store/task_slice";
 import {DELETE_REQUEST, GET_REQUEST} from "../../action/request";
+import {AuthContext} from "../context/Context";
 
 
 
 const ProjectBoard = () => {
     const dispatch = useDispatch()
+    const authCtx = useContext(AuthContext)
     const {project} = useSelector((state) => state.project)
     const projectTask = useSelector((state) => state.task)
     const {tasks} = useSelector((state) => state.task)
@@ -62,12 +64,13 @@ const ProjectBoard = () => {
         toggleModel()
     }
 
-    const deleteAction = () => {
-        dispatch(GET_REQUEST('project/project-task/', project.identifier, null, setProductTask, setError))
+    const reLoadTasks = () => {
+        const {accessToken} = authCtx.cookie
+        dispatch(GET_REQUEST(`project/project-task/${project.identifier}`, project.identifier, accessToken, setProductTask, setError))
     }
 
-    const deleteTask = (taskID) => {
-        dispatch(DELETE_REQUEST('product/delete-task/', taskID, null, deleteAction))
+    const deleteAction = (taskID) => {
+        dispatch(DELETE_REQUEST('product/delete-task/', taskID, null, reLoadTasks))
     }
 
     const onChange = event => {
@@ -118,84 +121,90 @@ const ProjectBoard = () => {
                         </li>
                     </nav>
                     <div className="task">
-                        <div className="positionLeft">
-                            {
-                                tasks.map((task, index) => {
-                                    return task.status === 'To DO' || task.status === 'To Do' ? (
-                                        <div className="card" key={index}>
-                                            <div className=
-                                                     {`header 
-                                                     ${task.priority === 'High' ? 
-                                                         'bgRed' : task.priority === 
-                                                         'Medium' ? 'bgWarm' : 'bgGreen'}`}
-                                            >
-                                                <li>ID: {task.taskID}</li>
-                                                <li>Priority: {task.priority}</li>
-                                            </div>
-                                            <div className="body">
-                                                <h3>{task.summary}</h3>
-                                                <div className="actionBtn">
-                                                    <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
-                                                    <li onClick={() => deleteTask(task.taskID)}>Delete</li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ) : ''
-                                })
-                            }
-                        </div>
-                        <div className="positionMiddle">
-                            {
-                                tasks.map((task, index) => {
-                                    return task.status === 'In Progress' ? (
-                                        <div className="card" key={index}>
-                                            <div className={
-                                                `header 
+                        {
+                            tasks.length > 0 ? (
+                                <>
+                                    <div className="positionLeft">
+                                        {
+                                            tasks.map((task, index) => {
+                                                return task.status === 'To DO' || task.status === 'To Do' ? (
+                                                    <div className="card" key={index}>
+                                                        <div className=
+                                                                 {`header 
                                                      ${task.priority === 'High' ?
-                                                    'bgRed' : task.priority ===
-                                                    'Medium' ? 'bgWarm' : 'bgGreen'}`
-                                            }>
-                                                <li>ID: {task.taskID}</li>
-                                                <li>Priority: {task.priority}</li>
-                                            </div>
-                                            <div className="body">
-                                                <h3>{task.summary}</h3>
-                                                <div className="actionBtn">
-                                                    <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
-                                                    <li onClick={() => deleteTask(task.taskID)}>Delete</li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ) : ''
-                                })
-                            }
-                        </div>
-                        <div className="positionRight">
-                            {
-                                tasks.map((task, index) => {
-                                    return task.status === 'Complete' ? (
-                                        <div className="card" key={index}>
-                                            <div className={
-                                                `header 
+                                                                     'bgRed' : task.priority ===
+                                                                     'Medium' ? 'bgWarm' : 'bgGreen'}`}
+                                                        >
+                                                            <li>ID: {task.taskID}</li>
+                                                            <li>Priority: {task.priority}</li>
+                                                        </div>
+                                                        <div className="body">
+                                                            <h3>{task.summary}</h3>
+                                                            <div className="actionBtn">
+                                                                <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
+                                                                <li onClick={() => deleteAction(task.taskID)}>Delete</li>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ) : ''
+                                            })
+                                        }
+                                    </div>
+                                    <div className="positionMiddle">
+                                        {
+                                            tasks.map((task, index) => {
+                                                return task.status === 'In Progress' ? (
+                                                    <div className="card" key={index}>
+                                                        <div className={
+                                                            `header 
                                                      ${task.priority === 'High' ?
-                                                    'bgRed' : task.priority ===
-                                                    'Medium' ? 'bgWarm' : 'bgGreen'}`
-                                            }>
-                                                <li>ID: {task.taskID}</li>
-                                                <li>Priority: {task.priority}</li>
-                                            </div>
-                                            <div className="body">
-                                                <h3>{task.summary}</h3>
-                                                <div className="actionBtn">
-                                                    <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
-                                                    <li onClick={() => deleteTask(task.taskID)}>Delete</li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ) : ''
-                                })
-                            }
-                        </div>
+                                                                'bgRed' : task.priority ===
+                                                                'Medium' ? 'bgWarm' : 'bgGreen'}`
+                                                        }>
+                                                            <li>ID: {task.taskID}</li>
+                                                            <li>Priority: {task.priority}</li>
+                                                        </div>
+                                                        <div className="body">
+                                                            <h3>{task.summary}</h3>
+                                                            <div className="actionBtn">
+                                                                <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
+                                                                <li onClick={() => deleteAction(task.taskID)}>Delete</li>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ) : ''
+                                            })
+                                        }
+                                    </div>
+                                    <div className="positionRight">
+                                        {
+                                            tasks.map((task, index) => {
+                                                return task.status === 'Complete' ? (
+                                                    <div className="card" key={index}>
+                                                        <div className={
+                                                            `header 
+                                                     ${task.priority === 'High' ?
+                                                                'bgRed' : task.priority ===
+                                                                'Medium' ? 'bgWarm' : 'bgGreen'}`
+                                                        }>
+                                                            <li>ID: {task.taskID}</li>
+                                                            <li>Priority: {task.priority}</li>
+                                                        </div>
+                                                        <div className="body">
+                                                            <h3>{task.summary}</h3>
+                                                            <div className="actionBtn">
+                                                                <li onClick={() => toggleTaskUpdate(task.taskID)}>View / Update</li>
+                                                                <li onClick={() => deleteAction(task.taskID)}>Delete</li>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ) : ''
+                                            })
+                                        }
+                                    </div>
+                                </>
+                            ): ''
+                        }
                     </div>
                 </div>
             </div>

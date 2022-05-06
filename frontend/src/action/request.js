@@ -52,7 +52,7 @@ export const GET_REQUEST = (url, id, token, action, setError) => {
         const fetchDate = async () => {
             return  axios({
                 method: 'GET',
-                url: `/task/${url}${id ? id : ''}`,
+                url: `/task/${url}`,
                 headers: {
                     Authorization: token ? `Bearer ${token}` : 'Bearer',
                     'Content-Type': 'application/json;charset=UTF-8'
