@@ -53,6 +53,10 @@ export const GET_REQUEST = (url, id, token, action, setError) => {
             return  axios({
                 method: 'GET',
                 url: `/task/${url}${id ? id : ''}`,
+                headers: {
+                    Authorization: token ? `Bearer ${token}` : 'Bearer',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
             })
         }
 

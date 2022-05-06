@@ -24,7 +24,7 @@ const Dashboard = () => {
         }
     }
 
-    const setProduct = (url, id, response) => {
+    const setProjects = (url, id, response) => {
         if (id !== null) {
             dispatch(projectAction.selectedProject(response))
         }
@@ -53,7 +53,8 @@ const Dashboard = () => {
         const {userID, email, accessToken} = authCtx.cookie
         dispatch(SEND_REQUEST('POST', 'user/custom-data', email,
             customData, setError, accessToken))
-        dispatch((GET_REQUEST('project/task-due-soon', userID, accessToken, setDueTask, setTaskErrorMessage)))
+        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
+        // dispatch((GET_REQUEST('project/task-due-soon', userID, accessToken, setDueTask, setTaskErrorMessage)))
         // dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
     }, [dispatch])
     return (
