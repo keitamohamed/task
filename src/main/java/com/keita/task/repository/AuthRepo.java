@@ -6,5 +6,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface AuthRepo extends CrudRepository<Authenticate, Long> {
 
-    Authenticate findByEmail(@Param("email") String email);
+    Authenticate findByEmail(String email);
 }

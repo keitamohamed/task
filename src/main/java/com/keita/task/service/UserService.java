@@ -1,11 +1,9 @@
 package com.keita.task.service;
 
-import com.keita.task.error_handler.InvalidInput;
-import com.keita.task.error_handler.PasswordValidation;
-import com.keita.task.error_handler.ProjectExceptionHandler;
-import com.keita.task.error_handler.SuccessfulHandler;
+import com.keita.task.error_handler.*;
 import com.keita.task.model.Authenticate;
 import com.keita.task.model.User;
+import com.keita.task.repository.AuthRepo;
 import com.keita.task.repository.UserRepo;
 import com.keita.task.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -24,11 +24,13 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepo;
+    private final AuthRepo authRepo;
 
     @Autowired
-    public UserService(PasswordEncoder passwordEncoder, UserRepo userRepo) {
+    public UserService(PasswordEncoder passwordEncoder, UserRepo userRepo, AuthRepo authRepo) {
         this.passwordEncoder = passwordEncoder;
         this.userRepo = userRepo;
+        this.authRepo = authRepo;
     }
 
     public void save(User user, BindingResult result, HttpServletResponse response) {
@@ -50,6 +52,18 @@ public class UserService {
         userRepo.save(user);
         String message = String.format("Your account have been created. Your user ID is [ %s ]. You can now login", user.getUserID());
         new SuccessfulHandler(response, message);
+    }
+
+    public void customData(String email, HttpServletResponse response) {
+        Authenticate findUser = authRepo.findByEmail(email);
+        System.out.println("\nUser ID ");
+        System.out.println("ID " + findUser.getAuth().getUserID());
+        Map<String, String> data = new HashMap<>();
+
+        User user = findUser.getAuth();
+        data.put("userID", user.getUserID().toString());
+        data.put("name", user.getFirstName() + " " + user.getLastName());
+        new CustomData(response, data);
     }
 
     @Transactional
@@ -78,6 +92,10 @@ public class UserService {
 
     private Optional<User> findUserByID(Long userID) {
         return  userRepo.findById(userID);
+    }
+
+    private Optional<User> findUserByEmail(String email) {
+        return userRepo.findUserByAuth_Email(email);
     }
 
     private void checkPasswordValidation(User user, HttpServletResponse response) {

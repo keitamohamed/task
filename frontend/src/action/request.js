@@ -58,6 +58,7 @@ export const GET_REQUEST = (url, id, token, action, setError) => {
 
         try {
             const response = await fetchDate()
+            console.log(response)
             action(url, id, response.data)
         }catch (error) {
             setError(error)

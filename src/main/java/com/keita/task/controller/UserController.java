@@ -33,6 +33,12 @@ public class UserController {
         userService.save(user, bindingResult, response);
     }
 
+    @GetMapping(value = {"/{email}/custom-data"})
+    public void getUserIDAndName(@PathVariable String email, HttpServletResponse response) {
+        System.out.println("Coming here");
+        userService.customData(email, response);
+    }
+
     @GetMapping(
             value = {"/all"}
     )

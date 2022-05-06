@@ -72,4 +72,16 @@ public class MessageHandler {
         }
 
     }
+
+    static void customData(HttpServletResponse response, Map<?, ?> map) {
+        try {
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.setContentType(APPLICATION_JSON_VALUE);
+
+            new MessageMapper(response.getOutputStream(), map);
+        }catch (IOException exception) {
+            System.out.println(exception.getMessage());
+        }
+
+    }
 }
