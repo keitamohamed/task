@@ -38,7 +38,6 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public void getUserIDAndName(@RequestBody String email, HttpServletResponse response) {
-        System.out.println("Email " + email);
         userService.customData(email, response);
     }
 

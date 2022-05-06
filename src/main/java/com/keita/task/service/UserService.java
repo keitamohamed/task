@@ -57,8 +57,7 @@ public class UserService {
 
     public List<Project> projects(Long userID, HttpServletResponse response) {
         User findUser = findUserByUserID(userID, response);
-
-        return null;
+        return findUser.getProject();
     }
 
     public void customData(String email, HttpServletResponse response) {
