@@ -42,7 +42,6 @@ const Dashboard = () => {
     }
 
     const customData = (data) => {
-        console.log('Custom data', data)
         authCtx.setUserIDAndName(data)
     }
 
@@ -51,9 +50,10 @@ const Dashboard = () => {
 
     useEffect(() => {
         const {userID, email, accessToken} = authCtx.cookie
+        console.log("userID", userID, "email", email, "token", accessToken)
         dispatch(SEND_REQUEST('POST', 'user/custom-data', email,
             customData, setError, accessToken))
-        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
+        // dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
         // dispatch((GET_REQUEST('project/task-due-soon', userID, accessToken, setDueTask, setTaskErrorMessage)))
         // dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
     }, [dispatch])
