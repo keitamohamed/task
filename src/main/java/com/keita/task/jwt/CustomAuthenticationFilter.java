@@ -67,17 +67,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .sign(algorithm);
         Map<String, String> token = new HashMap<>();
         token.put("accessToken", accessToken);
-        response.setHeader("accessToken", accessToken);
-        response.setHeader("email", user.getUsername());
-        token.put("email", user.getUsername());
         user.getAuthorities()
                 .forEach(object -> {
                     token.put(object.toString(), object.toString());
-                    if (object.toString().contains("ROLE")) {
-                        response.setHeader("Role", object.toString());
-                    }else {
-                        response.setHeader(object.toString().toLowerCase(), object.toString());
-                    }
                 });
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper()
