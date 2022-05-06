@@ -33,8 +33,11 @@ public class UserController {
         userService.save(user, bindingResult, response);
     }
 
-    @GetMapping(value = {"/{email}/custom-data"})
-    public void getUserIDAndName(@PathVariable String email, HttpServletResponse response) {
+    @PostMapping(value = {"/custom-data"},
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void getUserIDAndName(@RequestBody String email, HttpServletResponse response) {
+        System.out.println("Email " + email);
         userService.customData(email, response);
     }
 

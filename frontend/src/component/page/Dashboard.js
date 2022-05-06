@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {BsPlus} from 'react-icons/bs'
 import moment from "moment";
 
-import {GET_REQUEST} from "../../action/request";
+import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import {projectAction} from "../../store/project_slice";
 import {taskAction} from "../../store/task_slice";
 import {AuthContext} from "../context/Context";
@@ -41,18 +41,20 @@ const Dashboard = () => {
         dispatch(projectAction.setError(error.response.data))
     }
 
-    const customData = (ur, id, data) => {
-        authCtx.seUserIDAndName(data)
+    const customData = (data) => {
+        console.log('Custom data', data)
+        authCtx.setUserIDAndName(data)
     }
 
     const setCustomError = error => {
     }
 
     useEffect(() => {
-        dispatch(GET_REQUEST(`/user/${authCtx.cookie.email}/custom-data`, null,
-            authCtx.cookie.accessToken, customData, setCustomError))
-        dispatch((GET_REQUEST('project/task-due-soon', null, null, setDueTask, setTaskErrorMessage)))
-        dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
+        const {userID, email, accessToken} = authCtx.cookie
+        dispatch(SEND_REQUEST('POST', 'user/custom-data', email,
+            customData, setError, accessToken))
+        dispatch((GET_REQUEST('project/task-due-soon', userID, accessToken, setDueTask, setTaskErrorMessage)))
+        // dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
     }, [dispatch])
     return (
         <div className={`dashboard`}>
@@ -101,15 +103,17 @@ const Dashboard = () => {
                         <div className="content">
                             <ul>
                                 {
-                                    taskDue.map((task, index) => {
-                                        return <li
-                                            key={index}
-                                            className={'taskDue'}
-                                        >
-                                            <span>{task.summary}</span>
-                                            <span>{moment(task.dueDate).format('MMM DD YYYY')}</span>
-                                        </li>
-                                    })
+                                    taskDue !== null ? (
+                                        taskDue.map((task, index) => {
+                                            return <li
+                                                key={index}
+                                                className={'taskDue'}
+                                            >
+                                                <span>{task.summary}</span>
+                                                <span>{moment(task.dueDate).format('MMM DD YYYY')}</span>
+                                            </li>
+                                        })
+                                    ) : ''
                                 }
                             </ul>
                         </div>

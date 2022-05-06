@@ -4,7 +4,6 @@ import {projectAction} from "../store/project_slice";
 // axios.defaults.baseURL = "http://localhost:8080/task/"
 
 export const SEND_REQUEST = (requestAction, url, data, action, setError, token) => {
-    console.log(url, data)
     return async (dispatch) => {
         const send = async () => {
             return axios({

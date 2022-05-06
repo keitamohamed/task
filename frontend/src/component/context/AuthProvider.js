@@ -16,9 +16,9 @@ const AuthProvider = ({children}) => {
         setCookie('role', ROLE_USER)
     }
 
-    const seUserIDAndName = ({userId, name}) => {
+    const setUserIDAndName = ({userID, name}) => {
         setCookie('name', name)
-        setCookie('userID', userId)
+        setCookie('userID', userID)
     }
 
     const logout = () => {
@@ -28,10 +28,11 @@ const AuthProvider = ({children}) => {
 
     return (
         <Provider value={{
+            cookie,
             setUserCredential,
-            seUserIDAndName,
+            setUserIDAndName,
             logout,
-            cookie}}>
+        }}>
             {children}
         </Provider>
     )
