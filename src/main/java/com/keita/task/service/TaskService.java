@@ -67,8 +67,15 @@ public class TaskService {
         return (tasks
                 .stream()
                 .sorted(Comparator.comparing(ProjectTask::getDueDate))
-                .limit(5)
+                .sorted((o1, o2) -> {
+                    if (o1.getPriority().equals(o2.getPriority()) && o1.getPriority().equals("High"))
+                        return -1;
+                    else if (o1.getPriority().compareTo(o2.getPriority()) > 1 && o2.getPriority().equals("Medium"))
+                        return 0;
+                    return 1;
+                })
                 .collect(Collectors.toList()));
+
     }
 
     public List<ProjectTask> projectTask (Project project) {

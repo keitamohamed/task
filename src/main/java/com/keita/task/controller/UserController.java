@@ -1,7 +1,9 @@
 package com.keita.task.controller;
 
 import com.keita.task.model.Project;
+import com.keita.task.model.ProjectTask;
 import com.keita.task.model.User;
+import com.keita.task.service.ProjectService;
 import com.keita.task.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
@@ -17,9 +19,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final ProjectService projectService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ProjectService projectService) {
         this.userService = userService;
+        this.projectService = projectService;
     }
 
     @PostMapping(
@@ -45,6 +49,12 @@ public class UserController {
     public List<Project> project(@PathVariable Long userID, HttpServletResponse response) {
         return userService.projects(userID, response);
     };
+
+    @GetMapping(value = {"{userID}/task-due-soon"})
+    public List<ProjectTask> dueSoon(@PathVariable Long userID, HttpServletResponse response) {
+        User user = userService.findUserByUserID(userID, response);
+        return projectService.dueSoon(user);
+    }
 
     @GetMapping(
             value = {"/all"}

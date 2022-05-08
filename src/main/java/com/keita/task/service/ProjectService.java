@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Optional;
-import java.util.Spliterator;
-import java.util.Spliterators;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -56,6 +53,18 @@ public class ProjectService {
                         );}
                     return result;
                 }));
+    }
+
+    public List<ProjectTask> dueSoon(User user) {
+        List<Project> projects = user.getProject();
+        return (projects
+                .stream()
+                .map(Project::getTask)
+                .flatMap(List::stream)
+                .sorted(Comparator.comparing(ProjectTask::getDueDate))
+                .sorted(Comparator.comparing(ProjectTask::getPriority))
+                .collect(Collectors.toList()));
+
     }
 
     public void deleteProjectByIdentifier(String identifier, HttpServletResponse response) {

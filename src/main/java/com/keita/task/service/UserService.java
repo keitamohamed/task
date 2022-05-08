@@ -3,6 +3,7 @@ package com.keita.task.service;
 import com.keita.task.error_handler.*;
 import com.keita.task.model.Authenticate;
 import com.keita.task.model.Project;
+import com.keita.task.model.ProjectTask;
 import com.keita.task.model.User;
 import com.keita.task.repository.AuthRepo;
 import com.keita.task.repository.UserRepo;
