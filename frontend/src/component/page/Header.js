@@ -1,11 +1,15 @@
 import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 
 import {AuthContext} from "../context/Context";
 import routePath from "../../route/RoutePath";
 import Logo from "../app_logo/Logo";
 import {useContext} from "react";
 
+import {projectAction} from "../../store/project_slice";
+
 const Header = ({width, color}) => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
 
@@ -15,6 +19,7 @@ const Header = ({width, color}) => {
 
     const logout = () => {
         authCtx.logout()
+        dispatch(projectAction.logout())
         navigateTo('/')
     }
     return (

@@ -57,6 +57,8 @@ public class UserService {
 
     public List<Project> projects(Long userID, HttpServletResponse response) {
         User findUser = findUserByUserID(userID, response);
+        System.out.println("Size " + findUser.getProject().size());
+        findUser.getProject().forEach(p -> System.out.println(p.getIdentifier()));
         return findUser.getProject();
     }
 

@@ -8,9 +8,10 @@ import {AuthContext} from "../context/Context";
 import Logo from "../app_logo/Logo";
 import {SEND_REQUEST} from "../../action/request";
 
+let loginForm = null
+let signupForm = null
+
 const Login = () => {
-    let loginForm = null;
-    let signupForm = null;
     const  navigate = useNavigate();
     const dispatch = useDispatch();
     const authCtx = useContext(AuthContext)
@@ -18,14 +19,26 @@ const Login = () => {
         email: '',
         password: ''
     })
-    const [register, setRegister] = useState({})
+    const [register, setRegister] = useState({
+        firstName: '',
+        lastName: '',
+        'auth': null
+    })
+    const [auth, setAuth] = useState()
+    const [credError, setCredError] = useState()
     
     const setLoginCredential = userCredential => {
         authCtx.setUserCredential(userCredential)
         navigate('/dashboard')
     }
 
+    const sendRegistrationCredential = message => {
+        console.log(message)
+    }
+
     const setError = error => {
+        console.log(error)
+        setCredError(error)
     }
     
     const onChangeLogin = event => {
@@ -36,6 +49,13 @@ const Login = () => {
     }
 
     const onChangeRegister = event => {
+        if (event.target.name === 'email' || event.target.name === 'password') {
+            setAuth({
+                ...auth,
+                [event.target.name]: event.target.value
+            })
+            return
+        }
         setRegister({
             ...register,
             [event.target.name]: event.target.value
@@ -49,9 +69,11 @@ const Login = () => {
 
     const formAction = (openElement, closeElement) => {
         closeElement.setAttribute('closing', '')
+        console.log(openElement)
         closeElement.addEventListener('animationend', () => {
             closeElement.setAttribute('closed', '')
             closeElement.removeAttribute('closing')
+            closeElement.removeAttribute('open')
         }, {once: true})
         openElement.removeAttribute('closed')
         openElement.setAttribute('open', '')
@@ -62,12 +84,27 @@ const Login = () => {
         dispatch(SEND_REQUEST("POST", "login", login, setLoginCredential, setError))
     }
 
+    const onSubmitRegister = event => {
+        event.preventDefault()
+        setRegister({
+            ...register,
+            ['auth']: auth
+        })
+        dispatch(SEND_REQUEST("POST", `user/register`, register, sendRegistrationCredential, setError, null))
+    }
+
     useEffect(() => {
+        if (loginForm === null || signupForm === null) {
         loginForm = getElement('loginContent')
         signupForm = getElement('signupContent')
+        }
 
+        if (loginForm.hasAttributes('open')) {
+            signupForm = getElement('signupContent')
+            loginForm = getElement('loginContent')
+        }
         loginForm.setAttribute('open', '')
-    }, [])
+    }, [loginForm, signupForm])
 
     return (
         <div className='login'>
@@ -128,7 +165,9 @@ const Login = () => {
                                 <h2>Signup</h2>
                             </div>
                             <div className="formContainer">
-                                <form action="" className="form">
+                                <form action=""
+                                      onSubmit={onSubmitRegister}
+                                      className="form">
                                     <div className="formGroup">
                                         <p>First name</p>
                                         <input type="text"

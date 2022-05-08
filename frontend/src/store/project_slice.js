@@ -46,6 +46,9 @@ const projectSlice = createSlice( {
             const date = action.payload;
             state.project[date.name] = (convertDate(date.value))
         },
+        logout: state => {
+            state.value = '/logout'
+        },
         setMessage(state, action) {
             state.message = action.payload;
         },

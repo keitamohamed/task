@@ -1,17 +1,18 @@
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {projectAction} from "../../store/project_slice";
 import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import Form from "./Form";
+import {AuthContext} from "../context/Context";
 
 let isLoaded = false;
 
 const NewProject = () => {
     const navigate = useNavigate();
+    const authCtx = useContext(AuthContext)
     const project = useSelector((state) => state.project);
-    // const error = useSelector((state) => state.project.error);
     const dispatch = useDispatch();
 
 
@@ -51,7 +52,8 @@ const NewProject = () => {
 
     const onSubmit = event => {
         event.preventDefault();
-        dispatch(SEND_REQUEST('POST', 'project/add', project.project, fetchProject, setError))
+        const {userID, accessToken} = authCtx.cookie
+        dispatch(SEND_REQUEST('POST', `project/${userID}/add`, project.project, fetchProject, setError, accessToken))
         navigate('/project')
     }
 

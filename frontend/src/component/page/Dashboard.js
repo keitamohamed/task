@@ -1,4 +1,4 @@
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useNavigate, Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {BsPlus} from 'react-icons/bs'
@@ -13,6 +13,7 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
+    const [isUserIDExist, setIsUserIDExist] = useState(false);
     const {taskDue} = useSelector((state) => state.task)
 
     const setDueTask = (url, id, response) => {
@@ -41,17 +42,18 @@ const Dashboard = () => {
     }
 
     const setCustomError = error => {
+
     }
 
     useEffect(() => {
         const {userID, email, accessToken} = authCtx.cookie
-        console.log("userID", userID, "email", email, "token", accessToken)
         dispatch(SEND_REQUEST('POST', 'user/custom-data', email,
-            customData, setError, accessToken))
+            customData, setCustomError, accessToken))
+        if (userID && !isUserIDExist) {
         dispatch(GET_REQUEST(`user/${userID}/project`, userID, accessToken, setProjects, setError))
-        // dispatch((GET_REQUEST('project/task-due-soon', userID, accessToken, setDueTask, setTaskErrorMessage)))
-        // dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
-    }, [dispatch])
+            setIsUserIDExist(true)
+        }
+    }, [dispatch, authCtx.cookie])
     return (
         <div className={`dashboard`}>
             <div className="sidebar">

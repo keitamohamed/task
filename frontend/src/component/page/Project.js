@@ -25,6 +25,7 @@ const Project = () => {
     const setProductTask = (url, id, response) => {
         dispatch(taskAction.loadTask(response))
     }
+
     const setErrorMessage = (error) => {
         dispatch(taskAction.setError(error.response.data))
     }
