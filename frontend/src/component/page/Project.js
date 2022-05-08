@@ -6,6 +6,7 @@ import {AiFillDelete} from 'react-icons/ai'
 import {FiCheckSquare} from 'react-icons/fi'
 import {MdDashboard} from 'react-icons/md'
 import {ImDatabase} from 'react-icons/im'
+import {BsPlus} from "react-icons/bs";
 
 import Header from "./Header";
 import Notification from "../../notification/Notification";
@@ -15,6 +16,8 @@ import {projectAction} from "../../store/project_slice";
 import {taskAction} from "../../store/task_slice";
 
 let isLoaded = false;
+let messageNotification = null
+
 const Project = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -59,12 +62,18 @@ const Project = () => {
             identifier: identifier,
             message: `Are you sure you want to permanently delete project ${identifier}?`,
             showBtn: true,
-            showNotification: true
+            // showNotification: true
         })
+        notificationAction(messageNotification)
     }
 
     const navigateTo = to => {
         navigate(to)
+    }
+
+    const notificationAction = (openElement) => {
+        openElement.removeAttribute('closed')
+        openElement.setAttribute('open', '')
     }
 
     useEffect(() => {
@@ -73,13 +82,26 @@ const Project = () => {
             dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
             isLoaded = true
         }
-    }, [projects])
+        if (messageNotification === null) {
+            messageNotification = document.querySelector(".notification")
+        }
+    }, [projects, messageNotification])
 
     return (
         <div className='project'>
             <Header width={'60%'}/>
             <Notification/>
             <div className="mainContainer">
+                <div className="contentButtonContainerPlus">
+                    <li>
+                        <BsPlus
+                            style={{color: '#557B83'}}
+                            onClick={() => navigate("/new-project")}
+                        />
+                        <br/>
+                        <span>New Project</span>
+                    </li>
+                </div>
                 <div className="projectsContainer">
                     {
                         projects ? projects.map((project, index) => {

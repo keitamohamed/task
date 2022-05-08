@@ -63,8 +63,8 @@ public class ProjectService {
                 .flatMap(List::stream)
                 .sorted(Comparator.comparing(ProjectTask::getDueDate))
                 .sorted(Comparator.comparing(ProjectTask::getPriority))
+                .limit(4)
                 .collect(Collectors.toList()));
-
     }
 
     public void deleteProjectByIdentifier(String identifier, HttpServletResponse response) {

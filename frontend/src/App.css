@@ -1,16 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
 .notification {
   border: 1px solid #cbcbcb;
-  padding: 15px 5px 15px;
-  width: 40%;
+  padding: 15px 15px;
+  display: none;
+  width: fit-content;
+  opacity: 0;
   z-index: 5;
   position: absolute;
   top: 0;
   right: 0;
   margin-right: 2em;
-  background: linear-gradient(rgba(247, 247, 247, 0.9), rgba(247, 247, 247, 0.9));
-  transition: transform 1.5s ease-in;
-  transform: translateX(150%);
+  margin-top: 0.5em;
+  background: linear-gradient(#f7f7f7, #f7f7f7);
 }
 .notification .buttonContainer {
   display: grid;
@@ -33,6 +34,20 @@
 .notification .buttonContainer .conform {
   background: #019267;
   color: white;
+}
+
+.notification[open] {
+  display: block;
+  animation: notification_open 1s ease 0.5s forwards;
+}
+
+.notification[closing] {
+  display: block;
+  animation: notification_closing 1s ease 0.5s forwards;
+}
+
+.notification[closed] {
+  display: none;
 }
 
 .model {
@@ -92,6 +107,18 @@
   text-transform: uppercase;
 }
 
+.open_model {
+  display: block;
+}
+
+.mainContainer {
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
 @-webkit-keyframes model {
   from {
     top: -300px;
@@ -112,22 +139,6 @@
     opacity: 1;
   }
 }
-.open_model {
-  display: block;
-}
-
-.showNotification {
-  transform: translateX(0%);
-}
-
-.mainContainer {
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-}
-
 .appHeader {
   padding: 15px;
   background: inherit;
@@ -352,28 +363,6 @@
   -o-background-size: cover;
   background-size: cover;
 }
-.dashboard .mainContent .contentButtonContainer {
-  grid-area: btnContainer;
-  padding: 3em 15px 10px;
-  width: 80%;
-  border-bottom: 1px solid #bebebe;
-  text-align: left;
-  margin: 0 auto auto;
-}
-.dashboard .mainContent .contentButtonContainer li {
-  list-style: none;
-  width: fit-content;
-}
-.dashboard .mainContent .contentButtonContainer li svg {
-  border: 3px dotted;
-  border-radius: 10px;
-  font-size: 60px;
-  cursor: pointer;
-  margin-bottom: 0.1em;
-}
-.dashboard .mainContent .contentButtonContainer li span {
-  padding-top: 10px;
-}
 .dashboard .mainContent .taskDueContainer {
   grid-area: task;
   width: 80%;
@@ -585,12 +574,13 @@
 .project .mainContainer .projectContent {
   display: grid;
   grid-template-columns: 2fr 7fr 3fr;
-  padding: 15px;
   border: 1px solid #aeaeae;
   border-radius: 5px;
   margin-bottom: 0.5em;
   grid-gap: 0.5em;
   background: #fdfdfd;
+  padding: 1em 15px 15px;
+  margin-top: 1em;
 }
 .project .mainContainer .projectContent .contentLeft p {
   font-size: 1.2em;
@@ -783,6 +773,26 @@
   width: 100%;
 }
 
+@keyframes notification_open {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateX(150%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0%);
+  }
+}
+@keyframes notification_closing {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(150%);
+  }
+}
 @keyframes form_open {
   0% {
     opacity: 0;

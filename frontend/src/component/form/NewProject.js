@@ -33,13 +33,8 @@ const NewProject = () => {
         dispatch(projectAction.addNewProject(event.target))
     }
 
-    const setProduct = (url, id, response) => {
-        if (id !== null) {
-            dispatch(projectAction.selectedProject(response))
-        }
-        else {
-            dispatch(projectAction.loadProject(response))
-        }
+    const setProducts = (url, id, response) => {
+        dispatch(projectAction.loadProject(response))
     }
 
     const setError = (error) => {
@@ -47,7 +42,8 @@ const NewProject = () => {
     }
 
     const fetchProject = () => {
-        dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setError))
+        const {userID, accessToken} = authCtx.cookie
+        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProducts, setError))
     }
 
     const onSubmit = event => {

@@ -75,13 +75,15 @@ export const DELETE_REQUEST = (url, id, token, deleteAction, setError) => {
                 method: 'DELETE',
                 url: `/task/${url}${id ? id : ''}`,
                 headers: {
-                    'Accept': "*/*"
+                    Authorization: token ? `Bearer ${token}` : 'Bearer',
+                    'Content-Type': 'application/json;charset=UTF-8'
                 }
             })
         }
 
         try {
             const project = await fetchDate()
+            console.log(project)
             deleteAction(project.data)
         }catch (error) {
             setError(error.response.data)

@@ -2,16 +2,17 @@
 
 .notification {
   border: 1px solid #cbcbcb;
-  padding: 15px 5px 15px;
-  width: 40%;
+  padding: 15px 15px;
+  display: none;
+  width: fit-content;
+  opacity: 0;
   z-index: 5;
   position: absolute;
   top: 0;
   right: 0;
   margin-right: 2em;
-  background: linear-gradient(rgba(247, 247, 247, .9), rgba(247, 247, 247, .9));
-  transition: transform 1.5s ease-in;
-  transform: translateX(150%);
+  margin-top: .5em;
+  background: linear-gradient(rgba(247, 247, 247, 1), rgba(247, 247, 247, 1));
 
   .buttonContainer {
     display: grid;
@@ -38,6 +39,20 @@
       color: white;
     }
   }
+}
+
+.notification[open] {
+  display: block;
+  animation: notification_open 1s ease 0.5s forwards;
+}
+
+.notification[closing] {
+  display: block;
+  animation: notification_closing 1s ease 0.5s forwards;
+}
+
+.notification[closed] {
+  display: none;
 }
 
 .model {
@@ -104,6 +119,18 @@
   }
 }
 
+.open_model {
+  display: block;
+}
+
+.mainContainer {
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
 
 @-webkit-keyframes model {
   from {
@@ -126,22 +153,6 @@
     opacity: 1
   }
 
-}
-
-.open_model {
-  display: block;
-}
-
-.showNotification {
-  transform: translateX(0%);
-}
-
-.mainContainer {
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
 }
 
 .appHeader {
@@ -411,31 +422,6 @@
     -o-background-size: cover;
     background-size: cover;
 
-    .contentButtonContainer {
-      grid-area: btnContainer;
-      padding: 3em 15px 10px;
-      width: 80%;
-      border-bottom: 1px solid #bebebe;
-      text-align: left;
-      margin: 0 auto auto;
-
-      li {
-        list-style: none;
-        width: fit-content;
-
-        svg {
-          border: 3px dotted;
-          border-radius: 10px;
-          font-size: 60px;
-          cursor: pointer;
-          margin-bottom: .1em;
-        }
-
-        span {
-          padding-top: 10px;
-        }
-      }
-    }
 
     .taskDueContainer {
       grid-area: task;
@@ -694,12 +680,13 @@
     .projectContent {
       display: grid;
       grid-template-columns: 2fr 7fr 3fr;
-      padding: 15px;
       border: 1px solid #aeaeae;
       border-radius: 5px;
       margin-bottom: .5em;
       grid-gap: .5em;
       background: #fdfdfd;
+      padding: 1em 15px 15px;
+      margin-top: 1em;
 
       .contentLeft {
         p {
@@ -935,6 +922,28 @@
 
 .projectForm {
   width: 100%;
+}
+
+@keyframes notification_open {
+  0% {
+    opacity: 0;
+    transform: scale(.5) translateX(150%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0%);
+  }
+}
+
+@keyframes notification_closing {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(150%);
+  }
 }
 
 @keyframes form_open {

@@ -17,12 +17,7 @@ const Dashboard = () => {
     const {taskDue} = useSelector((state) => state.task)
 
     const setDueTask = (url, id, response) => {
-        if (url.includes('task-due-soon')) {
-            dispatch(taskAction.setTaskDue(response))
-        }
-        else {
-            dispatch(taskAction.loadTask(response))
-        }
+        dispatch(taskAction.setTaskDue(response))
     }
 
     const setProjects = (url, id, response) => {
@@ -41,9 +36,7 @@ const Dashboard = () => {
         authCtx.setUserIDAndName(data)
     }
 
-    const setCustomError = error => {
-
-    }
+    const setCustomError = error => {}
 
     useEffect(() => {
         const {userID, email, accessToken} = authCtx.cookie
@@ -53,6 +46,7 @@ const Dashboard = () => {
         dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
             setIsUserIDExist(true)
         }
+        dispatch(GET_REQUEST(`user/${userID}/task-due-soon`, userID, accessToken, setDueTask, setTaskErrorMessage))
     }, [dispatch, authCtx.cookie])
     return (
         <div className={`dashboard`}>
@@ -82,7 +76,7 @@ const Dashboard = () => {
                 </nav>
             </div>
             <div className="mainContent">
-                <div className="contentButtonContainer">
+                <div className="contentButtonContainerPlus">
                     <li>
                         <BsPlus
                             style={{color: '#557B83'}}

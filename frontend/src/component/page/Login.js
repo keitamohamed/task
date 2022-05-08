@@ -69,7 +69,6 @@ const Login = () => {
 
     const formAction = (openElement, closeElement) => {
         closeElement.setAttribute('closing', '')
-        console.log(openElement)
         closeElement.addEventListener('animationend', () => {
             closeElement.setAttribute('closed', '')
             closeElement.removeAttribute('closing')

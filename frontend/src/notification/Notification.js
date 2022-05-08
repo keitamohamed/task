@@ -2,48 +2,60 @@ import {useContext, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {DELETE_REQUEST, GET_REQUEST} from "../action/request";
 
-import {NotificationContext} from "../component/context/Context";
-import {taskAction} from "../store/task_slice";
+import {AuthContext, NotificationContext} from "../component/context/Context";
 import {projectAction} from "../store/project_slice";
 
+
+let messageNotification = null
 const Notification = () => {
+    const authCtx = useContext(AuthContext)
     const dispatch = useDispatch()
     const {message} = useSelector((state) => state.project)
-    const {notification, hideNotification, setActionMessage} = useContext(NotificationContext)
+    const {notification, setActionMessage} = useContext(NotificationContext)
 
     const setProjectErrorMessage = (data) => {
         dispatch(projectAction.setError(data))
     }
 
-    const setProduct = (id, response) => {
-        if (id !== null) {
-            dispatch(projectAction.selectedProject(response))
-        }
-        else {
-            dispatch(projectAction.loadProject(response))
-        }
+    const setProducts = (url, id, response) => {
+        dispatch(projectAction.loadProject(response))
     }
 
     const setProjectAction = (message) => {
+        const {userID, accessToken} = authCtx.cookie
         dispatch(projectAction.setMessage(message))
-        dispatch(GET_REQUEST('project/find-all-project', null, null, setProduct, setProjectErrorMessage))
+        setActionMessage(message)
+        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProducts, setProjectErrorMessage))
     }
 
     const action = event => {
+        const {accessToken} = authCtx.cookie
         if (event.target.name === 'cancel') {
-            hideNotification()
+            notificationAction()
             return
         }
-        dispatch(DELETE_REQUEST('project/delete/', notification.identifier, null, setProjectAction, setProjectErrorMessage))
-        hideNotification()
+        dispatch(DELETE_REQUEST('project/delete/', notification.identifier, accessToken, setProjectAction, setProjectErrorMessage))
         setActionMessage(message)
-        setTimeout(hideNotification, 5000)
+        setTimeout(notificationAction, 5000)
+    }
+
+    const notificationAction = () => {
+        messageNotification.setAttribute('closing', '')
+        messageNotification.addEventListener('animationend', () => {
+            messageNotification.setAttribute('closed', '')
+            messageNotification.removeAttribute('closing')
+            messageNotification.removeAttribute('open')
+        }, {once: true})
     }
 
     useEffect(() => {
-    }, [notification])
+
+        if (messageNotification === null) {
+            messageNotification = document.querySelector(".notification")
+        }
+    }, [notification, messageNotification, message])
     return (
-        <div className={`notification ${notification.showNotification ? 'showNotification' : ''}`}>
+        <div className='notification'>
             <p>{notification.message}</p>
             {
                 notification.showBtn ? (
