@@ -31,11 +31,11 @@ public class User {
     private String lastName;
 
     @Valid
-    @OneToOne(mappedBy = "auth", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "auth", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "auth")
     private Authenticate auth;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "project")
     private List<Project> project;
 }

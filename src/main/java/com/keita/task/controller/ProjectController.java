@@ -55,7 +55,9 @@ public class ProjectController {
             @RequestBody ProjectTask task,
             BindingResult result,
             HttpServletResponse response) {
-        service.saveTask(identifier, task, result, response);
+        Optional<Project> findProject = service.findProjectByIdentifier(HttpStatus.BAD_REQUEST, identifier, response, "");
+        Project project = findProject.get();
+        taskService.save(project, task, result, response);
     }
 
     @GetMapping(value = {"/find-by-identifier/{identifier}"})

@@ -57,13 +57,11 @@ public class UserService {
 
     public List<Project> projects(Long userID, HttpServletResponse response) {
         User findUser = findUserByUserID(userID, response);
-        System.out.println("Size " + findUser.getProject().size());
-        findUser.getProject().forEach(p -> System.out.println(p.getIdentifier()));
         return findUser.getProject();
     }
 
     public void customData(String email, HttpServletResponse response) {
-        Authenticate findUser = authRepo.findByEmail(email);
+        Authenticate findUser = findUserByEmail(email);
         Map<String, String> data = new HashMap<>();
 
         User user = findUser.getAuth();
@@ -100,8 +98,8 @@ public class UserService {
         return  userRepo.findById(userID);
     }
 
-    private Optional<User> findUserByEmail(String email) {
-        return userRepo.findUserByAuth_Email(email);
+    private Authenticate findUserByEmail(String email) {
+        return authRepo.findByEmail(email);
     }
 
     private void checkPasswordValidation(User user, HttpServletResponse response) {

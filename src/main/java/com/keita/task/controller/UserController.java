@@ -41,7 +41,7 @@ public class UserController {
         userService.customData(email, response);
     }
 
-    @GetMapping(value = {"{userID}/project"})
+    @GetMapping(value = {"{userID}/projects"})
     public List<Project> project(@PathVariable Long userID, HttpServletResponse response) {
         return userService.projects(userID, response);
     };

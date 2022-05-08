@@ -45,15 +45,11 @@ public class Project {
     private Date updatedAt;
 
     @JoinColumn(name = "userID")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "project")
     private User user;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "task")
     private List<ProjectTask> task;
-
-    public void addNewTask(ProjectTask newTask) {
-        task.add(newTask);
-    }
 }

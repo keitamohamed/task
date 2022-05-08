@@ -50,7 +50,7 @@ const Dashboard = () => {
         dispatch(SEND_REQUEST('POST', 'user/custom-data', email,
             customData, setCustomError, accessToken))
         if (userID && !isUserIDExist) {
-        dispatch(GET_REQUEST(`user/${userID}/project`, userID, accessToken, setProjects, setError))
+        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
             setIsUserIDExist(true)
         }
     }, [dispatch, authCtx.cookie])

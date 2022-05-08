@@ -70,7 +70,7 @@ const Project = () => {
     useEffect(() => {
         const {userID, accessToken} = authCtx.cookie
         if (!isLoaded) {
-            dispatch(GET_REQUEST(`user/${userID}/project`, userID, accessToken, setProjects, setError))
+            dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
             isLoaded = true
         }
     }, [projects])

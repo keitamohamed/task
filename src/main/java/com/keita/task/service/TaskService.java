@@ -29,11 +29,12 @@ public class TaskService {
         this.taskRepo = taskRepo;
     }
 
-    public void save(ProjectTask task, BindingResult result, HttpServletResponse response) {
+    public void save(Project project, ProjectTask task, BindingResult result, HttpServletResponse response) {
         if (result.hasErrors()) {
             throw new InvalidInput(result, response, "Invalid input fields. Make sure all required fields are valid");
         }
         task.setCreateAt(getDate());
+        task.setTask(project);
         taskRepo.save(task);
         new SuccessfulHandler(response, String.format("Task with an id %s have been added", task.getTaskID()));
     }

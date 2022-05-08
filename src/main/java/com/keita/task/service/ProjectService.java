@@ -42,18 +42,6 @@ public class ProjectService {
         projectRepo.save(project);
     }
 
-    public void saveTask(String identifier, ProjectTask task, BindingResult result, HttpServletResponse response) {
-        Optional<Project> findProject = findProjectByIdentifier(
-                HttpStatus.BAD_REQUEST,
-                identifier,
-                response, "");
-        Project project = findProject.get();
-        task.setTask(project);
-        taskService.save(task, result, response);
-        project.addNewTask(task);
-        projectRepo.save(project);
-    }
-
     public List<Project> findAllProject(HttpServletResponse response) {
         return StreamSupport.stream(
                         Spliterators.spliteratorUnknownSize(projectRepo.findAll().iterator(),
