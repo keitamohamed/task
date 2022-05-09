@@ -90,6 +90,43 @@ select option {
   padding-top: 10px;
 }
 
+.loading {
+  padding-top: 7em;
+}
+
+.paginationWrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 30%;
+  margin: 2em auto 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #E1E5EA;
+  border-radius: 30px;
+  padding: 10px 15px;
+}
+.paginationWrapper .paginationBtnContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #E1E5EA;
+  text-align: center;
+  padding: 10px;
+  align-self: center;
+  justify-self: center;
+}
+.paginationWrapper .paginationBtnContainer:hover {
+  background: #E1E5EA;
+}
+.paginationWrapper .paginationBtnContainer li {
+  list-style: none;
+  max-width: 100%;
+  max-height: 100%;
+  cursor: pointer;
+  text-align: center;
+}
+
 .dashboard {
   display: grid;
   grid-template-columns: repeat(12, 1fr);

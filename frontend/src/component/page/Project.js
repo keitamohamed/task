@@ -10,6 +10,9 @@ import {BsPlus} from "react-icons/bs";
 
 import Header from "./Header";
 import Notification from "../../notification/Notification";
+import DisplayProject from "./sub-component/ProjectPost";
+import NoData from "./sub-component/NoData";
+import ProjectContainer from "./sub-component/ProjectContainer";
 import {GET_REQUEST} from "../../action/request";
 import {AuthContext, NotificationContext} from "../context/Context";
 import {projectAction} from "../../store/project_slice";
@@ -51,7 +54,7 @@ const Project = () => {
         dispatch(GET_REQUEST(`project/project-task/${identifier}`, identifier, accessToken, setProductTask, setErrorMessage))
     }
 
-    const getProjects = (identifier) => {
+    const selectedProject = (identifier) => {
         const {accessToken} = authCtx.cookie
         dispatch(GET_REQUEST('project/find-by-identifier/', identifier, accessToken, setProject, setError))
     }
@@ -104,43 +107,14 @@ const Project = () => {
                 </div>
                 <div className="projectsContainer">
                     {
-                        projects ? projects.map((project, index) => {
-                            return (
-                                <div className="projectContent"
-                                     key={index}>
-                                    <div className="contentLeft">
-                                        <p>{project.identifier}</p>
-                                    </div>
-                                    <div className="contentMiddle">
-                                        <div className="context">
-                                            <h2>{project.name}</h2>
-                                            <p>{project.description}</p>
-                                            <p className='projectDate'>
-                                                {`Start Date: ${moment(project.start).format('MMM DD YYYY')} - 
-                                                Due Date: ${moment(project.endDate).format('MMM DD YYYY')}`}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="contentRight">
-                                        <Link to={`/project/board/${project.identifier}`} onClick={() => setProjectAndTasks(project.identifier)}>
-                                            <MdDashboard style={{color: '#0093AB'}} />
-                                            <span>Project Board</span>
-                                        </Link>
-                                        <Link
-                                            to={`/project/update/${project.id}`}
-                                            onClick={() => getProjects(project.identifier)}
-                                        >
-                                            <FiCheckSquare style={{color: '#019267'}} />
-                                            <span>Update Project</span>
-                                        </Link>
-                                        <Link to={``} onClick={() => deleteProject(project.identifier)}>
-                                            <AiFillDelete style={{color: '#E83A14'}} />
-                                            <span>Delete Project</span>
-                                        </Link>
-                                    </div>
-                                </div>
-                            )
-                        }) : (<ImDatabase/>)
+                        projects.length > 0 ?
+                        <DisplayProject
+                        projects={projects}
+                        numberOfPost={2}
+                        selectedProject={selectedProject}
+                        deleteProject={deleteProject}
+                        setProjectTask={setProjectAndTasks}/>
+                            : <NoData/>
                     }
                 </div>
             </div>

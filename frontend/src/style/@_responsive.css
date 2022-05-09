@@ -1,3 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
+@media screen and (max-width: 900px) {
+  .home .mainContainer .positionLeft {
+    width: 80vw;
+  }
+}
 
-/*# sourceMappingURL=@_Variable.css.map */
+/*# sourceMappingURL=@_responsive.css.map */

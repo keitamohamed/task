@@ -1,0 +1,150 @@
+@import "@_Variable";
+@import "@_media";
+
+@include responsive_max(md) {
+
+  .home {
+    .mainContainer {
+
+      .positionLeft {
+        width: 40vw;
+      }
+    }
+  }
+}
+
+@include responsive_max(smd) {
+
+  .project {
+
+    .mainContainer {
+      width: 95%;
+
+      .paginationWrapper {
+        width: 60%;
+      }
+
+      .projectContent {
+        border-color: #F5F5F5;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-areas:
+              "left left right right right right right right right"
+              "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
+
+        .contentLeft {
+          grid-area: left;
+        }
+        .contentMiddle {
+          grid-area: right;
+
+          .projectDate {
+            padding: 15px 0;
+            position: static;
+          }
+        }
+        .contentRight {
+          width: 80%;
+          grid-area: bottom;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-gap: .3em;
+          justify-content: center;
+          margin: 0 auto;
+
+          a {
+            border-color: $border_color;
+
+            &:hover {
+              border: 1px solid $light_border_color;
+              background: $light_border_color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include responsive_max(xs) {
+
+  .appHeader {
+
+    a, li {
+      margin-left: .6em;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+  }
+
+  .paginationWrapper {
+    width:80%;
+    border-radius: 20px;
+    padding: 5px 10px;
+  }
+
+  .home {
+    .mainContainer {
+      grid-template-columns: repeat(1, 1fr) !important;
+      .positionLeft {
+        width: 60vw;
+      }
+    }
+  }
+
+  .project {
+
+    .mainContainer {
+      width: 100%;
+
+      .contentButtonContainerPlus {
+        border-color: #F5F5F5;
+        width: 95%;
+      }
+
+      .projectContent {
+        border-color: #F5F5F5;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-areas:
+              "left left right right right right right right right"
+              "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
+
+        .contentLeft {
+          grid-area: left;
+        }
+        .contentMiddle {
+          grid-area: right;
+
+          .projectDate {
+            padding: 15px 0;
+            position: static;
+          }
+        }
+        .contentRight {
+          grid-area: bottom;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-gap: .2em;
+
+          * {
+            font-size: 1em;
+          }
+          a {
+            padding: 8px 5px;
+            &:hover {
+              border: 1px solid $light_border_color;
+              background: $light_border_color;
+            }
+
+            svg {
+              font-size: 1.2em;
+            }
+          }
+        }
+      }
+
+      .paginationWrapper {
+        width: 90%;
+      }
+    }
+  }
+}

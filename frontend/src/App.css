@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
 .notification {
   border: 1px solid #cbcbcb;
   padding: 15px 15px;
@@ -119,26 +120,6 @@
   position: absolute;
 }
 
-@-webkit-keyframes model {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
-@keyframes model {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
 .appHeader {
   padding: 15px;
   background: inherit;
@@ -231,17 +212,14 @@
 .home .mainContainer .positionLeft .contentInfo p {
   font-size: 1.2em;
   line-height: 1.5em;
+  text-align: left;
+  padding-left: 1.5em;
 }
 .home .mainContainer .positionLeft .positionBottom {
-  position: fixed;
-  bottom: 0;
-  margin: 0 auto;
-  text-align: center;
-  place-items: center;
-  justify-content: center;
+  margin: 10em auto 0;
+  width: fit-content;
 }
 .home .mainContainer .positionLeft .positionBottom .iconContainer {
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding-bottom: 20px;
@@ -250,7 +228,7 @@
   grid-gap: 1em;
 }
 .home .mainContainer .positionLeft .positionBottom .iconContainer svg {
-  font-size: 3em;
+  font-size: 40px;
 }
 .home .mainContainer .positionLeft .positionBottom .iconContainer svg:first-child {
   color: #39AEA9;
@@ -605,6 +583,8 @@
   position: absolute;
 }
 .project .mainContainer .projectContent .contentRight {
+  display: grid;
+  grid-gap: 0.3em;
   background: white;
 }
 .project .mainContainer .projectContent .contentRight * {
@@ -773,6 +753,26 @@
   width: 100%;
 }
 
+@-webkit-keyframes model {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes model {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
 @keyframes notification_open {
   0% {
     opacity: 0;
@@ -809,6 +809,115 @@
   }
   100% {
     transform: scale(0) translateY(150%);
+  }
+}
+@media screen and (max-width: 900px) {
+  .home .mainContainer .positionLeft {
+    width: 40vw;
+  }
+}
+@media screen and (max-width: 880px) {
+  .project .mainContainer {
+    width: 95%;
+  }
+  .project .mainContainer .paginationWrapper {
+    width: 60%;
+  }
+  .project .mainContainer .projectContent {
+    border-color: #F5F5F5;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-areas: "left left right right right right right right right" "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
+  }
+  .project .mainContainer .projectContent .contentLeft {
+    grid-area: left;
+  }
+  .project .mainContainer .projectContent .contentMiddle {
+    grid-area: right;
+  }
+  .project .mainContainer .projectContent .contentMiddle .projectDate {
+    padding: 15px 0;
+    position: static;
+  }
+  .project .mainContainer .projectContent .contentRight {
+    width: 80%;
+    grid-area: bottom;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.3em;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .project .mainContainer .projectContent .contentRight a {
+    border-color: #E1E5EA;
+  }
+  .project .mainContainer .projectContent .contentRight a:hover {
+    border: 1px solid #F5F5F5;
+    background: #F5F5F5;
+  }
+}
+@media screen and (max-width: 575px) {
+  .appHeader a, .appHeader li {
+    margin-left: 0.6em;
+    font-size: 1.1em;
+    cursor: pointer;
+  }
+
+  .paginationWrapper {
+    width: 80%;
+    border-radius: 20px;
+    padding: 5px 10px;
+  }
+
+  .home .mainContainer {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .home .mainContainer .positionLeft {
+    width: 60vw;
+  }
+
+  .project .mainContainer {
+    width: 100%;
+  }
+  .project .mainContainer .contentButtonContainerPlus {
+    border-color: #F5F5F5;
+    width: 95%;
+  }
+  .project .mainContainer .projectContent {
+    border-color: #F5F5F5;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-areas: "left left right right right right right right right" "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
+  }
+  .project .mainContainer .projectContent .contentLeft {
+    grid-area: left;
+  }
+  .project .mainContainer .projectContent .contentMiddle {
+    grid-area: right;
+  }
+  .project .mainContainer .projectContent .contentMiddle .projectDate {
+    padding: 15px 0;
+    position: static;
+  }
+  .project .mainContainer .projectContent .contentRight {
+    grid-area: bottom;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.2em;
+  }
+  .project .mainContainer .projectContent .contentRight * {
+    font-size: 1em;
+  }
+  .project .mainContainer .projectContent .contentRight a {
+    padding: 8px 5px;
+  }
+  .project .mainContainer .projectContent .contentRight a:hover {
+    border: 1px solid #F5F5F5;
+    background: #F5F5F5;
+  }
+  .project .mainContainer .projectContent .contentRight a svg {
+    font-size: 1.2em;
+  }
+  .project .mainContainer .paginationWrapper {
+    width: 90%;
   }
 }
 

@@ -131,30 +131,6 @@
   position: absolute;
 }
 
-
-@-webkit-keyframes model {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
-
-@keyframes model {
-  from {
-    top: -300px;
-    opacity: 0
-  }
-  to {
-    top: 0;
-    opacity: 1
-  }
-
-}
-
 .appHeader {
   padding: 15px;
   background: inherit;
@@ -256,19 +232,16 @@
         p {
           font-size: 1.2em;
           line-height: 1.5em;
+          text-align: left;
+          padding-left: 1.5em;
         }
       }
 
       .positionBottom {
-        position: fixed;
-        bottom: 0;
-        margin: 0 auto;
-        text-align: center;
-        place-items: center;
-        justify-content: center;
+        margin: 10em auto 0;
+        width: fit-content;
 
         .iconContainer {
-          width: 100%;
           display: grid;
           grid-template-columns: repeat(5, 1fr);
           padding-bottom: 20px;
@@ -277,7 +250,7 @@
           grid-gap: 1em;
 
           svg {
-            font-size: 3em;
+            font-size: 40px;
 
             &:first-child {
               color: #39AEA9;
@@ -719,6 +692,8 @@
       }
 
       .contentRight {
+        display: grid;
+        grid-gap: .3em;
         background: white;
 
         * {
@@ -924,6 +899,30 @@
   width: 100%;
 }
 
+
+@-webkit-keyframes model {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes model {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+  to {
+    top: 0;
+    opacity: 1
+  }
+
+}
+
 @keyframes notification_open {
   0% {
     opacity: 0;
@@ -965,5 +964,8 @@
     transform: scale(0) translateY(150%);
   }
 }
+
+
+@import "./style/@_responsive";
 
 
