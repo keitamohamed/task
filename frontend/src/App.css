@@ -854,6 +854,35 @@
     border: 1px solid #F5F5F5;
     background: #F5F5F5;
   }
+
+  .login .positionLeft .content {
+    width: 80% !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .project .mainContainer {
+    width: 100%;
+  }
+  .project .mainContainer .contentButtonContainerPlus {
+    border-color: #F5F5F5;
+    width: 95%;
+  }
+  .project .mainContainer .projectContent .contentRight {
+    width: 100%;
+    grid-gap: 0.2em;
+  }
+  .project .mainContainer .projectContent .contentRight * {
+    font-size: 1em;
+  }
+  .project .mainContainer .projectContent .contentRight a {
+    padding: 8px 5px;
+  }
+  .project .mainContainer .projectContent .contentRight a svg {
+    font-size: 1.2em;
+  }
+  .project .mainContainer .paginationWrapper {
+    width: 90%;
+  }
 }
 @media screen and (max-width: 575px) {
   .appHeader a, .appHeader li {
@@ -875,49 +904,34 @@
     width: 60vw;
   }
 
-  .project .mainContainer {
-    width: 100%;
-  }
-  .project .mainContainer .contentButtonContainerPlus {
-    border-color: #F5F5F5;
-    width: 95%;
-  }
-  .project .mainContainer .projectContent {
-    border-color: #F5F5F5;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-areas: "left left right right right right right right right" "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
-  }
-  .project .mainContainer .projectContent .contentLeft {
-    grid-area: left;
-  }
-  .project .mainContainer .projectContent .contentMiddle {
-    grid-area: right;
-  }
-  .project .mainContainer .projectContent .contentMiddle .projectDate {
-    padding: 15px 0;
-    position: static;
-  }
-  .project .mainContainer .projectContent .contentRight {
-    grid-area: bottom;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 0.2em;
-  }
-  .project .mainContainer .projectContent .contentRight * {
-    font-size: 1em;
-  }
-  .project .mainContainer .projectContent .contentRight a {
-    padding: 8px 5px;
-  }
-  .project .mainContainer .projectContent .contentRight a:hover {
-    border: 1px solid #F5F5F5;
-    background: #F5F5F5;
-  }
-  .project .mainContainer .projectContent .contentRight a svg {
-    font-size: 1.2em;
-  }
-  .project .mainContainer .paginationWrapper {
+  .project .paginationWrapper {
     width: 90%;
+  }
+
+  .projectBoard .taskContainer nav {
+    display: none !important;
+  }
+  .projectBoard .taskContainer .task {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .login .main {
+    grid-template-columns: repeat(1, 1fr);
+    min-height: 100% !important;
+  }
+  .login .main .positionLeft, .login .main .positionRight {
+    height: 100%;
+  }
+  .login .main .positionLeft {
+    height: fit-content;
+  }
+  .login .main .positionRight {
+    padding-top: 3em;
+  }
+}
+@media screen and (max-width: 880px) {
+  .login .positionLeft {
+    background: url("../public/image/login_s.png") !important;
   }
 }
 

@@ -11,7 +11,7 @@ const usePaginate = (post, numberPostPerPage) => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 2000)
+        }, 500)
     }, [posts, numberPostPerPage])
 
     return{post, currentPage, postPerPage, loading, setCurrentPage}

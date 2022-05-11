@@ -965,7 +965,20 @@
   }
 }
 
-
 @import "./style/@_responsive";
+
+
+
+//For image processing
+
+@include responsive_max(smd) {
+
+  .login {
+
+    .positionLeft {
+      background: url("../public/image/login_s.png") !important;
+    }
+  }
+}
 
 

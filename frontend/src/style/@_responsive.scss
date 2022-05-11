@@ -1,6 +1,11 @@
 @import "@_Variable";
 @import "@_media";
 
+
+@include  responsive_min(ssmd) {
+
+}
+
 @include responsive_max(md) {
 
   .home {
@@ -63,6 +68,62 @@
       }
     }
   }
+
+  .login {
+
+    .positionLeft {
+      .content {
+        width: 80% !important;
+      }
+    }
+  }
+}
+
+@include responsive_max(ssmd) {
+
+}
+
+@include responsive_max(s) {
+
+  .project {
+
+    .mainContainer {
+      width: 100%;
+
+      .contentButtonContainerPlus {
+        border-color: #F5F5F5;
+        width: 95%;
+      }
+
+      .projectContent {
+
+        .contentRight {
+          width: 100%;
+          grid-gap: .2em;
+
+          * {
+            font-size: 1em;
+          }
+          a {
+            padding: 8px 5px;
+            svg {
+              font-size: 1.2em;
+            }
+          }
+        }
+      }
+      .paginationWrapper {
+        width: 90%;
+      }
+    }
+  }
+
+  .login {
+
+    .positionLeft {
+
+    }
+  }
 }
 
 @include responsive_max(xs) {
@@ -92,58 +153,42 @@
   }
 
   .project {
-
-    .mainContainer {
-      width: 100%;
-
-      .contentButtonContainerPlus {
-        border-color: #F5F5F5;
-        width: 95%;
-      }
-
-      .projectContent {
-        border-color: #F5F5F5;
-        grid-template-columns: repeat(9, 1fr);
-        grid-template-areas:
-              "left left right right right right right right right"
-              "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
-
-        .contentLeft {
-          grid-area: left;
-        }
-        .contentMiddle {
-          grid-area: right;
-
-          .projectDate {
-            padding: 15px 0;
-            position: static;
-          }
-        }
-        .contentRight {
-          grid-area: bottom;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          grid-gap: .2em;
-
-          * {
-            font-size: 1em;
-          }
-          a {
-            padding: 8px 5px;
-            &:hover {
-              border: 1px solid $light_border_color;
-              background: $light_border_color;
-            }
-
-            svg {
-              font-size: 1.2em;
-            }
-          }
-        }
-      }
-
       .paginationWrapper {
         width: 90%;
+      }
+  }
+
+  .projectBoard {
+
+
+    .taskContainer {
+
+      nav {
+        display: none !important;
+      }
+
+      .task {
+        grid-template-columns: repeat(1, 1fr) !important;
+      }
+    }
+  }
+
+  .login {
+
+    .main {
+      grid-template-columns: repeat(1, 1fr);
+      min-height: 100% !important;
+
+      .positionLeft, .positionRight {
+        height: 100%;
+      }
+
+      .positionLeft {
+        height: fit-content;
+      }
+
+      .positionRight {
+        padding-top: 3em;
       }
     }
   }
