@@ -30,11 +30,12 @@
       }
 
       .projectContent {
-        border-color: #F5F5F5;
         grid-template-columns: repeat(9, 1fr);
         grid-template-areas:
               "left left right right right right right right right"
               "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
+        background: rgba(247, 247, 247, .1);
+        border-color: $border_color;
 
         .contentLeft {
           grid-area: left;
@@ -81,6 +82,27 @@
 
 @include responsive_max(ssmd) {
 
+  .main {
+
+    .positionLeft {
+      height: fit-content;
+      padding-bottom: 10px;
+
+      .content {
+        margin-top: 3em;
+      }
+    }
+
+    .positionRight {
+
+      .content {
+        .form {
+          width: 95% !important;
+        }
+      }
+    }
+  }
+
 }
 
 @include responsive_max(s) {
@@ -118,11 +140,48 @@
     }
   }
 
-  .login {
+  .dashboard {
 
-    .positionLeft {
-
+    .logoContainer {
+      border: none !important;
     }
+
+    .sidebar {
+
+      .sidebarNav {
+        .largeDevices {
+          display: none;
+        }
+
+        .smallDevices {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+
+          .dropdown {
+            display: flex;
+            text-align: right;
+            justify-content: right;
+
+            .icons {
+              width: fit-content;
+            }
+
+            svg {
+              font-size: 1.5em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include responsive_max(s) {
+
+  .dashboard {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "sidebar sidebar sidebar"
+                          "mainContent mainContent mainContent";
   }
 }
 
@@ -147,7 +206,7 @@
     .mainContainer {
       grid-template-columns: repeat(1, 1fr) !important;
       .positionLeft {
-        width: 60vw;
+        width: 65vw;
       }
     }
   }
@@ -185,10 +244,15 @@
 
       .positionLeft {
         height: fit-content;
+        padding-bottom: 10px;
+
+        .content {
+          margin-top: 3em;
+        }
       }
 
       .positionRight {
-        padding-top: 3em;
+        padding-top: 2.5em;
       }
     }
   }

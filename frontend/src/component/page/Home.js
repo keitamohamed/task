@@ -93,17 +93,17 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="positionBottom">
-                        <div className="iconContainer">
-                            <SiJava/>
-                            <SiJavascript/>
-                            <SiSpringboot/>
-                            <FaReact/>
-                            <SiMysql/>
-                        </div>
-                    </div>
                 </div>
                 <div className="positionRight"></div>
+            </div>
+            <div className="containerPosition">
+                <div className="iconContainer">
+                    <SiJava/>
+                    <SiJavascript/>
+                    <SiSpringboot/>
+                    <FaReact/>
+                    <SiMysql/>
+                </div>
             </div>
         </div>
     )

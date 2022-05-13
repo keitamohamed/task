@@ -215,35 +215,43 @@
   text-align: left;
   padding-left: 1.5em;
 }
-.home .mainContainer .positionLeft .positionBottom {
-  margin: 10em auto 0;
-  width: fit-content;
+.home .containerPosition {
+  display: grid;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  margin: 0 auto !important;
+  background: rgba(247, 247, 247, 0.1);
+  padding: 10px 15px;
+  justify-content: left;
+  grid-gap: 1em;
 }
-.home .mainContainer .positionLeft .positionBottom .iconContainer {
+.home .containerPosition .iconContainer {
+  width: fit-content;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  padding-bottom: 20px;
   justify-content: center;
   align-items: center;
   grid-gap: 1em;
+  margin: 0 auto;
 }
-.home .mainContainer .positionLeft .positionBottom .iconContainer svg {
+.home .containerPosition .iconContainer svg {
   font-size: 40px;
 }
-.home .mainContainer .positionLeft .positionBottom .iconContainer svg:first-child {
+.home .containerPosition .iconContainer svg:first-child {
   color: #39AEA9;
 }
-.home .mainContainer .positionLeft .positionBottom .iconContainer svg:nth-child(2) {
+.home .containerPosition .iconContainer svg:nth-child(2) {
   color: #F8CB2E;
   background: #000;
 }
-.home .mainContainer .positionLeft .positionBottom .iconContainer svg:nth-child(3) {
+.home .containerPosition .iconContainer svg:nth-child(3) {
   color: #069A8E;
 }
-.home .mainContainer .positionLeft .positionBottom .iconContainer svg:nth-child(4) {
+.home .containerPosition .iconContainer svg:nth-child(4) {
   color: #42C2FF;
 }
-.home .mainContainer .positionLeft .positionBottom .iconContainer svg:last-child {
+.home .containerPosition .iconContainer svg:last-child {
   color: #0AA1DD;
   font-size: 3.5em;
 }
@@ -824,9 +832,10 @@
     width: 60%;
   }
   .project .mainContainer .projectContent {
-    border-color: #F5F5F5;
     grid-template-columns: repeat(9, 1fr);
     grid-template-areas: "left left right right right right right right right" "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
+    background: rgba(247, 247, 247, 0.1);
+    border-color: #E1E5EA;
   }
   .project .mainContainer .projectContent .contentLeft {
     grid-area: left;
@@ -859,6 +868,18 @@
     width: 80% !important;
   }
 }
+@media screen and (max-width: 800px) {
+  .main .positionLeft {
+    height: fit-content;
+    padding-bottom: 10px;
+  }
+  .main .positionLeft .content {
+    margin-top: 3em;
+  }
+  .main .positionRight .content .form {
+    width: 95% !important;
+  }
+}
 @media screen and (max-width: 768px) {
   .project .mainContainer {
     width: 100%;
@@ -883,6 +904,34 @@
   .project .mainContainer .paginationWrapper {
     width: 90%;
   }
+
+  .dashboard .logoContainer {
+    border: none !important;
+  }
+  .dashboard .sidebar .sidebarNav .largeDevices {
+    display: none;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown {
+    display: flex;
+    text-align: right;
+    justify-content: right;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown .icons {
+    width: fit-content;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown svg {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "sidebar sidebar sidebar" "mainContent mainContent mainContent";
+  }
 }
 @media screen and (max-width: 575px) {
   .appHeader a, .appHeader li {
@@ -901,7 +950,7 @@
     grid-template-columns: repeat(1, 1fr) !important;
   }
   .home .mainContainer .positionLeft {
-    width: 60vw;
+    width: 65vw;
   }
 
   .project .paginationWrapper {
@@ -924,9 +973,13 @@
   }
   .login .main .positionLeft {
     height: fit-content;
+    padding-bottom: 10px;
+  }
+  .login .main .positionLeft .content {
+    margin-top: 3em;
   }
   .login .main .positionRight {
-    padding-top: 3em;
+    padding-top: 2.5em;
   }
 }
 @media screen and (max-width: 880px) {

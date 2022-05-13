@@ -2,7 +2,10 @@ import {useContext, useEffect, useState} from "react";
 import {useNavigate, Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {BsPlus} from 'react-icons/bs'
+import {AiOutlineMenu, AiOutlineClose} from "react-icons/ai";
 import moment from "moment";
+
+import Logo from "../app_logo/Logo";
 
 import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import {projectAction} from "../../store/project_slice";
@@ -52,7 +55,7 @@ const Dashboard = () => {
         <div className={`dashboard`}>
             <div className="sidebar">
                 <nav className="sidebarNav">
-                    <ul>
+                    <ul className="largeDevices">
                         <div className="contentTop">
                             <li>
                                 <Link to={'/'}>
@@ -72,6 +75,21 @@ const Dashboard = () => {
                             <li>Marking</li>
                             <li>Sale</li>
                         </div>
+                    </ul>
+                    <ul className="smallDevices">
+                        <div className="logoContainer">
+                            <strong>
+                                <Link to={'/'}>
+                                    <Logo fontWidth={'50%'} color={'#FFF'} />
+                                </Link>
+                            </strong>
+                        </div>
+                        <ul className="dropdown">
+                            <li className="icons">
+                                <AiOutlineMenu/>
+                                <AiOutlineClose/>
+                            </li>
+                        </ul>
                     </ul>
                 </nav>
             </div>
