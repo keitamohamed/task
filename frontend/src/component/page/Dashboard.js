@@ -88,6 +88,7 @@ const Dashboard = () => {
         if (openMenu.hasAttributes('open')) {
             closeMenu = getElement('closeMenu')
             openMenu = getElement('openMenu')
+            dropDownMenu = getElement('dropdownContent')
         }
         openMenu.setAttribute('open', '')
     }

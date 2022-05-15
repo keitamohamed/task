@@ -111,11 +111,31 @@
 
     .mainContainer {
       width: 100%;
+      height: 70%;
+      padding: 0 15px;
 
       .contentButtonContainerPlus {
         border-color: #F5F5F5;
-        width: 95%;
+        height: fit-content;
+        padding: 0;
+
+        svg {
+          font-size: 2.5em;
+        }
+
+        span {
+          font-size: .8em;
+        }
       }
+
+      .contentPaginate {
+        overflow: scroll;
+
+        .paginateDataWrapper {
+          overflow: hidden;
+        }
+      }
+
 
       .projectContent {
 
@@ -188,7 +208,7 @@
               position: absolute;
               right: 0;
               margin-top: 2.5em;
-              width: 40%;
+              width: 60%;
               padding: 10px 0;
 
 
@@ -212,7 +232,7 @@
             }
           }
 
-          .closeMenu, .closeMenu {
+          .closeMenu, .closeMenu, .dropdownContent {
             display: none;
           }
 
@@ -227,11 +247,11 @@
           }
           .openMenu[closing] {
             display: block;
-            animation: menu_closing 1s ease .5s forwards;
+            animation: menu_closing .1s ease .1s forwards;
           }
           .closeMenu[closing] {
             display: block;
-            animation: menu_closing 1s ease .5s forwards;
+            animation: menu_closing .1s ease .1s forwards;
           }
           .openMenu[closed] {
             display: none;
@@ -241,6 +261,7 @@
           }
           .dropdownContent[closed] {
             display: none;
+            animation: dropdown_closing .1s ease-in-out .1s forwards;
           }
         }
       }

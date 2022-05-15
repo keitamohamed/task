@@ -825,10 +825,25 @@
 @media screen and (max-width: 768px) {
   .project .mainContainer {
     width: 100%;
+    height: 70%;
+    padding: 0 15px;
   }
   .project .mainContainer .contentButtonContainerPlus {
     border-color: #F5F5F5;
-    width: 95%;
+    height: fit-content;
+    padding: 0;
+  }
+  .project .mainContainer .contentButtonContainerPlus svg {
+    font-size: 2.5em;
+  }
+  .project .mainContainer .contentButtonContainerPlus span {
+    font-size: 0.8em;
+  }
+  .project .mainContainer .contentPaginate {
+    overflow: scroll;
+  }
+  .project .mainContainer .contentPaginate .paginateDataWrapper {
+    overflow: hidden;
   }
   .project .mainContainer .projectContent .contentRight {
     width: 100%;
@@ -883,7 +898,7 @@
     position: absolute;
     right: 0;
     margin-top: 2.5em;
-    width: 40%;
+    width: 60%;
     padding: 10px 0;
   }
   .dashboard .sidebar .sidebarNav .smallDevices .dropdown .dropdownContent ul {
@@ -901,7 +916,7 @@
   .dashboard .sidebar .sidebarNav .smallDevices .dropdown .dropdownContent ul li:hover a {
     color: #000;
   }
-  .dashboard .sidebar .sidebarNav .smallDevices .closeMenu, .dashboard .sidebar .sidebarNav .smallDevices .closeMenu {
+  .dashboard .sidebar .sidebarNav .smallDevices .closeMenu, .dashboard .sidebar .sidebarNav .smallDevices .closeMenu, .dashboard .sidebar .sidebarNav .smallDevices .dropdownContent {
     display: none;
   }
   .dashboard .sidebar .sidebarNav .smallDevices .openMenu[open] {
@@ -915,11 +930,11 @@
   }
   .dashboard .sidebar .sidebarNav .smallDevices .openMenu[closing] {
     display: block;
-    animation: menu_closing 1s ease 0.5s forwards;
+    animation: menu_closing 0.1s ease 0.1s forwards;
   }
   .dashboard .sidebar .sidebarNav .smallDevices .closeMenu[closing] {
     display: block;
-    animation: menu_closing 1s ease 0.5s forwards;
+    animation: menu_closing 0.1s ease 0.1s forwards;
   }
   .dashboard .sidebar .sidebarNav .smallDevices .openMenu[closed] {
     display: none;
@@ -929,6 +944,7 @@
   }
   .dashboard .sidebar .sidebarNav .smallDevices .dropdownContent[closed] {
     display: none;
+    animation: dropdown_closing 0.1s ease-in-out 0.1s forwards;
   }
 }
 @media screen and (max-width: 768px) {
@@ -1003,10 +1019,18 @@
 }
 @keyframes menu_closing {
   0% {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   100% {
-    transform: translateX(150%);
+    transform: translateY(-150%);
+  }
+}
+@keyframes dropdown_closing {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
   }
 }
 @-webkit-keyframes model {
