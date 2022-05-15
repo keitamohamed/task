@@ -61,8 +61,8 @@
             border-color: $border_color;
 
             &:hover {
-              border: 1px solid $light_border_color;
-              background: $light_border_color;
+              border: 1px solid $white_light_color;
+              background: $white_light_color;
             }
           }
         }
@@ -149,6 +149,7 @@
     .sidebar {
 
       .sidebarNav {
+
         .largeDevices {
           display: none;
         }
@@ -156,19 +157,90 @@
         .smallDevices {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
+          background: #161A23;
 
           .dropdown {
-            display: flex;
-            text-align: right;
-            justify-content: right;
+            width: 100%;
+            place-items: end;
+            position: relative;
+            display: inline-block;
+            background: inherit;
+
+
+            .icons, .dropdownContent {
+              width: fit-content;
+              float: right;
+              background: inherit;
+            }
 
             .icons {
-              width: fit-content;
+              cursor: default;
+              width: 20%;
             }
 
             svg {
               font-size: 1.5em;
+              cursor: pointer;
             }
+
+            .dropdownContent {
+              border: none;
+              position: absolute;
+              right: 0;
+              margin-top: 2.5em;
+              width: 40%;
+              padding: 10px 0;
+
+
+               ul {
+                 grid-gap: 0;
+                 width: 100%;
+                 text-align: center;
+
+                 li {
+                   width: 100%;
+                   padding-left: 15px;
+
+                   &:hover {
+                     background: $white_light_color;
+                      a {
+                        color: #000;
+                      }
+                   }
+                 }
+               }
+            }
+          }
+
+          .closeMenu, .closeMenu {
+            display: none;
+          }
+
+          .openMenu[open] {
+            display: block;
+          }
+          .closeMenu[open] {
+            display: block;
+          }
+          .dropdownContent[open] {
+            display: block;
+          }
+          .openMenu[closing] {
+            display: block;
+            animation: menu_closing 1s ease .5s forwards;
+          }
+          .closeMenu[closing] {
+            display: block;
+            animation: menu_closing 1s ease .5s forwards;
+          }
+          .openMenu[closed] {
+            display: none;
+          }
+          .closeMenu[closed] {
+            display: none;
+          }
+          .dropdownContent[closed] {
+            display: none;
           }
         }
       }

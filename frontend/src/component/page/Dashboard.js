@@ -12,12 +12,21 @@ import {projectAction} from "../../store/project_slice";
 import {taskAction} from "../../store/task_slice";
 import {AuthContext} from "../context/Context";
 
+let openMenu = null
+let closeMenu = null
+let dropDownMenu = null;
+
 const Dashboard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
     const [isUserIDExist, setIsUserIDExist] = useState(false);
     const {taskDue} = useSelector((state) => state.task)
+
+    const getElement = (name) => {
+        const element = document.querySelector(`.${name}`)
+        return element ? element : null
+    }
 
     const setDueTask = (url, id, response) => {
         dispatch(taskAction.setTaskDue(response))
@@ -41,7 +50,51 @@ const Dashboard = () => {
 
     const setCustomError = error => {}
 
+    const toggleMenu = (openMenu, closeMenu) => {
+        closeMenu.setAttribute('closing', '')
+        closeMenu.addEventListener('animationend', () => {
+            closeMenu.setAttribute('closed', '')
+            closeMenu.removeAttribute('closing')
+            closeMenu.removeAttribute('open')
+            showHideDropdown(openMenu, closeMenu)
+        }, {once: true})
+        openMenu.removeAttribute('closed')
+        openMenu.setAttribute('open', '')
+    }
+
+
+    const showHideDropdown = (elementOne, elementTwo) => {
+
+        if (!elementOne) {
+            return
+        }
+        if (elementOne.classList.contains('openMenu')) {
+            dropDownMenu.removeAttribute('open')
+            dropDownMenu.setAttribute('closed', '')
+        }
+        if (elementOne.classList.contains('closeMenu') && elementOne.hasAttribute('open')) {
+            dropDownMenu.removeAttribute('closed')
+            dropDownMenu.setAttribute('open', '')
+        }
+    }
+
+    const initElement = () => {
+        if (openMenu === null || closeMenu === null) {
+            openMenu = getElement('openMenu')
+            closeMenu = getElement('closeMenu')
+            dropDownMenu = getElement('dropdownContent')
+        }
+
+        if (openMenu.hasAttributes('open')) {
+            closeMenu = getElement('closeMenu')
+            openMenu = getElement('openMenu')
+        }
+        openMenu.setAttribute('open', '')
+    }
+
     useEffect(() => {
+        initElement();
+        showHideDropdown()
         const {userID, email, accessToken} = authCtx.cookie
         dispatch(SEND_REQUEST('POST', 'user/custom-data', email,
             customData, setCustomError, accessToken))
@@ -50,7 +103,7 @@ const Dashboard = () => {
             setIsUserIDExist(true)
         }
         dispatch(GET_REQUEST(`user/${userID}/task-due-soon`, userID, accessToken, setDueTask, setTaskErrorMessage))
-    }, [dispatch, authCtx.cookie])
+    }, [dispatch, authCtx.cookie, openMenu, closeMenu, dropDownMenu])
     return (
         <div className={`dashboard`}>
             <div className="sidebar">
@@ -86,9 +139,20 @@ const Dashboard = () => {
                         </div>
                         <ul className="dropdown">
                             <li className="icons">
-                                <AiOutlineMenu/>
-                                <AiOutlineClose/>
+                                <AiOutlineMenu
+                                    className='openMenu'
+                                    onClick={() => toggleMenu(closeMenu, openMenu)}  />
+                                <AiOutlineClose
+                                    className='closeMenu'
+                                    onClick={() => toggleMenu(openMenu, closeMenu)} />
                             </li>
+                            <div className="dropdownContent">
+                                <ul>
+                                    <li><Link to='/project'>Project</Link></li>
+                                    <li><Link to={""}>Task</Link></li>
+                                    <li><Link to={""}>Team</Link></li>
+                                </ul>
+                            </div>
                         </ul>
                     </ul>
                 </nav>
