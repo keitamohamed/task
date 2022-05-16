@@ -13,9 +13,9 @@ spring:
         format_sql: true
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/taskie?serverTimezone=UTC
-    username: developer
-    password: 'developer'
+    url: jdbc:mysql://us-cdbr-east-05.cleardb.net/heroku_f59a365f89a617f?reconnect=true
+    username: b4786f8f8e2ec1
+    password: ea30a17e
     driver-class-name: com.mysql.cj.jdbc.Driver
 jwt:
   securityKey: 'securesecuresecurehbsfljjkdwnlDWscjkcfbkt8322yroyo823ye29ogdiqeo2y282u7g2d28u2fwiut821yw'
