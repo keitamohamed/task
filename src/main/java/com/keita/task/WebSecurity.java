@@ -25,7 +25,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_ACCESS = {
             "/",
-            "/favicon.ico",
+            "/**/*.ico",
             "/**/*.png",
             "/**/*.jpg",
             "/**/*.gif",
