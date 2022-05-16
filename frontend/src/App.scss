@@ -174,19 +174,17 @@
   background-size: cover;
 
   .mainContainer {
-    display: grid;
-    grid-template-columns: 4.5fr 7fr;
-    width: 90%;
-    height: auto;
-    top: 50%;
-    left: 50%;
-    margin: 0 auto;
-    transform: translate(-50%, -50%);
-    position: absolute;
 
+    .show_top {
+      display: grid;
+      grid-template-columns: 4.5fr 7fr;
+      width: 90%;
+      height: fit-content;
+      margin: 0 auto;
+    }
     .positionLeft {
       padding: 15px;
-      min-height: 60vh;
+      min-height: 40vh;
       background: rgba(247, 247, 247, .1);
 
       nav {

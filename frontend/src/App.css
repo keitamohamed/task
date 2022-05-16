@@ -158,20 +158,16 @@
   -o-background-size: cover;
   background-size: cover;
 }
-.home .mainContainer {
+.home .mainContainer .show_top {
   display: grid;
   grid-template-columns: 4.5fr 7fr;
   width: 90%;
-  height: auto;
-  top: 50%;
-  left: 50%;
+  height: fit-content;
   margin: 0 auto;
-  transform: translate(-50%, -50%);
-  position: absolute;
 }
 .home .mainContainer .positionLeft {
   padding: 15px;
-  min-height: 60vh;
+  min-height: 40vh;
   background: rgba(247, 247, 247, 0.1);
 }
 .home .mainContainer .positionLeft nav {
@@ -761,6 +757,11 @@
   width: 100%;
 }
 
+@media screen and (min-width: 800px) {
+  .smallDevices {
+    display: none !important;
+  }
+}
 @media screen and (max-width: 900px) {
   .home .mainContainer .positionLeft {
     width: 40vw;
@@ -952,6 +953,20 @@
   }
   .dashboard .sidebar .sidebarNav .smallDevices .dropdownContent[closed] {
     display: none;
+  }
+
+  .contentButtonContainerPlus {
+    padding: 1em 15px 10px;
+  }
+  .contentButtonContainerPlus li svg {
+    font-size: 40px;
+  }
+
+  .taskDueContainer .titleContainer h5 {
+    font-size: 1.2em !important;
+  }
+  .taskDueContainer .titleContainer i {
+    font-size: 1.2em !important;
   }
 }
 @media screen and (max-width: 768px) {

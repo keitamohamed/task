@@ -141,5 +141,17 @@ select {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-areas: "sidebar sidebar mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent"
+}
 
+.noData {
+  padding-top: 3em;
+
+  svg {
+    font-size: 2em;
+  }
+
+  p {
+    font-size: 18px;
+    padding-top: 5px;
+  }
 }

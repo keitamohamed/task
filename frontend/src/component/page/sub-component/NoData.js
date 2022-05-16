@@ -1,10 +1,11 @@
 import {ImDatabase} from "react-icons/im";
 
-const NoData = () => {
+const NoData = ({text}) => {
 
     return (
         <div className="noData">
             <ImDatabase/>
+            <p>{text}</p>
         </div>
     )
 }

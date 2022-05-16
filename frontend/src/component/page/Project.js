@@ -114,7 +114,7 @@ const Project = () => {
                         selectedProject={selectedProject}
                         deleteProject={deleteProject}
                         setProjectTask={setProjectAndTasks}/>
-                            : <NoData/>
+                            : <NoData text={`No projects to display`}/>
                     }
                 </div>
             </div>

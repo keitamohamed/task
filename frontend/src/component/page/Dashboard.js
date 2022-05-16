@@ -6,6 +6,7 @@ import {AiOutlineMenu, AiOutlineClose} from "react-icons/ai";
 import moment from "moment";
 
 import Logo from "../app_logo/Logo";
+import NoData from "./sub-component/NoData";
 
 import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
 import {projectAction} from "../../store/project_slice";
@@ -175,23 +176,25 @@ const Dashboard = () => {
                         <i>All tasks</i>
                     </div>
                     <div className="taskContainer">
-                        <div className="content">
-                            <ul>
-                                {
-                                    taskDue !== null ? (
-                                        taskDue.map((task, index) => {
-                                            return <li
-                                                key={index}
-                                                className={'taskDue'}
-                                            >
-                                                <span>{task.summary}</span>
-                                                <span>{moment(task.dueDate).format('MMM DD YYYY')}</span>
-                                            </li>
-                                        })
-                                    ) : ''
-                                }
-                            </ul>
-                        </div>
+                        {
+                            taskDue.length > 0 ? (
+                                <div className="content">
+                                    <ul>
+                                        {
+                                            taskDue.map((task, index) => {
+                                                return <li
+                                                    key={index}
+                                                    className={'taskDue'}
+                                                >
+                                                    <span>{task.summary}</span>
+                                                    <span>{moment(task.dueDate).format('MMM DD YYYY')}</span>
+                                                </li>
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                            ): <NoData text={`No tasks to display`} />
+                        }
                     </div>
                 </div>
             </div>

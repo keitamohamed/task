@@ -24,6 +24,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final UserAuthDetailsService authDetailsService;
 
     private static final String[] PUBLIC_ACCESS = {
+            "/",
+            "/favicon.ico",
+            "/**/*.png",
+            "/**/*.jpg",
+            "/**/*.gif",
+            "/**/*.svg",
+            "/**/*.html",
+            "/**/*.css",
+            "/**/*.js",
             "/task/user/register"
     };
 

@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
     task: {},
     tasks: [],
-    taskDue: null,
+    taskDue: [],
     message: null,
     error: null
 }

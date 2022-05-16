@@ -133,4 +133,15 @@ select option {
   grid-template-areas: "sidebar sidebar mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent mainContent";
 }
 
+.noData {
+  padding-top: 3em;
+}
+.noData svg {
+  font-size: 2em;
+}
+.noData p {
+  font-size: 18px;
+  padding-top: 5px;
+}
+
 /*# sourceMappingURL=index.css.map */

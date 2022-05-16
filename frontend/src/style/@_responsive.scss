@@ -4,6 +4,9 @@
 
 @include  responsive_min(ssmd) {
 
+  .smallDevices {
+    display: none !important;
+  }
 }
 
 @include responsive_max(md) {
@@ -271,6 +274,31 @@
             display: none;
           }
         }
+      }
+    }
+  }
+
+
+  //Goble css style for small devices
+  .contentButtonContainerPlus {
+    padding: 1em 15px 10px;
+    li {
+
+      svg {
+        font-size: 40px;
+      }
+    }
+  }
+
+  .taskDueContainer {
+
+    .titleContainer {
+
+      h5 {
+        font-size: 1.2em !important;
+      }
+      i {
+        font-size: 1.2em !important;
       }
     }
   }
