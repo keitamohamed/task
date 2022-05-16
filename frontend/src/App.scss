@@ -926,28 +926,44 @@
 @keyframes menu_open {
   0% {
     opacity: 0;
-    transform: scale(0)
+    transform: scale(.5) translateX(150%);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateX(0%);
   }
 }
 
 @keyframes menu_closing {
   0% {
-    transform: translateY(0);
+    opacity: 1;
+    transform: translateX(0);
   }
   100% {
-    transform: translateY(-150%);
+    opacity: 0;
+    transform: translateX(150%);
   }
 }
-@keyframes dropdown_closing {
+
+@keyframes dropdown_open {
   0% {
-    transform: scale(1);
+    opacity: 0;
+    transform: scale(.5) translateX(150%);
   }
   100% {
-    transform: scale(0);
+    opacity: 1;
+    transform: scale(1) translateX(0%);
+  }
+}
+
+@keyframes dropdown_closing {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(150%);
   }
 }
 

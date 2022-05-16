@@ -234,24 +234,32 @@
 
           .closeMenu, .closeMenu, .dropdownContent {
             display: none;
+            opacity: 0;
           }
 
           .openMenu[open] {
             display: block;
+            animation: menu_open .2s ease .5s forwards;
           }
           .closeMenu[open] {
             display: block;
+            animation: menu_open .2s ease .5s forwards;
           }
           .dropdownContent[open] {
             display: block;
+            animation: dropdown_open .2s ease .5s forwards;
           }
           .openMenu[closing] {
             display: block;
-            animation: menu_closing .1s ease .1s forwards;
+            animation: menu_closing .2s ease .3s forwards;
           }
           .closeMenu[closing] {
             display: block;
-            animation: menu_closing .1s ease .1s forwards;
+            animation: menu_closing .2s ease .3s forwards;
+          }
+          .dropdownContent[closing] {
+            display: block;
+            animation: dropdown_closing .2s ease .5s forwards;
           }
           .openMenu[closed] {
             display: none;
@@ -261,7 +269,6 @@
           }
           .dropdownContent[closed] {
             display: none;
-            animation: dropdown_closing .1s ease-in-out .1s forwards;
           }
         }
       }
