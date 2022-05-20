@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -40,42 +41,46 @@ public class JwtCustomAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorization = request.getHeader(jwtConfig.authorizationHeader());
-        if (request.getServletPath().equals("/task/login")
-                || authorization == null
-                || !authorization.startsWith(jwtConfig.getTokenPrefix() + " ")) {
-            Map<String, String> message = new HashMap<>();
-            if (!request.getServletPath().equals("/task/login") && !request.getServletPath().equals("/task/user/register")) {
-                message.put("title", "Access is denied");
-                message.put("message", "Sorry, but you don't have access to this content");
-                response.setContentType(APPLICATION_JSON_VALUE);
-                new ObjectMapper().writeValue(response.getOutputStream(), message);
-            }
-            filterChain.doFilter(request, response);
-        }else {
-            String token = (authorization.replace(jwtConfig.getTokenPrefix(),"")).replaceAll("\\s+", "");
-            try {
-                Algorithm algorithm = Algorithm.HMAC256(jwtConfig.getSecurityKey().getBytes());
-                JWTVerifier verifier = JWT.require(algorithm).build();
-                DecodedJWT decodedJWT = verifier.verify(token);
-                String username = decodedJWT.getSubject();
-                String [] roles = decodedJWT.getClaim("roles").asArray(String.class);
-                Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                stream(roles)
-                        .forEach(role -> {
-                            authorities.add(new SimpleGrantedAuthority(role));
-                        });
-                Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                filterChain.doFilter(request, response);
-            }catch (Exception exception) {
-                response.setStatus(FORBIDDEN.value());
 
-                Map<String, String> error = new HashMap<>();
-                error.put("errorMessage", exception.getMessage());
-                response.setContentType(APPLICATION_JSON_VALUE);
-                new ObjectMapper().writeValue(response.getOutputStream(), error);
-            }
+        String jwt = getJwtFormRequest(request);
+
+        if (StringUtils.hasText(jwt) && getDecodedJWT(jwt, response) != null) {
+            DecodedJWT decodedJWT = getDecodedJWT(jwt, response);
+            assert decodedJWT != null;
+            String username = decodedJWT.getSubject();
+            String [] roles = decodedJWT.getClaim("roles").asArray(String.class);
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            stream(roles)
+                    .forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
+            Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
+        filterChain.doFilter(request, response);
+    }
+
+    private DecodedJWT getDecodedJWT(String token, HttpServletResponse response) throws IOException {
+
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(jwtConfig.getSecurityKey().getBytes());
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            return verifier.verify(token);
+        }catch (Exception exception) {
+            response.setStatus(FORBIDDEN.value());
+
+            Map<String, String> error = new HashMap<>();
+            error.put("errorMessage", exception.getMessage());
+            response.setContentType(APPLICATION_JSON_VALUE);
+            new ObjectMapper().writeValue(response.getOutputStream(), error);
+        }
+        return null;
+    }
+
+    private String getJwtFormRequest(HttpServletRequest request) {
+        String authorization = request.getHeader(jwtConfig.authorizationHeader());
+
+        if (StringUtils.hasText(authorization) && authorization.startsWith(jwtConfig.getTokenPrefix() + " ")) {
+            return (authorization.replace(jwtConfig.getTokenPrefix(),"").replaceAll("\\s+", ""));
+        }
+        return null;
     }
 }

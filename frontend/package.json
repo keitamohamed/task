@@ -19,6 +19,7 @@
     "react-scripts": "5.0.1",
     "react-spinners": "^0.11.0",
     "redux-thunk": "^2.4.1",
+    "serve": "^13.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,5 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "https://mk-task.herokuapp.com"
 }
