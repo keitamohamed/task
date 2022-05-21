@@ -42,7 +42,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         try {
             Authenticate authenticationInput = new ObjectMapper()
                     .readValue(request.getInputStream(), Authenticate.class);
+            System.out.println("Username " + authenticationInput.getEmail());
             Authentication authentication = new UsernamePasswordAuthenticationToken(authenticationInput.getEmail(), authenticationInput.getPassword());
+
             return authenticationManager.authenticate(authentication);
         }catch (IOException e) {
             throw new RuntimeException(e.getMessage());

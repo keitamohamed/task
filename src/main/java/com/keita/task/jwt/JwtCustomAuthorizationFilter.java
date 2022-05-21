@@ -48,7 +48,7 @@ public class JwtCustomAuthorizationFilter extends OncePerRequestFilter {
             DecodedJWT decodedJWT = getDecodedJWT(jwt, response);
             assert decodedJWT != null;
             String username = decodedJWT.getSubject();
-            String [] roles = decodedJWT.getClaim("roles").asArray(String.class);
+            String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             stream(roles)
                     .forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
@@ -77,10 +77,10 @@ public class JwtCustomAuthorizationFilter extends OncePerRequestFilter {
 
     private String getJwtFormRequest(HttpServletRequest request) {
         String authorization = request.getHeader(jwtConfig.authorizationHeader());
-
         if (StringUtils.hasText(authorization) && authorization.startsWith(jwtConfig.getTokenPrefix() + " ")) {
             return (authorization.replace(jwtConfig.getTokenPrefix(),"").replaceAll("\\s+", ""));
         }
         return null;
+
     }
 }

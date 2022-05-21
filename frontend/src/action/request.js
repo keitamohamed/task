@@ -4,7 +4,7 @@ import {projectAction} from "../store/project_slice";
 // axios.defaults.baseURL = "http://localhost:8080/task/"
 
 export const SEND_REQUEST = (requestAction, url, data, action, setError, token) => {
-    return async (dispatch) => {
+    return async () => {
         const send = async () => {
             return axios({
                 method: requestAction,
@@ -12,7 +12,8 @@ export const SEND_REQUEST = (requestAction, url, data, action, setError, token) 
                 data: data,
                 headers: {
                     Authorization: token ? `Bearer ${token}` : 'Bearer',
-                    'Content-Type': 'application/json;charset=UTF-8'
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'dataType': 'json'
                 }
             });
         }
@@ -21,6 +22,7 @@ export const SEND_REQUEST = (requestAction, url, data, action, setError, token) 
             const response = await send()
             action(response.data)
         }catch (error) {
+            console.log(error.response)
             setError(error)
         }
     }
@@ -46,7 +48,7 @@ export const UPDATE_REQUEST = (url, data) => {
     }
 }
 
-export const GET_REQUEST = (url, id, token, action, setError) => {
+export const GET_REQUEST = (url, id, action, setError, token) => {
     return async () => {
         const fetchDate = async () => {
             return  axios({
@@ -83,7 +85,6 @@ export const DELETE_REQUEST = (url, id, token, deleteAction, setError) => {
 
         try {
             const project = await fetchDate()
-            console.log(project)
             deleteAction(project.data)
         }catch (error) {
             setError(error.response.data)

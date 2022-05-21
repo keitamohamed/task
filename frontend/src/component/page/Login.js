@@ -25,12 +25,14 @@ const Login = () => {
         'auth': null
     })
     const [auth, setAuth] = useState()
-    const [credError, setCredError] = useState()
-    
+
+
     const setLoginCredential = userCredential => {
         authCtx.setUserCredential(userCredential)
         navigate('/dashboard')
     }
+
+    const [credError, setCredError] = useState()
 
     const sendRegistrationCredential = message => {
         console.log(message)
@@ -40,7 +42,7 @@ const Login = () => {
         console.log(error)
         setCredError(error)
     }
-    
+
     const onChangeLogin = event => {
         setLogin({
             ...login,
@@ -80,7 +82,7 @@ const Login = () => {
 
     const onSubmitLogin = event => {
         event.preventDefault()
-        dispatch(SEND_REQUEST("POST", "login", login, setLoginCredential, setError))
+        dispatch(SEND_REQUEST("POST", "login", login, setLoginCredential, setError, null))
     }
 
     const onSubmitRegister = event => {

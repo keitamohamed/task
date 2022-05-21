@@ -45,7 +45,7 @@ const Dashboard = () => {
         dispatch(projectAction.setError(error.response.data))
     }
 
-    const customData = (data) => {
+    const customData = (url, id, data) => {
         authCtx.setUserIDAndName(data)
     }
 
@@ -98,13 +98,12 @@ const Dashboard = () => {
         initElement();
         showHideDropdown()
         const {userID, email, accessToken} = authCtx.cookie
-        dispatch(SEND_REQUEST('POST', 'user/custom-data', email,
-            customData, setCustomError, accessToken))
+        dispatch(GET_REQUEST(`user/custom-data/${email}`, null, customData, setCustomError, accessToken))
         if (userID && !isUserIDExist) {
-        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
+        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, setProjects, setError, accessToken))
             setIsUserIDExist(true)
         }
-        dispatch(GET_REQUEST(`user/${userID}/task-due-soon`, userID, accessToken, setDueTask, setTaskErrorMessage))
+        dispatch(GET_REQUEST(`user/${userID}/task-due-soon`, userID, setDueTask, setTaskErrorMessage, accessToken))
     }, [dispatch, authCtx.cookie, openMenu, closeMenu, dropDownMenu])
     return (
         <div className={`dashboard`}>

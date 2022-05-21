@@ -44,13 +44,13 @@ const NewProject = () => {
     const fetchProject = () => {
         const {userID, accessToken} = authCtx.cookie
         dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProducts, setError))
+        navigate('/project')
     }
 
     const onSubmit = event => {
         event.preventDefault();
         const {userID, accessToken} = authCtx.cookie
         dispatch(SEND_REQUEST('POST', `project/${userID}/add`, project.project, fetchProject, setError, accessToken))
-        navigate('/project')
     }
 
     useEffect(() => {
