@@ -52,7 +52,8 @@ public class UserService {
         Authenticate authenticate = user.getAuth();
         authenticate.setPassword(passwordEncoder.encode(authenticate.getPassword()));
         userRepo.save(user);
-        String message = String.format("Your account have been created. Your user ID is [ %s ]. You can now login", user.getUserID());
+        String message = String.format("Your account have been created. Your ID: %s. " +
+                "You can now login using %s", user.getUserID(), user.getAuth().getEmail());
         new SuccessfulHandler(response, message);
     }
 

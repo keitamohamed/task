@@ -50,6 +50,35 @@ input:-webkit-autofill {
   padding: 0 0 1.2em 0;
   font-size: 17px;
 }
+.inputError::placeholder, .message::placeholder {
+  color: #FF1818;
+  font-size: 17px;
+}
+
+.successfully {
+  text-align: center;
+  padding-bottom: 10px !important;
+}
+
+.textC {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.textL {
+  text-align: left;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.p10 {
+  padding-bottom: 10px !important;
+}
+
+.p20 {
+  padding-bottom: 1.5em !important;
+}
 
 .message {
   color: #4E944F;

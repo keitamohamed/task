@@ -20,9 +20,9 @@ export const SEND_REQUEST = (requestAction, url, data, action, setError, token) 
 
         try {
             const response = await send()
+            console.log(response)
             action(response.data)
         }catch (error) {
-            console.log(error.response)
             setError(error)
         }
     }

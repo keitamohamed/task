@@ -12,7 +12,7 @@ let loginForm = null
 let signupForm = null
 
 const Login = () => {
-    const  navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const authCtx = useContext(AuthContext)
     const [login, setLogin] = useState({
@@ -22,25 +22,53 @@ const Login = () => {
     const [register, setRegister] = useState({
         firstName: '',
         lastName: '',
-        'auth': null
+        auth: {}
     })
-    const [auth, setAuth] = useState()
-
+    const [auth, setAuth] = useState({
+        email: '',
+        password: ''
+    })
+    const [credError, setCredError] = useState({})
+    const [conformPassword, setConformPassword] = useState({
+        conformPassword: '',
+        error: '',
+        passwordMissMatch: ''
+    })
+    const [accountCreated, setAccountCreated] = useState({})
 
     const setLoginCredential = userCredential => {
         authCtx.setUserCredential(userCredential)
         navigate('/dashboard')
     }
 
-    const [credError, setCredError] = useState()
-
     const sendRegistrationCredential = message => {
-        console.log(message)
+        setAccountCreated(message)
     }
 
     const setError = error => {
-        console.log(error)
-        setCredError(error)
+        setCredError(error.response.data)
+    }
+
+    const passwordValidation = () => {
+        if (!auth.password) {
+            return
+        }
+        if (!conformPassword.conformPassword) {
+            setConformPassword({
+                ...conformPassword,
+                error: 'Conform password is required'
+            })
+            return false
+        }
+        if (conformPassword.conformPassword !== auth.password) {
+            setConformPassword({
+                ...conformPassword,
+                error: '',
+                passwordMissMatch: 'Password confirmation does not match.'
+            })
+            return false
+        }
+        return true
     }
 
     const onChangeLogin = event => {
@@ -56,7 +84,17 @@ const Login = () => {
                 ...auth,
                 [event.target.name]: event.target.value
             })
+            setRegister({
+                ...register,
+                auth: auth
+            })
             return
+        }else if (event.target.name === 'conformPassword') {
+            setConformPassword({
+                ...conformPassword,
+                [event.target.name]: event.target.value
+            })
+            return;
         }
         setRegister({
             ...register,
@@ -89,15 +127,18 @@ const Login = () => {
         event.preventDefault()
         setRegister({
             ...register,
-            ['auth']: auth
+            auth: auth
         })
+        if (passwordValidation() === false) {
+            return
+        }
         dispatch(SEND_REQUEST("POST", `user/register`, register, sendRegistrationCredential, setError, null))
     }
 
     useEffect(() => {
         if (loginForm === null || signupForm === null) {
-        loginForm = getElement('loginContent')
-        signupForm = getElement('signupContent')
+            loginForm = getElement('loginContent')
+            signupForm = getElement('signupContent')
         }
 
         if (loginForm.hasAttributes('open')) {
@@ -105,6 +146,7 @@ const Login = () => {
             loginForm = getElement('loginContent')
         }
         loginForm.setAttribute('open', '')
+        setCredError({})
     }, [loginForm, signupForm])
 
     return (
@@ -114,7 +156,7 @@ const Login = () => {
                     <div className="logoContainer">
                         <strong>
                             <Link to={'/'}>
-                                <Logo fontWidth={'30%'} color={'#FFF'} />
+                                <Logo fontWidth={'30%'} color={'#FFF'}/>
                             </Link>
                         </strong>
                     </div>
@@ -152,8 +194,11 @@ const Login = () => {
                                         />
                                     </div>
                                     <div className="formGroup">
+                                        <p className="inputError p20 textC">{credError.message}</p>
+                                    </div>
+                                    <div className="formGroup">
                                         <input type="submit"
-                                               value='Login' />
+                                               value='Login'/>
                                         <li>{`Don't have an account?`} <span onClick={
                                             () => formAction(signupForm, loginForm)}>Sign up</span>
                                         </li>
@@ -173,44 +218,64 @@ const Login = () => {
                                         <p>First name</p>
                                         <input type="text"
                                                name="firstName"
+                                               className={credError.error && credError.error.firstName ? 'inputError' : ''}
                                                onChange={onChangeRegister}
-                                               placeholder='First name'
+                                               placeholder={credError.error && credError.error.firstName ?
+                                                   credError.error.firstName : 'First name'}
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Last name</p>
                                         <input type="text"
                                                name="lastName"
+                                               className={credError.error && credError.error.lastName ? 'inputError' : ''}
                                                onChange={onChangeRegister}
-                                               placeholder='Last name'
+                                               placeholder={credError.error && credError.error.lastName ?
+                                                   credError.error.lastName : 'Last name'}
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Email</p>
                                         <input type="email"
                                                name="email"
+                                               className={credError.error && credError.error['auth.email'] ? 'inputError' : ''}
                                                onChange={onChangeRegister}
-                                               placeholder='Email'
+                                               placeholder={credError.error && credError.error['auth.email'] ?
+                                                   credError.error['auth.email'] : 'Email'}
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Password</p>
                                         <input type="password"
                                                name="password"
+                                               autoComplete='new-password'
+                                               className={credError.error && credError.error['auth.password'] ? 'inputError' : ''}
                                                onChange={onChangeRegister}
-                                               placeholder='Password'
+                                               placeholder={credError.error && credError.error['auth.password'] ?
+                                                   credError.error['auth.password'] : 'password'}
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Conform password</p>
                                         <input type="password"
-                                               name='pConform'
-                                               placeholder='Conform Password'
+                                               name='conformPassword'
+                                               className={conformPassword.error ? 'inputError' : ''}
+                                               onChange={onChangeRegister}
+                                               placeholder= {conformPassword.error ?
+                                                   conformPassword.error : 'Conform Password'}
                                         />
                                     </div>
                                     <div className="formGroup">
+                                        {/*{*/}
+                                        {/*    conformPassword.passwordMissMatch && (<p className="inputError p10">{conformPassword.passwordMissMatch}</p>)*/}
+                                        {/*}*/}
+                                        {
+                                            (<p className='message successfully'>{accountCreated.message}</p>)
+                                        }
+                                    </div>
+                                    <div className="formGroup">
                                         <input type="submit"
-                                               value='Register' />
+                                               value='Register'/>
                                         <li>{`Have an account?`} <span onClick={
                                             () => formAction(loginForm, signupForm)}>Login</span>
                                         </li>
