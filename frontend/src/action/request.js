@@ -1,5 +1,4 @@
 import axios from "axios";
-import {projectAction} from "../store/project_slice";
 
 export const SEND_REQUEST = (url, data, action, setError, token) => {
 
