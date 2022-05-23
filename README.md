@@ -1,8 +1,9 @@
 # Taskie
-
 Taskie is a simple Spring boot and React JS application that 
 let you Plan, track, and management project that is 
 flexes to your needs.
+
+Navigate to the application site [taskie page](https://mk-task.herokuapp.com) and test it out 
 ## Tools and Technologies used
  #### Backend
   * Java 11
