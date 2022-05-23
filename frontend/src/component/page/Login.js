@@ -120,7 +120,7 @@ const Login = () => {
 
     const onSubmitLogin = event => {
         event.preventDefault()
-        dispatch(SEND_REQUEST("POST", "login", login, setLoginCredential, setError, null))
+        dispatch(SEND_REQUEST("login", login, setLoginCredential, setError, null))
     }
 
     const onSubmitRegister = event => {
@@ -132,7 +132,7 @@ const Login = () => {
         if (passwordValidation() === false) {
             return
         }
-        dispatch(SEND_REQUEST("POST", `user/register`, register, sendRegistrationCredential, setError, null))
+        dispatch(SEND_REQUEST(`user/register`, register, sendRegistrationCredential, setError, null))
     }
 
     useEffect(() => {

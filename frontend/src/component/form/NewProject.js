@@ -50,7 +50,7 @@ const NewProject = () => {
     const onSubmit = event => {
         event.preventDefault();
         const {userID, accessToken} = authCtx.cookie
-        dispatch(SEND_REQUEST('POST', `project/${userID}/add`, project.project, fetchProject, setError, accessToken))
+        dispatch(SEND_REQUEST(`project/${userID}/add`, project.project, fetchProject, setError, accessToken))
     }
 
     useEffect(() => {

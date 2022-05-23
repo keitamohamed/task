@@ -3,11 +3,11 @@ import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
 import {projectAction} from "../../store/project_slice";
 
-import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
+import {GET_REQUEST, UPDATE_REQUEST} from "../../action/request";
 import Header from "../page/Header";
 
 import Notification from "../../notification/Notification";
-import {NotificationContext} from "../context/Context";
+import {AuthContext, NotificationContext} from "../context/Context";
 import Form from "./Form";
 
 let isLoaded = false
@@ -17,6 +17,7 @@ const ProjectUpdate = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const {project: selectedProject, message} = useSelector((state) => state.project);
+    const authCtx = useContext(AuthContext)
     const [updateProject, setUpdateProject] = useState({})
     const {setActionMessage, hideNotificationWithTimeout, notification} = useContext(NotificationContext)
 
@@ -51,7 +52,8 @@ const ProjectUpdate = () => {
 
     const onSubmit = event => {
         event.preventDefault();
-        dispatch(SEND_REQUEST('PUT', `project/update/${selectedProject.id}`, selectedProject, projectUpdateAction, setError))
+        const {accessToken} = authCtx.cookie
+        dispatch(UPDATE_REQUEST(`project/update/${selectedProject.id}`, selectedProject, projectUpdateAction, setError, accessToken))
         showNotification = true;
     }
 

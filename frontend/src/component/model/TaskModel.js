@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import DatePicker from "react-datepicker";
 import {FaTimes} from "react-icons/fa";
-import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
+import {GET_REQUEST, SEND_REQUEST, UPDATE_REQUEST} from "../../action/request";
 import {taskAction} from "../../store/task_slice";
 import {AuthContext} from "../context/Context";
 
@@ -59,10 +59,10 @@ const TaskModel = ({isNewTask, task, change, taskDate}) => {
         event.preventDefault()
         const {accessToken} = authCtx.cookie
         if (isNewTask) {
-            dispatch(SEND_REQUEST('POST', `project/${project.identifier}/add-task`, task, getProjectTask, setError, accessToken))
+            dispatch(SEND_REQUEST(`project/${project.identifier}/add-task`, task, getProjectTask, setError, accessToken))
             return
         }
-        dispatch(SEND_REQUEST('PUT', `project/update-task/${task.taskID}`, task, updateAction, setError, accessToken))
+        dispatch(UPDATE_REQUEST(`project/update-task/${task.taskID}`, task, updateAction, setError, accessToken))
     }
 
     useEffect(() => {

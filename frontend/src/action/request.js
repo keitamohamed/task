@@ -1,14 +1,12 @@
 import axios from "axios";
 import {projectAction} from "../store/project_slice";
 
-// axios.defaults.baseURL = "http://localhost:8080/task/"
-
-export const SEND_REQUEST = (requestAction, url, data, action, setError, token) => {
+export const SEND_REQUEST = (url, data, action, setError, token) => {
 
     return async () => {
         const send = async () => {
             return axios({
-                method: requestAction,
+                method: 'POST',
                 url: `/task/${url}`,
                 data: data,
                 headers: {
@@ -28,27 +26,31 @@ export const SEND_REQUEST = (requestAction, url, data, action, setError, token) 
     }
 }
 
-export const UPDATE_REQUEST = (url, data) => {
-    return async (dispatch) => {
+export const UPDATE_REQUEST = (url, data, action, setError, token) => {
+    return async () => {
         const send = async () => {
             return axios({
                 method: 'PUT',
                 url: `/task/${url}`,
                 data: data,
+                headers: {
+                    Authorization: token ? `Bearer ${token}` : 'Bearer',
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'dataType': 'json'
+                }
             });
         }
 
         try {
             const response = await send()
-            dispatch(GET_REQUEST('project/find-all-project', null, null))
-            dispatch(projectAction.setMessage(response.data))
+            action(response.data)
         }catch (error) {
-            return(dispatch(projectAction.setError(error.response.data)));
+            setError(error.response.data)
         }
     }
 }
 
-export const GET_REQUEST = (url, id, action, setError, token) => {
+export const GET_REQUEST = (url, action, setError, token) => {
     return async () => {
         const fetchDate = async () => {
             return  axios({
@@ -63,9 +65,9 @@ export const GET_REQUEST = (url, id, action, setError, token) => {
 
         try {
             const response = await fetchDate()
-            action(url, id, response.data)
+            action(response.data)
         }catch (error) {
-            setError(error)
+            setError(error.response.data)
         }
     }
 }
@@ -85,7 +87,6 @@ export const DELETE_REQUEST = (url, id, deleteAction, setError, token) => {
 
         try {
             const project = await fetchDate()
-            console.log("Delete project", project)
             deleteAction(project.data)
         }catch (error) {
             setError(error.response.data)

@@ -27,18 +27,21 @@ const ProjectContainer = ({projects, selectedProject, deleteProject, setProjectT
                     <div className="contentRight">
                         <Link to={`/project/board/${project.identifier}`} onClick={() => setProjectTask(project.identifier)}>
                             <MdDashboard style={{color: '#0093AB'}} />
-                            <span>Project Board</span>
+                            <span className={"largeDevices"}>Project Board</span>
+                            <span className={"smallDevices"}>Board</span>
                         </Link>
                         <Link
                             to={`/project/update/${project.id}`}
                             onClick={() => selectedProject(project.identifier)}
                         >
                             <FiCheckSquare style={{color: '#019267'}} />
-                            <span>Update Project</span>
+                            <span className={"largeDevices"}>Update Project</span>
+                            <span className={"smallDevices"}>Update</span>
                         </Link>
                         <Link to={``} onClick={() => deleteProject(project.identifier)}>
                             <AiFillDelete style={{color: '#E83A14'}} />
-                            <span>Delete Project</span>
+                            <span className={"largeDevices"}>Delete Project</span>
+                            <span className={"smallDevices"}>Delete</span>
                         </Link>
                     </div>
                 </div>

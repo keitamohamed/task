@@ -8,7 +8,7 @@ import moment from "moment";
 import Logo from "../app_logo/Logo";
 import NoData from "./sub-component/NoData";
 
-import {GET_REQUEST, SEND_REQUEST} from "../../action/request";
+import {GET_REQUEST} from "../../action/request";
 import {projectAction} from "../../store/project_slice";
 import {taskAction} from "../../store/task_slice";
 import {AuthContext} from "../context/Context";
@@ -29,23 +29,23 @@ const Dashboard = () => {
         return element ? element : null
     }
 
-    const setDueTask = (url, id, response) => {
+    const setDueTask = (response) => {
         dispatch(taskAction.setTaskDue(response))
     }
 
-    const setProjects = (url, id, response) => {
+    const setProjects = (response) => {
         dispatch(projectAction.loadProject(response))
     }
 
     const setTaskErrorMessage = (error) => {
-        dispatch(taskAction.setError(error.response.data))
+        dispatch(taskAction.setError(error))
     }
 
     const setError = (error) => {
-        dispatch(projectAction.setError(error.response.data))
+        dispatch(projectAction.setError(error))
     }
 
-    const customData = (url, id, data) => {
+    const customData = (data) => {
         authCtx.setUserIDAndName(data)
     }
 
@@ -98,12 +98,12 @@ const Dashboard = () => {
         initElement();
         showHideDropdown()
         const {userID, email, accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST(`user/custom-data/${email}`, null, customData, setCustomError, accessToken))
+        dispatch(GET_REQUEST(`user/custom-data/${email}`, customData, setCustomError, accessToken))
         if (userID && !isUserIDExist) {
-        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, setProjects, setError, accessToken))
+        dispatch(GET_REQUEST(`user/${userID}/projects`, setProjects, setError, accessToken))
             setIsUserIDExist(true)
         }
-        dispatch(GET_REQUEST(`user/${userID}/task-due-soon`, userID, setDueTask, setTaskErrorMessage, accessToken))
+        dispatch(GET_REQUEST(`user/${userID}/task-due-soon`, setDueTask, setTaskErrorMessage, accessToken))
     }, [dispatch, authCtx.cookie, openMenu, closeMenu, dropDownMenu])
     return (
         <div className={`dashboard`}>

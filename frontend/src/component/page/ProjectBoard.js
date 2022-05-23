@@ -46,13 +46,12 @@ const ProjectBoard = () => {
         toggleModel();
     }
 
-    const setProductTask = (url, id, response) => {
+    const setProductTask = (response) => {
         dispatch(taskAction.loadTask(response))
     }
 
     const setError = (error) => {
-        console.log(error)
-        // dispatch(taskAction.setError(error.response.data))
+        dispatch(taskAction.setError(error))
     }
 
     const toggleTaskUpdate = (id) => {
@@ -67,7 +66,7 @@ const ProjectBoard = () => {
 
     const reLoadTasks = () => {
         const {accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST(`project/project-task/${project.identifier}`, project.identifier, setProductTask, setError, accessToken))
+        dispatch(GET_REQUEST(`project/project-task/${project.identifier}`, setProductTask, setError, accessToken))
     }
 
     const deleteAction = (taskID) => {

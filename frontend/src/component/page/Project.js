@@ -1,18 +1,12 @@
 import {useContext, useEffect} from "react";
-import {useNavigate, Link} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import moment from 'moment'
-import {AiFillDelete} from 'react-icons/ai'
-import {FiCheckSquare} from 'react-icons/fi'
-import {MdDashboard} from 'react-icons/md'
-import {ImDatabase} from 'react-icons/im'
 import {BsPlus} from "react-icons/bs";
 
 import Header from "./Header";
 import Notification from "../../notification/Notification";
 import DisplayProject from "./sub-component/ProjectPost";
 import NoData from "./sub-component/NoData";
-import ProjectContainer from "./sub-component/ProjectContainer";
 import {GET_REQUEST} from "../../action/request";
 import {AuthContext, NotificationContext} from "../context/Context";
 import {projectAction} from "../../store/project_slice";
@@ -28,35 +22,35 @@ const Project = () => {
     const {projects} = useSelector((state) => state.project)
     const notification = useContext(NotificationContext)
 
-    const setProductTask = (url, id, response) => {
+    const setProductTask = (response) => {
         dispatch(taskAction.loadTask(response))
     }
 
     const setErrorMessage = (error) => {
-        dispatch(taskAction.setError(error.response.data))
+        dispatch(taskAction.setError(error))
     }
 
     const setProjects = (url, id, response) => {
         dispatch(projectAction.loadProject(response))
     }
 
-    const setProject = (url, id, response) => {
+    const setProject = (response) => {
         dispatch(projectAction.selectedProject(response))
     }
 
     const setError = (error) => {
-        dispatch(projectAction.setError(error.response.data))
+        dispatch(projectAction.setError(error))
     }
 
     const setProjectAndTasks = (identifier) => {
         const {accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, identifier, setProject, setError, accessToken))
-        dispatch(GET_REQUEST(`project/project-task/${identifier}`, identifier, setProductTask, setErrorMessage, accessToken))
+        dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, setProject, setError, accessToken))
+        dispatch(GET_REQUEST(`project/project-task/${identifier}`, setProductTask, setErrorMessage, accessToken))
     }
 
     const selectedProject = (identifier) => {
         const {accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, identifier, setProject, setError, accessToken))
+        dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, setProject, setError, accessToken))
     }
 
     const deleteProject = (identifier) => {
@@ -68,10 +62,6 @@ const Project = () => {
             showNotification: true
         })
         notificationAction(messageNotification)
-    }
-
-    const navigateTo = to => {
-        navigate(to)
     }
 
     const notificationAction = (openElement) => {

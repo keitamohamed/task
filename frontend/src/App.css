@@ -761,6 +761,10 @@
   .smallDevices {
     display: none !important;
   }
+
+  .largeDevices {
+    display: inline-block;
+  }
 }
 @media screen and (max-width: 900px) {
   .home .mainContainer .positionLeft {
@@ -863,10 +867,16 @@
     font-size: 1em;
   }
   .project .mainContainer .projectContent .contentRight a {
-    padding: 8px 5px;
+    padding-left: 2em;
   }
   .project .mainContainer .projectContent .contentRight a svg {
     font-size: 1.2em;
+  }
+  .project .mainContainer .projectContent .contentRight .largeDevices {
+    display: none;
+  }
+  .project .mainContainer .projectContent .contentRight .smallDevices {
+    display: inline-block;
   }
   .project .mainContainer .paginationWrapper {
     width: 90%;

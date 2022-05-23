@@ -7,6 +7,10 @@
   .smallDevices {
     display: none !important;
   }
+
+  .largeDevices {
+    display: inline-block;
+  }
 }
 
 @include responsive_max(md) {
@@ -162,10 +166,19 @@
             font-size: 1em;
           }
           a {
-            padding: 8px 5px;
+            padding-left: 2em;
+
             svg {
               font-size: 1.2em;
             }
+          }
+
+          .largeDevices {
+            display: none;
+          }
+
+          .smallDevices {
+            display: inline-block;
           }
         }
       }
