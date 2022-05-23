@@ -42,3 +42,8 @@ Navigate to the application site [taskie page](https://mk-task.herokuapp.com) an
  * Before taking on application like this, make sure to learn more about authentication and united testing first.
  * Be committed and do not give up. At time, I almost decided not to do the authentication and united test. But as of now 
    I can say that I am 30% confident about **Authentication**.
+
+#### Below is some images of the App UI interface
+Image of the home page ![This is an image of the home page](frontend/public/image/Screen-shot-home.png)
+Image of the login page ![This is an image of the login page](frontend/public/image/Screen-shot-login.png)
+Image of the dashboard ![This is an image of the login page](frontend/public/image/dashboard-show.png)
