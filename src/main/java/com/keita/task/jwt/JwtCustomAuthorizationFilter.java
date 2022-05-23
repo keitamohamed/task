@@ -81,6 +81,5 @@ public class JwtCustomAuthorizationFilter extends OncePerRequestFilter {
             return (authorization.replace(jwtConfig.getTokenPrefix(),"").replaceAll("\\s+", ""));
         }
         return null;
-
     }
 }

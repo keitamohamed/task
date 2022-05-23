@@ -4,6 +4,7 @@ import {projectAction} from "../store/project_slice";
 // axios.defaults.baseURL = "http://localhost:8080/task/"
 
 export const SEND_REQUEST = (requestAction, url, data, action, setError, token) => {
+
     return async () => {
         const send = async () => {
             return axios({
@@ -20,7 +21,6 @@ export const SEND_REQUEST = (requestAction, url, data, action, setError, token) 
 
         try {
             const response = await send()
-            console.log(response)
             action(response.data)
         }catch (error) {
             setError(error)
@@ -70,7 +70,7 @@ export const GET_REQUEST = (url, id, action, setError, token) => {
     }
 }
 
-export const DELETE_REQUEST = (url, id, token, deleteAction, setError) => {
+export const DELETE_REQUEST = (url, id, deleteAction, setError, token) => {
     return async () => {
         const fetchDate = async () => {
             return axios({
@@ -85,6 +85,7 @@ export const DELETE_REQUEST = (url, id, token, deleteAction, setError) => {
 
         try {
             const project = await fetchDate()
+            console.log("Delete project", project)
             deleteAction(project.data)
         }catch (error) {
             setError(error.response.data)

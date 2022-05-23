@@ -50,13 +50,13 @@ const Project = () => {
 
     const setProjectAndTasks = (identifier) => {
         const {accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, identifier, accessToken, setProject, setError))
-        dispatch(GET_REQUEST(`project/project-task/${identifier}`, identifier, accessToken, setProductTask, setErrorMessage))
+        dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, identifier, setProject, setError, accessToken))
+        dispatch(GET_REQUEST(`project/project-task/${identifier}`, identifier, setProductTask, setErrorMessage, accessToken))
     }
 
     const selectedProject = (identifier) => {
         const {accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST('project/find-by-identifier/', identifier, accessToken, setProject, setError))
+        dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, identifier, setProject, setError, accessToken))
     }
 
     const deleteProject = (identifier) => {
@@ -65,7 +65,7 @@ const Project = () => {
             identifier: identifier,
             message: `Are you sure you want to permanently delete project ${identifier}?`,
             showBtn: true,
-            // showNotification: true
+            showNotification: true
         })
         notificationAction(messageNotification)
     }
@@ -82,7 +82,7 @@ const Project = () => {
     useEffect(() => {
         const {userID, accessToken} = authCtx.cookie
         if (!isLoaded) {
-            dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProjects, setError))
+            dispatch(GET_REQUEST(`user/${userID}/projects`, userID, setProjects, setError, accessToken))
             isLoaded = true
         }
         if (messageNotification === null) {

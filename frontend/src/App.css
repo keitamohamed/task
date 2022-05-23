@@ -172,7 +172,7 @@
 }
 .home .mainContainer .positionLeft nav {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   place-items: center;
   padding-bottom: 2em;
@@ -766,6 +766,10 @@
   .home .mainContainer .positionLeft {
     width: 40vw;
   }
+
+  .formContainer .formGroup {
+    width: 90% !important;
+  }
 }
 @media screen and (max-width: 880px) {
   .project .mainContainer {
@@ -824,6 +828,11 @@
   }
 }
 @media screen and (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "sidebar sidebar sidebar" "mainContent mainContent mainContent";
+  }
+
   .project .mainContainer {
     width: 100%;
     height: 70%;
@@ -968,11 +977,12 @@
   .taskDueContainer .titleContainer i {
     font-size: 1.2em !important;
   }
-}
-@media screen and (max-width: 768px) {
-  .dashboard {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-areas: "sidebar sidebar sidebar" "mainContent mainContent mainContent";
+
+  .formContainer {
+    width: 80%;
+  }
+  .formContainer .formGroup {
+    width: 100%;
   }
 }
 @media screen and (max-width: 575px) {
@@ -990,9 +1000,22 @@
 
   .home .mainContainer {
     grid-template-columns: repeat(1, 1fr) !important;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .home .mainContainer .show_top {
+    width: 100%;
+    grid-template-columns: 9fr 2fr !important;
   }
   .home .mainContainer .positionLeft {
-    width: 65vw;
+    width: 100%;
+  }
+  .home .mainContainer .positionLeft nav li {
+    text-align: left !important;
+  }
+  .home .mainContainer .positionLeft .titleContainer h1 span {
+    color: #7F8487;
   }
 
   .project .paginationWrapper {
@@ -1004,6 +1027,13 @@
   }
   .projectBoard .taskContainer .task {
     grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .dashboard .mainContent .contentButtonContainerPlus {
+    width: 95%;
+  }
+  .dashboard .mainContent .taskDueContainer {
+    width: 95%;
   }
 
   .login .main {
@@ -1022,6 +1052,10 @@
   }
   .login .main .positionRight {
     padding-top: 2.5em;
+  }
+
+  .formContainer {
+    width: 100% !important;
   }
 }
 @media screen and (max-width: 880px) {

@@ -49,9 +49,10 @@ const TaskModel = ({isNewTask, task, change, taskDate}) => {
         getProjectTask()
     }
 
-    const getProjectTask = () => {
+    const getProjectTask = (message) => {
+        dispatch(taskAction.setMessage(message))
         const {accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST(`project/project-task/${project.identifier}`, project.identifier, accessToken, setProductTask, setError))
+        dispatch(GET_REQUEST(`project/project-task/${project.identifier}`, project.identifier, setProductTask, setError, accessToken))
     }
     
     const onSubmit = event => {

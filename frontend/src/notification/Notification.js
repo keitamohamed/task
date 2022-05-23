@@ -25,7 +25,7 @@ const Notification = () => {
         const {userID, accessToken} = authCtx.cookie
         dispatch(projectAction.setMessage(message))
         setActionMessage(message)
-        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProducts, setProjectErrorMessage))
+        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, setProducts, setProjectErrorMessage, accessToken))
     }
 
     const action = event => {
@@ -34,7 +34,7 @@ const Notification = () => {
             notificationAction()
             return
         }
-        dispatch(DELETE_REQUEST('project/delete/', notification.identifier, accessToken, setProjectAction, setProjectErrorMessage))
+        dispatch(DELETE_REQUEST('project/delete/', notification.identifier, setProjectAction, setProjectErrorMessage, accessToken))
         setActionMessage(message)
         setTimeout(notificationAction, 5000)
     }

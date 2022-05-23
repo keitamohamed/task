@@ -59,14 +59,14 @@ const Home = () => {
                 <div className="show_top">
                     <div className="positionLeft">
                         <nav>
-                            <li className='carouselTitle active'>Project & Tasks</li>
+                            <li className='carouselTitle active'>Project</li>
                             <li className='carouselTitle'>Goals</li>
                             <li className='carouselTitle'>Views</li>
                         </nav>
                         <div className="contentInfo">
                             <div className="carousel task">
                                 <div className="titleContainer">
-                                    <h1 className={'title'}>Simplify work & get more done</h1>
+                                    <h1 className={'title'}>Simplify <span>work &</span> get more done</h1>
                                 </div>
                                 <div className="infoContainer">
                                     <p>Plan, track, and management any type of work with
@@ -76,7 +76,7 @@ const Home = () => {
                             </div>
                             <div className="carousel goal">
                                 <div className="titleContainer">
-                                    <h1 className={'title'}>Set goals & crush <br/>them</h1>
+                                    <h1 className={'title'}>Set goals <span>&</span> crush them</h1>
                                 </div>
                                 <div className="infoContainer">
                                     <p>Stay on track to hit your goals with targets for task completions
@@ -86,7 +86,7 @@ const Home = () => {
                             </div>
                             <div className="carousel task">
                                 <div className="titleContainer">
-                                    <h1 className={'title'}>See your work, <br/>you way</h1>
+                                    <h1 className={'title'}>See your <span>work,</span> <br/>you way</h1>
                                 </div>
                                 <div className="infoContainer">
                                     <p>Track tasks on list, update workflows on a Board, and so much more.

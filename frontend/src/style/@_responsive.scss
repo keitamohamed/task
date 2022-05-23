@@ -19,6 +19,12 @@
       }
     }
   }
+
+  .formContainer {
+    .formGroup {
+      width: 90% !important;
+    }
+  }
 }
 
 @include responsive_max(smd) {
@@ -109,6 +115,12 @@
 }
 
 @include responsive_max(s) {
+
+  .dashboard {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "sidebar sidebar sidebar"
+                          "mainContent mainContent mainContent";
+  }
 
   .project {
 
@@ -283,7 +295,6 @@
   .contentButtonContainerPlus {
     padding: 1em 15px 10px;
     li {
-
       svg {
         font-size: 40px;
       }
@@ -302,16 +313,17 @@
       }
     }
   }
-}
 
-@include responsive_max(s) {
+  .formContainer {
+    width: 80%;
 
-  .dashboard {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-areas: "sidebar sidebar sidebar"
-                          "mainContent mainContent mainContent";
+    .formGroup {
+      width: 100%;
+    }
   }
 }
+
+
 
 @include responsive_max(xs) {
 
@@ -333,8 +345,30 @@
   .home {
     .mainContainer {
       grid-template-columns: repeat(1, 1fr) !important;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      .show_top {
+        width: 100%;
+        grid-template-columns: 9fr 2fr !important;
+      }
       .positionLeft {
-        width: 65vw;
+        width: 100%;
+
+        nav {
+          li {
+            text-align: left !important;
+          }
+        }
+
+        .titleContainer {
+           h1 {
+             span {
+               color: #7F8487;
+             }
+           }
+        }
       }
     }
   }
@@ -356,6 +390,19 @@
 
       .task {
         grid-template-columns: repeat(1, 1fr) !important;
+      }
+    }
+  }
+
+  .dashboard {
+
+    .mainContent {
+
+      .contentButtonContainerPlus {
+        width: 95%;
+      }
+      .taskDueContainer {
+        width: 95%;
       }
     }
   }
@@ -383,5 +430,9 @@
         padding-top: 2.5em;
       }
     }
+  }
+
+  .formContainer {
+    width: 100% !important;
   }
 }

@@ -51,7 +51,8 @@ const ProjectBoard = () => {
     }
 
     const setError = (error) => {
-        dispatch(taskAction.setError(error.response.data))
+        console.log(error)
+        // dispatch(taskAction.setError(error.response.data))
     }
 
     const toggleTaskUpdate = (id) => {
@@ -66,11 +67,12 @@ const ProjectBoard = () => {
 
     const reLoadTasks = () => {
         const {accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST(`project/project-task/${project.identifier}`, project.identifier, accessToken, setProductTask, setError))
+        dispatch(GET_REQUEST(`project/project-task/${project.identifier}`, project.identifier, setProductTask, setError, accessToken))
     }
 
     const deleteAction = (taskID) => {
-        dispatch(DELETE_REQUEST('product/delete-task/', taskID, null, reLoadTasks))
+        const {accessToken} = authCtx.cookie
+        dispatch(DELETE_REQUEST('project/delete-task/', taskID, reLoadTasks, setError, accessToken))
     }
 
     const onChange = event => {
@@ -88,12 +90,6 @@ const ProjectBoard = () => {
     }
 
     useEffect(() => {
-        const size = {
-            width: window.innerWidth || document.body.clientWidth,
-            height: window.innerHeight || document.body.clientHeight
-        }
-
-        console.log("Size", size)
 
     }, [dispatch, tasks, projectTask])
 

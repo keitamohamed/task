@@ -43,7 +43,7 @@ const NewProject = () => {
 
     const fetchProject = () => {
         const {userID, accessToken} = authCtx.cookie
-        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, accessToken, setProducts, setError))
+        dispatch(GET_REQUEST(`user/${userID}/projects`, userID, setProducts, setError, accessToken))
         navigate('/project')
     }
 
