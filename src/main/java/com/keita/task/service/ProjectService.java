@@ -40,19 +40,16 @@ public class ProjectService {
     }
 
     public List<Project> findAllProject(HttpServletResponse response) {
-        return StreamSupport.stream(
-                        Spliterators.spliteratorUnknownSize(projectRepo.findAll().iterator(),
-                                Spliterator.ORDERED),
-                        false)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), result -> {
-                    if (result.isEmpty()) {
-                        throw new ProjectExceptionHandler(
-                                HttpStatus.OK,
-                                response,
-                                "No content to load."
-                        );}
-                    return result;
-                }));
+        List<Project> findAll = findAll();
+        if (findAll.isEmpty()) {
+            throw new ProjectExceptionHandler(
+                    HttpStatus.OK, response,"No content to load.");
+        }
+        return findAll;
+    }
+
+    public List<Project> findAll() {
+        return projectRepo.findAll();
     }
 
     public List<ProjectTask> dueSoon(User user) {
@@ -90,6 +87,11 @@ public class ProjectService {
         throw new ProjectExceptionHandler(HttpStatus.OK, response, String.format("Project with identifier %s was updated", project.getIdentifier()));
     }
 
+    public List<ProjectTask> findProjectTaskSortByDueDateAndPriority(String projectIdentifier, HttpServletResponse response) {
+        Optional<Project> project = findProjectByIdentifier(HttpStatus.BAD_REQUEST, projectIdentifier, response, "");
+        return taskService.projectTask(project.get());
+    }
+
     public Optional<Project> findProjectByIdentifier(
             HttpStatus status,
             String projectIdentifier,
@@ -105,17 +107,11 @@ public class ProjectService {
                 ));
     }
 
-    private void findProjectByIdentifier(String projectIdentifier, HttpServletResponse response) {
+    public void findProjectByIdentifier(String projectIdentifier, HttpServletResponse response) {
         String message = "Project with identifier " + projectIdentifier.toUpperCase() + " already exist";
         if (projectRepo.findProjectByIdentifier(projectIdentifier).isPresent()){
-            throw new ProjectExceptionHandler(HttpStatus.FOUND, response, message);
+            throw new ProjectExceptionHandler(HttpStatus.BAD_REQUEST, response, message);
         }
     }
-
-    public List<ProjectTask> findProjectTaskSortByDueDateAndPriority(String projectIdentifier, HttpServletResponse response) {
-        Optional<Project> project = findProjectByIdentifier(HttpStatus.BAD_REQUEST, projectIdentifier, response, "");
-        return taskService.projectTask(project.get());
-    }
-
 
 }
