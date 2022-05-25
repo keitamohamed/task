@@ -58,7 +58,6 @@ public class MessageHandler {
     }
 
     static void projectIdentifierResponse(HttpStatus status, HttpServletResponse response, String message) {
-
         try {
             Map<String, String> errorMap = new HashMap<>();
             errorMap.put("status", status.name());
