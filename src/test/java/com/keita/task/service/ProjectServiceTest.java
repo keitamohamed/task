@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,7 @@ class ProjectServiceTest {
     private TaskService taskService;
     @Captor ArgumentCaptor<Project> argumentCaptor;
 
+    @InjectMocks
     private ProjectService underTest;
 
     @BeforeEach
@@ -193,12 +195,21 @@ class ProjectServiceTest {
 
     @Test
     void itShouldDeleteProjectByIdentifier() {
+        String identifier = "RAG12";
+
+        lenient().when(projectRepo.findProjectByIdentifier(identifier)).thenReturn(Optional.of(new Project()));
+        lenient().doNothing().when(projectRepo).deleteById(1L);
+
+        assertThatThrownBy(() -> underTest.deleteProjectByIdentifier(identifier, httpServletResponse))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        verify(projectRepo, times(1)).findProjectByIdentifier("RAG12");
     }
 
     @Test
     void itShouldFindAllProject() {
         underTest.findAll();
-        verify(projectRepo).findAll();
+        verify(projectRepo, times(1)).findAll();
     }
 
     @Test
@@ -209,10 +220,37 @@ class ProjectServiceTest {
 
     @Test
     void itShouldUpdateProject() {
+        ZoneId defaultZoneId = ZoneId.systemDefault();
 
+        Project project = new Project();
+
+        LocalDate localDate = LocalDate.of(2020, 7, 23);
+        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+
+        project.setId(1L);
+        project.setDescription("Test");
+        project.setIdentifier("RAG12");
+        project.setName("Test");
+        project.setStartDate(date);
+        project.setEndDate(date);
+
+        lenient().when(projectRepo.findProjectByIdentifier(project.getIdentifier())).thenReturn(Optional.ofNullable(project));
+        lenient().doReturn(null).when(projectRepo).save(project);
+
+        assertThatThrownBy(() -> underTest.updateProject(project, httpServletResponse))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        verify(projectRepo, times(1)).findProjectByIdentifier("RAG12");
+        verify(projectRepo, times(1)).save(project);
     }
 
     @Test
     void itShouldFindProjectTaskSortByDueDateAndPriority() {
+        String identifier = "RAG12";
+
+        lenient().when(projectRepo.findProjectByIdentifier(identifier)).thenReturn(Optional.of(new Project()));
+
+        underTest.findProjectTaskSortByDueDateAndPriority(identifier, httpServletResponse);
+        verify(projectRepo, times(1)).findProjectByIdentifier("RAG12");
     }
 }
