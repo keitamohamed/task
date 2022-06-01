@@ -41,4 +41,11 @@ public class ProjectTask {
     @JsonBackReference(value = "task")
     private Project task;
 
+    public ProjectTask(Long taskID, String summary, String status, String priority, Date dueDate) {
+        this.taskID = taskID;
+        this.summary = summary;
+        this.status = status;
+        this.priority = priority;
+        this.dueDate = dueDate;
+    }
 }

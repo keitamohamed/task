@@ -59,6 +59,6 @@ public class UserController {
             value = {"/all"}
     )
     public List<User> all() {
-        return userService.all();
+        return userService.findAllUser();
     }
 }

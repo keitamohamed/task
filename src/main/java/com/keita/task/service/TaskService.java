@@ -79,12 +79,10 @@ public class TaskService {
     }
 
     public List<ProjectTask> projectTask (Project project) {
-        return (project.getTask()
+        return project.getTask()
                 .stream()
                 .sorted(Comparator.comparing(ProjectTask::getDueDate))
-                .sorted(Comparator.comparing(ProjectTask::getPriority))
-                .collect(Collectors.toList())
-        );
+                .collect(Collectors.toList());
     }
 
     public List<ProjectTask> sortTaskByPriority(HttpServletResponse response) {
@@ -107,7 +105,6 @@ public class TaskService {
     }
 
     public Optional<ProjectTask> findTaskByID(Long taskID, HttpServletResponse response) {
-        taskDueSoon(response);
         String message = String.format("No task match with an id %s.", taskID);
         return taskRepo.findById(taskID)
                 .map(Optional::of).orElseThrow(() ->
@@ -139,3 +136,4 @@ public class TaskService {
     }
 
 }
+
