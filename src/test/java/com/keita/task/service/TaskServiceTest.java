@@ -191,5 +191,9 @@ class TaskServiceTest {
 
     @Test
     void projectTaskList() {
+//        taskServiceUnderTest.projectTaskList(response);
+        assertThatThrownBy(() -> taskServiceUnderTest.projectTaskList(response))
+                .isInstanceOf(IllegalArgumentException.class);
+        verify(taskRepoUnderTest, times(1)).projectTaskList();
     }
 }
