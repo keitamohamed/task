@@ -92,18 +92,13 @@ class TaskServiceTest {
                 .willReturn(Optional.empty());
 
         //WHEN
-        //... IT SHOULD SAVE THE NEW PROJECT
 //        taskServiceUnderTest.save(project, task, result, response);
-
-        // IT SHOULD THE REQUEST AND THROW EXCEPTION AT THE END
         assertThatThrownBy(() -> taskServiceUnderTest.save(project, task, result, response))
                 .isInstanceOf(IllegalArgumentException.class);
 
         //THEN...
-        // IT SHOULD SAVE THE TASK AND CAPTURE THE SAVE VALUE
         then(taskRepoUnderTest).should().save(argumentCaptor.capture());
         ProjectTask captorValue = argumentCaptor.getValue();
-        // IT SHOULD CHECK THAT THE CAPTURE REQUEST IS EQUAL TO PROJECT
         assertThat(captorValue).isEqualTo(task);
     }
 
