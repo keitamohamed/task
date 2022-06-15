@@ -81,6 +81,5 @@ public class MessageHandler {
         }catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
-
     }
 }
