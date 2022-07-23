@@ -1,6 +1,6 @@
-import {usePaginate, usePost} from "../../custom-hook/usePaginate";
+import {usePaginate, usePost} from "../../hook/usePaginate";
 import TaskContainer from "./TaskContainer";
-import UsePagination from "../../custom-hook/usePagination";
+import UsePagination from "../../hook/usePagination";
 import Loading from "./Loading";
 
 const TaskPost = ({tasks, numberOfPost, toggleTaskUpdate, deleteAction}) => {

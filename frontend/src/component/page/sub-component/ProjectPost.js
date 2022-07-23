@@ -1,5 +1,5 @@
-import {usePaginate, usePost} from "../../custom-hook/usePaginate";
-import UsePagination from "../../custom-hook/usePagination";
+import {usePaginate, usePost} from "../../hook/usePaginate";
+import UsePagination from "../../hook/usePagination";
 import Loading from "./Loading";
 
 import ProjectContainer from "./ProjectContainer";
