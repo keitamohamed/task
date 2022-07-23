@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {useNavigate, Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {BsPlus} from 'react-icons/bs'
@@ -9,9 +9,8 @@ import Logo from "../app_logo/Logo";
 import NoData from "./sub-component/NoData";
 
 import {GET_REQUEST} from "../../action/request";
-import {projectAction} from "../../store/project_slice";
-import {taskAction} from "../../store/task_slice";
 import {AuthContext} from "../context/Context";
+import {useProject} from "../hook/useProject";
 
 let openMenu = null
 let closeMenu = null
@@ -21,7 +20,8 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
-    const [isUserIDExist, setIsUserIDExist] = useState(false);
+    const {loadProject, loadTaskDue} = useProject()
+
     const {taskDue} = useSelector((state) => state.task)
 
     const getElement = (name) => {
@@ -29,27 +29,13 @@ const Dashboard = () => {
         return element ? element : null
     }
 
-    const setDueTask = (response) => {
-        dispatch(taskAction.setTaskDue(response))
-    }
-
-    const setProjects = (response) => {
-        dispatch(projectAction.loadProject(response))
-    }
-
-    const setTaskErrorMessage = (error) => {
-        dispatch(taskAction.setError(error))
-    }
-
-    const setError = (error) => {
-        dispatch(projectAction.setError(error))
-    }
-
     const customData = (data) => {
         authCtx.setUserIDAndName(data)
     }
 
-    const setCustomError = error => {}
+    const setCustomError = () => {
+
+    }
 
     const toggleMenu = (openMenu, closeMenu) => {
         closeMenu.setAttribute('closing', '')
@@ -97,13 +83,11 @@ const Dashboard = () => {
     useEffect(() => {
         initElement();
         showHideDropdown()
-        const {userID, email, accessToken} = authCtx.cookie
+        const {email, accessToken} = authCtx.cookie
         dispatch(GET_REQUEST(`user/custom-data/${email}`, customData, setCustomError, accessToken))
-        if (userID && !isUserIDExist) {
-        dispatch(GET_REQUEST(`user/${userID}/projects`, setProjects, setError, accessToken))
-            setIsUserIDExist(true)
-        }
-        dispatch(GET_REQUEST(`user/${userID}/task-due-soon`, setDueTask, setTaskErrorMessage, accessToken))
+        loadProject()
+        loadTaskDue()
+
     }, [dispatch, authCtx.cookie, openMenu, closeMenu, dropDownMenu])
     return (
         <div className={`dashboard`}>
