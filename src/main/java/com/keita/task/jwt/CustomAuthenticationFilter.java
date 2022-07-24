@@ -2,12 +2,14 @@ package com.keita.task.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.keita.task.error_handler.BlankCredentialInput;
 import lombok.extern.slf4j.Slf4j;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.keita.task.auth.UserAuthDetail;
 import com.keita.task.config.JwtConfig;
 import com.keita.task.model.Authenticate;
 import com.keita.task.util.Util;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,13 +44,19 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         try {
             Authenticate authenticationInput = new ObjectMapper()
                     .readValue(request.getInputStream(), Authenticate.class);
-            System.out.println("Username " + authenticationInput.getEmail());
             Authentication authentication = new UsernamePasswordAuthenticationToken(authenticationInput.getEmail(), authenticationInput.getPassword());
-
+            if (authenticationInput.getEmail().isEmpty() || authenticationInput.getPassword().isEmpty()) {
+                throw new BlankCredentialInput(authenticationInput, HttpStatus.NOT_ACCEPTABLE, response);
+            }
             return authenticationManager.authenticate(authentication);
         }catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new BlankCredentialInput("You have entered an invalid username or password", HttpStatus.BAD_REQUEST, response);
         }
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        throw new BlankCredentialInput("You have entered an invalid username or password", HttpStatus.BAD_REQUEST, response);
     }
 
     @Override

@@ -58,6 +58,17 @@ input:-webkit-autofill {
   }
 }
 
+.error {
+  border: 1px solid #FF5F00 !important;
+}
+
+.error_message {
+  font-size: 16px;
+  color: #FF5F00;
+  text-align: center;
+  width: 100%;
+}
+
 .successfully {
   text-align: center;
   padding-bottom: 10px !important;

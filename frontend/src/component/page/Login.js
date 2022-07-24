@@ -28,7 +28,11 @@ const Login = () => {
         email: '',
         password: ''
     })
-    const [credError, setCredError] = useState({})
+    const [credError, setCredError] = useState({
+        email: '',
+        password: '',
+        message: ''
+    })
     const [conformPassword, setConformPassword] = useState({
         conformPassword: '',
         error: '',
@@ -37,8 +41,13 @@ const Login = () => {
     const [accountCreated, setAccountCreated] = useState({})
 
     const setLoginCredential = userCredential => {
-        authCtx.setUserCredential(userCredential)
-        navigate('/dashboard')
+        console.log(userCredential)
+        if (userCredential.code === '406' || userCredential.code === '400') {
+            setError(userCredential)
+        } else {
+            authCtx.setUserCredential(userCredential)
+            navigate('/dashboard')
+        }
     }
 
     const sendRegistrationCredential = message => {
@@ -46,7 +55,19 @@ const Login = () => {
     }
 
     const setError = error => {
-        setCredError(error.response.data)
+        const {email, password} = error
+        if (error.response) {
+            setCredError({
+                ...error,
+                message: error.response.data.message
+            })
+        } else {
+            setCredError({
+                ...error,
+                email,
+                password,
+            })
+        }
     }
 
     const passwordValidation = () => {
@@ -181,20 +202,24 @@ const Login = () => {
                                         <p>Email</p>
                                         <input type="email"
                                                name="email"
+                                               className={credError.email ? 'error' : ''}
                                                onChange={onChangeLogin}
-                                               placeholder='Email'
+                                               placeholder={credError.email ? credError.email : 'Email'}
                                         />
                                     </div>
                                     <div className="formGroup">
                                         <p>Password</p>
                                         <input type="password"
                                                name="password"
+                                               className={credError.password ? 'error' : ''}
                                                onChange={onChangeLogin}
-                                               placeholder='Password'
+                                               placeholder={credError.password ? credError.password : 'Password'}
                                         />
                                     </div>
                                     <div className="formGroup">
-                                        <p className="inputError p20 textC">{credError.message}</p>
+                                        {
+                                            credError.message !== '' ? <p className='inputError error_message'>{credError.message}</p> : ''
+                                        }
                                     </div>
                                     <div className="formGroup">
                                         <input type="submit"
@@ -264,14 +289,6 @@ const Login = () => {
                                                placeholder= {conformPassword.error ?
                                                    conformPassword.error : 'Conform Password'}
                                         />
-                                    </div>
-                                    <div className="formGroup">
-                                        {/*{*/}
-                                        {/*    conformPassword.passwordMissMatch && (<p className="inputError p10">{conformPassword.passwordMissMatch}</p>)*/}
-                                        {/*}*/}
-                                        {
-                                            (<p className='message successfully'>{accountCreated.message}</p>)
-                                        }
                                     </div>
                                     <div className="formGroup">
                                         <input type="submit"
