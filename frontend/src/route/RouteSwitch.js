@@ -24,7 +24,8 @@ const RouteSwitch = () => {
     }
 
     const getCookie = () => {
-        const cookie = ('; '+document.cookie).split(`; taskRefreshToken=`).pop().split(';')[0];
+        const cookie = ('; ' + document.cookie).split(`; taskRefreshToken=`).pop().split(';')[0];
+        console.log(cookie)
         windowRefresh(cookie)
         return !!cookie
     }
