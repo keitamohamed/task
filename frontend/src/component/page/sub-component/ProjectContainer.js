@@ -10,7 +10,7 @@ const ProjectContainer = ({projects, selectedProject, deleteProject, setProjectT
         projects.map((project, index) => {
             return (
                 <div className="projectContent"
-                     key={index}>
+                     key={`${project.identifier}_${index}`}>
                     <div className="contentLeft">
                         <p>{project.identifier}</p>
                     </div>
