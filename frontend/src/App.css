@@ -815,18 +815,17 @@
     background: #F5F5F5;
   }
 
+  .login .positionLeft {
+    height: fit-content;
+    padding-bottom: 10px;
+    background: url("./assert/image/login_s.png") no-repeat center;
+  }
   .login .positionLeft .content {
+    margin-top: 3em;
     width: 80% !important;
   }
 }
 @media screen and (max-width: 800px) {
-  .main .positionLeft {
-    height: fit-content;
-    padding-bottom: 10px;
-  }
-  .main .positionLeft .content {
-    margin-top: 3em;
-  }
   .main .positionRight .content .form {
     width: 95% !important;
   }
@@ -996,7 +995,7 @@
   }
 }
 @media screen and (max-width: 575px) {
-  .appHeader a, .appHeader li {
+  .header a, .header li {
     margin-left: 0.6em;
     font-size: 1.1em;
     cursor: pointer;
@@ -1052,13 +1051,6 @@
   }
   .login .main .positionLeft, .login .main .positionRight {
     height: 100%;
-  }
-  .login .main .positionLeft {
-    height: fit-content;
-    padding-bottom: 10px;
-  }
-  .login .main .positionLeft .content {
-    margin-top: 3em;
   }
   .login .main .positionRight {
     padding-top: 2.5em;

@@ -23,10 +23,12 @@ const Project = () => {
     const notification = useContext(NotificationContext)
 
     const setProductTask = (response) => {
+        console.log("Task", response)
         dispatch(taskAction.loadTask(response))
     }
 
     const setErrorMessage = (error) => {
+        console.log("Task error", error)
         dispatch(taskAction.setError(error))
     }
 
@@ -35,15 +37,18 @@ const Project = () => {
     }
 
     const setProject = (response) => {
+        console.log("Project", response)
         dispatch(projectAction.selectedProject(response))
     }
 
     const setError = (error) => {
+        console.log("Project error", error)
         dispatch(projectAction.setError(error))
     }
 
     const setProjectAndTasks = (identifier) => {
         const {accessToken} = authCtx.cookie
+        console.log("cookie", accessToken)
         dispatch(GET_REQUEST(`project/find-by-identifier/${identifier}`, setProject, setError, accessToken))
         dispatch(GET_REQUEST(`project/project-task/${identifier}`, setProductTask, setErrorMessage, accessToken))
     }
@@ -72,7 +77,7 @@ const Project = () => {
     useEffect(() => {
         const {userID, accessToken} = authCtx.cookie
         if (!isLoaded) {
-            dispatch(GET_REQUEST(`user/${userID}/projects`, userID, setProjects, setError, accessToken))
+            // dispatch(GET_REQUEST(`user/${userID}/projects`, setProjects, setError, accessToken))
             isLoaded = true
         }
         if (messageNotification === null) {
@@ -97,7 +102,7 @@ const Project = () => {
                 </div>
                 <div className="projectsContainer">
                     {
-                        projects.length > 0 ?
+                        projects?.length !== 0 ?
                         <DisplayProject
                         projects={projects}
                         numberOfPost={2}

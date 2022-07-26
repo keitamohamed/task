@@ -42,7 +42,7 @@ const Form = ({isNewProject, title, submitBtnText, submit, change, projectDate})
                                    onChange={onChange}
                                    placeholder={'Enter form identifier'}
                             />
-                            {error && error.identifier && (<p className='inputError'>{error.identifier}</p>)}
+                            {error && error.identifier !== '' && (<p className='inputError'>{error.identifier}</p>)}
                         </div>
                     ): ''
                 }

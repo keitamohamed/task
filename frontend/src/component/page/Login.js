@@ -41,7 +41,6 @@ const Login = () => {
     const [accountCreated, setAccountCreated] = useState({})
 
     const setLoginCredential = userCredential => {
-        console.log(userCredential)
         if (userCredential.code === '406' || userCredential.code === '400') {
             setError(userCredential)
         } else {

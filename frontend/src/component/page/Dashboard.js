@@ -34,7 +34,6 @@ const Dashboard = () => {
     }
 
     const setCustomError = () => {
-
     }
 
     const toggleMenu = (openMenu, closeMenu) => {

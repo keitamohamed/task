@@ -20,7 +20,7 @@ const usePaginate = (post, numberPostPerPage) => {
 const usePost = (currentPage, postPerPage, post) => {
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const currentPosts = post.slice(indexOfFirstPost, indexOfLastPost)
+    const currentPosts = post?.slice(indexOfFirstPost, indexOfLastPost)
 
     return {currentPosts}
 }
