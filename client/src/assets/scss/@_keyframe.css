@@ -1,0 +1,100 @@
+@keyframes menu_open {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateX(150%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0%);
+  }
+}
+@keyframes menu_closing {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(150%);
+  }
+}
+@keyframes dropdown_open {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateX(150%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0%);
+  }
+}
+@keyframes dropdown_closing {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(150%);
+  }
+}
+@-webkit-keyframes model {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes model {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes notification_open {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateX(150%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0%);
+  }
+}
+@keyframes notification_closing {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(150%);
+  }
+}
+@keyframes form_open {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes form_closing {
+  0% {
+    transform: scale(0.5) translateY(0);
+  }
+  100% {
+    transform: scale(0) translateY(150%);
+  }
+}
+
+/*# sourceMappingURL=@_keyframe.css.map */

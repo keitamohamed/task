@@ -1,0 +1,317 @@
+@import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
+@media screen and (min-width: 800px) {
+  .smallDevices {
+    display: none;
+  }
+
+  .largeDevices {
+    display: inline-block;
+  }
+}
+@media screen and (max-width: 900px) {
+  .home .mainContainer .positionLeft {
+    width: 40vw;
+  }
+
+  .formContainer .formGroup {
+    width: 90% !important;
+  }
+}
+@media screen and (max-width: 880px) {
+  .project .mainContainer {
+    width: 95%;
+  }
+  .project .mainContainer .paginationWrapper {
+    width: 60%;
+  }
+  .project .mainContainer .projectContent {
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-areas: "left left right right right right right right right" "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
+    background: rgba(247, 247, 247, 0.1);
+    border-color: #E1E5EA;
+  }
+  .project .mainContainer .projectContent .contentLeft {
+    grid-area: left;
+  }
+  .project .mainContainer .projectContent .contentMiddle {
+    grid-area: right;
+  }
+  .project .mainContainer .projectContent .contentMiddle .projectDate {
+    padding: 15px 0;
+    position: static;
+  }
+  .project .mainContainer .projectContent .contentRight {
+    width: 80%;
+    grid-area: bottom;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.3em;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .project .mainContainer .projectContent .contentRight a {
+    border-color: #E1E5EA;
+  }
+  .project .mainContainer .projectContent .contentRight a:hover {
+    border: 1px solid #F5F5F5;
+    background: #F5F5F5;
+  }
+
+  .login .positionLeft {
+    background: url("./assets/image/login_s.png") !important;
+  }
+  .login .positionLeft .content {
+    width: 80% !important;
+  }
+}
+@media screen and (max-width: 800px) {
+  .main .positionLeft {
+    height: fit-content;
+    padding-bottom: 10px;
+  }
+  .main .positionLeft .content {
+    margin-top: 3em;
+  }
+  .main .positionRight .content .form {
+    width: 95% !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "sidebar sidebar sidebar" "mainContent mainContent mainContent";
+  }
+
+  .project .mainContainer {
+    width: 100%;
+    height: 70%;
+    padding: 0 15px;
+  }
+  .project .mainContainer .contentButtonContainerPlus {
+    border-color: #F5F5F5;
+    height: fit-content;
+    padding: 0;
+  }
+  .project .mainContainer .contentButtonContainerPlus svg {
+    font-size: 2.5em;
+  }
+  .project .mainContainer .contentButtonContainerPlus span {
+    font-size: 0.8em;
+  }
+  .project .mainContainer .contentPaginate {
+    overflow: scroll;
+  }
+  .project .mainContainer .contentPaginate .paginateDataWrapper {
+    overflow: hidden;
+  }
+  .project .mainContainer .projectContent .contentRight {
+    width: 100%;
+    grid-gap: 0.2em;
+  }
+  .project .mainContainer .projectContent .contentRight * {
+    font-size: 1em;
+  }
+  .project .mainContainer .projectContent .contentRight a {
+    padding-left: 2em;
+  }
+  .project .mainContainer .projectContent .contentRight a svg {
+    font-size: 1.2em;
+  }
+  .project .mainContainer .projectContent .contentRight .largeDevices {
+    display: none;
+  }
+  .project .mainContainer .projectContent .contentRight .smallDevices {
+    display: inline-block;
+  }
+  .project .mainContainer .paginationWrapper {
+    width: 90%;
+  }
+
+  .dashboard .logoContainer {
+    border: none !important;
+  }
+  .dashboard .sidebar .sidebarNav .largeDevices {
+    display: none;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: #161A23;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown {
+    width: 100%;
+    place-items: end;
+    position: relative;
+    display: inline-block;
+    background: inherit;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown .icons, .dashboard .sidebar .sidebarNav .smallDevices .dropdown .dropdownContent {
+    width: fit-content;
+    float: right;
+    background: inherit;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown .icons {
+    cursor: default;
+    width: 20%;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown svg {
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown .dropdownContent {
+    border: none;
+    position: absolute;
+    right: 0;
+    margin-top: 2.5em;
+    width: 60%;
+    padding: 10px 0;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown .dropdownContent ul {
+    grid-gap: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown .dropdownContent ul li {
+    width: 100%;
+    padding-left: 15px;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown .dropdownContent ul li:hover {
+    background: #F5F5F5;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdown .dropdownContent ul li:hover a {
+    color: #000;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .closeMenu, .dashboard .sidebar .sidebarNav .smallDevices .closeMenu, .dashboard .sidebar .sidebarNav .smallDevices .dropdownContent {
+    display: none;
+    opacity: 0;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .openMenu[open] {
+    display: block;
+    animation: menu_open 0.2s ease 0.5s forwards;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .closeMenu[open] {
+    display: block;
+    animation: menu_open 0.2s ease 0.5s forwards;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdownContent[open] {
+    display: block;
+    animation: dropdown_open 0.2s ease 0.5s forwards;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .openMenu[closing] {
+    display: block;
+    animation: menu_closing 0.2s ease 0.3s forwards;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .closeMenu[closing] {
+    display: block;
+    animation: menu_closing 0.2s ease 0.3s forwards;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdownContent[closing] {
+    display: block;
+    animation: dropdown_closing 0.2s ease 0.5s forwards;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .openMenu[closed] {
+    display: none;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .closeMenu[closed] {
+    display: none;
+  }
+  .dashboard .sidebar .sidebarNav .smallDevices .dropdownContent[closed] {
+    display: none;
+  }
+
+  .contentButtonContainerPlus {
+    padding: 1em 15px 10px;
+  }
+  .contentButtonContainerPlus li svg {
+    font-size: 40px;
+  }
+
+  .taskDueContainer .titleContainer h5 {
+    font-size: 1.2em !important;
+  }
+  .taskDueContainer .titleContainer i {
+    font-size: 1.2em !important;
+  }
+
+  .formContainer {
+    width: 80%;
+  }
+  .formContainer .formGroup {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 575px) {
+  .header a, .header li {
+    margin-left: 0.6em;
+    font-size: 1.1em;
+    cursor: pointer;
+  }
+
+  .paginationWrapper {
+    width: 80%;
+    border-radius: 20px;
+    padding: 5px 10px;
+  }
+
+  .home .mainContainer {
+    grid-template-columns: repeat(1, 1fr) !important;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .home .mainContainer .show_top {
+    width: 100%;
+    grid-template-columns: 9fr 2fr !important;
+  }
+  .home .mainContainer .positionLeft {
+    width: 100%;
+  }
+  .home .mainContainer .positionLeft nav li {
+    text-align: left !important;
+  }
+  .home .mainContainer .positionLeft .titleContainer h1 span {
+    color: #7F8487;
+  }
+
+  .project .paginationWrapper {
+    width: 90%;
+  }
+
+  .projectBoard .taskContainer nav {
+    display: none !important;
+  }
+  .projectBoard .taskContainer .task {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .dashboard .mainContent .contentButtonContainerPlus {
+    width: 95%;
+  }
+  .dashboard .mainContent .taskDueContainer {
+    width: 95%;
+  }
+
+  .login .main {
+    grid-template-columns: repeat(1, 1fr);
+    min-height: 100% !important;
+  }
+  .login .main .positionLeft, .login .main .positionRight {
+    height: 100%;
+  }
+  .login .main .positionLeft {
+    height: fit-content;
+    padding-bottom: 10px;
+  }
+  .login .main .positionLeft .content {
+    margin-top: 3em;
+  }
+  .login .main .positionRight {
+    padding-top: 2.5em;
+  }
+
+  .formContainer {
+    width: 100% !important;
+  }
+}
+
+/*# sourceMappingURL=@_responsive.css.map */
