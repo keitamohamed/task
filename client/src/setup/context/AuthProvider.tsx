@@ -1,37 +1,46 @@
 import {useCookies} from "react-cookie"
 import {AuthContext} from "./Context";
-import {Props} from "../../component/interface/interface"
+import {Props, CredentialsType} from "../../interface_type/interface"
 
 const {Provider} = AuthContext
 
-interface CookieProp {
-    cookie: [token: string, name: string, userID: number, email: string]
-}
-
-interface CredentialsType {
-    accessToken: string,
-    name: string,
-    userID: string,
-    email: string
-}
-export const AuthProvider = ({children}: Props) => {
+const AuthProvider = ({children}: Props) => {
 
     const [cookie, setCookie, removeCookie] = useCookies(
-        ['accessToken', 'name', 'userID', 'email'])
+        ['taskToken', 'name', 'userID', 'email'])
+
+
+    const getCookie = (): any => {
+        return cookie
+    }
     
     const setCredentials = (credentials: CredentialsType) => {
-        setCookie('accessToken', credentials.accessToken)
-        setCookie('name', credentials.name)
-        setCookie('userID', credentials.userID)
+        setCookie('taskToken', credentials.taskAccessToken)
         setCookie('email', credentials.email)
+    }
+    
+    const setUserNameID = (data: {userID: string, name: string}): void => {
+        setCookie('userID', data.userID)
+        setCookie('name', data.name)
+    }
+
+    const logout = (): void => {
+        const removeCredential = ['taskToken', 'name', 'userID', 'email']
+        // @ts-ignore
+        removeCredential.forEach(name => removeCookie(name))
     }
 
     return (
         <Provider value={{
-            cookie,
+            getCookie,
+            setCredentials,
+            setUserNameID,
+            logout
         }}>
             {children}
         </Provider>
     )
 
 }
+
+export default AuthProvider

@@ -1,7 +1,7 @@
 
 interface Props {
-    width: string,
-    color: string | null;
+    width: string | undefined,
+    color: string | undefined;
 }
 
 const Logo = (props: Props) => {

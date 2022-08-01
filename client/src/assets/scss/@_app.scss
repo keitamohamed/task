@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import "@_variable";
 
 .notification {
@@ -142,8 +145,10 @@
     .linkContainer {
       display: inline-block;
       text-align: right;
-      width: 100%;
-      padding: 0 1.5em 0 15px;
+      width: fit-content;
+      right: 0;
+      position: absolute;
+      padding-right: 2em;
     }
   }
 
@@ -153,7 +158,7 @@
     text-underline: none;
     color: inherit;
     margin-left: .5em;
-    font-size: 1.3em;
+    font-size: 18px;
     cursor: pointer;
 
     &:hover {
@@ -650,97 +655,97 @@
   min-height: 100vh;
 
   .mainContainer {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
-    padding: 15px;
+    padding: 15px 0;
 
-    .projectContent {
-      display: grid;
-      grid-template-columns: 2fr 7fr 3fr;
-      border: 1px solid #aeaeae;
-      border-radius: 5px;
-      margin-bottom: .5em;
-      grid-gap: .5em;
-      background: #fdfdfd;
-      padding: 1em 15px 15px;
-      margin-top: 1em;
-
-      .contentLeft {
-        p {
-          font-size: 1.2em;
-          font-weight: bold;
-          text-align: left;
-        }
-      }
-
-      .contentMiddle {
-        text-align: left;
-        position: relative;
-
-        * {
-          text-align: left;
-        }
-
-        h2 {
-          margin-bottom: .5em;
-        }
-
-        p {
-          font-size: 1.1em;
-        }
-
-        .projectDate {
-          bottom: 0;
-          position: absolute
-        }
-      }
-
-      .contentRight {
-        display: grid;
-        grid-gap: .3em;
-        background: white;
-
-        * {
-          list-style: none
-        }
-
-        a, li {
-          cursor: pointer;
-          border: .05em solid #c4c4c4;
-          padding: 8px 10px;
-          text-align: left;
-          border-radius: 5px;
-          display: block;
-
-          &:hover {
-            background: #EEEEEE;
-          }
-
-          svg {
-            font-size: 1.6em;
-          }
-
-          span {
-            margin-top: .2em;
-            position: absolute;
-            margin-left: .5em;
-          }
-
-
-          &:first-child {
-            color: #0093AB;
-          }
-
-          &:nth-child(2) {
-            color: #019267;
-          }
-
-          &:last-child {
-            color: #E83A14;
-          }
-        }
-      }
-    }
+    //.projectContent {
+    //  display: grid;
+    //  grid-template-columns: 2fr 7fr 3fr;
+    //  border: 1px solid #aeaeae;
+    //  border-radius: 5px;
+    //  margin-bottom: .5em;
+    //  grid-gap: .5em;
+    //  background: #fdfdfd;
+    //  padding: 1em 15px 15px;
+    //  margin-top: 1em;
+    //
+    //  .contentLeft {
+    //    p {
+    //      font-size: 1.2em;
+    //      font-weight: bold;
+    //      text-align: left;
+    //    }
+    //  }
+    //
+    //  .contentMiddle {
+    //    text-align: left;
+    //    position: relative;
+    //
+    //    * {
+    //      text-align: left;
+    //    }
+    //
+    //    h2 {
+    //      margin-bottom: .5em;
+    //    }
+    //
+    //    p {
+    //      font-size: 1.1em;
+    //    }
+    //
+    //    .projectDate {
+    //      bottom: 0;
+    //      position: absolute
+    //    }
+    //  }
+    //
+    //  .contentRight {
+    //    display: grid;
+    //    grid-gap: .3em;
+    //    background: white;
+    //
+    //    * {
+    //      list-style: none
+    //    }
+    //
+    //    a, li {
+    //      cursor: pointer;
+    //      border: .05em solid #c4c4c4;
+    //      padding: 8px 10px;
+    //      text-align: left;
+    //      border-radius: 5px;
+    //      display: block;
+    //
+    //      &:hover {
+    //        background: #EEEEEE;
+    //      }
+    //
+    //      svg {
+    //        font-size: 1.6em;
+    //      }
+    //
+    //      span {
+    //        margin-top: .2em;
+    //        position: absolute;
+    //        margin-left: .5em;
+    //      }
+    //
+    //
+    //      &:first-child {
+    //        color: #0093AB;
+    //      }
+    //
+    //      &:nth-child(2) {
+    //        color: #019267;
+    //      }
+    //
+    //      &:last-child {
+    //        color: #E83A14;
+    //      }
+    //    }
+    //  }
+    //}
   }
 }
 

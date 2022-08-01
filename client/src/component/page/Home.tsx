@@ -13,15 +13,15 @@ export const Home = () => {
     const init = () => {
         const titles = getElement('carouselTitle')
         titles?.forEach((element, index) => {
-            element.addEventListener('mouseover', e => {
+            element.addEventListener('mouseover', () => {
                 // @ts-ignore
                 element.style.borderBottom = '1px solid red'
             })
-            element.addEventListener('mouseleave', evt => {
+            element.addEventListener('mouseleave', () => {
                 // @ts-ignore
                 element.style.borderBottom = 'none'
             })
-            element.addEventListener('click', evt => {
+            element.addEventListener('click', () => {
                 titles.forEach(removeActive => {
                     removeActive.classList.remove('active')
                 })
@@ -53,7 +53,7 @@ export const Home = () => {
 
     return (
         <div className="home">
-            <Header width={'40%'} color={null}  />
+            <Header width={'40%'} color={undefined}  />
             <div className="mainContainer">
                 <div className="show_top">
                     <div className="positionLeft">
@@ -94,7 +94,7 @@ export const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="positionRight"></div>
+                    <div className="positionRight"/>
                 </div>
             </div>
             <div className="containerPosition">

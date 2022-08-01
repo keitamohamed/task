@@ -1,5 +1,5 @@
 import axios from "axios";
-import {InitialState} from "../component/interface/interface";
+import {InitialState} from "../interface_type/interface";
 
 export const POST_REQUEST = (
     url: string,
@@ -42,7 +42,7 @@ export const GET_REQUEST = (
         const fetch = async () => {
             return axios({
                 method: "GET",
-                url: `/keita${url}`,
+                url: `task/${url}`,
                 withCredentials: true,
                 headers: {
                     Authorization: token ? `Bearer ${token}` : 'Bearer',
@@ -54,6 +54,34 @@ export const GET_REQUEST = (
         try {
             const response = await fetch();
             action(response.data)
+        } catch (error) {
+            setError(error.response.data)
+        }
+    }
+}
+export const DELETE_REQUEST = (
+    token: string,
+    url: string,
+    deleteAction: (data: object) => void,
+    setError: (error: any) => void,
+    ) => {
+
+    return async () => {
+        const sendRequest = async () => {
+            return axios({
+                method: "DELETE",
+                url: `task/${url}`,
+                withCredentials: true,
+                headers: {
+                    Authorization: token ? `Bearer ${token}` : 'Bearer',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            })
+        }
+
+        try {
+            const response = await sendRequest();
+            deleteAction(response.data)
         } catch (error) {
             setError(error.response.data)
         }

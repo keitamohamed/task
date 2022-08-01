@@ -7,6 +7,7 @@ html {
 }
 
 * {
+  font-family: $font_family_roboto;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -125,26 +126,31 @@ select {
 
 .contentButtonContainerPlus {
   grid-area: btnContainer;
-  padding: 3em 15px 10px;
+  padding: 1em 15px 10px;
   width: 80%;
   border-bottom: 1px solid #bebebe;
   text-align: left;
   margin: 0 auto auto;
 
   li {
+    //position: relative;
     list-style: none;
     width: fit-content;
 
     svg {
       border: 3px dotted;
       border-radius: 10px;
-      font-size: 60px;
+      font-size: 50px;
       cursor: pointer;
-      margin-bottom: .1em;
+      //margin-bottom: .1em;
     }
 
     span {
-      padding-top: 10px;
+      position: absolute;
+      margin-top: -15px;
+      margin-left: -25px;
+
+      //padding-top: 10px;
     }
   }
 }
@@ -157,13 +163,13 @@ select {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 30%;
-  margin: 2em auto 0;
+  //margin: 2em auto 0;
   justify-content: center;
   align-items: center;
   text-align: center;
   border: 1px solid $border_color;
-  border-radius: 30px;
-  padding: 10px 15px;
+  //border-radius: 30px;
+  //padding: 10px 15px;
 
   .paginationBtnContainer {
     width: 40px;

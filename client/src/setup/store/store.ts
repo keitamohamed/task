@@ -2,9 +2,11 @@ import {configureStore, combineReducers, AnyAction} from "@reduxjs/toolkit"
 import thunk from "redux-thunk";
 
 import projectSlice from "../slice/project";
+import taskSlice from "../slice/task";
 
 const reducers = combineReducers({
-    project: projectSlice.reducer
+    project: projectSlice.reducer,
+    task: taskSlice.reducer
 })
 
 const rootReducer = (state: any, action: AnyAction) => {

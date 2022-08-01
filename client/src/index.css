@@ -98,6 +98,9 @@
     transform: scale(0) translateY(150%);
   }
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 .notification {
   border: 1px solid #cbcbcb;
   padding: 15px 15px;
@@ -229,8 +232,10 @@
 .header nav .linkContainer {
   display: inline-block;
   text-align: right;
-  width: 100%;
-  padding: 0 1.5em 0 15px;
+  width: fit-content;
+  right: 0;
+  position: absolute;
+  padding-right: 2em;
 }
 .header a, .header li {
   display: inline-block;
@@ -238,7 +243,7 @@
   text-underline: none;
   color: inherit;
   margin-left: 0.5em;
-  font-size: 1.3em;
+  font-size: 18px;
   cursor: pointer;
 }
 .header a:hover, .header li:hover {
@@ -645,78 +650,9 @@
   min-height: 100vh;
 }
 .project .mainContainer {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
-  padding: 15px;
-}
-.project .mainContainer .projectContent {
-  display: grid;
-  grid-template-columns: 2fr 7fr 3fr;
-  border: 1px solid #aeaeae;
-  border-radius: 5px;
-  margin-bottom: 0.5em;
-  grid-gap: 0.5em;
-  background: #fdfdfd;
-  padding: 1em 15px 15px;
-  margin-top: 1em;
-}
-.project .mainContainer .projectContent .contentLeft p {
-  font-size: 1.2em;
-  font-weight: bold;
-  text-align: left;
-}
-.project .mainContainer .projectContent .contentMiddle {
-  text-align: left;
-  position: relative;
-}
-.project .mainContainer .projectContent .contentMiddle * {
-  text-align: left;
-}
-.project .mainContainer .projectContent .contentMiddle h2 {
-  margin-bottom: 0.5em;
-}
-.project .mainContainer .projectContent .contentMiddle p {
-  font-size: 1.1em;
-}
-.project .mainContainer .projectContent .contentMiddle .projectDate {
-  bottom: 0;
-  position: absolute;
-}
-.project .mainContainer .projectContent .contentRight {
-  display: grid;
-  grid-gap: 0.3em;
-  background: white;
-}
-.project .mainContainer .projectContent .contentRight * {
-  list-style: none;
-}
-.project .mainContainer .projectContent .contentRight a, .project .mainContainer .projectContent .contentRight li {
-  cursor: pointer;
-  border: 0.05em solid #c4c4c4;
-  padding: 8px 10px;
-  text-align: left;
-  border-radius: 5px;
-  display: block;
-}
-.project .mainContainer .projectContent .contentRight a:hover, .project .mainContainer .projectContent .contentRight li:hover {
-  background: #EEEEEE;
-}
-.project .mainContainer .projectContent .contentRight a svg, .project .mainContainer .projectContent .contentRight li svg {
-  font-size: 1.6em;
-}
-.project .mainContainer .projectContent .contentRight a span, .project .mainContainer .projectContent .contentRight li span {
-  margin-top: 0.2em;
-  position: absolute;
-  margin-left: 0.5em;
-}
-.project .mainContainer .projectContent .contentRight a:first-child, .project .mainContainer .projectContent .contentRight li:first-child {
-  color: #0093AB;
-}
-.project .mainContainer .projectContent .contentRight a:nth-child(2), .project .mainContainer .projectContent .contentRight li:nth-child(2) {
-  color: #019267;
-}
-.project .mainContainer .projectContent .contentRight a:last-child, .project .mainContainer .projectContent .contentRight li:last-child {
-  color: #E83A14;
+  padding: 15px 0;
 }
 
 .projectBoard {
@@ -1172,6 +1108,7 @@ html {
 }
 
 * {
+  font-family: "Roboto", sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -1287,7 +1224,7 @@ select option {
 
 .contentButtonContainerPlus {
   grid-area: btnContainer;
-  padding: 3em 15px 10px;
+  padding: 1em 15px 10px;
   width: 80%;
   border-bottom: 1px solid #bebebe;
   text-align: left;
@@ -1300,12 +1237,13 @@ select option {
 .contentButtonContainerPlus li svg {
   border: 3px dotted;
   border-radius: 10px;
-  font-size: 60px;
+  font-size: 50px;
   cursor: pointer;
-  margin-bottom: 0.1em;
 }
 .contentButtonContainerPlus li span {
-  padding-top: 10px;
+  position: absolute;
+  margin-top: -15px;
+  margin-left: -25px;
 }
 
 .loading {
@@ -1316,13 +1254,10 @@ select option {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 30%;
-  margin: 2em auto 0;
   justify-content: center;
   align-items: center;
   text-align: center;
   border: 1px solid #E1E5EA;
-  border-radius: 30px;
-  padding: 10px 15px;
 }
 .paginationWrapper .paginationBtnContainer {
   width: 40px;

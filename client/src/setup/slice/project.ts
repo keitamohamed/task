@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {InitialState} from "../../component/interface/interface";
+import {InitialState} from "../../interface_type/interface";
 
 const setProject: InitialState['project'] = {
     name: '',

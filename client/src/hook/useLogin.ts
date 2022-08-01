@@ -1,16 +1,16 @@
 import {ChangeEvent, useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {useAppDispatch, useAppSelector} from "../setup/store/ReduxHook";
-import {POST_REQUEST} from "../api/Request";
-import {CredentialsType, CredError, Login} from "../component/interface/interface";
+import {useAppDispatch} from "../setup/store/ReduxHook";
+import {POST_REQUEST, GET_REQUEST} from "../api/Request";
+import {CredentialsType, CredError, Login} from "../interface_type/interface"
 import {AuthContext} from "../setup/context/Context";
+import {ApiPath} from "../api/URLPath";
 
 let loginForm: Element | null
 let signupForm: Element | null
 
 export const useLogin = () => {
-
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const authCtx = useContext(AuthContext)
@@ -47,13 +47,25 @@ export const useLogin = () => {
         passwordMissMatch: ''
     })
 
-    const setLoginCredential = (userCredential: CredentialsType) => {
+    const setLoginCredential = async (userCredential: CredentialsType) => {
         if (userCredential.code === '406' || userCredential.code === '400') {
             setError(userCredential)
         } else {
-            // authCtx.setUserCredential(userCredential)
+            authCtx.setCredentials(userCredential)
+            // setUserNameID(userCredential)
+            // @ts-ignore
+            await dispatch(GET_REQUEST(userCredential.taskAccessToken,`${ApiPath.GET_CUSTOM_DATA}/${userCredential.email}`, setCustomDate, setError))
             navigate('/dashboard')
         }
+    }
+    
+    const setCustomDate = (customData: {userID: string, name: string}) => {
+        authCtx.setUserNameID(customData)
+    }
+    
+    const setUserNameID = (userCredential: CredentialsType) => {
+        // @ts-ignore
+        dispatch(GET_REQUEST(userCredential.taskAccessToken,`${ApiPath.GET_CUSTOM_DATA}/${userCredential.email}`, setCustomDate, setError))
     }
 
     const sendRegistrationCredential = (message: string) => {
@@ -62,7 +74,7 @@ export const useLogin = () => {
     }
 
     const setError = (error: any) => {
-        const {email, password, message, code} = error
+        const {email, password, code} = error
         if (code === '406' && email) {
             setLoginError({
                 ...loginError,
@@ -172,7 +184,7 @@ export const useLogin = () => {
     const onSubmitLogin = async (event: any) => {
         event.preventDefault()
         // @ts-ignore
-        dispatch(POST_REQUEST("login", login, setLoginCredential, setError, null))
+        dispatch(POST_REQUEST(ApiPath.LOGIN, login, setLoginCredential, setError, null))
     }
 
     const onSubmitRegister = (event: any) => {
@@ -185,7 +197,7 @@ export const useLogin = () => {
             return
         }
         // @ts-ignore
-        dispatch(POST_REQUEST(`user/register`, register, sendRegistrationCredential, setRegistrationError, null))
+        dispatch(POST_REQUEST(ApiPath.REGISTER, register, sendRegistrationCredential, setRegistrationError, null))
     }
 
     useEffect(() => {
