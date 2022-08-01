@@ -3,6 +3,7 @@ package com.keita.task;
 import com.keita.task.auth.UserAuthDetailsService;
 import com.keita.task.config.JwtConfig;
 import com.keita.task.jwt.CustomAuthenticationFilter;
+import com.keita.task.jwt.JWTToken;
 import com.keita.task.jwt.JwtCustomAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final JwtConfig jwtConfig;
     private final UserAuthDetailsService authDetailsService;
+    private final JWTToken jwtToken;
 
     private static final String[] PUBLIC_ACCESS = {
             "/",
@@ -41,9 +43,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             "/task/user/**"
     };
 
-    public WebSecurity(UserAuthDetailsService authDetailsService, JwtConfig jwtConfig) {
+    public WebSecurity(UserAuthDetailsService authDetailsService, JwtConfig jwtConfig, JWTToken jwtToken) {
         this.jwtConfig = jwtConfig;
         this.authDetailsService = authDetailsService;
+        this.jwtToken = jwtToken;
     }
 
     @Bean
@@ -58,7 +61,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(jwtConfig, authenticationManagerBean());
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(jwtConfig, authenticationManagerBean(), jwtToken);
         customAuthenticationFilter.setFilterProcessesUrl("/task/login");
         http
                 .csrf()
@@ -70,7 +73,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(USER_ACCESS).hasAnyAuthority("ROLE_USER")
                 .and()
                 .addFilter(customAuthenticationFilter)
-                .addFilterBefore(new JwtCustomAuthorizationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtCustomAuthorizationFilter(jwtConfig, jwtToken), UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
                 .disable();
     }

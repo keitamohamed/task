@@ -152,7 +152,7 @@
 .home {
   background: #f3f3fa;
   min-height: 100vh;
-  background: url("./../public/image/home-bg.png") no-repeat center center fixed;
+  background: url("../public/image/home-bg.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -818,7 +818,7 @@
   .login .positionLeft {
     height: fit-content;
     padding-bottom: 10px;
-    background: url("./assert/image/login_s.png") no-repeat center;
+    background: url("../public/image/login_s.png") no-repeat center;
   }
   .login .positionLeft .content {
     margin-top: 3em;

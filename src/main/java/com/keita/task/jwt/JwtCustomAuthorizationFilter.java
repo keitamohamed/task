@@ -33,18 +33,19 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class JwtCustomAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtConfig jwtConfig;
+    private final JWTToken jwtToken;
 
     @Autowired
-    public JwtCustomAuthorizationFilter(JwtConfig jwtConfig) {
+    public JwtCustomAuthorizationFilter(JwtConfig jwtConfig, JWTToken jwtToken) {
         this.jwtConfig = jwtConfig;
+        this.jwtToken = jwtToken;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String jwt = jwtToken.getJwtRefreshToken("taskAccessToken", request);
 
-        String jwt = getJwtFormRequest(request);
-
-        if (StringUtils.hasText(jwt) && getDecodedJWT(jwt, response) != null) {
+        if (StringUtils.hasText(jwt) && doesRequestHeaderExist(request) && getDecodedJWT(jwt, response) != null) {
             DecodedJWT decodedJWT = getDecodedJWT(jwt, response);
             assert decodedJWT != null;
             String username = decodedJWT.getSubject();
@@ -75,11 +76,7 @@ public class JwtCustomAuthorizationFilter extends OncePerRequestFilter {
         return null;
     }
 
-    private String getJwtFormRequest(HttpServletRequest request) {
-        String authorization = request.getHeader(jwtConfig.authorizationHeader());
-        if (StringUtils.hasText(authorization) && authorization.startsWith(jwtConfig.getTokenPrefix() + " ")) {
-            return (authorization.replace(jwtConfig.getTokenPrefix(),"").replaceAll("\\s+", ""));
-        }
-        return null;
+    private boolean doesRequestHeaderExist(HttpServletRequest request) {
+        return StringUtils.hasText(request.getHeader(jwtConfig.authorizationHeader()));
     }
 }

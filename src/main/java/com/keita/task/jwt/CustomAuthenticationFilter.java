@@ -1,30 +1,28 @@
 package com.keita.task.jwt;
 
-import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.keita.task.error_handler.BlankCredentialInput;
+import com.keita.task.util.Util;
 import lombok.extern.slf4j.Slf4j;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.keita.task.auth.UserAuthDetail;
 import com.keita.task.config.JwtConfig;
 import com.keita.task.model.Authenticate;
-import com.keita.task.util.Util;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -33,10 +31,12 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     private final JwtConfig jwtConfig;
     private final AuthenticationManager authenticationManager;
+    private final JWTToken jwtToken;
 
-    public CustomAuthenticationFilter(JwtConfig jwtConfig, AuthenticationManager authenticationManager) {
+    public CustomAuthenticationFilter(JwtConfig jwtConfig, AuthenticationManager authenticationManager, JWTToken jwtToken) {
         this.jwtConfig = jwtConfig;
         this.authenticationManager = authenticationManager;
+        this.jwtToken = jwtToken;
     }
 
     @Override
@@ -63,25 +63,21 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         UserAuthDetail user = (UserAuthDetail) authResult.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256(jwtConfig.getSecurityKey().getBytes());
-        String accessToken = JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(Util.numberOfWeek(jwtConfig.getExpirationAfterDays()))
-                .withIssuer(request.getRequestURI())
-                .withClaim(
-                        "roles",
-                        user.getAuthorities()
-                                .stream()
-                                .map(GrantedAuthority::getAuthority)
-                                .collect(Collectors.toList())
-                )
-                .sign(algorithm);
+        String accessToken = jwtToken.getAccessToken(user.getUsername(), user.getAuthorities(), algorithm, request);
+        String refreshToken = jwtToken.getRefreshToken(user.getUsername(), algorithm, request);
+
         Map<String, String> token = new HashMap<>();
-        token.put("accessToken", accessToken);
+        token.put("taskAccessToken", accessToken);
         token.put("email", user.getUsername());
         user.getAuthorities()
-                .forEach(object -> {
-                    token.put(object.toString(), object.toString());
-                });
+                .forEach(object -> token.put(object.toString(), object.toString()));
+        token.put("taskRefreshToken", refreshToken);
+
+        Cookie cookie = jwtToken.getCookie(accessToken, "taskAccessToken", user.getUsername(), jwtConfig.getAccessTokenExpirationDateInt());
+        response.addCookie(cookie);
+//        cookie = jwtToken.getCookie(refreshToken, "taskRefreshToken", user.getUsername(), jwtConfig.getRefreshTokenExpirationDateInt());
+//        response.addCookie(cookie);
+
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper()
                 .writeValue(response.getOutputStream(), token);
