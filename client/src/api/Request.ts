@@ -81,6 +81,7 @@ export const DELETE_REQUEST = (
 
         try {
             const response = await sendRequest();
+            console.log(response.data)
             deleteAction(response.data)
         } catch (error) {
             setError(error.response.data)

@@ -21,6 +21,10 @@ const taskSlice = createSlice({
     name: 'task',
     initialState,
     reducers: {
+        newTask(state, action) {
+            const task = action.payload
+            state.task[task.name as keyof Object] = task.value
+        },
         loadTask(state, action) {
             state.tasks = action.payload
         },

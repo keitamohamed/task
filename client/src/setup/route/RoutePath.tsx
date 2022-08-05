@@ -28,7 +28,7 @@ export const routePath = [
     },
     {
         name: "Board",
-        path: `project/board:identifier`,
+        path: `project/board:id`,
         protected: true,
         showLink: false,
         component: Task

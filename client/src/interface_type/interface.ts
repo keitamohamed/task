@@ -9,7 +9,9 @@ export interface AuthContextProperty {
 
 export interface UIContextProps {
     getLogoProperties: () => any
-    setLogoProperties: (logoProperties: LogoProperty) => void
+    getModelProperty: () => any,
+    setLogoProperties: (logoProperties: LogoProperty) => void,
+    setModelProp: (isNewTask: boolean) => void
 }
 
 export interface NotificationProperty {
@@ -44,8 +46,8 @@ export interface TaskInitialState {
     },
     tasks: any[],
     taskDue: any[],
-    message: object,
-    error: object
+    message: any,
+    error: any
 }
 
 export interface CredentialsType {

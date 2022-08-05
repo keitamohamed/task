@@ -776,6 +776,36 @@
 .projectBoard .mainContainer li {
   list-style: none;
 }
+.projectBoard .tasks .custom_g_style {
+  padding: 0 5px;
+  border-color: #64748b;
+}
+.projectBoard .tasks .custom_g_style .title_container {
+  padding: 10px 0;
+  color: #FFF;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+.projectBoard .tasks .custom_g_style .title_container * {
+  font-size: 1.2em;
+}
+.projectBoard .tasks .custom_g_style .task {
+  border: 1px solid #64748b;
+}
+.projectBoard .tasks .custom_g_style .task * {
+  list-style: none;
+}
+.projectBoard .tasks .custom_g_style .task .actionBtn li {
+  cursor: pointer;
+}
+.projectBoard .tasks .title_container {
+  width: 100%;
+}
+.projectBoard .tasks .title_container h5 {
+  font-size: 1.3em;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+}
 
 .projectUpdate {
   min-height: 100vh;

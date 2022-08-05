@@ -890,6 +890,50 @@
       list-style: none;
     }
   }
+
+  .tasks {
+
+    .custom_g_style {
+      //border-right: 1px solid #64748b;
+      padding: 0 5px;
+      border-color: #64748b;
+
+      .title_container {
+        padding: 10px 0;
+        color: #FFF;
+        text-transform: uppercase;
+
+        * {
+          font-size: 1.2em;
+        }
+        margin-bottom: 1em;
+      }
+
+      .task {
+        border: 1px solid #64748b;
+
+        * {
+          list-style: none
+        }
+
+        .actionBtn {
+          li {
+            cursor: pointer
+          }
+        }
+      }
+    }
+
+    .title_container {
+      width: 100%;
+
+      h5 {
+        font-size: 1.3em;
+        font-family: $font_family_lato;
+        font-weight: 700;
+      }
+    }
+  }
 }
 
 .projectUpdate {

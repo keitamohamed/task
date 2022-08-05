@@ -14,7 +14,7 @@ export const useNotification = () => {
     const dispatch = useAppDispatch()
     const {message} = useAppSelector((state) => state.project)
     const {loadProjects} = useProject()
-    const {getNotificationsProperty, setNotificationMessage} = useContext(NotificationContext)
+    const {getNotificationsProperty, setNotificationMessage, hideNotificationTimeout} = useContext(NotificationContext)
 
     const notificationAction = () => {
         notificationMessage?.setAttribute('closing', '')
@@ -25,14 +25,20 @@ export const useNotification = () => {
         }, {once: true})
     }
 
+    const deleteAction = (data: {message: string, code: string, status: string}) => {
+        loadProjects()
+        setNotificationMessage(data.message!, true, false)
+    }
+
     const cancel = () => {
         notificationAction()
     }
 
-    const conform = () => {
+    const conform = async (response: any) => {
         const {identifier} = getNotificationsProperty()
         // @ts-ignore
-        dispatch(DELETE_REQUEST(null, ApiPath.DELETE_PROJECT(identifier), loadProjects, setErrorMessage))
+        await dispatch(DELETE_REQUEST(null, ApiPath.DELETE_PROJECT(identifier), deleteAction, setErrorMessage))
+        hideNotificationTimeout(5000)
     }
 
     const setErrorMessage = (error: any) => {

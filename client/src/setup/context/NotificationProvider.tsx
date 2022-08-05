@@ -4,6 +4,8 @@ import {NotificationStateProps, Props} from "../../interface_type/interface";
 
 const {Provider} = NotificationContext
 
+let messageNotification = null
+
 const NotificationProvider = ({children}: Props) => {
 
     const [notification, setNotification] = useState<NotificationStateProps>({

@@ -56,10 +56,10 @@ export const useProject = () => {
     const deleteProject = (identifier: string, notificationAction: () => void) => {
         setNotificationProperty({
             identifier: identifier,
-            message: "Delete Project",
+            message: `Are you sure you want to delete project ${identifier}?`,
             showBtn: true,
             showNotification: true,
-            title: `Are you sure you want to permanently delete project ${identifier}?`
+            title: `Delete Project`
         })
         notificationAction()
     }

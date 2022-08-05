@@ -14,7 +14,7 @@ interface PostProps {
 let notification: HTMLElement | null;
 
 export const Post = (props: PostProps) => {
-    const {findProjectByIdentifier, setProjectTasks, deleteProject} = useProject()
+    const {findProjectByIdentifier, deleteProject} = useProject()
     const {loadTask} = useTask()
 
     const showNotification = () => {
@@ -32,7 +32,9 @@ export const Post = (props: PostProps) => {
                     return (
                         <div
                             className={`projectContent 
-                            grid grid-cols-12 mt-3 p-2 border border-sky-500 min-w-full min-h-full`}
+                            grid grid-cols-12 mt-3 p-2 
+                            border border-sky-500 
+                            min-w-full min-h-full`}
                             key={`${project.identifier}_${index}`}
                         >
                             <div className="contentLeft col-span-1 mt-2">
@@ -50,9 +52,9 @@ export const Post = (props: PostProps) => {
                             </div>
                             <div className="contentRight col-span-3 min-w-full">
                                 <Link
-                                    to={`/project/board/${project.identifier}`}
-                                    onClick={() => setProjectTasks(project.identifier)}
+                                    to={`/project/board:${project.id}`}
                                     className={`flex justify-content gap-2`}
+                                    onClick={() => loadTask(project.identifier)}
                                 >
                                     <MdDashboard className={'mt-1'} style={{color: '#0093AB'}} />
                                     <span className={"largeDevices"}>Project Board</span>

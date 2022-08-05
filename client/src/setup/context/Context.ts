@@ -15,8 +15,10 @@ const authDefaultProps: AuthContextProperty = {
 }
 
 const uiProps: UIContextProps = {
-    getLogoProperties: () => '',
-    setLogoProperties: () => ''
+    getLogoProperties(): any {},
+    getModelProperty(): any {},
+    setLogoProperties(logoProperties): void {},
+    setModelProp(isNewTask: boolean): void {}
 }
 
 const notificationProps: NotificationProperty = {

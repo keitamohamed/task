@@ -9,7 +9,14 @@ export const Notification = () => {
 
     return (
         <div className='notification'>
-            <p>{getNotificationsProperty().message}</p>
+            <div className="body">
+                <div className="title_container">
+                    <h5>{getNotificationsProperty().title}</h5>
+                </div>
+                <div className="messageContainer">
+                    <p>{getNotificationsProperty().message}</p>
+                </div>
+            </div>
             {
                 getNotificationsProperty().showBtn ? (
                     <div className="buttonContainer">
