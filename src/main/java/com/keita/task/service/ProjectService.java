@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -21,11 +23,18 @@ public class ProjectService {
 
     private final ProjectRepo projectRepo;
     private final TaskService taskService;
+    private final LocalDate dataObject = LocalDate.now();
 
     @Autowired
     public ProjectService(ProjectRepo projectRepo, TaskService taskService) {
         this.projectRepo = projectRepo;
         this.taskService = taskService;
+    }
+
+    private Date date () {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String d = dataObject.format(formatter);
+        return java.sql.Date.valueOf(d);
     }
 
     public void save(User user, Project project, BindingResult result, HttpServletResponse response) {
@@ -35,6 +44,7 @@ public class ProjectService {
         findProjectByIdentifier(project.getIdentifier(), response);
 
         project.setIdentifier(project.getIdentifier().toUpperCase());
+        project.setCreatedAt(date());
         project.setUser(user);
         projectRepo.save(project);
     }

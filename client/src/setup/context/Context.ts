@@ -18,7 +18,7 @@ const uiProps: UIContextProps = {
     getLogoProperties(): any {},
     getModelProperty(): any {},
     setLogoProperties(logoProperties): void {},
-    setModelProp(isNewTask: boolean): void {}
+    setModelProp(isNewTask: boolean): void {},
 }
 
 const notificationProps: NotificationProperty = {
@@ -34,7 +34,8 @@ const notificationProps: NotificationProperty = {
     hideNotification(): void {},
     hideNotificationTimeout(seconds: number): void {},
     setNotificationMessage(message: string, showNotification: boolean, showBtn: boolean): void {},
-    setNotificationProperty(props: NotificationStateProps): void {}
+    setNotificationProperty(props: NotificationStateProps): void {},
+    showNotification(title: string, message: string, identifier: string): void {}
 }
 
 

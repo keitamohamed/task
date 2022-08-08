@@ -33,7 +33,7 @@ export const Dashboard = () => {
                                 </li>
                                 <li>
                                     <li
-                                        onClick={() => navigateTo('/project')}>
+                                        onClick={() => navigateTo('/task')}>
                                         Project
                                     </li>
                                 </li>

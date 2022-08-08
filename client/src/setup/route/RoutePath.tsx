@@ -21,14 +21,14 @@ export const routePath = [
     },
     {
         name: "Project",
-        path: "/project",
+        path: "/task",
         protected: true,
         showLink: true,
         component: Project
     },
     {
         name: "Board",
-        path: `project/board:id`,
+        path: `board:id`,
         protected: true,
         showLink: false,
         component: Task

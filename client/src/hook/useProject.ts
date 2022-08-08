@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {useAppDispatch, useAppSelector} from "../setup/store/ReduxHook";
 
-import {GET_REQUEST} from "../api/Request";
+import {DELETE_REQUEST, GET_REQUEST} from "../api/Request";
 import {ApiPath} from "../api/URLPath";
 import {AuthContext, NotificationContext} from "../setup/context/Context";
 
@@ -10,7 +10,7 @@ import {taskAction} from "../setup/slice/task"
 
 export const useProject = () => {
     const authCtx = useContext(AuthContext)
-    const {setNotificationProperty} = useContext(NotificationContext)
+    const {setNotificationProperty, setNotificationMessage, hideNotificationTimeout} = useContext(NotificationContext)
     const dispatch = useAppDispatch();
     const {project, projects, message, error} = useAppSelector((state) => state.project)
 
@@ -22,6 +22,12 @@ export const useProject = () => {
         dispatch(projectAction.selectedProject(project))
         dispatch(taskAction.loadTask(project.task))
     }
+
+    const deleteAction = (data: {message: string, code: string, status: string}) => {
+        loadProjects()
+        setNotificationMessage(data.message!, true, false)
+    }
+
 
     const setTaskDue = (task: object) => {
         dispatch(taskAction.setTaskDue(task))
@@ -48,20 +54,15 @@ export const useProject = () => {
         // @ts-ignore
         dispatch(GET_REQUEST(null, ApiPath.FIND_PROJECT(identifier), setProject, setError))
     }
-    
+
     const setProjectTasks = (identifier: string) => {
         findProjectByIdentifier(identifier)
     }
 
-    const deleteProject = (identifier: string, notificationAction: () => void) => {
-        setNotificationProperty({
-            identifier: identifier,
-            message: `Are you sure you want to delete project ${identifier}?`,
-            showBtn: true,
-            showNotification: true,
-            title: `Delete Project`
-        })
-        notificationAction()
+    const deleteProject = () => {
+        // @ts-ignore
+        dispatch(DELETE_REQUEST(null, ApiPath.DELETE_PROJECT(project.identifier), deleteAction, setError))
+        hideNotificationTimeout(5000)
     }
 
     return {loadProjects, loadTaskDue, findProjectByIdentifier, setProjectTasks, deleteProject}

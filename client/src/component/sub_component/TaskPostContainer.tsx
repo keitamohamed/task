@@ -11,7 +11,10 @@ export const TaskPostContainer = () => {
                     <div className={`taskContainer`}>
                         <TaskPost/>
                     </div>
-                ) : <h1>No Task</h1>
+                ) :
+                    <div className={`No Data text-center mt-10`}>
+                        <h1>No Task</h1>
+                    </div>
             }
         </>
     )

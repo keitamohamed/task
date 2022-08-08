@@ -51,6 +51,7 @@
 
 .notification[closing] {
   display: block;
+  opacity: 1;
   animation: notification_closing 1s ease 0.5s forwards;
 }
 
@@ -81,12 +82,13 @@
   }
 
   .btnCloseContainer {
-    width: 100%;
+    position: absolute;
+    width: fit-content;
     text-align: right;
+    right: 4em;
 
     svg {
-      right: 0;
-      font-size: 2em;
+      font-size: 1.5em;
       cursor: pointer;
       fill: #E83A14;
     }
@@ -752,6 +754,26 @@
 .projectBoard {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+
+  .nav {
+
+    .navActionBtnContainer {
+      margin-left: 3em;
+
+      .bt_icon {
+        float: right;
+
+        svg {
+          margin-left: .2em;
+        }
+
+        span {
+          font-size: .8em;
+        }
+        width: fit-content;
+      }
+    }
+  }
 
   .mainContainer {
     width: 95%;

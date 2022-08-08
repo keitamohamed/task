@@ -9,6 +9,7 @@ export const POST_REQUEST = (
     token: string) => {
 
     return async () => {
+        axios.defaults.url = 'http://localhost:8080'
         const send = async () => {
             return axios({
                 method: 'POST',
@@ -59,6 +60,34 @@ export const GET_REQUEST = (
         }
     }
 }
+
+export const UPDATE_REQUEST = (
+    url: string,
+    data: object,
+    action: (data: object) => void,
+    setError: (error: object) => void) => {
+
+    return async () => {
+        const send = async () => {
+            return axios({
+                method: "PUT",
+                url: `task/${url}`,
+                data: data,
+                headers: {
+                    Authorization: 'Bearer',
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
+        try {
+            const response = await send();
+            action(response.data)
+        } catch (error) {
+            setError(error.response.data)
+        }
+    }
+}
+
 export const DELETE_REQUEST = (
     token: string,
     url: string,

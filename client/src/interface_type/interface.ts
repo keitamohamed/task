@@ -19,7 +19,8 @@ export interface NotificationProperty {
     setNotificationProperty: (props: NotificationStateProps) => void,
     setNotificationMessage: (message: string, showNotification: boolean, showBtn: boolean) => void
     hideNotification: () => void,
-    hideNotificationTimeout: (seconds: number) => void
+    hideNotificationTimeout: (seconds: number) => void,
+    showNotification: (title: string, message: string, identifier: string) => void
 }
 
 export interface InitialState {
@@ -30,19 +31,20 @@ export interface InitialState {
         startDate: Date,
         endDate: Date,
     }
-    projects: Object[]
+    projects: any[]
     message: string,
     error: string
 }
 
 export interface TaskInitialState {
     task: {
+        taskID: number
         summary: string,
         status: string,
         priority: string,
-        dueDate: Date,
-        createAt: Date,
-        updateAt: Date,
+        dueDate: string,
+        createAt: string,
+        updateAt: string,
     },
     tasks: any[],
     taskDue: any[],

@@ -8,7 +8,7 @@ const {Provider} = UIContent
 const UIProvider = ({children}: Props) => {
     const [logoProperty, setLogoProperty] = useState<LogoProperty>({
         color: "",
-        width: ""
+        width: "25%"
     })
     const [modelProperty, setModelProperty] = useState<{isNewTask: boolean}>({
         isNewTask: false,
@@ -41,7 +41,7 @@ const UIProvider = ({children}: Props) => {
             getLogoProperties,
             getModelProperty,
             setLogoProperties,
-            setModelProp
+            setModelProp,
         }}>
             {children}
         </Provider>

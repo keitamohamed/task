@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 // @ts-ignore
 import DatePicker from 'react-datepicker'
 import { useModel } from "../../hook/useModel";
@@ -8,16 +8,12 @@ import {UIContent} from "../../setup/context/Context";
 
 export const Model = () => {
     const uiCtx = useContext(UIContent)
-    const {modelProps, toggle, onChange, onChangeDate, onSubmit} = useModel();
+    const {toggle, dueDate, onChange, onChangeDate, onSubmit} = useModel();
     const {task, message, error} = useAppSelector((state) => state.task)
-    const [taskDate, setTaskDate] = useState<{date: Date}>({
-        date: new Date()
-    })
 
-    useEffect(() => {
-
-    }, [modelProps])
-
+    const isNewTask = (): boolean => {
+        return task.summary !== ''
+    }
     return (
         <div className="model">
             <div className="content">
@@ -37,11 +33,11 @@ export const Model = () => {
                             <textarea
                                 name='summary'
                                 className={error && error.summary ? 'addRedBorder' : 'summary'}
-                                onChange={onChange}
-                                value={task.summary}
-                                placeholder={task.summary ? task.summary : 'Enter task summary'}
+                                onChange={(e) => onChange(e)}
+                                placeholder={
+                                    task.summary ? task.summary : (error && error.summary ? error.summary : 'Enter task summary')
+                                }
                             />
-                            {error && error.summary && (<p className='inputError'>{error.summary}</p>)}
                         </div>
                         <div className="formGroup">
                             <select
@@ -79,7 +75,7 @@ export const Model = () => {
                             <DatePicker
                                 name={"dueDate"}
                                 className={error && error.dueDate ? 'addRedBorder' :'dueDate'}
-                                selected={task.dueDate}
+                                selected={''}
                                 minDate={new Date()}
                                 dateFormat={"yyyy-MM-dd"}
                                 onChange={(date: Date) => onChangeDate("dueDate", date)}
@@ -92,7 +88,11 @@ export const Model = () => {
                         </div>
                         <div className="formGroup">
                             <div className="btnContainer">
-                                <input type="submit" className="submitButton" value={modelProps.isNewTask ? 'Submit' : 'Update'}/>
+                                <input
+                                    type="submit"
+                                    className="submitButton"
+                                    value={uiCtx.getModelProperty().isNewTask ?
+                                    'Submit' : 'Update'}/>
                             </div>
                         </div>
                     </div>

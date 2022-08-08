@@ -6,22 +6,20 @@ import {ApiPath} from "../api/URLPath";
 import {useProject} from "./useProject";
 import {projectAction} from "../setup/slice/project";
 
-let notificationMessage: HTMLElement | null
-
 export const useNotification = () => {
     const authCtx = useContext(AuthContext)
     const uiCtx = useContext(UIContent)
     const dispatch = useAppDispatch()
     const {message} = useAppSelector((state) => state.project)
     const {loadProjects} = useProject()
-    const {getNotificationsProperty, setNotificationMessage, hideNotificationTimeout} = useContext(NotificationContext)
+    const {setNotificationMessage} = useContext(NotificationContext)
 
-    const notificationAction = () => {
-        notificationMessage?.setAttribute('closing', '')
-        notificationMessage?.addEventListener('animationend', () => {
-            notificationMessage?.setAttribute('closed', '')
-            notificationMessage?.removeAttribute('closing')
-            notificationMessage?.removeAttribute('open')
+    const closeNotification = (notificationElement: HTMLElement | null) => {
+        notificationElement?.setAttribute('closing', '')
+        notificationElement?.addEventListener('animationend', () => {
+            notificationElement?.setAttribute('closed', '')
+            notificationElement?.removeAttribute('closing')
+            notificationElement?.removeAttribute('open')
         }, {once: true})
     }
 
@@ -30,26 +28,27 @@ export const useNotification = () => {
         setNotificationMessage(data.message!, true, false)
     }
 
-    const cancel = () => {
-        notificationAction()
-    }
+    // const cancel = () => {
+    //     notificationAction()
+    // }
 
-    const conform = async (response: any) => {
-        const {identifier} = getNotificationsProperty()
-        // @ts-ignore
-        await dispatch(DELETE_REQUEST(null, ApiPath.DELETE_PROJECT(identifier), deleteAction, setErrorMessage))
-        hideNotificationTimeout(5000)
-    }
+    // const conform = async (method: () => void) => {
+    //     const {identifier} = getNotificationsProperty()
+    //     // @ts-ignore
+    //     // await dispatch(DELETE_REQUEST(null, ApiPath.DELETE_PROJECT(identifier), deleteAction, setErrorMessage))
+    //     await method()
+    //     hideNotificationTimeout(5000)
+    // }
 
     const setErrorMessage = (error: any) => {
       dispatch(projectAction.setError(error))
     }
 
-    useEffect(() => {
-        if (notificationMessage === undefined) {
-            notificationMessage = document.querySelector('.notification')
-        }
-    }, [notificationMessage])
+    // useEffect(() => {
+    //     if (notificationMessage === undefined) {
+    //         notificationMessage = document.querySelector('.notification')
+    //     }
+    // }, [notificationMessage])
 
-    return {conform, cancel}
+    return {closeNotification}
 }

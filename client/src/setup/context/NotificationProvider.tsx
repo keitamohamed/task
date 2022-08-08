@@ -5,6 +5,7 @@ import {NotificationStateProps, Props} from "../../interface_type/interface";
 const {Provider} = NotificationContext
 
 let messageNotification = null
+let notificationElement: HTMLElement | null;
 
 const NotificationProvider = ({children}: Props) => {
 
@@ -41,6 +42,24 @@ const NotificationProvider = ({children}: Props) => {
         })
     }
 
+    const showNotification = (title: string, message: string, identifier: string) => {
+        setNotificationProperty({
+            identifier: identifier,
+            message: message,
+            showBtn: true,
+            showNotification: true,
+            title: title
+        })
+        // if (notificationElement === null || notificationElement === undefined) {
+        //     notificationElement = document.querySelector('.notification')
+        // }
+        // notificationElement?.removeAttribute('open')
+        // notificationElement?.setAttribute('closed', '')
+        // console.log(notificationElement)
+        notificationElement?.removeAttribute('closed')
+        notificationElement?.setAttribute('open', '')
+    }
+
 
     const hideNotification = () => ({
         ...notification,
@@ -57,7 +76,8 @@ const NotificationProvider = ({children}: Props) => {
             setNotificationProperty,
             setNotificationMessage,
             hideNotification,
-            hideNotificationTimeout
+            hideNotificationTimeout,
+            showNotification
 
         }}>
             {children}

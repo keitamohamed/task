@@ -1,3 +1,4 @@
+import {useContext, useEffect} from "react";
 import {Link} from "react-router-dom";
 import moment from "moment";
 
@@ -6,24 +7,40 @@ import {FiCheckSquare} from "react-icons/fi";
 import {AiFillDelete} from "react-icons/ai";
 import {useProject} from "../../hook/useProject";
 import {useTask} from "../../hook/useTask";
+import {NotificationContext} from "../../setup/context/Context";
+import {useAppSelector, useAppDispatch} from "../../setup/store/ReduxHook";
+import {projectAction} from "../../setup/slice/project";
 
 interface PostProps {
     currentPost: any[];
 }
 
-let notification: HTMLElement | null;
+let notificationElement: HTMLElement | null
 
 export const Post = (props: PostProps) => {
-    const {findProjectByIdentifier, deleteProject} = useProject()
+    const dispatch = useAppDispatch()
+    const {projects} = useAppSelector((state) => state.project)
+    const {showNotification} = useContext(NotificationContext)
+    const {findProjectByIdentifier} = useProject()
     const {loadTask} = useTask()
 
-    const showNotification = () => {
-        if (notification === null || notification === undefined) {
-            notification = document.querySelector('.notification')
-        }
-        notification?.removeAttribute('closed')
-        notification?.setAttribute('open', '')
+    const setSelectedProject = (identifier: string) => {
+        const selectedProject = projects.find((project) => project.identifier === identifier)
+        dispatch(projectAction.selectedProject(selectedProject))
+        showNotification(
+            'Delete Project',
+            `Are you sure you want to delete project ${identifier}?`,
+            identifier)
+        console.log(notificationElement)
+        notificationElement?.removeAttribute('closed')
+        notificationElement?.setAttribute('open', '')
     }
+
+    useEffect(() => {
+        if (notificationElement === null || notificationElement === undefined) {
+            notificationElement = document.querySelector('.notification')
+        }
+    }, [])
 
     return (
         <>
@@ -52,7 +69,7 @@ export const Post = (props: PostProps) => {
                             </div>
                             <div className="contentRight col-span-3 min-w-full">
                                 <Link
-                                    to={`/project/board:${project.id}`}
+                                    to={`/board:${project.id}`}
                                     className={`flex justify-content gap-2`}
                                     onClick={() => loadTask(project.identifier)}
                                 >
@@ -74,7 +91,7 @@ export const Post = (props: PostProps) => {
                                 <Link
                                     className={`flex justify-content gap-2`}
                                     to={``}
-                                    onClick={() => deleteProject(project.identifier, showNotification)}>
+                                    onClick={() => setSelectedProject(project.identifier)}>
                                     <AiFillDelete
                                         className={'mt-1'}
                                         style={{color: '#E83A14'}} />

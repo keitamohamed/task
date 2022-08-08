@@ -9,8 +9,10 @@ import NotificationProvider from "./setup/context/NotificationProvider";
 import App from './App'
 import store from "./setup/store/store";
 
+import 'react-datepicker/dist/react-datepicker.css'
 import "./assets/scss/@_keyframe.scss"
 import "./index.scss"
+
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
