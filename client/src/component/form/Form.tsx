@@ -40,9 +40,10 @@ export const Form = (props: {
                     <input
                         type="text"
                         name={'identifier'}
+                        disabled={!props.isNew}
                         className={error.identifier ? error.identifier : 'identifier'}
                         onChange={props.onChange}
-                        placeholder={error.identifier ? error.identifier : 'Enter project identifier'}
+                        placeholder={project.identifier ? project.identifier : 'Enter project identifier'}
                     />
                 </div>
                 <div className="formGroup">
@@ -51,7 +52,7 @@ export const Form = (props: {
                         name={'name'}
                         className={error.name ? error.name : 'name'}
                         onChange={props.onChange}
-                        placeholder={error.name ? error.name : 'Enter project name'}
+                        placeholder={project.name ? project.name : 'Enter project name'}
                     />
                 </div>
                 <div className="formGroup">
@@ -60,7 +61,7 @@ export const Form = (props: {
                         name={'description'}
                         className={error.description ? error.description : 'description'}
                         onChange={props.onChange}
-                        placeholder={error.description ? error.description : 'Enter project description'}
+                        placeholder={project.description ? project.description : 'Enter project description'}
                     />
                 </div>
                 <div className="formGroup">

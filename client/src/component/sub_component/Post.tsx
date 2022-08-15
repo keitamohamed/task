@@ -79,7 +79,7 @@ export const Post = (props: PostProps) => {
                                 </Link>
                                 <Link
                                     className={`flex justify-content gap-2`}
-                                    to={`/project/update/${project.identifier}`}
+                                    to={`/update${project.id}`}
                                     onClick={() => findProjectByIdentifier(project.identifier)}
                                 >
                                     <FiCheckSquare

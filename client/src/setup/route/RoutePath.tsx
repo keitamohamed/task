@@ -4,6 +4,7 @@ import {Project} from "../../component/page/Project";
 import {Login} from "../../component/page/Login"
 import {Task} from "../../component/page/Task";
 import {NewProject} from "../../component/page/NewProject";
+import {UpdateProject} from "../../component/page/Update";
 
 export const routePath = [
     {
@@ -36,10 +37,17 @@ export const routePath = [
     },
     {
         name: "New Project",
-        path: `/project/add`,
+        path: `/add`,
         protected: true,
         showLink: false,
         component: NewProject
+    },
+    {
+        name: "Update Project",
+        path: `/update:id`,
+        protected: true,
+        showLink: false,
+        component: UpdateProject
     },
     // {
     //     name: "Task",

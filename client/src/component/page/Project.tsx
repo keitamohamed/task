@@ -4,21 +4,24 @@ import {useNavigate} from "react-router-dom"
 import Header from "./Header";
 import {UIContent} from "../../setup/context/Context";
 import {BsPlus} from "react-icons/bs";
-import {useAppSelector} from "../../setup/store/ReduxHook";
+import {useAppSelector, useAppDispatch} from "../../setup/store/ReduxHook";
 import NoData from "../sub_component/NoDate";
 import {ProjectPost} from "../sub_component/ProjectPost";
 import {Notification} from "../../notification/Notification";
 import {useProject} from "../../hook/useProject";
+import {projectAction} from "../../setup/slice/project";
 
 let notificationElement: HTMLElement | null
 
 export const Project = () => {
+    const dispatch = useAppDispatch()
     const uiCtx = useContext(UIContent)
     const nav = useNavigate()
     const {deleteProject} = useProject()
     const {projects} = useAppSelector((state) => state.project)
 
     const navigate = (to: string) => {
+        dispatch(projectAction.initialProject())
         nav(to)
     }
 
@@ -49,7 +52,7 @@ export const Project = () => {
                 <li>
                     <BsPlus
                         style={{color: '#557B83'}}
-                        onClick={() => navigate("/project/add")}
+                        onClick={() => navigate("/add")}
                     />
                     <br/>
                     <span>New Project</span>

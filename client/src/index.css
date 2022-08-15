@@ -830,13 +830,13 @@
   padding: 20px;
 }
 
-.projectForm {
+.projectForm, .projectUpdate {
   width: 100%;
 }
-.projectForm .titleContainer {
+.projectForm .titleContainer, .projectUpdate .titleContainer {
   width: 60%;
 }
-.projectForm .titleContainer h2 {
+.projectForm .titleContainer h2, .projectUpdate .titleContainer h2 {
   font-size: 1.3em;
   text-align: left;
   border-bottom: 2px dotted #ccc;
