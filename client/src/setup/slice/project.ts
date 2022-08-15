@@ -19,7 +19,7 @@ const initialState: InitialState = {
     },
     projects: [],
     message: '',
-    error: ''
+    error: {}
 }
 
 const convertDate = (data: Date): any => {
@@ -40,6 +40,7 @@ const projectSlice = createSlice( {
         },
         addNewProject(state, action ) {
             const project = action.payload
+            console.log(project.name);
             state.project[project.name as keyof Object] = project.value
         },
         updateProject(state, action){

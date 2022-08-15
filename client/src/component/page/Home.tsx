@@ -54,7 +54,7 @@ export const Home = () => {
     return (
         <div className="home">
             <Header width={'40%'} color={undefined}  />
-            <div className="mainContainer">
+            <div className="mainContainer md:!mt-10 sm:!mt-16 md:z-0 sm:z-0">
                 <div className="show_top">
                     <div className="positionLeft">
                         <nav>

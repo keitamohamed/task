@@ -23,7 +23,6 @@ export const Project = () => {
     }
 
     const closeNotificationDialog = () : void => {
-        console.log(notificationElement)
         notificationElement?.setAttribute('closing', '')
         notificationElement?.addEventListener('animationend', () => {
             notificationElement?.setAttribute('closed', '')
@@ -50,7 +49,7 @@ export const Project = () => {
                 <li>
                     <BsPlus
                         style={{color: '#557B83'}}
-                        onClick={() => navigate("/new-project")}
+                        onClick={() => navigate("/project/add")}
                     />
                     <br/>
                     <span>New Project</span>

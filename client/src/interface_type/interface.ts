@@ -33,7 +33,7 @@ export interface InitialState {
     }
     projects: any[]
     message: string,
-    error: string
+    error: any
 }
 
 export interface TaskInitialState {

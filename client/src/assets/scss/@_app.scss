@@ -972,4 +972,14 @@
 
 .projectForm {
   width: 100%;
+
+  .titleContainer {
+    width: 60%;
+
+    h2 {
+      font-size: 1.3em;
+      text-align: left;
+      border-bottom: 2px dotted #ccc;
+    }
+  }
 }

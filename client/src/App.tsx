@@ -1,4 +1,4 @@
-import "./index.scss"
+// import "./index.scss"
 
 import RouteSwitcher from "./setup/route/RouteSwitcher";
 

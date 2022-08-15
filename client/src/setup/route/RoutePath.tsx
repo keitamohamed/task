@@ -3,6 +3,7 @@ import {Dashboard} from "../../component/page/Dashboard";
 import {Project} from "../../component/page/Project";
 import {Login} from "../../component/page/Login"
 import {Task} from "../../component/page/Task";
+import {NewProject} from "../../component/page/NewProject";
 
 export const routePath = [
     {
@@ -32,6 +33,13 @@ export const routePath = [
         protected: true,
         showLink: false,
         component: Task
+    },
+    {
+        name: "New Project",
+        path: `/project/add`,
+        protected: true,
+        showLink: false,
+        component: NewProject
     },
     // {
     //     name: "Task",

@@ -31,7 +31,7 @@ const Header = (props: Props) => {
     }
 
     return (
-        <header className='header'>
+        <header className='header md:z-10 sm:z-10'>
             <nav>
                 <div className="logoContainer">
                     <strong>

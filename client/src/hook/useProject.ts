@@ -66,5 +66,4 @@ export const useProject = () => {
     }
 
     return {loadProjects, loadTaskDue, findProjectByIdentifier, setProjectTasks, deleteProject}
-
 }
