@@ -25,7 +25,6 @@ const Header = (props: Props) => {
     }
 
     const navigateTo = (to: string) => {
-        console.log("click " + to)
         loadProjects()
         navigate('/project')
     }

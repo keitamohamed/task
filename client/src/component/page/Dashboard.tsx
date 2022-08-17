@@ -8,17 +8,28 @@ import {useDashboard} from "../../hook/useDashboard";
 import moment from "moment";
 import NoData from "../sub_component/NoDate";
 import {useContext} from "react";
-import {UIContent} from "../../setup/context/Context";
+import {AuthContext, UIContent} from "../../setup/context/Context";
+import {projectAction} from "../../setup/slice/project";
+import {useAppDispatch} from "../../setup/store/ReduxHook";
 
 export const Dashboard = () => {
     const navigate = useNavigate()
+    const authCtx = useContext(AuthContext)
     const uiCtx = useContext(UIContent)
+    const dispatch = useAppDispatch();
     const {toggleMenu, taskDue, openMenu, closeMenu} = useDashboard()
 
     const navigateTo = (to: string) => {
         uiCtx.setLogoProperties({width: '45%', color: '#000'})
         navigate(to)
     }
+
+    const logout = () => {
+        authCtx.logout();
+        dispatch(projectAction.logout());
+        navigate('/')
+    }
+
     return (
         <>
             <div className={`dashboard`}>
@@ -65,9 +76,14 @@ export const Dashboard = () => {
                                 </li>
                                 <div className="dropdownContent">
                                     <ul>
-                                        <li><Link to='' onClick={() => navigateTo('/project')}>Project</Link></li>
-                                        <li><Link to={""}>Task</Link></li>
-                                        <li><Link to={""}>Team</Link></li>
+                                        <li>
+                                            <li onClick={() => navigateTo('/task')}>Project</li>
+                                        </li>
+                                        <li><li >Task</li></li>
+                                        <li><li >Team</li></li>
+                                        <li>
+                                            <li onClick={logout}>Logout</li>
+                                        </li>
                                     </ul>
                                 </div>
                             </ul>
@@ -79,7 +95,7 @@ export const Dashboard = () => {
                         <li>
                             <BsPlus
                                 style={{color: '#557B83'}}
-                                onClick={() => navigate("/new-project")}
+                                onClick={() => navigate("/add")}
                             />
                             <br/>
                             <span>New Project</span>

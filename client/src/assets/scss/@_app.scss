@@ -293,6 +293,11 @@
 
   .titleContainer {
     padding: 15px 15px 20px;
+
+    h2 {
+      text-transform: uppercase;
+      text-align: center;
+    }
   }
 
   .formContainer {
@@ -300,11 +305,11 @@
     margin: 0 auto;
 
     .formGroup {
-      width: 60%;
+      width: 100%;
       margin: 0 auto;
 
       input, textarea, select {
-        border: 1px solid #a7a7a7;
+        border-bottom: 1px solid #a7a7a7;
         width: 100%;
         padding: 10px 15px;
         margin-bottom: .5em;
@@ -977,8 +982,8 @@
     width: 60%;
 
     h2 {
-      font-size: 1.3em;
-      text-align: left;
+      font-size: 1.2em;
+      text-align: center;
       border-bottom: 2px dotted #ccc;
     }
   }

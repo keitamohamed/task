@@ -14,7 +14,7 @@ const initialState: InitialState = {
         name: '',
         identifier: '',
         description: '',
-        startDate: new Date,
+        startDate: new Date(),
         endDate: new Date,
     },
     projects: [],
@@ -51,7 +51,7 @@ const projectSlice = createSlice( {
         },
         setDate(state, action)  {
             const date = action.payload;
-            state.project[date.name as keyof Object] = convertDate(date.value)
+            state.project[date.name as keyof Object] = convertDate(date.date)
         },
         logout: (state) => {
             state.project = setProject

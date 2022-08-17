@@ -14,7 +14,7 @@ export const useLogin = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const authCtx = useContext(AuthContext)
-    const [login, setLogin] = useState({
+    const [login, setLogin] = useState<{email: string, password: string}>({
         email: '',
         password: ''
     })
@@ -52,7 +52,6 @@ export const useLogin = () => {
             setError(userCredential)
         } else {
             authCtx.setCredentials(userCredential)
-            // setUserNameID(userCredential)
             // @ts-ignore
             await dispatch(GET_REQUEST(userCredential.taskAccessToken,`${ApiPath.GET_CUSTOM_DATA}/${userCredential.email}`, setCustomDate, setError))
             navigate('/dashboard')
@@ -79,13 +78,20 @@ export const useLogin = () => {
             setLoginError({
                 ...loginError,
                 email,
+            })
+            return
+        }
+        if (code === '406' && password) {
+            setLoginError({
+                ...loginError,
                 password
             })
+            return
         }
-        if (error.response) {
+        if (error) {
             setResponseMessage({
                 ...error,
-                message: error.response.data.message
+                message: error.message
             })
         }
     }
