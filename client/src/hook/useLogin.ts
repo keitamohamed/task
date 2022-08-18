@@ -79,7 +79,6 @@ export const useLogin = () => {
                 ...loginError,
                 email,
             })
-            return
         }
         if (code === '406' && password) {
             setLoginError({

@@ -480,4 +480,39 @@
       }
     }
   }
+
+  .model {
+    padding: 15px 0;
+
+    .content {
+
+      .form {
+        width: 100% !important;
+
+        .formContainer {
+          min-width: 100% !important;
+          padding: 5px 5px 0;
+
+          .btnCloseContainer {
+            right: 1.5em;
+          }
+        }
+
+        .titleContainer {
+          width: 100%;
+          right: 2em !important;
+          margin-top: 2em;
+
+          h2 {
+            font-size: 1em;
+            text-align: center;
+          }
+        }
+
+        .formGroup {
+          width: 100% !important;
+        }
+      }
+    }
+  }
 }

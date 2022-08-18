@@ -7,7 +7,7 @@ import Logo from "../logo/Logo";
 import {useDashboard} from "../../hook/useDashboard";
 import moment from "moment";
 import NoData from "../sub_component/NoDate";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext, UIContent} from "../../setup/context/Context";
 import {projectAction} from "../../setup/slice/project";
 import {useAppDispatch} from "../../setup/store/ReduxHook";
@@ -69,10 +69,10 @@ export const Dashboard = () => {
                                 <li className="icons">
                                     <AiOutlineMenu
                                         className='openMenu'
-                                        onClick={() => toggleMenu(closeMenu, openMenu)}  />
+                                        onClick={() => toggleMenu(closeMenu, openMenu, false)}  />
                                     <AiOutlineClose
                                         className='closeMenu'
-                                        onClick={() => toggleMenu(openMenu, closeMenu)} />
+                                        onClick={() => toggleMenu(openMenu, closeMenu, true)} />
                                 </li>
                                 <div className="dropdownContent">
                                     <ul>

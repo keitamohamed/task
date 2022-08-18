@@ -1185,6 +1185,32 @@
   .projectForm .titleContainer h2 {
     padding-bottom: 5px;
   }
+
+  .model {
+    padding: 15px 0;
+  }
+  .model .content .form {
+    width: 100% !important;
+  }
+  .model .content .form .formContainer {
+    min-width: 100% !important;
+    padding: 5px 5px 0;
+  }
+  .model .content .form .formContainer .btnCloseContainer {
+    right: 1.5em;
+  }
+  .model .content .form .titleContainer {
+    width: 100%;
+    right: 2em !important;
+    margin-top: 2em;
+  }
+  .model .content .form .titleContainer h2 {
+    font-size: 1em;
+    text-align: center;
+  }
+  .model .content .form .formGroup {
+    width: 100% !important;
+  }
 }
 html {
   -webkit-text-size-adjust: 100%;

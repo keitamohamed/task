@@ -39,7 +39,10 @@ export const useModel = () => {
         dispatch(taskAction.setTaskDueDate({name, date}))
     }
 
-    const setNewProject = (isNewTask: boolean) => {
+    const setNewTask = (isNewTask: boolean) => {
+        if (isNewTask) {
+            dispatch(taskAction.initialTask())
+        }
         setProps(isNewTask)
         toggle()
     }
@@ -69,5 +72,5 @@ export const useModel = () => {
         }
     }
 
-    return {toggle, dueDate, setNewProject, setProps, onChange, onChangeDate, onSubmit}
+    return {toggle, dueDate, setNewProject: setNewTask, setProps, onChange, onChangeDate, onSubmit}
 }

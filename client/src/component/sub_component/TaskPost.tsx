@@ -1,12 +1,12 @@
+import {useContext, useEffect} from "react";
+import moment from 'moment'
 import {useAppDispatch, useAppSelector} from "../../setup/store/ReduxHook";
 import {useTask} from "../../hook/useTask";
 import {useModel} from "../../hook/useModel";
 import {taskAction} from "../../setup/slice/task";
-import {useContext, useEffect} from "react";
 import {NotificationContext} from "../../setup/context/Context";
 
 
-let loaded = false
 let notificationElement: HTMLElement | null;
 
 export const TaskPost = () => {
@@ -43,7 +43,7 @@ export const TaskPost = () => {
     }, [])
 
     return (
-        <div className={`tasksContainer grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1`}>
+        <div className={`tasksContainer grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1`}>
             <div className="position_left custom_g_style md:border-y-1 md:mt-2 md:mb-2 lg:border-r border-borderColor">
                 <div className="title_container md:!text-left bg-cyan-300 text-white">
                     <h5 className={`md:!texts-left`}>To Do</h5>
@@ -55,7 +55,10 @@ export const TaskPost = () => {
                                 <div className="task p-1" key={`${task.taskID}_${index}`}>
                                     <div className="task_header grid grid-cols-2">
                                         <li className={`text-left pl-3`}>{`ID#: ${task.taskID}`}</li>
-                                        <li>{`Priority: ${task.priority}`}</li>
+                                        <div className="grid md:grid-cols-1 gap-1 mb-2">
+                                            <li>{`Priority: ${task.priority}`}</li>
+                                            <li>{`Due: ${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
+                                        </div>
                                     </div>
                                     <div className="task_body">
                                         <p>{`${task.summary}`}</p>
@@ -82,7 +85,10 @@ export const TaskPost = () => {
                                 <div className="task p-1" key={`${task.taskID}_${index}`}>
                                     <div className="task_header grid grid-cols-2">
                                         <li>{`ID#: ${task.taskID}`}</li>
-                                        <li>{`Priority: ${task.priority}`}</li>
+                                        <div className="grid md:grid-cols-1 gap-1 mb-2">
+                                            <li>{`Priority: ${task.priority}`}</li>
+                                            <li>{`Due: ${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
+                                        </div>
                                     </div>
                                     <div className="task_body">
                                         <p>{`${task.summary}`}</p>
@@ -110,7 +116,10 @@ export const TaskPost = () => {
                                 <div className="task p-1" key={`${task.taskID}_${index}`}>
                                     <div className="task_header grid grid-cols-2">
                                         <li className={`text-left pl-3`}>{`ID#: ${task.taskID}`}</li>
-                                        <li>{`Priority: ${task.priority}`}</li>
+                                        <div className="grid md:grid-cols-1 gap-1 mb-2">
+                                            <li>{`Priority: ${task.priority}`}</li>
+                                            <li>{`Due: ${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
+                                        </div>
                                     </div>
                                     <div className="task_body">
                                         <p>{`${task.summary}`}</p>

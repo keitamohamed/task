@@ -8,6 +8,16 @@ export const convertDate = (data: Date): any => {
         (data.getTimezoneOffset() * 60000)).toISOString().split("T")[0]
 }
 
+const reSetTask: TaskInitialState['task'] = {
+    taskID: 0,
+    summary: '',
+    status: '',
+    priority: '',
+    dueDate: '',
+    createAt: '',
+    updateAt: '',
+}
+
 const initialState: TaskInitialState = {
     task: {
         taskID: 0,
@@ -45,16 +55,19 @@ const taskSlice = createSlice({
             const date = action.payload
             state.task[date.name as keyof Object] = convertDate(date.date)
         },
-        setMessage(state, action){
+        initialTask(state) {
+            state.task = reSetTask
+        },
+        setMessage(state, action) {
             state.message = action.payload
         },
         setError(state, action) {
             state.error = action.payload.error
         },
-        reSetMessage(state){
+        reSetMessage(state) {
             state.message = {}
         },
-        reSetError(state){
+        reSetError(state) {
             state.error = {}
         }
     }

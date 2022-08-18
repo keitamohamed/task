@@ -34,21 +34,24 @@ export const useDashboard = () => {
         }
     }
 
-    const toggleMenu = (openMenu: Element | null, closeMenu: Element | null) => {
-        closeMenu?.setAttribute('closing', '')
-        closeMenu?.addEventListener('animationend', () => {
-            closeMenu.setAttribute('closed', '')
-            closeMenu.removeAttribute('closing')
-            closeMenu.removeAttribute('open')
-            showHideDropdown(openMenu)
+    const toggleMenu = async (openMenuElement: Element | null, closeMenuElement: Element | null, closed: boolean) => {
+        if (!closed && closeMenuElement!) {
+            closeMenuElement.removeAttribute('closed')
+            getElement('closeMenu').setAttribute('open', '')
+        }
+        closeMenuElement?.setAttribute('closing', '')
+        closeMenuElement?.addEventListener('animationend', () => {
+            closeMenuElement.setAttribute('closed', '')
+            closeMenuElement.removeAttribute('closing')
+            closeMenuElement.removeAttribute('open')
+            showHideDropdown(openMenuElement)
         }, {once: true})
-        openMenu?.removeAttribute('closed')
-        openMenu?.setAttribute('open', '')
+        openMenuElement?.removeAttribute('closed')
+        openMenuElement?.setAttribute('open', '')
     }
 
     const initElement = () => {
         if (openMenu === undefined || closeMenu === undefined) {
-
             openMenu = getElement('openMenu')
             closeMenu = getElement('closeMenu')
             dropDownMenu = getElement('dropdownContent')
