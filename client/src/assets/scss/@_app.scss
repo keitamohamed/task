@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import "@_variable";
 
 .notification {
@@ -145,12 +146,11 @@
     grid-template-columns: 2fr 8fr;
 
     .linkContainer {
-      display: inline-block;
+      //display: inline-block;
       text-align: right;
-      width: fit-content;
       right: 0;
       position: absolute;
-      padding-right: 2em;
+      //padding-right: 1em;
     }
   }
 
@@ -166,6 +166,131 @@
     &:hover {
       border-radius: 2px;
       padding: 0 3px 5px;
+    }
+  }
+
+  .largeDevices {
+    right: 1em !important;
+  }
+
+  .smallDevices {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 0 10px 10px;
+    text-align: left;
+    width: 60%;
+    gap: 1em;
+    justify-content: flex-end;
+    place-items: flex-end;
+    float: right;
+
+    .actionContainer {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: fit-content;
+      float: right;
+      gap: 1em;
+      padding-right: 10px;
+      place-items: flex-end;
+
+      svg {
+        font-size: 1.5em;
+        cursor: pointer;
+      }
+
+      div {
+        display: grid;
+        justify-content: center;
+      }
+
+      .icon_container {
+        display: grid;
+        justify-content: flex-end;
+        place-items: flex-end;
+        width: fit-content;
+
+        svg {
+          margin-top: .1em;
+        }
+      }
+
+      .modeContainer {
+        border: 1px solid #ccc;
+        height: fit-content;
+        border-radius: 15px;
+        width: 50px;
+        svg {
+          font-size: 1.2em;
+        }
+      }
+    }
+
+    .dropdown {
+      padding: 5px 0 15px;
+      width: 100%;
+      height: 80vh;
+      position: relative;
+      z-index: 20;
+      display: none;
+      opacity: 0;
+      transform: translateX(100%);
+      top: 0;
+      margin-top: -4em;
+      background: $dark_mode_secondary;
+
+      .closeBtnContainer {
+        width: 100%;
+        padding: 5px 10px 20px;
+        margin-bottom: 1em;
+
+        svg {
+          fill: #FFF;
+          right: .5em;
+          position: absolute;
+          font-size: 1.4em;
+          cursor: pointer;
+
+          &:hover {
+            fill: $icon_color_r
+          }
+        }
+      }
+
+      * {
+        color: #FFF;
+      }
+
+      ul {
+        display: grid;
+        height: fit-content;
+        gap: .4em;
+
+        * {
+          text-align: left;
+          font-size: 1em;
+          text-transform: capitalize
+        }
+
+        li:hover, a:hover {
+          background: $dark_mode_text_color;
+          color: #000;
+        }
+      }
+    }
+
+    .dropdown[open] {
+      display: flex;
+      flex-direction: column;
+      animation: dropdown_open .5s forwards;
+    }
+    .dropdown[closing] {
+      display: flex;
+      flex-direction: column;
+      transform: translateX(0);
+      animation: dropdown_closing 0.5s forwards;
+    }
+    .dropdown[closed] {
+      display: none;
+      animation: dropdown_closed 1s ease 0.5s forwards;
     }
   }
 }

@@ -12,3 +12,4 @@ public class TaskApplication {
         SpringApplication.run(TaskApplication.class, args);
     }
 }
+    

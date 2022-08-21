@@ -1,0 +1,8 @@
+@import "@_variable";
+
+.dark {
+  background: #121212;
+  * {
+    color: $dark_mode_text_color !important;
+  }
+}

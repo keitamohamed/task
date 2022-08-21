@@ -32,7 +32,6 @@ export const Project = () => {
             notificationElement?.removeAttribute('closing')
             notificationElement?.removeAttribute('open')
         }, {once: true})
-        console.log(notificationElement)
     }
 
     useEffect(() => {

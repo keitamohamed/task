@@ -1,5 +1,59 @@
 @import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
+@keyframes dropdown_open {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@-webkit-keyframes dropdown_open {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes dropdown_closing {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@-webkit-keyframes dropdown_closing {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes dropdown_closed {
+  100% {
+    transform: translateX(100%);
+  }
+}
+@-webkit-keyframes dropdown_closed {
+  100% {
+    transform: translateX(100%);
+  }
+}
 @keyframes menu_open {
   0% {
     opacity: 0;
@@ -13,7 +67,7 @@
 @keyframes menu_closing {
   0% {
     opacity: 1;
-    transform: translateX(0);
+    transform: scale(1) translateX(0%);
   }
   100% {
     opacity: 0;
@@ -232,12 +286,9 @@
   grid-template-columns: 2fr 8fr;
 }
 .header nav .linkContainer {
-  display: inline-block;
   text-align: right;
-  width: fit-content;
   right: 0;
   position: absolute;
-  padding-right: 2em;
 }
 .header a, .header li {
   display: inline-block;
@@ -251,6 +302,114 @@
 .header a:hover, .header li:hover {
   border-radius: 2px;
   padding: 0 3px 5px;
+}
+.header .largeDevices {
+  right: 1em !important;
+}
+.header .smallDevices {
+  grid-template-columns: repeat(1, 1fr);
+  padding: 0 0 10px 10px;
+  text-align: left;
+  width: 60%;
+  gap: 1em;
+  justify-content: flex-end;
+  place-items: flex-end;
+  float: right;
+}
+.header .smallDevices .actionContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: fit-content;
+  float: right;
+  gap: 1em;
+  padding-right: 10px;
+  place-items: flex-end;
+}
+.header .smallDevices .actionContainer svg {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.header .smallDevices .actionContainer div {
+  display: grid;
+  justify-content: center;
+}
+.header .smallDevices .actionContainer .icon_container {
+  display: grid;
+  justify-content: flex-end;
+  place-items: flex-end;
+  width: fit-content;
+}
+.header .smallDevices .actionContainer .icon_container svg {
+  margin-top: 0.1em;
+}
+.header .smallDevices .actionContainer .modeContainer {
+  border: 1px solid #ccc;
+  height: fit-content;
+  border-radius: 15px;
+  width: 50px;
+}
+.header .smallDevices .actionContainer .modeContainer svg {
+  font-size: 1.2em;
+}
+.header .smallDevices .dropdown {
+  padding: 5px 0 15px;
+  width: 100%;
+  height: 80vh;
+  position: relative;
+  z-index: 20;
+  display: none;
+  opacity: 0;
+  transform: translateX(100%);
+  top: 0;
+  margin-top: -4em;
+  background: #1D1E20;
+}
+.header .smallDevices .dropdown .closeBtnContainer {
+  width: 100%;
+  padding: 5px 10px 20px;
+  margin-bottom: 1em;
+}
+.header .smallDevices .dropdown .closeBtnContainer svg {
+  fill: #FFF;
+  right: 0.5em;
+  position: absolute;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+.header .smallDevices .dropdown .closeBtnContainer svg:hover {
+  fill: #FF1818;
+}
+.header .smallDevices .dropdown * {
+  color: #FFF;
+}
+.header .smallDevices .dropdown ul {
+  display: grid;
+  height: fit-content;
+  gap: 0.4em;
+}
+.header .smallDevices .dropdown ul * {
+  text-align: left;
+  font-size: 1em;
+  text-transform: capitalize;
+}
+.header .smallDevices .dropdown ul li:hover, .header .smallDevices .dropdown ul a:hover {
+  background: #E0E0E1;
+  color: #000;
+}
+.header .smallDevices .dropdown[open] {
+  display: flex;
+  flex-direction: column;
+  animation: dropdown_open 0.5s forwards;
+}
+.header .smallDevices .dropdown[closing] {
+  display: flex;
+  flex-direction: column;
+  transform: translateX(0);
+  animation: dropdown_closing 0.5s forwards;
+}
+.header .smallDevices .dropdown[closed] {
+  display: none;
+  animation: dropdown_closed 1s ease 0.5s forwards;
 }
 
 .home {

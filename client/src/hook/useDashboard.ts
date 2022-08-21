@@ -16,8 +16,7 @@ export const useDashboard = () => {
     const {taskDue} = useAppSelector((state) => state.task)
 
     const getElement = (name: string): HTMLElement => {
-        const element = document.querySelector(`.${name}`) as HTMLElement
-        return element
+        return document.querySelector(`.${name}`) as HTMLElement
     }
 
     const showHideDropdown = (elementOne: Element | null) => {
@@ -35,17 +34,20 @@ export const useDashboard = () => {
     }
 
     const toggleMenu = async (openMenuElement: Element | null, closeMenuElement: Element | null, closed: boolean) => {
-        if (!closed && closeMenuElement!) {
-            closeMenuElement.removeAttribute('closed')
-            getElement('closeMenu').setAttribute('open', '')
-        }
+        // if (!closed && closeMenuElement!) {
+        //     closeMenuElement.removeAttribute('closed')
+        //     getElement('closeMenu').setAttribute('open', '')
+        // }
+        closeMenuElement?.removeAttribute('closed')
         closeMenuElement?.setAttribute('closing', '')
         closeMenuElement?.addEventListener('animationend', () => {
             closeMenuElement.setAttribute('closed', '')
             closeMenuElement.removeAttribute('closing')
             closeMenuElement.removeAttribute('open')
             showHideDropdown(openMenuElement)
-        }, {once: true})
+
+        },{once: true})
+
         openMenuElement?.removeAttribute('closed')
         openMenuElement?.setAttribute('open', '')
     }

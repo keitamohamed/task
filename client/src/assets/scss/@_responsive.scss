@@ -12,6 +12,10 @@
   }
 }
 
+@include responsive_min(s) {
+
+}
+
 @include responsive_min (xs) {
   .projectForm {
 

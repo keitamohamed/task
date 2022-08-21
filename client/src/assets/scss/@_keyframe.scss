@@ -1,3 +1,64 @@
+@keyframes dropdown_open {
+  0% {
+    transform: translateX(100%)
+  }
+  50% {
+    transform: translateX(50%)
+  }
+  100% {
+    transform: translateX(0)
+  }
+}
+
+@-webkit-keyframes dropdown_open {
+  0% {
+    transform: translateX(100%)
+  }
+  50% {
+    transform: translateX(50%)
+  }
+  100% {
+    transform: translateX(0)
+  }
+
+}
+
+@keyframes dropdown_closing {
+  0% {
+    transform: translateX(0)
+  }
+  50% {
+    transform: translateX(50%)
+  }
+  100% {
+    transform: translateX(100%)
+  }
+}
+
+@-webkit-keyframes dropdown_closing {
+  0% {
+    transform: translateX(0%)
+  }
+  50% {
+    transform: translateX(50%)
+  }
+  100% {
+    transform: translateX(100%)
+  }
+}
+
+@keyframes dropdown_closed {
+  100% {
+    transform: translateX(100%)
+  }
+}
+
+@-webkit-keyframes dropdown_closed {
+  100% {
+    transform: translateX(100%)
+  }
+}
+
 @keyframes menu_open {
   0% {
     opacity: 0;
@@ -12,7 +73,7 @@
 @keyframes menu_closing {
   0% {
     opacity: 1;
-    transform: translateX(0);
+    transform: scale(1) translateX(0%);
   }
   100% {
     opacity: 0;

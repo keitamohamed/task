@@ -12,8 +12,9 @@ import store from "./setup/store/store";
 import 'react-datepicker/dist/react-datepicker.css'
 import "./assets/scss/@_keyframe.scss"
 import "./index.scss"
+import "./tailwind.css"
 import "./assets/scss/@_responsive.scss"
-
+import "./assets/scss/@mode.scss"
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 

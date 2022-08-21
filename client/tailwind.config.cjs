@@ -1,10 +1,12 @@
-// /** @type {DefaultColors} */
-// const colors = require('tailwindcss/colors')
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  experimental: {
+    darkModeVariant: true
+  },
+  darkMode: 'class',
   theme: {
     screens: {
       'sm': {'min': '300px', 'max': '768px'},
@@ -37,7 +39,17 @@ module.exports = {
         50: '#f8fafc'
       }
     },
-    extend: {},
+    extend: {
+      backgroundColor: {
+        primary: 'rgb(112, 38, 173)'
+      }
+    },
+  },
+  variants: {
+    extend: {
+      // ...
+      translate: ['dark'],
+    }
   },
   plugins: [],
 }
