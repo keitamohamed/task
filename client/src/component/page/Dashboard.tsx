@@ -1,9 +1,9 @@
 import {Link, useNavigate} from "react-router-dom";
 
-import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
+// import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
 import {BsPlus} from "react-icons/bs"
 
-import Logo from "../logo/Logo";
+// import Logo from "../logo/Logo";
 import {useDashboard} from "../../hook/useDashboard";
 import moment from "moment";
 import NoData from "../sub_component/NoDate";
@@ -11,6 +11,7 @@ import {useContext, useEffect} from "react";
 import {AuthContext, UIContent} from "../../setup/context/Context";
 import {projectAction} from "../../setup/slice/project";
 import {useAppDispatch} from "../../setup/store/ReduxHook";
+import Header from "./Header";
 
 export const Dashboard = () => {
     const navigate = useNavigate()
@@ -32,64 +33,65 @@ export const Dashboard = () => {
 
     return (
         <>
+            <Header width={'40%'} color={undefined} />
             <div className={`dashboard`}>
-                <div className="sidebar">
-                    <nav className="sidebarNav">
-                        <ul className="largeDevices">
-                            <div className="contentTop">
-                                <li>
-                                    <Link to={'/'}>
-                                        Home
-                                    </Link>
-                                </li>
-                                <li>
-                                    <li
-                                        onClick={() => navigateTo('/task')}>
-                                        Project
-                                    </li>
-                                </li>
-                                <li>Tasks</li>
-                            </div>
-                            <div className="contentBottom">
-                                <li>Teams</li>
-                                <li>Engineering</li>
-                                <li>Marking</li>
-                                <li>Sale</li>
-                            </div>
-                        </ul>
-                        <ul className="smallDevices">
-                            <div className="logoContainer">
-                                <strong>
-                                    <Link to={'/'}>
-                                        <Logo width={'50%'} color={'#FFF'} />
-                                    </Link>
-                                </strong>
-                            </div>
-                            <ul className="dropdown">
-                                <li className="icons">
-                                    <AiOutlineMenu
-                                        className='openMenu'
-                                        onClick={() => toggleMenu(closeMenu, openMenu, false)}  />
-                                    <AiOutlineClose
-                                        className='closeMenu'
-                                        onClick={() => toggleMenu(openMenu, closeMenu, true)} />
-                                </li>
-                                <div className="dropdownContent">
-                                    <ul>
-                                        <li>
-                                            <li onClick={() => navigateTo('/task')}>Project</li>
-                                        </li>
-                                        <li><li >Task</li></li>
-                                        <li><li >Team</li></li>
-                                        <li>
-                                            <li onClick={logout}>Logout</li>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </ul>
-                        </ul>
-                    </nav>
-                </div>
+                {/*<div className="sidebar">*/}
+                {/*    <nav className="sidebarNav">*/}
+                {/*        <ul className="largeDevices">*/}
+                {/*            <div className="contentTop">*/}
+                {/*                <li>*/}
+                {/*                    <Link to={'/'}>*/}
+                {/*                        Home*/}
+                {/*                    </Link>*/}
+                {/*                </li>*/}
+                {/*                <li>*/}
+                {/*                    <li*/}
+                {/*                        onClick={() => navigateTo('/task')}>*/}
+                {/*                        Project*/}
+                {/*                    </li>*/}
+                {/*                </li>*/}
+                {/*                <li>Tasks</li>*/}
+                {/*            </div>*/}
+                {/*            <div className="contentBottom">*/}
+                {/*                <li>Teams</li>*/}
+                {/*                <li>Engineering</li>*/}
+                {/*                <li>Marking</li>*/}
+                {/*                <li>Sale</li>*/}
+                {/*            </div>*/}
+                {/*        </ul>*/}
+                {/*        <ul className="smallDevices">*/}
+                {/*            <div className="logoContainer">*/}
+                {/*                <strong>*/}
+                {/*                    <Link to={'/'}>*/}
+                {/*                        <Logo width={'50%'} color={'#FFF'} />*/}
+                {/*                    </Link>*/}
+                {/*                </strong>*/}
+                {/*            </div>*/}
+                {/*            <ul className="dropdown">*/}
+                {/*                <li className="icons">*/}
+                {/*                    <AiOutlineMenu*/}
+                {/*                        className='openMenu'*/}
+                {/*                        onClick={() => toggleMenu(closeMenu, openMenu, false)}  />*/}
+                {/*                    <AiOutlineClose*/}
+                {/*                        className='closeMenu'*/}
+                {/*                        onClick={() => toggleMenu(openMenu, closeMenu, true)} />*/}
+                {/*                </li>*/}
+                {/*                <div className="dropdownContent">*/}
+                {/*                    <ul>*/}
+                {/*                        <li>*/}
+                {/*                            <li onClick={() => navigateTo('/task')}>Project</li>*/}
+                {/*                        </li>*/}
+                {/*                        <li><li >Task</li></li>*/}
+                {/*                        <li><li >Team</li></li>*/}
+                {/*                        <li>*/}
+                {/*                            <li onClick={logout}>Logout</li>*/}
+                {/*                        </li>*/}
+                {/*                    </ul>*/}
+                {/*                </div>*/}
+                {/*            </ul>*/}
+                {/*        </ul>*/}
+                {/*    </nav>*/}
+                {/*</div>*/}
                 <div className="mainContent">
                     <div className="contentButtonContainerPlus">
                         <li>

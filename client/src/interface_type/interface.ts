@@ -88,6 +88,6 @@ export interface NotificationStateProps {
 }
 
 export type LogoProperty = {
-    width: string,
-    color: string
+    width: string | undefined,
+    color: string | undefined
 }

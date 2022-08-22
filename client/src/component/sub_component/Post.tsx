@@ -54,10 +54,10 @@ export const Post = (props: PostProps) => {
                             min-w-full min-h-full`}
                             key={`${project.identifier}_${index}`}
                         >
-                            <div className="contentLeft col-span-1 mt-2">
+                            <div className="contentLeft col-span-2 !min-w-full mt-2">
                                 <p>{project.identifier}</p>
                             </div>
-                            <div className="contentMiddle col-span-8">
+                            <div className="contentMiddle col-span-10 !min-w-full">
                                 <div className="context">
                                     <h2>{project.name}</h2>
                                     <p>{project.description}</p>
@@ -67,15 +67,15 @@ export const Post = (props: PostProps) => {
                                     </p>
                                 </div>
                             </div>
-                            <div className="contentRight col-span-3 min-w-full">
+                            <div className="contentRight xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 !col-span-12 !min-w-full">
                                 <Link
                                     to={`/board:${project.id}`}
                                     className={`flex justify-content gap-2`}
                                     onClick={() => loadTask(project.identifier)}
                                 >
                                     <MdDashboard className={'mt-1'} style={{color: '#0093AB'}} />
-                                    <span className={"largeDevices"}>Project Board</span>
-                                    <span className={"smallDevices"}>Board</span>
+                                    <span className={"sm:hidden md:hidden lg:hidden xl:inline-block"}>Project Board</span>
+                                    <span className={"sm:inline-block md:inline-block lg:inline-block xl:hidden"}>Board</span>
                                 </Link>
                                 <Link
                                     className={`flex justify-content gap-2`}
@@ -85,8 +85,8 @@ export const Post = (props: PostProps) => {
                                     <FiCheckSquare
                                         className={'mt-1'}
                                         style={{color: '#019267'}} />
-                                    <span className={"largeDevices"}>Update Project</span>
-                                    <span className={"smallDevices"}>Update</span>
+                                    <span className={"sm:hidden md:hidden lg:hidden xl:inline-block"}>Update Project</span>
+                                    <span className={"sm:inline-block md:inline-block lg:inline-block xl:hidden"}>Update</span>
                                 </Link>
                                 <Link
                                     className={`flex justify-content gap-2`}
@@ -95,8 +95,8 @@ export const Post = (props: PostProps) => {
                                     <AiFillDelete
                                         className={'mt-1'}
                                         style={{color: '#E83A14'}} />
-                                    <span className={"largeDevices"}>Delete Project</span>
-                                    <span className={"smallDevices"}>Delete</span>
+                                    <span className={"sm:hidden md:hidden lg:hidden xl:inline-block"}>Delete Project</span>
+                                    <span className={"sm:inline-block md:inline-block lg:inline-block xl:hidden"}>Delete</span>
                                 </Link>
                             </div>
                         </div>

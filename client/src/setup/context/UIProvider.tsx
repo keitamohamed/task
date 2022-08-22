@@ -2,7 +2,6 @@ import {useState} from "react";
 
 import {UIContent} from "./Context";
 import {LogoProperty, Props} from "../../interface_type/interface"
-
 const {Provider} = UIContent
 
 const UIProvider = ({children}: Props) => {
@@ -31,8 +30,8 @@ const UIProvider = ({children}: Props) => {
     const setLogoProperties = (props: LogoProperty) => {
         setLogoProperty({
             ...logoProperty,
-            width: props.width,
-            color: props.color
+            width: (props.width ? props.width : logoProperty.width),
+            color: (props.color ? props.color : logoProperty.color)
         })
     }
 

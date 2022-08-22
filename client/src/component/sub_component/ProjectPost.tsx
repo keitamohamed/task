@@ -14,7 +14,7 @@ export const ProjectPost = (post: {numPostPerPage: number}) => {
     return (
         projects.length !== 0 && !pageLoaded ? (
             <div className='contentPaginate justify-center grid gap-3'>
-                <div className="paginateDataWrapper grid lg:grid-cols-2 md:grid-cols-1 gap-2">
+                <div className="paginateDataWrapper grid !xl:min-w-full xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 gap-2">
                     <Post currentPost={currentPosts} />
                 </div>
                 <Pagination

@@ -7,7 +7,7 @@ import {MdNightlight} from 'react-icons/md'
 
 import Logo from "../logo/Logo";
 import {routePath} from "../../setup/route/RoutePath";
-import {AuthContext} from "../../setup/context/Context";
+import {AuthContext, UIContent} from "../../setup/context/Context";
 import {useAppDispatch} from "../../setup/store/ReduxHook";
 import {projectAction} from "../../setup/slice/project";
 import {useProject} from "../../hook/useProject";
@@ -20,6 +20,7 @@ interface Props {
 const Header = (props: Props) => {
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
+    const uiCtx = useContext(UIContent)
     const dispatch = useAppDispatch();
     const {loadProjects} = useProject()
 
@@ -27,11 +28,6 @@ const Header = (props: Props) => {
         authCtx.logout();
         dispatch(projectAction.logout());
         navigate('/')
-    }
-
-    const navigateTo = (to: string) => {
-        loadProjects()
-        navigate('/project')
     }
 
     const getElement = (name: string): HTMLElement | null => {
@@ -62,18 +58,67 @@ const Header = (props: Props) => {
                 dropDown.removeAttribute('open')
             },{once: true})
         }
-        if (baseVal === 'darkMode') {
+        if (baseVal.includes('darkMode')) {
             window.document.documentElement.classList.add('dark')
-        } else if (baseVal === 'lightMode') {
-            document.documentElement.classList.remove('dark')
+            window.document.documentElement.classList.remove('light')
+            uiCtx.setLogoProperties({
+                width: '40%',
+                color: '#FFFFFF',
+            })
+        } else if (baseVal.includes('lightMode')) {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+            uiCtx.setLogoProperties({
+                width: '40%',
+                color: '#000',
+            })
+        }
+        switchModel()
+    }
+
+    const switchModel = () => {
+        const className = document.documentElement.className;
+        if (className === 'dark') {
+            // @ts-ignore
+            getElement('lightMode.sm').style.display = 'block'
+            // @ts-ignore
+            getElement('darkMode.sm').style.display = 'none'
+            // @ts-ignore
+            getElement('lightMode.lg').style.display = 'block'
+            // @ts-ignore
+            getElement('darkMode.lg').style.display = 'none'
+        }
+        else {
+            // @ts-ignore
+            getElement('darkMode.sm').style.display = 'block'
+            // @ts-ignore
+            getElement('lightMode.sm').style.display = 'none'
+            // @ts-ignore
+            getElement('darkMode.lg').style.display = 'block'
+            // @ts-ignore
+            getElement('lightMode.lg').style.display = 'none'
         }
     }
 
     const init = () => {
-        let element = getElement('lightMode')
-        if (element) {
-            element.style.display = 'none'
+        let elementLG = getElement('lightMode.lg')
+        let elementSM = getElement('lightMode.sm')
+        if (elementLG !== null || elementSM !== null) {
+            // @ts-ignore
+            elementLG.style.display = 'none'
+            // @ts-ignore
+            elementSM.style.display = 'none'
         }
+        elementLG = getElement('darkMode.lg');
+        elementSM = getElement('darkMode.sm');
+
+        if (elementLG !== null || elementSM !== null) {
+            // @ts-ignore
+            elementLG.style.display = 'none'
+            // @ts-ignore
+            elementSM.style.display = 'none'
+        }
+        switchModel()
     }
 
 
@@ -91,24 +136,30 @@ const Header = (props: Props) => {
                         </Link>
                     </strong>
                 </div>
-                <div className="largeDevices linkContainer sm:hidden md:hidden lg:grid xl:grid">
-                    {
-                        routePath.map((link, index) => {
-                            if (link.protected && authCtx.getCookie().taskToken && link.showLink) {
-                                return (<Link key={`${link.name}_${index}`}
-                                              to={link.path}
-                                >
-                                    {link.name}
-                                </Link>)
-                            }
-                            if (!link.protected && !authCtx.getCookie().taskToken && link.showLink) {
-                                return (<Link key={index} to={link.path} >{link.name}</Link>)
-                            }
-                        })
-                    }
-                    {
-                        authCtx.getCookie().taskToken ? <li onClick={logout}>logout </li> : ''
-                    }
+                <div className="largeDevices linkContainer sm:hidden md:hidden lg:flex xl:flex">
+                    <ul className={'grid-cols-10'}>
+                        {
+                            routePath.map((link, index) => {
+                                if (link.protected && authCtx.getCookie().taskToken && link.showLink) {
+                                    return (<Link key={`${link.name}_${index}`}
+                                                  to={link.path}
+                                    >
+                                        {link.name}
+                                    </Link>)
+                                }
+                                if (!link.protected && !authCtx.getCookie().taskToken && link.showLink) {
+                                    return (<Link key={index} to={link.path} >{link.name}</Link>)
+                                }
+                            })
+                        }
+                        {
+                            authCtx.getCookie().taskToken ? <li onClick={logout}>logout </li> : ''
+                        }
+                    </ul>
+                    <div className="modeContainer">
+                        <BsFillSunFill className='lightMode lg' onClick={() => toggleMode('lightMode.lg')}/>
+                        <MdNightlight className='darkMode lg' onClick={() => toggleMode('darkMode.lg')}/>
+                    </div>
                 </div>
                 <div className="smallDevices linkContainer sm:grid md:grid lg:hidden xl:hidden">
                     <div className="actionContainer">
@@ -116,8 +167,8 @@ const Header = (props: Props) => {
                             <AiOutlineMenu className='showDropdown' onClick={() => toggleMode('showDropdown')}/>
                         </div>
                         <div className="modeContainer">
-                            <BsFillSunFill className='lightMode' onClick={() => toggleMode('lightMode')}/>
-                            <MdNightlight className='darkMode' onClick={() => toggleMode('darkMode')}/>
+                            <BsFillSunFill className='lightMode sm' onClick={() => toggleMode('lightMode.sm')}/>
+                            <MdNightlight className='darkMode sm' onClick={() => toggleMode('darkMode.sm')}/>
                         </div>
                     </div>
                     <div className="dropdown">

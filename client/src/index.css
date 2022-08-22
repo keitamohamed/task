@@ -305,6 +305,24 @@
 }
 .header .largeDevices {
   right: 1em !important;
+  gap: 1em;
+  justify-content: flex-end;
+  place-items: flex-end;
+  float: right;
+  text-align: left;
+}
+.header .largeDevices .modeContainer {
+  display: grid;
+  justify-content: center;
+  place-items: center;
+  border: 1px solid #ccc;
+  height: fit-content;
+  border-radius: 15px;
+  width: 50px;
+}
+.header .largeDevices .modeContainer svg {
+  font-size: 1.2em;
+  cursor: pointer;
 }
 .header .smallDevices {
   grid-template-columns: repeat(1, 1fr);
@@ -315,6 +333,19 @@
   justify-content: flex-end;
   place-items: flex-end;
   float: right;
+}
+.header .smallDevices .modeContainer {
+  display: grid;
+  justify-content: center;
+  place-items: center;
+  border: 1px solid #ccc;
+  height: fit-content;
+  border-radius: 15px;
+  width: 50px;
+}
+.header .smallDevices .modeContainer svg {
+  font-size: 1.2em;
+  cursor: pointer;
 }
 .header .smallDevices .actionContainer {
   display: grid;
@@ -341,15 +372,6 @@
 }
 .header .smallDevices .actionContainer .icon_container svg {
   margin-top: 0.1em;
-}
-.header .smallDevices .actionContainer .modeContainer {
-  border: 1px solid #ccc;
-  height: fit-content;
-  border-radius: 15px;
-  width: 50px;
-}
-.header .smallDevices .actionContainer .modeContainer svg {
-  font-size: 1.2em;
 }
 .header .smallDevices .dropdown {
   padding: 5px 0 15px;
@@ -1011,7 +1033,7 @@
   }
 
   .largeDevices {
-    display: inline-block;
+    display: inline-flex;
   }
 }
 @media screen and (min-width: 575px) {
@@ -1046,7 +1068,7 @@
     width: 60%;
   }
   .project .mainContainer .projectContent {
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-template-areas: "left left right right right right right right right" "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
     background: rgba(247, 247, 247, 0.1);
     border-color: #E1E5EA;
@@ -1069,6 +1091,9 @@
     grid-gap: 0.3em;
     justify-content: center;
     margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%, -50%);
   }
   .project .mainContainer .projectContent .contentRight a {
     border-color: #E1E5EA;
@@ -1098,9 +1123,6 @@
   }
   .dashboard .sidebar .sidebarNav {
     padding: 0;
-  }
-  .dashboard .sidebar .largeDevices {
-    display: none !important;
   }
   .dashboard .sidebar .smallDevices {
     display: grid;

@@ -1,8 +1,136 @@
 @import "@_variable";
 
+.light {
+  background: inherit;
+}
+
 .dark {
   background: #121212;
   * {
-    color: $dark_mode_text_color !important;
+    color: $dark_mode_text_color;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 0 !important;
+    -webkit-text-fill-color: $dark_mode_text_color;
+  }
+
+  input::placeholder:-webkit-autofill {
+    color: #FFF;
+  }
+
+  input, input[type="text"],
+  input[type="text"]:focus,
+  input[type="email"],
+  input:focus, input[type="email"]:focus {
+    background: transparent !important;
+    border: none !important;
+    outline-width: 0 !important;
+    border-bottom: 1px solid #eee !important;
+  }
+
+  input[type="submit"] {
+    background: $dark_mode_secondary;
+    padding: 5px 15px;
+    margin-top: 1em;
+    border: 1px solid #eee !important;
+  }
+
+  .project {
+    .projectContent {
+      background: none;
+
+      .contentRight {
+        display: grid;
+        gap: .5em !important;
+
+        a {
+          background: $dark_mode_secondary;
+          padding: 2px 5px;
+
+          &:hover {
+            background: $dark_mode;
+            border: none
+          }
+        }
+      }
+    }
+  }
+
+  .projectBoard {
+
+    .taskContainer {
+
+      .title_container {
+        background: none;
+        background: $dark_mode_secondary
+      }
+
+      .task_body {
+
+        .actionBtn {
+
+          li {
+            border: $light_slate;
+            background: $dark_mode_secondary;
+
+            &:hover {
+              background: $dark_mode
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .login {
+
+    .positionRight {
+      .loginContent {
+
+        .formGroup {
+          background: none !important;
+
+          input {
+            padding: 5px 10px;
+          }
+
+        }
+      }
+    }
+  }
+
+  .dashboard {
+
+    .mainContent {
+      background: none;
+    }
+  }
+
+  .model {
+    .content {
+
+      .form {
+        background: $dark_mode
+      }
+
+      .formContainer {
+        background: $dark_mode_secondary;
+
+        * {
+          background: inherit;
+        }
+
+        .btnContainer {
+          input {
+            border-color: $dark_mode_secondary !important;
+            background: $dark_mode !important;
+          }
+        }
+      }
+    }
   }
 }

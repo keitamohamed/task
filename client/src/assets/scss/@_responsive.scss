@@ -8,7 +8,7 @@
   }
 
   .largeDevices {
-    display: inline-block;
+    display: inline-flex;
   }
 }
 
@@ -46,10 +46,6 @@
   .formContainer {
     .formGroup {
       width: 95% !important;
-
-      //input {
-      //  //border-bottom: 1px solid #bebebe !important;
-      //}
     }
   }
 
@@ -70,7 +66,7 @@
       }
 
       .projectContent {
-        grid-template-columns: repeat(9, 1fr);
+        grid-template-columns: repeat(12, 1fr);
         grid-template-areas:
               "left left right right right right right right right"
               "bottom bottom bottom bottom bottom bottom bottom bottom bottom";
@@ -96,6 +92,9 @@
           grid-gap: .3em;
           justify-content: center;
           margin: 0 auto;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%, -50%);
 
           a {
             border-color: $border_color;
@@ -137,10 +136,6 @@
 
       .sidebarNav {
         padding: 0;
-      }
-
-      .largeDevices {
-        display: none !important;
       }
 
       .smallDevices {

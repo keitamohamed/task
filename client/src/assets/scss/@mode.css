@@ -1,9 +1,86 @@
 @import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Lato:wght@300&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,300;1,100&display=swap");
+.light {
+  background: inherit;
+}
+
 .dark {
   background: #121212;
 }
 .dark * {
-  color: #E0E0E1 !important;
+  color: #E0E0E1;
+}
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 0 !important;
+  -webkit-text-fill-color: #E0E0E1;
+}
+.dark input::placeholder:-webkit-autofill {
+  color: #FFF;
+}
+.dark input, .dark input[type=text],
+.dark input[type=text]:focus,
+.dark input[type=email],
+.dark input:focus, .dark input[type=email]:focus {
+  background: transparent !important;
+  border: none !important;
+  outline-width: 0 !important;
+  border-bottom: 1px solid #eee !important;
+}
+.dark input[type=submit] {
+  background: #1D1E20;
+  padding: 5px 15px;
+  margin-top: 1em;
+  border: 1px solid #eee !important;
+}
+.dark .project .projectContent {
+  background: none;
+}
+.dark .project .projectContent .contentRight {
+  display: grid;
+  gap: 0.5em !important;
+}
+.dark .project .projectContent .contentRight a {
+  background: #1D1E20;
+  padding: 2px 5px;
+}
+.dark .project .projectContent .contentRight a:hover {
+  background: #121212;
+  border: none;
+}
+.dark .projectBoard .taskContainer .title_container {
+  background: none;
+  background: #1D1E20;
+}
+.dark .projectBoard .taskContainer .task_body .actionBtn li {
+  border: #A8B2D1;
+  background: #1D1E20;
+}
+.dark .projectBoard .taskContainer .task_body .actionBtn li:hover {
+  background: #121212;
+}
+.dark .login .positionRight .loginContent .formGroup {
+  background: none !important;
+}
+.dark .login .positionRight .loginContent .formGroup input {
+  padding: 5px 10px;
+}
+.dark .dashboard .mainContent {
+  background: none;
+}
+.dark .model .content .form {
+  background: #121212;
+}
+.dark .model .content .formContainer {
+  background: #1D1E20;
+}
+.dark .model .content .formContainer * {
+  background: inherit;
+}
+.dark .model .content .formContainer .btnContainer input {
+  border-color: #1D1E20 !important;
+  background: #121212 !important;
 }
 
 /*# sourceMappingURL=@mode.css.map */

@@ -67,7 +67,7 @@ export const useDashboard = () => {
     }
 
     useEffect(() => {
-        initElement()
+        // initElement()
         loadProjects()
         loadTaskDue()
     }, [openMenu, closeMenu])

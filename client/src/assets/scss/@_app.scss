@@ -171,6 +171,26 @@
 
   .largeDevices {
     right: 1em !important;
+    gap: 1em;
+    justify-content: flex-end;
+    place-items: flex-end;
+    float: right;
+    text-align: left;
+
+    .modeContainer {
+      display: grid;
+      justify-content: center;
+      place-items: center;
+      border: 1px solid #ccc;
+      height: fit-content;
+      border-radius: 15px;
+      width: 50px;
+
+      svg {
+        font-size: 1.2em;
+        cursor: pointer;
+      }
+    }
   }
 
   .smallDevices {
@@ -182,6 +202,21 @@
     justify-content: flex-end;
     place-items: flex-end;
     float: right;
+
+    .modeContainer {
+      display: grid;
+      justify-content: center;
+      place-items: center;
+      border: 1px solid #ccc;
+      height: fit-content;
+      border-radius: 15px;
+      width: 50px;
+
+      svg {
+        font-size: 1.2em;
+        cursor: pointer;
+      }
+    }
 
     .actionContainer {
       display: grid;
@@ -210,16 +245,6 @@
 
         svg {
           margin-top: .1em;
-        }
-      }
-
-      .modeContainer {
-        border: 1px solid #ccc;
-        height: fit-content;
-        border-radius: 15px;
-        width: 50px;
-        svg {
-          font-size: 1.2em;
         }
       }
     }
