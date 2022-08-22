@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {useMediaQuery} from "react-responsive";
 import {Link} from "react-router-dom";
 
 import {BiDotsHorizontal} from "react-icons/bi";
@@ -7,7 +8,7 @@ import {useLogin} from "../../hook/useLogin";
 import Logo from "../logo/Logo";
 
 export const Login = () => {
-
+    const isSmallScreen = useMediaQuery({query: '(max-width: 960px)'})
     const {
         onChangeLogin,
         onChangeRegister,
@@ -27,7 +28,7 @@ export const Login = () => {
 
     useEffect(() => {
 
-    }, [responseMessage])
+    }, [responseMessage, isSmallScreen])
 
 
     return (
@@ -37,7 +38,7 @@ export const Login = () => {
                     <div className="logoContainer">
                         <strong>
                             <Link to={'/'}>
-                                <Logo width={logoProp.width} color={logoProp.color}/>
+                                <Logo width={isSmallScreen ? '40%' : '30%'} color={logoProp.color}/>
                             </Link>
                         </strong>
                     </div>

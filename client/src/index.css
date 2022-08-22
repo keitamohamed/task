@@ -723,6 +723,7 @@
 .login .main .positionLeft .logoContainer {
   padding: 1.5rem 0 0 2em;
   text-align: left;
+  width: fit-content;
 }
 .login .main .positionLeft .content {
   width: 70%;

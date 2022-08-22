@@ -146,11 +146,9 @@
     grid-template-columns: 2fr 8fr;
 
     .linkContainer {
-      //display: inline-block;
       text-align: right;
       right: 0;
       position: absolute;
-      //padding-right: 1em;
     }
   }
 
@@ -669,6 +667,7 @@
       .logoContainer {
         padding: 1.5rem 0 0 2em;
         text-align: left;
+        width: fit-content;
       }
 
       .content {

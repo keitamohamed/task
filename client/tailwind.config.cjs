@@ -40,6 +40,10 @@ module.exports = {
       }
     },
     extend: {
+      custom: {
+        'lg': '20%',
+        'sm': '60%'
+      },
       backgroundColor: {
         primary: 'rgb(112, 38, 173)'
       }

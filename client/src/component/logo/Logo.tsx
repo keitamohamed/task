@@ -1,3 +1,5 @@
+import {useMediaQuery} from "react-responsive";
+import {useEffect} from "react";
 
 interface Props {
     width: string | undefined,
@@ -5,11 +7,22 @@ interface Props {
 }
 
 const Logo = (props: Props) => {
+    const isSmallScreen = useMediaQuery({query: '(max-width: 500px)'})
+    const isMedScreen = useMediaQuery({query: '(max-width: 600px)'})
+    const isMedScreenX = useMediaQuery({query: '(max-width: 768px)'})
+    const isLgScreen = useMediaQuery({query: '(max-width: 1200px)'})
+
+    // props.width ? props.width : '100%'
+    // props.color ? props.color : '#000000'
+
+    useEffect(() => {
+    }, [isSmallScreen])
 
     return (
         <svg height="100%" stroke-miterlimit="10"
              fillRule={'nonzero'} clipRule={'evenodd'} strokeLinecap={'round'} strokeLinejoin={'round'} version="1.1"
-             viewBox="0 0 230.271 78.9681" width={props.width ? props.width : '100%'} xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 230.271 78.9681" width={props.width ? props.width : isSmallScreen ? '100%' : isMedScreen ?
+            '80%' : isMedScreenX ? '70%' : isLgScreen ? '40%' : '30%'} xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg"
              xmlns-vectornator="http://vectornator.io" xmlnsXlink="http://www.w3.org/1999/xlink">
             <defs>
                 <clipPath id="TextBounds">

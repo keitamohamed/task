@@ -130,9 +130,9 @@ const Header = (props: Props) => {
         <header className='header md:z-10 sm:z-10'>
             <nav>
                 <div className="logoContainer">
-                    <strong>
+                    <strong className={''}>
                         <Link to={'/'}>
-                            <Logo width={props.width} color={props.color} />
+                            <Logo width={undefined} color={props.color} />
                         </Link>
                     </strong>
                 </div>
