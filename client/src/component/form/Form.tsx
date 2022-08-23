@@ -26,10 +26,15 @@ export const Form = (props: {
         dispatch(projectAction.setDate({name, date}))
     }
 
+    const onSubmit = (event: any) => {
+        event.preventDefault();
+        props.onSubmit(event)
+    }
+
     return (
         <form
             className='form'
-            onSubmit={props.onSubmit}
+            onSubmit={onSubmit}
         >
             <div className="titleContainer">
                 <h2>{props.title}</h2>
@@ -41,50 +46,50 @@ export const Form = (props: {
                         type="text"
                         name={'identifier'}
                         disabled={!props.isNew}
-                        className={error.identifier ? error.identifier : 'identifier'}
+                        className={error.identifier ? 'error error_message_text_color' : 'identifier'}
                         onChange={props.onChange}
-                        placeholder={project.identifier ? project.identifier : 'Enter project identifier'}
+                        placeholder={project.identifier ? project.identifier : error.identifier ? error.identifier : 'Enter project identifier'}
                     />
                 </div>
                 <div className="formGroup">
                     <input
                         type="text"
                         name={'name'}
-                        className={error.name ? error.name : 'name'}
+                        className={error.name ? 'error' : 'name'}
                         onChange={props.onChange}
-                        placeholder={project.name ? project.name : 'Enter project name'}
+                        placeholder={project.name ? project.name : error.name ? error.name : 'Enter project name'}
                     />
                 </div>
                 <div className="formGroup">
                     <input
                         type="text"
                         name={'description'}
-                        className={error.description ? error.description : 'description'}
+                        className={error.description ? 'error' :  'description'}
                         onChange={props.onChange}
-                        placeholder={project.description ? project.description : 'Enter project description'}
+                        placeholder={project.description ? project.description : error.identifier ? error.identifier : 'Enter project description'}
                     />
                 </div>
                 <div className="formGroup">
                     <DatePicker
                         name={"startDate"}
-                        className={error && error.startDate ? 'addRedBorder' :'startDate'}
+                        className={error && error.startDate ? 'error' :'startDate'}
                         selected={projectData.startDate}
                         minDate={new Date()}
                         dateFormat={"yyyy-MM-dd"}
                         onChange={(date: Date) => onChangeDate("startDate", date)}
-                        placeholderText={project.startDate ? project.startDate : 'Select project start date'}
+                        placeholderText={error.startDate ? error.startDate : project.startDate ? project.startDate : 'Select project start date'}
                     />
                     {error && error.startDate && (<p className='inputError'>{error.startDate}</p>)}
                 </div>
                 <div className="formGroup">
                     <DatePicker
                         name={"endDate"}
-                        className={error && error.endDate ? 'addRedBorder' :'endDate'}
+                        className={error && error.endDate ? 'error' :'endDate'}
                         selected={projectData.endDate}
                         minDate={projectData.startDate}
                         dateFormat={"yyyy-MM-dd"}
                         onChange={(date: Date) => onChangeDate("endDate", date)}
-                        placeholderText={project.endDate ? project.endDate : 'Select project end date'}
+                        placeholderText={error.endDate ? error.endDate : project.endDate ? project.endDate : 'Select project end date'}
                     />
                     {error && error.endDate && (<p className='inputError'>{error.endDate}</p>)}
                 </div>

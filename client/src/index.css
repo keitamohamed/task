@@ -1465,6 +1465,9 @@ input:-webkit-autofill {
   border: 0 !important;
   border-bottom: 1px solid #FF5F00 !important;
 }
+.error::placeholder {
+  color: #FF5F00;
+}
 
 .error_message {
   font-size: 16px;

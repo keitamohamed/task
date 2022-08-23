@@ -74,6 +74,10 @@ input:-webkit-autofill {
 .error {
   border: 0 !important;
   border-bottom: 1px solid #FF5F00 !important;
+
+  &::placeholder {
+    color: #FF5F00
+  }
 }
 
 .error_message {

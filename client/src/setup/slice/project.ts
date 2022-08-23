@@ -9,6 +9,9 @@ const setProject: InitialState['project'] = {
     endDate: new Date(),
 }
 
+const setError: InitialState['error'] = {
+}
+
 const initialState: InitialState = {
     project: {
         name: '',
@@ -61,6 +64,9 @@ const projectSlice = createSlice( {
         },
         setError(state, action) {
             state.error = action.payload.error;
+        },
+        reSetError(state) {
+            state.error = setError
         }
     }
 })

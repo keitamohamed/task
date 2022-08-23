@@ -14,10 +14,11 @@ export const NewProject = () => {
     }
 
     const onSubmit = async (event: any) => {
+        console.log("onSubmit")
         event.preventDefault()
         await addNewProject()
         loadProjects()
-        navigate('/task')
+        // navigate('/task')
     }
 
     return (

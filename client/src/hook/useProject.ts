@@ -12,7 +12,7 @@ export const useProject = () => {
     const authCtx = useContext(AuthContext)
     const {setNotificationProperty, setNotificationMessage, hideNotificationTimeout} = useContext(NotificationContext)
     const dispatch = useAppDispatch();
-    const {project, projects, message, error} = useAppSelector((state) => state.project)
+    const {project} = useAppSelector((state) => state.project)
 
     const setProjects = (projects: object) => {
         dispatch(projectAction.loadProject(projects))
@@ -25,6 +25,7 @@ export const useProject = () => {
     const setProject = (project: any) => {
         dispatch(projectAction.selectedProject(project))
         dispatch(taskAction.loadTask(project.task))
+        dispatch(projectAction.reSetError())
     }
 
     const deleteAction = (data: {message: string, code: string, status: string}) => {
@@ -56,7 +57,7 @@ export const useProject = () => {
     }
 
     const loadProjects = () => {
-        const {userID,} = authCtx.getCookie()
+        const {userID} = authCtx.getCookie()
         // @ts-ignore
         dispatch(GET_REQUEST(null, ApiPath.USER_PROJECT(userID), setProjects, setError))
     }
