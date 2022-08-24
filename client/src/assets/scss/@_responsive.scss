@@ -10,6 +10,12 @@
   .largeDevices {
     display: inline-flex;
   }
+
+  .dashboard {
+    .sidebar {
+      display: grid;
+    }
+  }
 }
 
 @include responsive_min(s) {
@@ -133,6 +139,7 @@
 
     .sidebar {
       z-index: 20;
+      display: none;
 
       .sidebarNav {
         padding: 0;

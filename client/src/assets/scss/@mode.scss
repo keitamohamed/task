@@ -39,7 +39,40 @@
     border: 1px solid #eee !important;
   }
 
+  .home {
+    background: url('/src/assets/image/home-bg-dark.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    .contentInfo {
+
+      .titleContainer {
+        .title {
+          font-size: 2em !important;
+          * {
+            color: $dark_mode_text_color
+          }
+        }
+      }
+
+      .infoContainer {
+        p {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
   .project {
+
+    .mainContainer {
+      .contentButtonContainerPlus {
+
+      }
+    }
+
     .projectContent {
       background: none;
 
@@ -107,6 +140,12 @@
 
     .mainContent {
       background: none;
+
+      .titleContainer {
+        i {
+          color: $dark_mode_text_color
+        }
+      }
     }
   }
 

@@ -34,6 +34,22 @@
   margin-top: 1em;
   border: 1px solid #eee !important;
 }
+.dark .home {
+  background: url("/src/assets/image/home-bg-dark.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.dark .home .contentInfo .titleContainer .title {
+  font-size: 2em !important;
+}
+.dark .home .contentInfo .titleContainer .title * {
+  color: #E0E0E1;
+}
+.dark .home .contentInfo .infoContainer p {
+  padding-left: 0;
+}
 .dark .project .projectContent {
   background: none;
 }
@@ -68,6 +84,9 @@
 }
 .dark .dashboard .mainContent {
   background: none;
+}
+.dark .dashboard .mainContent .titleContainer i {
+  color: #E0E0E1;
 }
 .dark .model .content .form {
   background: #121212;

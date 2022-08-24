@@ -54,7 +54,7 @@ export const Project = () => {
                         onClick={() => navigate("/add")}
                     />
                     <br/>
-                    <span>New Project</span>
+                    <span className={`sm:hidden md:hidden`}>New Project</span>
                 </li>
             </div>
             <div className={`projectsContainer min-h-full`}>

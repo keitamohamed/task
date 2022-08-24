@@ -1,5 +1,5 @@
 import {useMediaQuery} from "react-responsive";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 interface Props {
     width: string | undefined,
@@ -11,12 +11,16 @@ const Logo = (props: Props) => {
     const isMedScreen = useMediaQuery({query: '(max-width: 600px)'})
     const isMedScreenX = useMediaQuery({query: '(max-width: 768px)'})
     const isLgScreen = useMediaQuery({query: '(max-width: 1200px)'})
-
-    // props.width ? props.width : '100%'
-    // props.color ? props.color : '#000000'
+    const [color, setColor] = useState<string>('')
 
     useEffect(() => {
-    }, [isSmallScreen])
+        if (document.documentElement.className === 'dark') {
+            setColor('#E0E0E1');
+        }
+        else {
+            setColor('#000');
+        }
+    }, [isSmallScreen, document.documentElement.className])
 
     return (
         <svg height="100%" stroke-miterlimit="10"
@@ -30,7 +34,7 @@ const Logo = (props: Props) => {
                 </clipPath>
             </defs>
             <g id="Layer-1" vectornator-layerName="Layer 1">
-                <g fill={props.color ? props.color : '#000000'} opacity="1" stroke="none">
+                <g fill={color} opacity="1" stroke="none">
                     <path clip-path="url(#TextBounds)"
                           d="M44.9489 16.5177L44.9489 19.5754L27.8822 19.5754L27.8822 63.6643L19.9533 63.6643L19.9533 19.5754L2.88667 19.5754L2.88667 16.5177L44.9489 16.5177Z"
                           fill-rule="evenodd"/>

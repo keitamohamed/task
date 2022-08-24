@@ -1036,6 +1036,10 @@
   .largeDevices {
     display: inline-flex;
   }
+
+  .dashboard .sidebar {
+    display: grid;
+  }
 }
 @media screen and (min-width: 575px) {
   .projectForm .titleContainer {
@@ -1121,6 +1125,7 @@
   }
   .dashboard .sidebar {
     z-index: 20;
+    display: none;
   }
   .dashboard .sidebar .sidebarNav {
     padding: 0;
