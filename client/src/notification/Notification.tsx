@@ -6,7 +6,7 @@ export const Notification = (props: {conform: () => void, closeNotification: () 
     const {getNotificationsProperty} = useContext(NotificationContext)
 
     return (
-        <div className='notification'>
+        <div className='notification sm:w-[95%] lg:w-[35%] xl:w-[25%]'>
             <div className="body">
                 <div className="title_container">
                     <h5>{getNotificationsProperty().title}</h5>

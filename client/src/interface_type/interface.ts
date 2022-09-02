@@ -17,10 +17,11 @@ export interface UIContextProps {
 export interface NotificationProperty {
     getNotificationsProperty: () => NotificationStateProps,
     setNotificationProperty: (props: NotificationStateProps) => void,
-    setNotificationMessage: (message: string, showNotification: boolean, showBtn: boolean) => void
+    setNotificationMessage: (message: string, showNotification: boolean, showBtn: boolean) => void;
     hideNotification: () => void,
     hideNotificationTimeout: (seconds: number) => void,
-    showNotification: (title: string, message: string, identifier: string) => void
+    showNotification: (title: string, message: string, identifier: string) => void;
+    cancelRequest: (showBtn: boolean, showNotification: boolean) => void;
 }
 
 export interface InitialState {

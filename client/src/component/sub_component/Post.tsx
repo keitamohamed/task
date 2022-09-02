@@ -1,4 +1,4 @@
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import {Link} from "react-router-dom";
 import moment from "moment";
 
@@ -15,8 +15,6 @@ interface PostProps {
     currentPost: any[];
 }
 
-let notificationElement: HTMLElement | null
-
 export const Post = (props: PostProps) => {
     const dispatch = useAppDispatch()
     const {projects} = useAppSelector((state) => state.project)
@@ -24,23 +22,15 @@ export const Post = (props: PostProps) => {
     const {findProjectByIdentifier} = useProject()
     const {loadTask} = useTask()
 
-    const setSelectedProject = (identifier: string) => {
+    const setSelectedProject = async (identifier: string) => {
         const selectedProject = projects.find((project) => project.identifier === identifier)
         dispatch(projectAction.selectedProject(selectedProject))
-        showNotification(
+        await showNotification(
             'Delete Project',
             `Are you sure you want to delete project ${identifier}?`,
-            identifier)
-        console.log(notificationElement)
-        notificationElement?.removeAttribute('closed')
-        notificationElement?.setAttribute('open', '')
+            identifier
+        )
     }
-
-    useEffect(() => {
-        if (notificationElement === null || notificationElement === undefined) {
-            notificationElement = document.querySelector('.notification')
-        }
-    }, [])
 
     return (
         <>
@@ -49,9 +39,7 @@ export const Post = (props: PostProps) => {
                     return (
                         <div
                             className={`projectContent 
-                            grid grid-cols-12 mt-3 p-2 
-                            border border-sky-500 
-                            min-w-full min-h-full`}
+                            grid grid-cols-12 mt-3 p-2 border border-sky-500 min-w-full min-h-full`}
                             key={`${project.identifier}_${index}`}
                         >
                             <div className="contentLeft col-span-2 !min-w-full mt-2">
@@ -67,7 +55,7 @@ export const Post = (props: PostProps) => {
                                     </p>
                                 </div>
                             </div>
-                            <div className="contentRight xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 !col-span-12 !min-w-full">
+                            <div className="contentRight grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 !col-span-12 !min-w-full">
                                 <Link
                                     to={`/board:${project.id}`}
                                     className={`flex justify-content gap-2`}

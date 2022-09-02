@@ -45,7 +45,7 @@ export const TaskPost = () => {
     return (
         <div className={`tasksContainer grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1`}>
             <div className="position_left custom_g_style md:border-y-1 md:mt-2 md:mb-2 lg:border-r border-borderColor">
-                <div className="title_container md:!text-left bg-cyan-300 text-white">
+                <div className="title_container md:!text-left text-white">
                     <h5 className={`md:!texts-left`}>To Do</h5>
                 </div>
                 <div className={`task_container grid md:grid-cols-1 gap-2`}>
@@ -63,9 +63,9 @@ export const TaskPost = () => {
                                     <div className="task_body">
                                         <p>{`${task.summary}`}</p>
                                         <div className="actionBtn grid grid-cols-2 gap-1 mt-3">
-                                            <li className={`border bg-teal-400 text-slate-50`}
+                                            <li className={`text-slate-50`}
                                                 onClick={() => setSelectedTask(task.taskID)}>Update</li>
-                                            <li className={`border bg-red-700 text-slate-50`} onClick={() => showNotificationDialog(task.taskID)}>Delete</li>
+                                            <li className={`text-slate-50`} onClick={() => showNotificationDialog(task.taskID)}>Delete</li>
                                         </div>
                                     </div>
                                 </div>

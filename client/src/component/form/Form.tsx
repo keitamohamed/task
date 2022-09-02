@@ -27,7 +27,7 @@ export const Form = (props: {
     }
 
     const onSubmit = (event: any) => {
-        event.preventDefault();
+        // event.preventDefault();
         props.onSubmit(event)
     }
 

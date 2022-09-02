@@ -20,6 +20,7 @@ export const useProject = () => {
 
     const setMessage = (message: any) => {
         dispatch(projectAction.setMessage(message))
+        loadProjects()
     }
 
     const setProject = (project: any) => {

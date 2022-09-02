@@ -60,6 +60,13 @@ const NotificationProvider = ({children}: Props) => {
         notificationElement?.setAttribute('open', '')
     }
 
+    const cancelRequest = (showNotification: boolean, showBtn: boolean) => {
+        setNotification({
+            ...notification,
+            showNotification,
+            showBtn
+        })
+    }
 
     const hideNotification = () => ({
         ...notification,
@@ -77,8 +84,8 @@ const NotificationProvider = ({children}: Props) => {
             setNotificationMessage,
             hideNotification,
             hideNotificationTimeout,
-            showNotification
-
+            showNotification,
+            cancelRequest
         }}>
             {children}
         </Provider>

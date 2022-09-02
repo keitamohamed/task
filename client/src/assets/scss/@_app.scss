@@ -5,10 +5,10 @@
 @import "@_variable";
 
 .notification {
-  border: 1px solid #cbcbcb;
-  padding: 15px 15px;
+  padding: 15px 0;
   display: none;
-  width: fit-content;
+  width: 100%;
+  min-height: 23vh;
   opacity: 0;
   z-index: 5;
   position: absolute;
@@ -16,31 +16,60 @@
   right: 0;
   margin-right: 2em;
   margin-top: .5em;
-  background: linear-gradient(rgba(247, 247, 247, 1), rgba(247, 247, 247, 1));
+  box-shadow: 4px 3px 2px -3px rgba(0, 0, 0, 1);
+  background: white;
+  border: 1px solid rgba(247, 247, 247, 1);
+  border-top: 4px solid $color_red;
+
+  .body, .buttonContainer {
+    width: 100% !important;
+  }
+
+  .body {
+    .title_container {
+      text-align: left;
+      padding-left: 15px;
+
+      h5 {
+        width: fit-content;
+      }
+    }
+  }
 
   .buttonContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 80%;
+    display: flex;
     margin: .5em auto 0;
+    background: linear-gradient(rgba(247, 247, 247, 1), rgba(247, 247, 247, 1));
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: .5em;
+    padding: 10px 10px 10px 0;
 
     button {
-      font-size: 1em;
+      font-size: .8em;
       cursor: pointer;
-      width: fit-content;
-      margin: 1em auto 0;
-      padding: 5px 15px;
       border-radius: 5px;
+      border: none;
+      padding: 5px 10px;
+      color: #000;
     }
 
     .cancel {
-      border: 1px solid #aeaeae;
-      color: black;
+      &:hover {
+        color: #000;
+        background: hsl(152, 68%, 70%);
+      }
     }
 
     .conform {
-      background: #019267;
-      color: white;
+
+      &:hover {
+        color: hsl(0, 68%, 50%);
+        background: hsl(0, 100%, 95%);
+      }
     }
   }
 }
@@ -320,7 +349,7 @@
 
 .home {
   min-height: 100vh;
-  background: url("./assets/image/home-bg.png") no-repeat center center fixed;
+  background: url("/src/assets/image/home-bg.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -545,7 +574,7 @@
     padding: 15px;
     width: 100%;
     height: auto;
-    background: url("./assets/image/dashboard_bg_w.png") no-repeat center center fixed;
+    background: url("/src/assets/image/dashboard_bg_w.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -650,7 +679,7 @@
     .positionLeft{
       width: 100%;
       height: 100%;
-      background: url('./assets/image/Login-two.png') no-repeat center;
+      background: url('/src/assets/image/Login-two.png') no-repeat center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -806,100 +835,13 @@
     width: 90%;
     margin: 0 auto;
     padding: 15px 0;
-
-    //.projectContent {
-    //  display: grid;
-    //  grid-template-columns: 2fr 7fr 3fr;
-    //  border: 1px solid #aeaeae;
-    //  border-radius: 5px;
-    //  margin-bottom: .5em;
-    //  grid-gap: .5em;
-    //  background: #fdfdfd;
-    //  padding: 1em 15px 15px;
-    //  margin-top: 1em;
-    //
-    //  .contentLeft {
-    //    p {
-    //      font-size: 1.2em;
-    //      font-weight: bold;
-    //      text-align: left;
-    //    }
-    //  }
-    //
-    //  .contentMiddle {
-    //    text-align: left;
-    //    position: relative;
-    //
-    //    * {
-    //      text-align: left;
-    //    }
-    //
-    //    h2 {
-    //      margin-bottom: .5em;
-    //    }
-    //
-    //    p {
-    //      font-size: 1.1em;
-    //    }
-    //
-    //    .projectDate {
-    //      bottom: 0;
-    //      position: absolute
-    //    }
-    //  }
-    //
-    //  .contentRight {
-    //    display: grid;
-    //    grid-gap: .3em;
-    //    background: white;
-    //
-    //    * {
-    //      list-style: none
-    //    }
-    //
-    //    a, li {
-    //      cursor: pointer;
-    //      border: .05em solid #c4c4c4;
-    //      padding: 8px 10px;
-    //      text-align: left;
-    //      border-radius: 5px;
-    //      display: block;
-    //
-    //      &:hover {
-    //        background: #EEEEEE;
-    //      }
-    //
-    //      svg {
-    //        font-size: 1.6em;
-    //      }
-    //
-    //      span {
-    //        margin-top: .2em;
-    //        position: absolute;
-    //        margin-left: .5em;
-    //      }
-    //
-    //
-    //      &:first-child {
-    //        color: #0093AB;
-    //      }
-    //
-    //      &:nth-child(2) {
-    //        color: #019267;
-    //      }
-    //
-    //      &:last-child {
-    //        color: #E83A14;
-    //      }
-    //    }
-    //  }
-    //}
   }
 }
 
 .projectBoard {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  min-height: 60vh;
 
   .nav {
 
@@ -1062,14 +1004,14 @@
   .tasks {
 
     .custom_g_style {
-      //border-right: 1px solid #64748b;
       padding: 0 5px;
       border-color: #64748b;
 
       .title_container {
         padding: 10px 0;
-        color: #FFF;
+        color: #000;
         text-transform: uppercase;
+        background: $dark_light_color;
 
         * {
           font-size: 1.2em;
@@ -1078,7 +1020,7 @@
       }
 
       .task {
-        border: 1px solid #64748b;
+        border: 1px solid $dark_light_color;
 
         * {
           list-style: none
@@ -1088,6 +1030,21 @@
           li {
             cursor: pointer
           }
+        }
+
+        .task_body {
+
+          .actionBtn {
+            background: $dark_light_color;
+
+            li {
+              &:last-child:hover {
+                color: hsl(0, 68%, 50%);
+                background: hsl(0, 100%, 95%);
+              }
+            }
+          }
+
         }
       }
     }
@@ -1118,6 +1075,7 @@
 
 .projectForm, .projectUpdate {
   width: 100%;
+  height: 90vh;
 
   .titleContainer {
     width: 60%;
@@ -1126,6 +1084,52 @@
       font-size: 1.2em;
       text-align: center;
       border-bottom: 2px dotted #ccc;
+    }
+  }
+}
+
+.footer {
+  width: 100%;
+  position: relative;
+  clear: both;
+  background: $dark_mode;
+  margin-top: 3em;
+
+  * {
+    color: $dark_mode_text_color;
+  }
+
+  .copyright {
+    background: $dark_mode_secondary;
+
+    p {
+      text-transform: uppercase;
+      font-family: 'proximanova', 'poppins', sans-serif;
+      font-size: .8em;
+    }
+  }
+
+  .icons {
+    border-top: 2px solid $dark_mode_secondary;
+    padding-top: 5px;
+    svg {
+      font-size: 1.5em;
+      cursor: pointer;
+
+      &:hover {
+        font-size: 1.6em;
+      }
+    }
+  }
+
+  .toolsContainer {
+    svg {
+      font-size: 1.5em;
+      cursor: pointer;
+
+      &:hover {
+        font-size: 1.6em;
+      }
     }
   }
 }

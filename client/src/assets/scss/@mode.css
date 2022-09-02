@@ -2,7 +2,6 @@
 .light {
   background: inherit;
 }
-
 .dark {
   background: #121212;
 }
@@ -33,6 +32,14 @@
   padding: 5px 15px;
   margin-top: 1em;
   border: 1px solid #eee !important;
+}
+.dark .notification {
+  background: #1D1E20;
+  border: none;
+  border-top: 4px solid #f71835;
+}
+.dark .notification * {
+  color: #E0E0E1;
 }
 .dark .home {
   background: url("/src/assets/image/home-bg-dark.png") no-repeat center center fixed;
@@ -100,6 +107,9 @@
 .dark .model .content .formContainer .btnContainer input {
   border-color: #1D1E20 !important;
   background: #121212 !important;
+}
+.dark .footer {
+  border-top: 2px solid #1D1E20;
 }
 
 /*# sourceMappingURL=@mode.css.map */

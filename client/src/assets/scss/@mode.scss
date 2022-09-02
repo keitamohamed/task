@@ -2,6 +2,10 @@
 
 .light {
   background: inherit;
+
+  .login {
+
+  }
 }
 
 .dark {
@@ -37,6 +41,16 @@
     padding: 5px 15px;
     margin-top: 1em;
     border: 1px solid #eee !important;
+  }
+
+  .notification {
+    background: $dark_mode_secondary;
+    border: none;
+    border-top: 4px solid $color_red;
+
+    * {
+      color: $dark_mode_text_color;
+    }
   }
 
   .home {
@@ -171,5 +185,9 @@
         }
       }
     }
+  }
+
+  .footer {
+    border-top: 2px solid $dark_mode_secondary;
   }
 }

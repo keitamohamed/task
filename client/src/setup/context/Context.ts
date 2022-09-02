@@ -35,7 +35,8 @@ const notificationProps: NotificationProperty = {
     hideNotificationTimeout(seconds: number): void {},
     setNotificationMessage(message: string, showNotification: boolean, showBtn: boolean): void {},
     setNotificationProperty(props: NotificationStateProps): void {},
-    showNotification(title: string, message: string, identifier: string): void {}
+    showNotification(title: string, message: string, identifier: string): void {},
+    cancelRequest(showNotificationL: boolean, showBtn: boolean): void {}
 }
 
 

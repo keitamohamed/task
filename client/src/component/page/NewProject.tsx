@@ -3,6 +3,7 @@ import {Form} from "../form/Form";
 import {useAppDispatch} from "../../setup/store/ReduxHook";
 import project, {projectAction} from "../../setup/slice/project";
 import {useProject} from "../../hook/useProject";
+import Header from "./Header";
 
 export const NewProject = () => {
     const navigate = useNavigate()
@@ -14,14 +15,14 @@ export const NewProject = () => {
     }
 
     const onSubmit = async (event: any) => {
-        console.log("onSubmit")
         event.preventDefault()
         await addNewProject()
-        loadProjects()
         // navigate('/task')
     }
 
     return (
+        <>
+            <Header width={undefined} color={undefined}  />
         <div className={'projectForm'}>
             <div className="mainContainer">
                 <Form
@@ -32,5 +33,6 @@ export const NewProject = () => {
                     onSubmit={onSubmit} />
             </div>
         </div>
+        </>
     )
 }

@@ -23,7 +23,7 @@ export const Login = () => {
     } = useLogin()
     const [logoProp, setLogoProp] = useState({
         width: '20%',
-        color: '#FFF'
+        color: '#E0E0E1'
     })
 
     useEffect(() => {

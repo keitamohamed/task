@@ -121,7 +121,7 @@
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateX(0%);
+    transform: scale(1) translateX(5%);
   }
 }
 @keyframes notification_closing {
@@ -156,10 +156,10 @@
 @tailwind components;
 @tailwind utilities;
 .notification {
-  border: 1px solid #cbcbcb;
-  padding: 15px 15px;
+  padding: 15px 0;
   display: none;
-  width: fit-content;
+  width: 100%;
+  min-height: 23vh;
   opacity: 0;
   z-index: 5;
   position: absolute;
@@ -167,29 +167,48 @@
   right: 0;
   margin-right: 2em;
   margin-top: 0.5em;
-  background: linear-gradient(#f7f7f7, #f7f7f7);
+  box-shadow: 4px 3px 2px -3px black;
+  background: white;
+  border: 1px solid #f7f7f7;
+  border-top: 4px solid #f71835;
+}
+.notification .body, .notification .buttonContainer {
+  width: 100% !important;
+}
+.notification .body .title_container {
+  text-align: left;
+  padding-left: 15px;
+}
+.notification .body .title_container h5 {
+  width: fit-content;
 }
 .notification .buttonContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 80%;
+  display: flex;
   margin: 0.5em auto 0;
+  background: linear-gradient(#f7f7f7, #f7f7f7);
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.5em;
+  padding: 10px 10px 10px 0;
 }
 .notification .buttonContainer button {
-  font-size: 1em;
+  font-size: 0.8em;
   cursor: pointer;
-  width: fit-content;
-  margin: 1em auto 0;
-  padding: 5px 15px;
   border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  color: #000;
 }
-.notification .buttonContainer .cancel {
-  border: 1px solid #aeaeae;
-  color: black;
+.notification .buttonContainer .cancel:hover {
+  color: #000;
+  background: #7ee7b6;
 }
-.notification .buttonContainer .conform {
-  background: #019267;
-  color: white;
+.notification .buttonContainer .conform:hover {
+  color: #d62929;
+  background: #ffe6e6;
 }
 
 .notification[open] {
@@ -436,7 +455,7 @@
 
 .home {
   min-height: 100vh;
-  background: url("./assets/image/home-bg.png") no-repeat center center fixed;
+  background: url("/src/assets/image/home-bg.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -627,7 +646,7 @@
   padding: 15px;
   width: 100%;
   height: auto;
-  background: url("./assets/image/dashboard_bg_w.png") no-repeat center center fixed;
+  background: url("/src/assets/image/dashboard_bg_w.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -714,7 +733,7 @@
 .login .main .positionLeft {
   width: 100%;
   height: 100%;
-  background: url("./assets/image/Login-two.png") no-repeat center;
+  background: url("/src/assets/image/Login-two.png") no-repeat center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -846,6 +865,7 @@
 .projectBoard {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  min-height: 60vh;
 }
 .projectBoard .nav .navActionBtnContainer {
   margin-left: 3em;
@@ -983,21 +1003,29 @@
 }
 .projectBoard .tasks .custom_g_style .title_container {
   padding: 10px 0;
-  color: #FFF;
+  color: #000;
   text-transform: uppercase;
+  background: #f7f7f7;
   margin-bottom: 1em;
 }
 .projectBoard .tasks .custom_g_style .title_container * {
   font-size: 1.2em;
 }
 .projectBoard .tasks .custom_g_style .task {
-  border: 1px solid #64748b;
+  border: 1px solid #f7f7f7;
 }
 .projectBoard .tasks .custom_g_style .task * {
   list-style: none;
 }
 .projectBoard .tasks .custom_g_style .task .actionBtn li {
   cursor: pointer;
+}
+.projectBoard .tasks .custom_g_style .task .task_body .actionBtn {
+  background: #f7f7f7;
+}
+.projectBoard .tasks .custom_g_style .task .task_body .actionBtn li:last-child:hover {
+  color: #d62929;
+  background: #ffe6e6;
 }
 .projectBoard .tasks .title_container {
   width: 100%;
@@ -1018,6 +1046,7 @@
 
 .projectForm, .projectUpdate {
   width: 100%;
+  height: 90vh;
 }
 .projectForm .titleContainer, .projectUpdate .titleContainer {
   width: 60%;
@@ -1026,6 +1055,43 @@
   font-size: 1.2em;
   text-align: center;
   border-bottom: 2px dotted #ccc;
+}
+
+.footer {
+  width: 100%;
+  position: relative;
+  clear: both;
+  background: #121212;
+  margin-top: 3em;
+}
+.footer * {
+  color: #E0E0E1;
+}
+.footer .copyright {
+  background: #1D1E20;
+}
+.footer .copyright p {
+  text-transform: uppercase;
+  font-family: "proximanova", "poppins", sans-serif;
+  font-size: 0.8em;
+}
+.footer .icons {
+  border-top: 2px solid #1D1E20;
+  padding-top: 5px;
+}
+.footer .icons svg {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.footer .icons svg:hover {
+  font-size: 1.6em;
+}
+.footer .toolsContainer svg {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.footer .toolsContainer svg:hover {
+  font-size: 1.6em;
 }
 
 @media screen and (min-width: 800px) {

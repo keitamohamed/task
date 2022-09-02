@@ -34,7 +34,7 @@ const Logo = (props: Props) => {
                 </clipPath>
             </defs>
             <g id="Layer-1" vectornator-layerName="Layer 1">
-                <g fill={color} opacity="1" stroke="none">
+                <g fill={props.color ? props.color : color} opacity="1" stroke="none">
                     <path clip-path="url(#TextBounds)"
                           d="M44.9489 16.5177L44.9489 19.5754L27.8822 19.5754L27.8822 63.6643L19.9533 63.6643L19.9533 19.5754L2.88667 19.5754L2.88667 16.5177L44.9489 16.5177Z"
                           fill-rule="evenodd"/>
