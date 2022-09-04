@@ -15,11 +15,11 @@ export const Model = () => {
         return task.summary !== ''
     }
     return (
-        <div className="model">
+        <div className="model sm:w-[95%]">
             <div className="content">
                 <form
                     action=""
-                    className="form"
+                    className="form sm:w-full sm:!p-0 md:!p-4 lg:!p-4 xl:!p-4"
                     onSubmit={onSubmit}
                 >
                     <div className="formContainer">

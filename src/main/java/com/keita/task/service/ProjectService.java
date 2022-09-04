@@ -2,6 +2,7 @@ package com.keita.task.service;
 
 import com.keita.task.error_handler.InvalidInput;
 import com.keita.task.error_handler.ProjectExceptionHandler;
+import com.keita.task.error_handler.SuccessfulHandler;
 import com.keita.task.model.Project;
 import com.keita.task.model.ProjectTask;
 import com.keita.task.model.User;
@@ -47,6 +48,7 @@ public class ProjectService {
         project.setCreatedAt(date());
         project.setUser(user);
         projectRepo.save(project);
+        new SuccessfulHandler(response, String.format("New project have been created with an identifier %s", project.getIdentifier()));
     }
 
     public List<Project> findAllProject(HttpServletResponse response) {

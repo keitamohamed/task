@@ -44,7 +44,7 @@ export const TaskPost = () => {
 
     return (
         <div className={`tasksContainer grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1`}>
-            <div className="position_left custom_g_style md:border-y-1 md:mt-2 md:mb-2 lg:border-r border-borderColor">
+            <div className="position_left custom_g_style md:border-y-1 md:mt-2 md:mb-2 lg:border-r border-darkLight">
                 <div className="title_container md:!text-left text-white">
                     <h5 className={`md:!texts-left`}>To Do</h5>
                 </div>
@@ -52,12 +52,12 @@ export const TaskPost = () => {
                     {
                         tasks.map((task, index) => {
                             return task.status === 'To Do' ? (
-                                <div className="task p-1" key={`${task.taskID}_${index}`}>
+                                <div className="task" key={`${task.taskID}_${index}`}>
                                     <div className="task_header grid grid-cols-2">
                                         <li className={`text-left pl-3`}>{`ID#: ${task.taskID}`}</li>
                                         <div className="grid md:grid-cols-1 gap-1 mb-2">
                                             <li>{`Priority: ${task.priority}`}</li>
-                                            <li>{`Due: ${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
+                                            <li>{`${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
                                         </div>
                                     </div>
                                     <div className="task_body">
@@ -74,7 +74,7 @@ export const TaskPost = () => {
                     }
                 </div>
             </div>
-            <div className="position_middle custom_g_style md:border-y-1 md:mt-2 md:mb-2 sm:mt-2 lg:border-r border-borderColor">
+            <div className="position_middle custom_g_style md:border-y-1 md:mt-2 md:mb-2 sm:mt-2 lg:border-r border-darkLight">
                 <div className="title_container bg-teal-400">
                     <h5>In Progress</h5>
                 </div>
@@ -82,21 +82,21 @@ export const TaskPost = () => {
                     {
                         tasks.map((task, index) => {
                             return task.status === 'In Progress' ? (
-                                <div className="task p-1" key={`${task.taskID}_${index}`}>
+                                <div className="task" key={`${task.taskID}_${index}`}>
                                     <div className="task_header grid grid-cols-2">
-                                        <li>{`ID#: ${task.taskID}`}</li>
+                                        <li className={'text-left pl-3'}>{`ID#: ${task.taskID}`}</li>
                                         <div className="grid md:grid-cols-1 gap-1 mb-2">
                                             <li>{`Priority: ${task.priority}`}</li>
-                                            <li>{`Due: ${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
+                                            <li>{`${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
                                         </div>
                                     </div>
                                     <div className="task_body">
                                         <p>{`${task.summary}`}</p>
                                         <div className="actionBtn grid grid-cols-2 gap-1 mt-3">
                                             <li
-                                                className={`border bg-teal-400 text-slate-50`}
+                                                className={`text-slate-50`}
                                                 onClick={() => setSelectedTask(task.taskID)}>Update</li>
-                                            <li className={`border bg-red-700 text-slate-50`} onClick={() => showNotificationDialog(task.taskID)}>Delete</li>
+                                            <li className={`text-slate-50`} onClick={() => showNotificationDialog(task.taskID)}>Delete</li>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@ export const TaskPost = () => {
                     }
                 </div>
             </div>
-            <div className="position_right custom_g_style md:border-y-1 md:mt-2 md:mb-2 sm:mt-2 lg:border-r border-borderColor">
+            <div className="position_right custom_g_style md:border-y-1 md:mt-2 md:mb-2 sm:mt-2 lg:border-r border-darkLight">
                 <div className="title_container bg-green-500">
                     <h5>Completed</h5>
                 </div>
@@ -113,22 +113,22 @@ export const TaskPost = () => {
                     {
                         tasks.map((task, index) => {
                             return task.status === 'Complete' ? (
-                                <div className="task p-1" key={`${task.taskID}_${index}`}>
+                                <div className="task" key={`${task.taskID}_${index}`}>
                                     <div className="task_header grid grid-cols-2">
                                         <li className={`text-left pl-3`}>{`ID#: ${task.taskID}`}</li>
                                         <div className="grid md:grid-cols-1 gap-1 mb-2">
                                             <li>{`Priority: ${task.priority}`}</li>
-                                            <li>{`Due: ${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
+                                            <li>{`${moment(task.dueDate).format('MMM DD YYYY')}`}</li>
                                         </div>
                                     </div>
                                     <div className="task_body">
                                         <p>{`${task.summary}`}</p>
                                         <div className="actionBtn grid grid-cols-2 gap-1 mt-3">
                                             <li
-                                                className={`border bg-teal-400 text-slate-50`}
+                                                className={`text-slate-50`}
                                                 onClick={() => setSelectedTask(task.taskID)}
                                             >Update</li>
-                                            <li className={`border bg-red-700 text-slate-50`}
+                                            <li className={`text-slate-50`}
                                                 onClick={() => showNotificationDialog(task.taskID)}>
                                                 Delete
                                             </li>

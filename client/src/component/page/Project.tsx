@@ -9,19 +9,25 @@ import NoData from "../sub_component/NoDate";
 import {ProjectPost} from "../sub_component/ProjectPost";
 import {Notification} from "../../notification/Notification";
 import {useProject} from "../../hook/useProject";
-import {projectAction} from "../../setup/slice/project";
+import project, {projectAction} from "../../setup/slice/project";
 
 export const Project = () => {
     const dispatch = useAppDispatch()
     const uiCtx = useContext(UIContent)
-    const {getNotificationsProperty, cancelRequest} = useContext(NotificationContext)
+    const {getNotificationsProperty, cancelRequest, hideNotificationTimeout} = useContext(NotificationContext)
     const nav = useNavigate()
     const {deleteProject} = useProject()
     const {projects} = useAppSelector((state) => state.project)
 
     const navigate = (to: string) => {
         dispatch(projectAction.initialProject())
+        dispatch(projectAction.setMessage({}))
         nav(to)
+    }
+
+    const deleteSelectedProject = async () => {
+        await deleteProject()
+        hideNotificationTimeout(5000)
     }
 
     const closeNotificationDialog = (): void => {
@@ -56,7 +62,7 @@ export const Project = () => {
     return (<div className='project'>
         <Header width={uiCtx.getLogoProperties()?.width} color={uiCtx.getLogoProperties()?.color}/>
         <Notification
-            conform={deleteProject}
+            conform={deleteSelectedProject}
             closeNotification={closeNotificationDialog}
         />
         <div className="mainContainer">

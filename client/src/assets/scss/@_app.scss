@@ -91,7 +91,7 @@
 
 .model {
   width: 95%;
-  min-height: 90vh;
+  min-height: fit-content;
   display: none;
   z-index: 10;
   position: absolute;
@@ -99,8 +99,9 @@
   top: 50%;
   transform: translate(-50%, -50%);
   overflow: auto;
-  padding: 15px;
+  padding: 0 15px 10px;
   border-radius: 5px;
+  background: $dark_light_color;
 
   .content {
     position: relative;
@@ -108,7 +109,7 @@
     -webkit-animation-duration: 0.4s;
     animation-name: model;
     animation-duration: .4s;
-    margin-top: 3em;
+    background: inherit;
   }
 
   .btnCloseContainer {
@@ -167,7 +168,7 @@
 }
 
 .header {
-  padding: 20px 10px;
+  padding: 20px 10px 0;
   background: inherit;
 
   nav {
@@ -490,7 +491,6 @@
         width: 100%;
         padding: 10px 15px;
         margin-bottom: .5em;
-        border-radius: 5px;
         font-size: 1.1em;
         text-align: left;
       }
@@ -1005,7 +1005,6 @@
 
     .custom_g_style {
       padding: 0 5px;
-      border-color: #64748b;
 
       .title_container {
         padding: 10px 0;
@@ -1014,13 +1013,15 @@
         background: $dark_light_color;
 
         * {
-          font-size: 1.2em;
+          font-size: .8em;
+          font-weight: 900;
         }
         margin-bottom: 1em;
       }
 
       .task {
         border: 1px solid $dark_light_color;
+        padding: 10px 0 0;
 
         * {
           list-style: none
@@ -1036,9 +1037,16 @@
 
           .actionBtn {
             background: $dark_light_color;
+            padding: 5px;
 
             li {
-              &:last-child:hover {
+              color: #008017;
+              border-radius: 10px;
+              background: hsl(131, 100%, 92%);
+
+
+
+              &:last-child {
                 color: hsl(0, 68%, 50%);
                 background: hsl(0, 100%, 95%);
               }

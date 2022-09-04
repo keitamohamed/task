@@ -23,6 +23,7 @@ module.exports = {
     },
     colors: {
       borderColor: '#d1d5db',
+      darkLight: 'hsl(106, 0%, 97%)',
       green: {
         500: '#10b981'
       },

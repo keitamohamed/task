@@ -3,8 +3,6 @@ import { NotificationContext } from "./Context"
 import {NotificationStateProps, Props} from "../../interface_type/interface";
 
 const {Provider} = NotificationContext
-
-let messageNotification = null
 let notificationElement: HTMLElement | null;
 
 const NotificationProvider = ({children}: Props) => {
@@ -32,7 +30,6 @@ const NotificationProvider = ({children}: Props) => {
         })
     }
 
-    // Change setNotificationAction to setNotificationMessage
     const setNotificationMessage = (message: string, showNotification: boolean, showBtn: boolean) => {
         setNotification({
             ...notification,
@@ -50,12 +47,6 @@ const NotificationProvider = ({children}: Props) => {
             showNotification: true,
             title: title
         })
-        // if (notificationElement === null || notificationElement === undefined) {
-        //     notificationElement = document.querySelector('.notification')
-        // }
-        // notificationElement?.removeAttribute('open')
-        // notificationElement?.setAttribute('closed', '')
-        // console.log(notificationElement)
         notificationElement?.removeAttribute('closed')
         notificationElement?.setAttribute('open', '')
     }
@@ -68,13 +59,27 @@ const NotificationProvider = ({children}: Props) => {
         })
     }
 
-    const hideNotification = () => ({
-        ...notification,
-        showNotification: false
-    })
+    const hideNotification = () => {
+        setNotification({
+            ...notification,
+            showBtn: false,
+            showNotification: false,
+        })
+    }
 
-    const hideNotificationTimeout = (second: number) => {
+    const reSetNotification = () => {
+        setNotificationProperty({
+            identifier: '',
+            message: '',
+            showBtn: false,
+            showNotification: false,
+            title: ''
+        })
+    }
+
+    const hideNotificationTimeout = async (second: number) => {
         setTimeout(hideNotification, second)
+        setTimeout(reSetNotification, (second + 2000))
     }
 
     return (

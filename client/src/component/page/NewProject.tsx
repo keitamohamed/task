@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom'
 import {Form} from "../form/Form";
 import {useAppDispatch} from "../../setup/store/ReduxHook";
-import project, {projectAction} from "../../setup/slice/project";
+import {projectAction} from "../../setup/slice/project";
 import {useProject} from "../../hook/useProject";
 import Header from "./Header";
 
@@ -14,10 +14,15 @@ export const NewProject = () => {
         dispatch(projectAction.addNewProject(event.target))
     }
 
+    const navigateTo = () => {
+        navigate('/task')
+    }
+
     const onSubmit = async (event: any) => {
         event.preventDefault()
         await addNewProject()
-        // navigate('/task')
+        await loadProjects()
+        setTimeout(navigateTo, 5000)
     }
 
     return (

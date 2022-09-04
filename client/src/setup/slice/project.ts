@@ -21,7 +21,7 @@ const initialState: InitialState = {
         endDate: new Date,
     },
     projects: [],
-    message: '',
+    message: {},
     error: {}
 }
 

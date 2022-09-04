@@ -33,7 +33,7 @@ export interface InitialState {
         endDate: Date,
     }
     projects: any[]
-    message: string,
+    message: any,
     error: any
 }
 

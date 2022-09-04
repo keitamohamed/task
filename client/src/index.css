@@ -228,7 +228,7 @@
 
 .model {
   width: 95%;
-  min-height: 90vh;
+  min-height: fit-content;
   display: none;
   z-index: 10;
   position: absolute;
@@ -236,8 +236,9 @@
   top: 50%;
   transform: translate(-50%, -50%);
   overflow: auto;
-  padding: 15px;
+  padding: 0 15px 10px;
   border-radius: 5px;
+  background: #f7f7f7;
 }
 .model .content {
   position: relative;
@@ -245,7 +246,7 @@
   -webkit-animation-duration: 0.4s;
   animation-name: model;
   animation-duration: 0.4s;
-  margin-top: 3em;
+  background: inherit;
 }
 .model .btnCloseContainer {
   position: absolute;
@@ -297,7 +298,7 @@
 }
 
 .header {
-  padding: 20px 10px;
+  padding: 20px 10px 0;
   background: inherit;
 }
 .header nav {
@@ -579,7 +580,6 @@
   width: 100%;
   padding: 10px 15px;
   margin-bottom: 0.5em;
-  border-radius: 5px;
   font-size: 1.1em;
   text-align: left;
 }
@@ -999,7 +999,6 @@
 }
 .projectBoard .tasks .custom_g_style {
   padding: 0 5px;
-  border-color: #64748b;
 }
 .projectBoard .tasks .custom_g_style .title_container {
   padding: 10px 0;
@@ -1009,10 +1008,12 @@
   margin-bottom: 1em;
 }
 .projectBoard .tasks .custom_g_style .title_container * {
-  font-size: 1.2em;
+  font-size: 0.8em;
+  font-weight: 900;
 }
 .projectBoard .tasks .custom_g_style .task {
   border: 1px solid #f7f7f7;
+  padding: 10px 0 0;
 }
 .projectBoard .tasks .custom_g_style .task * {
   list-style: none;
@@ -1022,8 +1023,14 @@
 }
 .projectBoard .tasks .custom_g_style .task .task_body .actionBtn {
   background: #f7f7f7;
+  padding: 5px;
 }
-.projectBoard .tasks .custom_g_style .task .task_body .actionBtn li:last-child:hover {
+.projectBoard .tasks .custom_g_style .task .task_body .actionBtn li {
+  color: #008017;
+  border-radius: 10px;
+  background: #d6ffde;
+}
+.projectBoard .tasks .custom_g_style .task .task_body .actionBtn li:last-child {
   color: #d62929;
   background: #ffe6e6;
 }
@@ -1440,7 +1447,7 @@
   }
 
   .model {
-    padding: 15px 0;
+    padding: 0;
   }
   .model .content .form {
     width: 100% !important;
@@ -1450,7 +1457,7 @@
     padding: 5px 5px 0;
   }
   .model .content .form .formContainer .btnCloseContainer {
-    right: 1.5em;
+    right: 0.3em;
   }
   .model .content .form .titleContainer {
     width: 100%;

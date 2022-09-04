@@ -25,6 +25,7 @@ export const POST_REQUEST = (
 
         try {
             const response = await send()
+            console.log("Response", response.data)
             action(response.data)
         }catch (error) {
             setError(error.response?.data)

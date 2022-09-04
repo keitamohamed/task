@@ -10,7 +10,7 @@ import {taskAction} from "../setup/slice/task"
 
 export const useProject = () => {
     const authCtx = useContext(AuthContext)
-    const {setNotificationProperty, setNotificationMessage, hideNotificationTimeout} = useContext(NotificationContext)
+    const {setNotificationMessage} = useContext(NotificationContext)
     const dispatch = useAppDispatch();
     const {project} = useAppSelector((state) => state.project)
 
@@ -18,8 +18,8 @@ export const useProject = () => {
         dispatch(projectAction.loadProject(projects))
     }
 
-    const setMessage = (message: any) => {
-        dispatch(projectAction.setMessage(message))
+    const setMessage = (response: any) => {
+        dispatch(projectAction.setMessage(response))
         loadProjects()
     }
 
@@ -31,6 +31,7 @@ export const useProject = () => {
 
     const deleteAction = (data: {message: string, code: string, status: string}) => {
         loadProjects()
+        dispatch(projectAction.setMessage(data))
         setNotificationMessage(data.message!, true, false)
     }
 
@@ -77,7 +78,6 @@ export const useProject = () => {
     const deleteProject = () => {
         // @ts-ignore
         dispatch(DELETE_REQUEST(null, ApiPath.DELETE_PROJECT(project.identifier), deleteAction, setError))
-        hideNotificationTimeout(5000)
     }
 
     return {

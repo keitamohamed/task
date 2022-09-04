@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useState} from "react";
 // @ts-ignore
 import DatePicker from 'react-datepicker'
 import {useAppSelector, useAppDispatch} from "../../setup/store/ReduxHook";
@@ -14,7 +14,7 @@ export const Form = (props: {
 
     const dispatch = useAppDispatch()
     const {} = useProject()
-    const {project, error} = useAppSelector((state) => state.project)
+    const {project, error, message} = useAppSelector((state) => state.project)
     const [projectData, setProjectDate] = useState<{startDate: Date, endDate: Date}>({startDate: new Date, endDate: new Date})
 
 
@@ -27,7 +27,6 @@ export const Form = (props: {
     }
 
     const onSubmit = (event: any) => {
-        // event.preventDefault();
         props.onSubmit(event)
     }
 
@@ -74,7 +73,7 @@ export const Form = (props: {
                         name={"startDate"}
                         className={error && error.startDate ? 'error' :'startDate'}
                         selected={projectData.startDate}
-                        minDate={new Date()}
+                        minDate={project.startDate}
                         dateFormat={"yyyy-MM-dd"}
                         onChange={(date: Date) => onChangeDate("startDate", date)}
                         placeholderText={error.startDate ? error.startDate : project.startDate ? project.startDate : 'Select project start date'}
@@ -92,6 +91,9 @@ export const Form = (props: {
                         placeholderText={error.endDate ? error.endDate : project.endDate ? project.endDate : 'Select project end date'}
                     />
                     {error && error.endDate && (<p className='inputError'>{error.endDate}</p>)}
+                </div>
+                <div className="formGroup pt-4 text-center">
+                    {message ? <p className={'message text-center'}>{message.message}</p> : ''}
                 </div>
                 <div className="formGroup">
                     <div className="btnContainer">
