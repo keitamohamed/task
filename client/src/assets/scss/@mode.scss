@@ -83,20 +83,26 @@
 
     .mainContainer {
       .contentButtonContainerPlus {
-
+        border: none;
       }
     }
 
     .projectContent {
       background: none;
+      border: 2px solid $dark_mode_secondary;
+      padding: 10px 0 0;
 
       .contentRight {
         display: grid;
         gap: .5em !important;
+        background: $dark_mode_secondary;
 
         a {
           background: $dark_mode_secondary;
           padding: 2px 5px;
+          border: 1px solid $dark_mode;
+          border-radius: 10px;
+          justify-content: center;
 
           &:hover {
             background: $dark_mode;
@@ -116,16 +122,21 @@
         background: $dark_mode_secondary
       }
 
-      .task_body {
+      .task {
+        border: 1px solid $dark_mode_secondary !important;
+        .task_body {
 
-        .actionBtn {
-
-          li {
-            border: $light_slate;
+          .actionBtn {
             background: $dark_mode_secondary;
 
-            &:hover {
-              background: $dark_mode
+            li {
+              border: $light_slate;
+              background: $dark_mode !important;
+              color: $dark_mode_text_color !important;
+
+              &:hover {
+                color: $light_slate !important
+              }
             }
           }
         }

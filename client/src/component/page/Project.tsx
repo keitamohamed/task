@@ -22,6 +22,7 @@ export const Project = () => {
     const navigate = (to: string) => {
         dispatch(projectAction.initialProject())
         dispatch(projectAction.setMessage({}))
+        dispatch(projectAction.reSetError())
         nav(to)
     }
 

@@ -32,14 +32,14 @@ export const Form = (props: {
 
     return (
         <form
-            className='form'
+            className='form lg:w-full xl:w-full]'
             onSubmit={onSubmit}
         >
             <div className="titleContainer">
                 <h2>{props.title}</h2>
             </div>
 
-            <div className="formContainer">
+            <div className="formContainer sm:!w-full md:!w-full lg:!w-full xl:!w-full">
                 <div className="formGroup">
                     <input
                         type="text"
@@ -95,9 +95,9 @@ export const Form = (props: {
                 <div className="formGroup pt-4 text-center">
                     {message ? <p className={'message text-center'}>{message.message}</p> : ''}
                 </div>
-                <div className="formGroup">
+                <div className="formGroup w-full">
                     <div className="btnContainer">
-                        <input type="submit" className="submitButton" value={props.btnText}/>
+                        <input type="submit" className="submitButton !mb-0" value={props.btnText}/>
                     </div>
                 </div>
             </div>

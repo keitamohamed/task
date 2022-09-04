@@ -57,16 +57,25 @@
 .dark .home .contentInfo .infoContainer p {
   padding-left: 0;
 }
+.dark .project .mainContainer .contentButtonContainerPlus {
+  border: none;
+}
 .dark .project .projectContent {
   background: none;
+  border: 2px solid #1D1E20;
+  padding: 10px 0 0;
 }
 .dark .project .projectContent .contentRight {
   display: grid;
   gap: 0.5em !important;
+  background: #1D1E20;
 }
 .dark .project .projectContent .contentRight a {
   background: #1D1E20;
   padding: 2px 5px;
+  border: 1px solid #121212;
+  border-radius: 10px;
+  justify-content: center;
 }
 .dark .project .projectContent .contentRight a:hover {
   background: #121212;
@@ -76,12 +85,19 @@
   background: none;
   background: #1D1E20;
 }
-.dark .projectBoard .taskContainer .task_body .actionBtn li {
-  border: #A8B2D1;
+.dark .projectBoard .taskContainer .task {
+  border: 1px solid #1D1E20 !important;
+}
+.dark .projectBoard .taskContainer .task .task_body .actionBtn {
   background: #1D1E20;
 }
-.dark .projectBoard .taskContainer .task_body .actionBtn li:hover {
-  background: #121212;
+.dark .projectBoard .taskContainer .task .task_body .actionBtn li {
+  border: #A8B2D1;
+  background: #121212 !important;
+  color: #E0E0E1 !important;
+}
+.dark .projectBoard .taskContainer .task .task_body .actionBtn li:hover {
+  color: #A8B2D1 !important;
 }
 .dark .login .positionRight .loginContent .formGroup {
   background: none !important;

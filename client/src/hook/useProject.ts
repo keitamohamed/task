@@ -1,4 +1,5 @@
 import {useContext} from "react";
+import {useNavigate} from 'react-router-dom'
 import {useAppDispatch, useAppSelector} from "../setup/store/ReduxHook";
 
 import {DELETE_REQUEST, GET_REQUEST, POST_REQUEST, UPDATE_REQUEST} from "../api/Request";
@@ -9,18 +10,25 @@ import {projectAction} from "../setup/slice/project";
 import {taskAction} from "../setup/slice/task"
 
 export const useProject = () => {
+    const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
     const {setNotificationMessage} = useContext(NotificationContext)
     const dispatch = useAppDispatch();
     const {project} = useAppSelector((state) => state.project)
 
+    const navigateTo = () => {
+        navigate('/task')
+    }
+
     const setProjects = (projects: object) => {
         dispatch(projectAction.loadProject(projects))
     }
 
-    const setMessage = (response: any) => {
+    const setMessage = async (response: any) => {
         dispatch(projectAction.setMessage(response))
-        loadProjects()
+        await loadProjects()
+        dispatch(projectAction.initialProject())
+        setTimeout(navigateTo, 5000)
     }
 
     const setProject = (project: any) => {
@@ -55,7 +63,6 @@ export const useProject = () => {
     const updateProject = async () => {
         // @ts-ignore
         await dispatch(UPDATE_REQUEST( ApiPath.UPDATE_PROJECT(project.identifier), project, setMessage, setError))
-        loadProjects()
     }
 
     const loadProjects = () => {

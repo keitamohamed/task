@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext} from "react";
 // @ts-ignore
 import DatePicker from 'react-datepicker'
 import { useModel } from "../../hook/useModel";
@@ -8,21 +8,18 @@ import {UIContent} from "../../setup/context/Context";
 
 export const Model = () => {
     const uiCtx = useContext(UIContent)
-    const {toggle, dueDate, onChange, onChangeDate, onSubmit} = useModel();
+    const {toggle, onChange, onChangeDate, onSubmit} = useModel();
     const {task, message, error} = useAppSelector((state) => state.task)
 
-    const isNewTask = (): boolean => {
-        return task.summary !== ''
-    }
     return (
-        <div className="model sm:w-[95%]">
-            <div className="content">
+        <div className="model sm:w-[95%] md:w-[50%] lg:w-[50%] xl:w-[50%]">
+            <div className="content !w-full">
                 <form
                     action=""
-                    className="form sm:w-full sm:!p-0 md:!p-4 lg:!p-4 xl:!p-4"
+                    className="form"
                     onSubmit={onSubmit}
                 >
-                    <div className="formContainer">
+                    <div className="formContainer !w-full !p-2">
                         <div className="btnCloseContainer">
                             <FaTimes onClick={toggle} />
                         </div>
@@ -90,7 +87,7 @@ export const Model = () => {
                             <div className="btnContainer">
                                 <input
                                     type="submit"
-                                    className="submitButton"
+                                    className={'submitButton !mb-0 !board-b-0'}
                                     value={uiCtx.getModelProperty().isNewTask ?
                                     'Submit' : 'Update'}/>
                             </div>

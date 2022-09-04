@@ -55,10 +55,10 @@ export const Post = (props: PostProps) => {
                                     </p>
                                 </div>
                             </div>
-                            <div className="contentRight grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 !col-span-12 !min-w-full">
+                            <div className="contentRight flex !col-span-12">
                                 <Link
                                     to={`/board:${project.id}`}
-                                    className={`flex justify-content gap-2`}
+                                    className={`flex w-full !justify-content gap-2`}
                                     onClick={() => loadTask(project.identifier)}
                                 >
                                     <MdDashboard className={'mt-1'} style={{color: '#0093AB'}} />
@@ -66,7 +66,7 @@ export const Post = (props: PostProps) => {
                                     <span className={"sm:inline-block md:inline-block lg:inline-block xl:hidden"}>Board</span>
                                 </Link>
                                 <Link
-                                    className={`flex justify-content gap-2`}
+                                    className={`flex w-full !justify-content gap-2`}
                                     to={`/update${project.id}`}
                                     onClick={() => findProjectByIdentifier(project.identifier)}
                                 >
@@ -77,7 +77,7 @@ export const Post = (props: PostProps) => {
                                     <span className={"sm:inline-block md:inline-block lg:inline-block xl:hidden"}>Update</span>
                                 </Link>
                                 <Link
-                                    className={`flex justify-content gap-2`}
+                                    className={`flex w-full !justify-content  gap-2`}
                                     to={``}
                                     onClick={() => setSelectedProject(project.identifier)}>
                                     <AiFillDelete
