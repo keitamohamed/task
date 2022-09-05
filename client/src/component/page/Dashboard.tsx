@@ -1,34 +1,31 @@
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
 import {BsPlus} from "react-icons/bs"
 
-// import Logo from "../logo/Logo";
 import {useDashboard} from "../../hook/useDashboard";
 import moment from "moment";
 import NoData from "../sub_component/NoDate";
-import {useContext, useEffect} from "react";
-import {AuthContext, UIContent} from "../../setup/context/Context";
+import {useContext} from "react";
+import {UIContent} from "../../setup/context/Context";
 import {projectAction} from "../../setup/slice/project";
 import {useAppDispatch} from "../../setup/store/ReduxHook";
 import Header from "./Header";
 
+
 export const Dashboard = () => {
     const navigate = useNavigate()
-    const authCtx = useContext(AuthContext)
     const uiCtx = useContext(UIContent)
     const dispatch = useAppDispatch();
-    const {toggleMenu, taskDue, openMenu, closeMenu} = useDashboard()
+    const {taskDue} = useDashboard()
 
     const navigateTo = (to: string) => {
         uiCtx.setLogoProperties({width: '45%', color: '#000'})
         navigate(to)
     }
 
-    const logout = () => {
-        authCtx.logout();
-        dispatch(projectAction.logout());
-        navigate('/')
+    const addNewProject = (to: string) => {
+        dispatch(projectAction.reSetError())
+        navigate(to)
     }
 
     return (
@@ -58,7 +55,7 @@ export const Dashboard = () => {
                         <li>
                             <BsPlus
                                 style={{color: '#557B83'}}
-                                onClick={() => navigate("/add")}
+                                onClick={() => addNewProject("/add")}
                             />
                             <br/>
                             <span>New Project</span>

@@ -93,8 +93,7 @@
       padding: 10px 0 0;
 
       .contentRight {
-        display: grid;
-        gap: .5em !important;
+        gap: .5em;
         background: $dark_mode_secondary;
 
         a {
@@ -107,6 +106,30 @@
           &:hover {
             background: $dark_mode;
             border: none
+          }
+        }
+      }
+    }
+  }
+
+  .projectForm {
+
+    .mainContainer {
+      background: $dark_mode_secondary;
+
+      .form {
+        width: 98%;
+        margin: 0 auto;
+        padding-bottom: 10px;
+
+        input {
+          border-color: $dark_mode !important;
+        }
+
+        .btnContainer {
+          input {
+            color: $dark_mode_text_color;
+            border-radius: 20px;
           }
         }
       }

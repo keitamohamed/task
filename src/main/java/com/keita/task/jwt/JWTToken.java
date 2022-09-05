@@ -17,7 +17,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.Clock;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -71,7 +70,7 @@ public class JWTToken {
         response.addCookie(jwtToken);
     }
 
-    public String getJwtRefreshToken(String tokenName, HttpServletRequest request) {
+    public String getJwtRefreshToken(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
        if (cookies != null) {
            return Arrays.stream(cookies)
@@ -81,7 +80,6 @@ public class JWTToken {
                    .orElse(null);
        }
        return null;
-//        return WebUtils.getCookie(request, tokenName);
     }
 
     public Cookie getCookie(String token, String tokenName, String username, int maxAge) {

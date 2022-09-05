@@ -76,7 +76,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         token.put("taskRefreshToken", refreshToken);
 
         JWTVerifier verifier = JWT.require(algorithm).build();
-        System.out.println("\nExpire at: " + verifier.verify(accessToken).getExpiresAt());
 
         int expireAt = (int)verifier.verify(accessToken).getExpiresAt().getTime();
         Cookie cookie = jwtToken.getCookie(accessToken, "taskAccessToken", user.getUsername(), expireAt);

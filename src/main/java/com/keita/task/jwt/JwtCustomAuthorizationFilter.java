@@ -43,7 +43,7 @@ public class JwtCustomAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwt = jwtToken.getJwtRefreshToken("taskAccessToken", request);
+        String jwt = jwtToken.getJwtRefreshToken(request);
 
         if (StringUtils.hasText(jwt) && doesRequestHeaderExist(request) && getDecodedJWT(jwt, response) != null) {
             DecodedJWT decodedJWT = getDecodedJWT(jwt, response);

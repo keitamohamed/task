@@ -66,8 +66,7 @@
   padding: 10px 0 0;
 }
 .dark .project .projectContent .contentRight {
-  display: grid;
-  gap: 0.5em !important;
+  gap: 0.5em;
   background: #1D1E20;
 }
 .dark .project .projectContent .contentRight a {
@@ -80,6 +79,21 @@
 .dark .project .projectContent .contentRight a:hover {
   background: #121212;
   border: none;
+}
+.dark .projectForm .mainContainer {
+  background: #1D1E20;
+}
+.dark .projectForm .mainContainer .form {
+  width: 98%;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+.dark .projectForm .mainContainer .form input {
+  border-color: #121212 !important;
+}
+.dark .projectForm .mainContainer .form .btnContainer input {
+  color: #E0E0E1;
+  border-radius: 20px;
 }
 .dark .projectBoard .taskContainer .title_container {
   background: none;

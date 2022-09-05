@@ -1,6 +1,4 @@
 import {useEffect} from "react";
-import {SiJava, SiJavascript, SiMysql, SiSpringboot} from "react-icons/si";
-import {FaReact} from "react-icons/fa"
 import Header from "./Header";
 
 export const Home = () => {
@@ -95,15 +93,6 @@ export const Home = () => {
                         </div>
                     </div>
                     <div className="positionRight"/>
-                </div>
-            </div>
-            <div className="containerPosition">
-                <div className="iconContainer">
-                    <SiJava/>
-                    <SiJavascript/>
-                    <SiSpringboot/>
-                    <FaReact/>
-                    <SiMysql/>
                 </div>
             </div>
         </div>
