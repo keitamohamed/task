@@ -55,6 +55,7 @@ export interface TaskInitialState {
 
 export interface CredentialsType {
     taskAccessToken: string,
+    taskRefreshToken: string
     name: string,
     userID: string,
     email: string

@@ -1,5 +1,7 @@
 package com.keita.task.jwt;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.keita.task.error_handler.BlankCredentialInput;
 import com.keita.task.util.Util;
@@ -73,10 +75,14 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .forEach(object -> token.put(object.toString(), object.toString()));
         token.put("taskRefreshToken", refreshToken);
 
-        Cookie cookie = jwtToken.getCookie(accessToken, "taskAccessToken", user.getUsername(), jwtConfig.getAccessTokenExpirationDateInt());
+        JWTVerifier verifier = JWT.require(algorithm).build();
+        System.out.println("\nExpire at: " + verifier.verify(accessToken).getExpiresAt());
+
+        int expireAt = (int)verifier.verify(accessToken).getExpiresAt().getTime();
+        Cookie cookie = jwtToken.getCookie(accessToken, "taskAccessToken", user.getUsername(), expireAt);
         response.addCookie(cookie);
-//        cookie = jwtToken.getCookie(refreshToken, "taskRefreshToken", user.getUsername(), jwtConfig.getRefreshTokenExpirationDateInt());
-//        response.addCookie(cookie);
+        cookie = jwtToken.getCookie(refreshToken, "taskRefreshToken", user.getUsername(), jwtConfig.getRefreshTokenExpirationDateInt());
+        response.addCookie(cookie);
 
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper()

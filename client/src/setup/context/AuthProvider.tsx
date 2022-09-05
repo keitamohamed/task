@@ -7,7 +7,7 @@ const {Provider} = AuthContext
 const AuthProvider = ({children}: Props) => {
 
     const [cookie, setCookie, removeCookie] = useCookies(
-        ['taskToken', 'name', 'userID', 'email'])
+        ['taskRefreshToken', 'name', 'userID', 'email'])
 
 
     const getCookie = (): any => {
@@ -15,7 +15,7 @@ const AuthProvider = ({children}: Props) => {
     }
     
     const setCredentials = (credentials: CredentialsType) => {
-        setCookie('taskToken', credentials.taskAccessToken)
+        setCookie('taskRefreshToken', credentials.taskRefreshToken)
         setCookie('email', credentials.email)
     }
     
@@ -25,7 +25,7 @@ const AuthProvider = ({children}: Props) => {
     }
 
     const logout = (): void => {
-        const removeCredential = ['taskToken', 'name', 'userID', 'email']
+        const removeCredential = ['taskRefreshToken', 'name', 'userID', 'email']
         // @ts-ignore
         removeCredential.forEach(name => removeCookie(name))
     }

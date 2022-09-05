@@ -1,13 +1,40 @@
 import axios from "axios";
 import {InitialState} from "../interface_type/interface";
 
+
+export const LOGIN_REQUEST = (
+    data: {email: string, password: string},
+    action: (response: object) => void,
+    setError: (error: object) => void,
+    ) => {
+    return async () => {
+        axios.defaults.url = 'http://localhost:8080'
+        const send = async () => {
+            return axios({
+                method: 'POST',
+                url: `task/login`,
+                data: data,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        }
+
+        try {
+            const response = await send()
+            action(response.data)
+        }catch (error) {
+            setError(error.response?.data)
+        }
+    }
+}
+
 export const POST_REQUEST = (
     url: string,
     data: InitialState['projects'],
     action: (response: object) => void,
     setError: (error: object) => void,
     token: string) => {
-
     return async () => {
         axios.defaults.url = 'http://localhost:8080'
         const send = async () => {
@@ -17,15 +44,13 @@ export const POST_REQUEST = (
                 data: data,
                 headers: {
                     Authorization: token ? `Bearer ${token}` : 'Bearer',
-                    'Content-Type': 'application/json; charset=UTF-8',
-                    'dataType': 'json'
+                    'Content-Type': 'application/json'
                 }
             });
         }
 
         try {
             const response = await send()
-            console.log("Response", response.data)
             action(response.data)
         }catch (error) {
             setError(error.response?.data)

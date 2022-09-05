@@ -2,7 +2,7 @@ import {ChangeEvent, useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {useAppDispatch} from "../setup/store/ReduxHook";
-import {POST_REQUEST, GET_REQUEST} from "../api/Request";
+import {POST_REQUEST, GET_REQUEST, LOGIN_REQUEST} from "../api/Request";
 import {CredentialsType, CredError, Login} from "../interface_type/interface"
 import {AuthContext} from "../setup/context/Context";
 import {ApiPath} from "../api/URLPath";
@@ -73,6 +73,7 @@ export const useLogin = () => {
     }
 
     const setError = (error: any) => {
+        console.log(error)
         const {email, password, code} = error
         if (code === '406' && email) {
             setLoginError({
@@ -189,7 +190,7 @@ export const useLogin = () => {
     const onSubmitLogin = async (event: any) => {
         event.preventDefault()
         // @ts-ignore
-        dispatch(POST_REQUEST(ApiPath.LOGIN, login, setLoginCredential, setError, null))
+        dispatch(LOGIN_REQUEST(login, setLoginCredential, setError))
     }
 
     const onSubmitRegister = (event: any) => {

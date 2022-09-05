@@ -86,8 +86,13 @@ public class JWTToken {
 
     public Cookie getCookie(String token, String tokenName, String username, int maxAge) {
         Cookie cookie = new Cookie(tokenName, token);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
+        if(tokenName.equals("taskRefreshToken")) {
+            cookie.setHttpOnly(false);
+            cookie.setSecure(true);
+        }else {
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true);
+        }
         cookie.setComment(username);
         cookie.setPath("/");
         cookie.setMaxAge(Util.maxAge(maxAge));

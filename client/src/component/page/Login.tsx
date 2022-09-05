@@ -21,7 +21,7 @@ export const Login = () => {
         conformPassword,
         responseMessage
     } = useLogin()
-    const [logoProp, setLogoProp] = useState({
+    const [logoProp] = useState({
         width: '20%',
         color: '#E0E0E1'
     })

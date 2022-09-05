@@ -25,6 +25,6 @@ public class Util {
     }
 
     public static  int maxAge(int maxAge) {
-        return ((60 * 60) * maxAge);
+        return (maxAge / (60 * 60));
     }
 }

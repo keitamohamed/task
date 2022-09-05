@@ -140,20 +140,20 @@ const Header = (props: Props) => {
                     <ul className={'grid-cols-10'}>
                         {
                             routePath.map((link, index) => {
-                                if (link.protected && authCtx.getCookie().taskToken && link.showLink) {
+                                if (link.protected && authCtx.getCookie().taskRefreshToken && link.showLink) {
                                     return (<Link key={`${link.name}_${index}`}
                                                   to={link.path}
                                     >
                                         {link.name}
                                     </Link>)
                                 }
-                                if (!link.protected && !authCtx.getCookie().taskToken && link.showLink) {
+                                if (!link.protected && !authCtx.getCookie().taskRefreshToken && link.showLink) {
                                     return (<Link key={index} to={link.path} >{link.name}</Link>)
                                 }
                             })
                         }
                         {
-                            authCtx.getCookie().taskToken ? <li onClick={logout}>logout </li> : ''
+                            authCtx.getCookie().taskRefreshToken ? <li onClick={logout}>logout </li> : ''
                         }
                     </ul>
                     <div className="modeContainer">
@@ -178,20 +178,20 @@ const Header = (props: Props) => {
                         <ul>
                             {
                                 routePath.map((link, index) => {
-                                    if (link.protected && authCtx.getCookie().taskToken && link.showLink) {
+                                    if (link.protected && authCtx.getCookie().taskRefreshToken && link.showLink) {
                                         return (<Link key={`${link.name}_${index}`}
                                                       to={link.path}
                                         >
                                             {link.name}
                                         </Link>)
                                     }
-                                    if (!link.protected && !authCtx.getCookie().taskToken && link.showLink) {
+                                    if (!link.protected && !authCtx.getCookie().taskRefreshToken && link.showLink) {
                                         return (<Link key={index} to={link.path} >{link.name}</Link>)
                                     }
                                 })
                             }
                             {
-                                authCtx.getCookie().taskToken ? <li onClick={logout}>logout </li> : ''
+                                authCtx.getCookie().taskRefreshToken ? <li onClick={logout}>logout </li> : ''
                             }
                         </ul>
                     </div>
