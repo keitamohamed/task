@@ -9,7 +9,7 @@ import { NotificationContext } from "../setup/context/Context";
 export const useTask = () => {
     const {showNotification} = useContext(NotificationContext)
     const dispatch = useAppDispatch();
-    const {task, tasks, message} = useAppSelector((state) => state.task)
+    const {task} = useAppSelector((state) => state.task)
     const {project, projects} = useAppSelector((state) => state.project)
 
 
@@ -24,11 +24,6 @@ export const useTask = () => {
     const setResponseMessage = async (response: any) => {
         await dispatch(taskAction.setMessage(response))
         await findProjectTaskSort(project.identifier)
-        showNotification(
-            'Task Deleted',
-            `${response.message}`,
-            task.taskID.toString())
-        console.log(message.message)
     }
 
     const setError = (error: any) => {

@@ -1,9 +1,14 @@
 import {useAppSelector} from "../../setup/store/ReduxHook";
 import {TaskPost} from "./TaskPost";
+import {useEffect} from "react";
+import task from "../../setup/slice/task";
 
 export const TaskPostContainer = () => {
     const {tasks} = useAppSelector((state) => state.task)
 
+    useEffect(() => {
+
+    }, [tasks])
     return (
         <>
             {

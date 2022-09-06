@@ -21,7 +21,7 @@ export interface NotificationProperty {
     hideNotification: () => void,
     hideNotificationTimeout: (seconds: number) => void,
     showNotification: (title: string, message: string, identifier: string) => void;
-    cancelRequest: (showBtn: boolean, showNotification: boolean) => void;
+    cancelRequest: () => void;
 }
 
 export interface InitialState {

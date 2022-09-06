@@ -51,11 +51,11 @@ const NotificationProvider = ({children}: Props) => {
         notificationElement?.setAttribute('open', '')
     }
 
-    const cancelRequest = (showNotification: boolean, showBtn: boolean) => {
+    const cancelRequest = () => {
         setNotification({
             ...notification,
-            showNotification,
-            showBtn
+            showNotification: false,
+            showBtn: false
         })
     }
 

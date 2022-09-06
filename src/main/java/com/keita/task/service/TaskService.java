@@ -8,6 +8,7 @@ import com.keita.task.model.ProjectTask;
 import com.keita.task.repository.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
@@ -35,8 +36,8 @@ public class TaskService {
         }
         task.setCreateAt(getDate());
         task.setTask(project);
-        taskRepo.save(task);
-        new SuccessfulHandler(response, String.format("Task with an id %s have been added", task.getTaskID()));
+        task = taskRepo.save(task);
+        new SuccessfulHandler(response, String.format("New task have been created with an id %s have been added", task.getTaskID()));
     }
 
     public void updateTask(ProjectTask task, Long id, HttpServletResponse response) {

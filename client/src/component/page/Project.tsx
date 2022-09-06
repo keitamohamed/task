@@ -10,9 +10,11 @@ import {ProjectPost} from "../sub_component/ProjectPost";
 import {Notification} from "../../notification/Notification";
 import {useProject} from "../../hook/useProject";
 import project, {projectAction} from "../../setup/slice/project";
+import {useNotification} from "../../hook/useNotification";
 
 export const Project = () => {
     const dispatch = useAppDispatch()
+    const {notificationAction} = useNotification()
     const uiCtx = useContext(UIContent)
     const {getNotificationsProperty, cancelRequest, hideNotificationTimeout} = useContext(NotificationContext)
     const nav = useNavigate()
@@ -31,40 +33,15 @@ export const Project = () => {
         hideNotificationTimeout(5000)
     }
 
-    const closeNotificationDialog = (): void => {
-        cancelRequest(false, false)
-    }
-
     useEffect(() => {
-        const notificationElement = document.querySelector('.notification')
-
-        if (getNotificationsProperty().showNotification) {
-            if (notificationElement) {
-                notificationElement.removeAttribute('closed')
-                notificationElement.removeAttribute('closing')
-                notificationElement.setAttribute('open', '')
-            }
-        }
-        if (!getNotificationsProperty().showNotification) {
-            const notificationElement = document.querySelector('.notification')
-            if (notificationElement && notificationElement.hasAttribute('open')) {
-                if ( notificationElement) {
-                    notificationElement?.setAttribute('closing', '')
-                    notificationElement?.addEventListener('animationend', () => {
-                        notificationElement?.setAttribute('closed', '')
-                        notificationElement?.removeAttribute('closing')
-                        notificationElement?.removeAttribute('open')
-                    }, {once: true})
-                }
-            }
-        }
+        notificationAction()
     }, [getNotificationsProperty()])
 
     return (<div className='project'>
         <Header width={uiCtx.getLogoProperties()?.width} color={uiCtx.getLogoProperties()?.color}/>
         <Notification
             conform={deleteSelectedProject}
-            closeNotification={closeNotificationDialog}
+            closeNotification={cancelRequest}
         />
         <div className="mainContainer">
             <div className="contentButtonContainerPlus">

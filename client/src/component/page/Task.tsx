@@ -1,5 +1,5 @@
 import {useContext, useEffect} from "react";
-import {UIContent} from "../../setup/context/Context";
+import {NotificationContext, UIContent} from "../../setup/context/Context";
 
 import {BsPlusSquareDotted} from "react-icons/bs";
 
@@ -10,34 +10,24 @@ import {Model} from "../model/Model";
 import {useAppSelector} from "../../setup/store/ReduxHook";
 import {Notification} from "../../notification/Notification";
 import {useTask} from "../../hook/useTask";
-
-let notificationElement: HTMLElement | null
+import {useNotification} from "../../hook/useNotification";
 
 export const Task = () => {
     const uiCtx = useContext(UIContent)
-    const {tasks, task} = useAppSelector((state) => state.task)
+    const {tasks} = useAppSelector((state) => state.task)
+    const {notificationAction} = useNotification()
+    const {getNotificationsProperty, cancelRequest, hideNotificationTimeout} = useContext(NotificationContext)
     const {setNewProject} = useModel()
     const {deleteTask} = useTask()
 
-    const conformDelete = () => {
-        deleteTask()
-        setTimeout(closeNotificationDialog, 5000)
-    }
-
-    const closeNotificationDialog = () => {
-        notificationElement?.setAttribute('closing', '')
-        notificationElement?.addEventListener('animationend', () => {
-            notificationElement?.setAttribute('closed', '')
-            notificationElement?.removeAttribute('closing')
-            notificationElement?.removeAttribute('open')
-        }, {once: true})
+    const conformDelete = async () => {
+        await deleteTask()
+        hideNotificationTimeout(5000)
     }
 
     useEffect(() => {
-        if (notificationElement === undefined || notificationElement === null) {
-            notificationElement = document.querySelector('.notification')
-        }
-    }, [])
+        notificationAction()
+    }, [getNotificationsProperty()])
 
     return (
         <div className='projectBoard'>
@@ -47,7 +37,7 @@ export const Task = () => {
             />
             <Notification
                 conform={conformDelete}
-                closeNotification={closeNotificationDialog}
+                closeNotification={cancelRequest}
             />
             <Model/>
             <div className="nav max-w-[80%] text-left mt-7 pl-5">
